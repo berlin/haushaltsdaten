@@ -21,6 +21,13 @@
 		font-style: italic;
 		font-display: swap;
 	}
+	@font-face {
+		font-family: 'RedHatMono';
+		src: url('/fonts/RedHatMono/RedHatMono-VariableFont_wght.woff2?v=3.18') format('woff2-variations');
+		font-weight: 200 800;
+		font-style: normal;
+		font-display: swap;
+	}
 
   :root {
     --vh: 1vh;

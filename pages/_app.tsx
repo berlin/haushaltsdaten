@@ -4,6 +4,7 @@ import { StrictMode, FC } from 'react'
 import { Head } from '@components/Head'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
+import { Header } from '@components/Header'
 
 interface PagePropType extends Record<string, unknown> {
   title?: string
@@ -25,6 +26,7 @@ const App: FC<{
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
+      <Header />
       <Component {...pageProps} query={parsedQuery} />
     </StrictMode>
   )

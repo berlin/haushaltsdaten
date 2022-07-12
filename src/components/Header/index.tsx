@@ -1,4 +1,4 @@
-import { Button } from '@components/Button'
+import { EmbeddPopup } from '@components/EmbeddPopup'
 import { ListBox } from '@components/ListBox'
 import { ToggleSwitch } from '@components/Toggle'
 import classNames from 'classnames'
@@ -16,7 +16,9 @@ export const Header: FC = () => {
       )}
     >
       <div className="container max-w-8xl mx-auto flex justify-between items-center">
-        <h1 className="font-bold text-xl">Berliner Haushaltsdaten</h1>
+        <h1 className="font-bold text-xl">
+          Berliner Haushaltsdaten <span className="font-normal">2022</span>
+        </h1>
         <nav className="flex gap-6">
           <ToggleSwitch optionA="Einnahmen" optionB="Ausgaben" />
           <Separator />
@@ -46,7 +48,7 @@ export const Header: FC = () => {
             ]}
           />
           <Separator />
-          <Button primary>Einbetten</Button>
+          <EmbeddPopup />
         </nav>
       </div>
     </header>

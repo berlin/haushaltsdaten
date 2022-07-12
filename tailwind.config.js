@@ -11,6 +11,7 @@ module.exports = {
     fontFamily: {
       // prettier-ignore
       sans: ['AlbertSans', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', "Segoe UI", 'Roboto', "Helvetica Neue", 'Arial', "Noto Sans", 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
+      mono: ['RedHatMono', 'monospace'],
     },
     colors: {
       ...colorPalette,
