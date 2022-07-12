@@ -1,13 +1,13 @@
 import { Story, Meta } from '@storybook/react'
 
-import { AppTitle } from '.'
+import { Header } from '.'
 
 export default {
-  title: 'UI Elements/AppTitle',
-  component: AppTitle,
+  title: 'UI Elements/Header',
+  component: Header,
 } as Meta
 
-const Template: Story = () => <AppTitle />
+const Template: Story = () => <Header />
 
 export const Default = Template.bind({})
 Default.parameters = {

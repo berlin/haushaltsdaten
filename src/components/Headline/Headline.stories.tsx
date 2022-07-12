@@ -34,5 +34,5 @@ Coloured.parameters = {
   },
 }
 Coloured.args = {
-  parentClassName: 'text-scale-5',
+  parentClassName: 'text-brand',
 }

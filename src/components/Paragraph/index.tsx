@@ -20,7 +20,6 @@ export const Paragraph: FC<ParagraphPropType> = ({
       {...props}
       className={classNames(
         className,
-        'font-serif',
         'mb-4',
         dropCap && [
           'first-letter:float-left',

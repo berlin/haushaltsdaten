@@ -10,11 +10,11 @@ export default {
 
 const pickRandomColor = (): string => {
   const colorClasses = [
-    'text-scale-4',
-    'text-scale-5',
-    'text-scale-6',
-    'text-scale-7',
-    'text-scale-8',
+    'text-lightblue',
+    'text-green',
+    'text-pink',
+    'text-violet',
+    'text-darkblue',
   ]
   return colorClasses[Math.floor(Math.random() * colorClasses.length)]
 }
@@ -64,9 +64,9 @@ CustomStrokeWidth.args = {
 
 export const DuoToneIcons = Template.bind({})
 DuoToneIcons.args = {
-  color1: colors.scale['8'],
-  color2: colors.scale['5'],
-  color3: colors.scale['3'],
+  color1: colors.lightblue,
+  color2: colors.middlegreen,
+  color3: colors.yellow,
   size: 80,
   strokeWidth: 4,
 }

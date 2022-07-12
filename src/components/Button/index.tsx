@@ -17,7 +17,7 @@ const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
     className,
     'relative',
     'rounded',
-    'focus:ring px-5 py-3 font-semibold',
+    'focus:ring px-4 py-2 font-semibold',
     'text-center inline-block',
     'transition-colors focus:outline-none',
     'inline-flex items-center gap-2',
@@ -25,19 +25,18 @@ const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
     !disabled &&
       primary && [
         'bg-gray-900 text-white',
-        'focus:ring-scale-3',
+        'focus:ring-brand',
         'hover:bg-gray-700',
         'active:bg-gray-900',
-        'pb-4',
       ],
     !disabled &&
       !primary && [
         'bg-white text-gray-900',
-        'focus:ring-scale-3',
+        'focus:ring-brand',
         'border border-gray-300',
         'hover:bg-gray-200',
         'active:bg-gray-300',
-        'focus:border-scale-3',
+        'focus:border-brand',
       ],
     disabled && [
       'bg-gray-100 text-gray-400 border border-gray-200',
@@ -45,24 +44,8 @@ const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
     ]
   )
 
-const Scale: FC = () => (
-  <div className="flex h-1 absolute bottom-0 left-0 right-0">
-    <span className="w-full h-1 bg-scale-1 rounded-bl" />
-    <span className="w-full h-1 bg-scale-2" />
-    <span className="w-full h-1 bg-scale-3" />
-    <span className="w-full h-1 bg-scale-4" />
-    <span className="w-full h-1 bg-scale-5" />
-    <span className="w-full h-1 bg-scale-6" />
-    <span className="w-full h-1 bg-scale-7" />
-    <span className="w-full h-1 bg-scale-8 rounded-br" />
-  </div>
-)
-
-const renderChildren = ({ children, primary }: ButtonPropType): ReactNode => (
-  <>
-    {typeof children === 'string' ? <span>{children}</span> : children}
-    {primary && <Scale />}
-  </>
+const renderChildren = ({ children }: ButtonPropType): ReactNode => (
+  <>{typeof children === 'string' ? <span>{children}</span> : children}</>
 )
 
 export const Button: FC<ButtonPropType> = (props) => {
