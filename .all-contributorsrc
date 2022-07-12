@@ -1,0 +1,70 @@
+{
+  "projectName": "haushaltsdaten",
+  "projectOwner": "technologiestiftung",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 64,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Lisa-Stubert",
+      "name": "Lisa Stubert",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61182572?v=4",
+      "profile": "https://github.com/Lisa-Stubert",
+      "contributions": [
+        "projectManagement",
+        "ideas",
+        "mentoring",
+        "eventOrganizing",
+        "data"
+      ]
+    },
+    {
+      "login": "m-b-e",
+      "name": "Max B. Eckert",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36029603?v=4",
+      "profile": "https://github.com/m-b-e",
+      "contributions": [
+        "ideas",
+        "eventOrganizing"
+      ]
+    },
+    {
+      "login": "dnsos",
+      "name": "Dennis Ostendorf",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15640196?v=4",
+      "profile": "https://github.com/dnsos",
+      "contributions": [
+        "design",
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "vogelino",
+      "name": "Lucas Vogel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2759340?v=4",
+      "profile": "https://vogelino.com/",
+      "contributions": [
+        "design",
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "ff6347",
+      "name": "Fabian Morón Zirfas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/315106?v=4",
+      "profile": "https://fabianmoronzirfas.me/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

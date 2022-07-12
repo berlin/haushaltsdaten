@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .h-screen {
+    height: var(--screenHeight);
+  }
+}
+@layer base {
+	@font-face {
+		font-family: 'PT Serif';
+		font-style:  normal;
+		font-weight: 400;
+		font-display: swap;
+		src: url("/fonts/PTSerif/PTSerif-Regular.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-Regular.woff?v=3.18") format("woff");
+	}
+	@font-face {
+		font-family: 'PT Serif';
+		font-style:  italic;
+		font-weight: 400;
+		font-display: swap;
+		src: url("/fonts/PTSerif/PTSerif-Italic.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-Italic.woff?v=3.18") format("woff");
+	}
+	@font-face {
+		font-family: 'PT Serif';
+		font-style:  normal;
+		font-weight: 700;
+		font-display: swap;
+		src: url("/fonts/PTSerif/PTSerif-Bold.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-Bold.woff?v=3.18") format("woff");
+	}
+	@font-face {
+		font-family: 'PT Serif';
+		font-style:  italic;
+		font-weight: 700;
+		font-display: swap;
+		src: url("/fonts/PTSerif/PTSerif-BoldItalic.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-BoldItalic.woff?v=3.18") format("woff");
+	}
+	@font-face {
+		font-family: 'Manrope';
+		src: url('/fonts/Manrope/Manrope-VariableFont_wght.woff2?v=3.18') format('woff2-variations');
+		font-weight: 200 800;
+		font-style: normal;
+		font-display: swap;
+	}
+
+  :root {
+    --vh: 1vh;
+    --screenHeight: calc(var(--vh, 1vh) * 100);
+    --screenSemiHeight: calc(var(--vh, 1vh) * 50);
+  }
+
+  html, body, #__next {
+    width: 100vw;
+    height: var(--screenHeight);
+    overflow: hidden;
+		font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+		@apply text-gray-900 antialiased
+  }
+	
+	/* Prose styles (tailwindcss typography plugin) */
+	.prose > p:not(.lead):first-of-type::first-letter {
+		@apply float-left mr-5 text-[5.5em] leading-[.9em];
+	}
+}
+
+/* MapLibre control adjustments */
+.maplibregl-ctrl-attrib.maplibregl-compact {
+	min-height: 24px !important;
+}
+.maplibregl-ctrl-group {
+  background-color: transparent !important;
+  border-radius: 2px !important;
+  border: 1px solid #E5E7EB;
+  box-shadow: 0px 5px 16px -8px #000000e5 !important;
+}
+
+.maplibregl-ctrl-group button:focus:last-child,
+.maplibregl-ctrl-group button:focus:first-child {
+  border-radius: 0% !important;
+}
+
+.maplibregl-ctrl-zoom-in, .maplibregl-ctrl-zoom-out {
+  margin: 0;
+}
+
+.maplibregl-ctrl-geolocate span {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNiIgaGVpZ2h0PSIyNiIgdmlld0JveD0iMCAwIDI2IDI2Ij48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zIC0zKSI+PHBvbHlnb24gcG9pbnRzPSIwIDAgMzIgMCAzMiAzMiAwIDMyIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTIiIHN0cm9rZT0iIzExMTgyNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiLz48cG9seWdvbiBzdHJva2U9IiMxMTE4MjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiBwb2ludHM9IjE2IDIyLjY2NyAxNC42NjcgMTcuMzMzIDkuMzMzIDE2IDIxLjMzMyAxMC42NjciLz48L2c+PC9zdmc+") !important;
+}
+
+.maplibregl-ctrl-zoom-out span {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyIiB2aWV3Qm94PSIwIDAgMjIgMiI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNSAtMTUpIj48cG9seWdvbiBwb2ludHM9IjAgMCAzMiAwIDMyIDMyIDAgMzIiLz48bGluZSB4MT0iNi42NjciIHgyPSIyNS4zMzMiIHkxPSIxNiIgeTI9IjE2IiBzdHJva2U9IiMxMTE4MjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9nPjwvc3ZnPg==") !important;
+}
+
+.maplibregl-ctrl-zoom-in span { 
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01IC01KSI+PHBvbHlnb24gcG9pbnRzPSIwIDAgMzIgMCAzMiAzMiAwIDMyIi8+PGxpbmUgeDE9IjE2IiB4Mj0iMTYiIHkxPSI2LjY2NyIgeTI9IjI1LjMzMyIgc3Ryb2tlPSIjMTExODI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSI2LjY2NyIgeDI9IjI1LjMzMyIgeTE9IjE2IiB5Mj0iMTYiIHN0cm9rZT0iIzExMTgyNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+") !important;
+}
+
+.maplibregl-ctrl-group button {
+  border-radius: 0%;
+  background-color: white !important;
+  width: 3rem !important;
+  height: 3rem !important;
+}
