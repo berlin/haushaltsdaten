@@ -1,3 +1,4 @@
+import { TreeMap } from '@components/TreeMap'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 
@@ -9,6 +10,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
   },
 })
 
-export const Home: FC = () => null
+export const Home: FC = () => {
+  return <TreeMap titelart="Einnahmetitel" funktion="Politische Führung" />
+}
 
 export default Home
