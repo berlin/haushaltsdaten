@@ -4,7 +4,6 @@ import { StrictMode, FC } from 'react'
 import { Head } from '@components/Head'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
-import { MainMenu } from '@components/MainMenu'
 
 interface PagePropType extends Record<string, unknown> {
   title?: string
@@ -26,10 +25,7 @@ const App: FC<{
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <main className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
-        <Component {...pageProps} query={parsedQuery} />
-      </main>
-      <MainMenu />
+      <Component {...pageProps} query={parsedQuery} />
     </StrictMode>
   )
 }
