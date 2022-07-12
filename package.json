@@ -25,7 +25,10 @@
   "dependencies": {
     "@mdx-js/loader": "2.1.2",
     "@next/mdx": "12.2.0",
+    "@supabase/supabase-js": "1.35.4",
+    "@types/d3": "7.4.0",
     "classnames": "2.3.1",
+    "d3": "7.6.1",
     "maplibre-gl": "2.1.9",
     "react": "17.0.2",
     "react-dom": "17.0.2",
