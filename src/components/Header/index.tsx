@@ -42,6 +42,7 @@ export const Header: FC<HeaderPropType> = ({ district }) => {
         </h1>
         <nav className="flex gap-6">
           <ToggleSwitch
+            value={mappedQuery.showExpenses ?? true}
             optionA="Einnahmen"
             optionB="Ausgaben"
             onChange={(isOn) => updateUrl({ showExpenses: isOn })}
