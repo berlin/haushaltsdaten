@@ -6,7 +6,7 @@ export interface TreeMapType {
   width?: number
   height?: number
   hierarchy: TreemapHierarchyType
-  initialLevelId?: string
+  breadcrumbsToDesiredLevel?: string[]
   onLastLevelReached?: (funktionsbezeichnung: string) => void
 }
 
@@ -29,7 +29,7 @@ export const TreeMap: FC<TreeMapType> = ({
   width = 800,
   height = 800,
   hierarchy,
-  initialLevelId,
+  breadcrumbsToDesiredLevel,
   onLastLevelReached = () => undefined,
 }) => {
   const x = d3.scaleLinear().rangeRound([0, width])
@@ -188,12 +188,11 @@ export const TreeMap: FC<TreeMapType> = ({
   }, [])
 
   useEffect(() => {
-    if (!initialLevelId) return
-    const nodeToClick = d3.select(`#${initialLevelId}`)
-    if (nodeToClick) {
-      nodeToClick.dispatch('click')
-    }
-  }, [initialLevelId])
+    if (!breadcrumbsToDesiredLevel) return
+    breadcrumbsToDesiredLevel.forEach((crumb) => {
+      d3.select(`#${crumb}`).dispatch('click')
+    })
+  }, [breadcrumbsToDesiredLevel])
   return (
     <div>
       <svg
