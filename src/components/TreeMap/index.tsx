@@ -76,21 +76,21 @@ export const TreeMap: FC<TreeMapType> = ({
     let group = svg.append('g').call(render, treemap(hierarchy))
 
     function render(
-      group: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
+      group: d3.Selection<SVGGElement, unknown, HTMLElement, TreemapItem>,
       root: TreeMapNode
     ): void {
       const node = group
-        .selectAll('g')
+        .selectAll<d3.BaseType, TreemapHierarchyType>('g')
         .data((root.children || []).concat(root))
         .join('g')
 
       node
         .attr('id', (d) => d.data.id || '')
-        .filter((d) => (d === root ? d.parent : d.children))
+        .filter((d) => Boolean(d === root ? d.parent : d.children))
         .attr('cursor', 'pointer')
         .on('click', (_event, d) => (d === root ? zoomout(root) : zoomin(d)))
 
-      node.append('title').text((d) => `${name(d)}\n${format(d.value)}`)
+      node.append('title').text((d) => `${name(d)}\n${format(d.value || 0)}`)
 
       // Reactangles (Fill & Stroke)
       node
@@ -119,13 +119,13 @@ export const TreeMap: FC<TreeMapType> = ({
         .data((d) =>
           (d === root ? name(d) : d.data.name)
             .split(/(?=[A-Z] [^A-Z])/g)
-            .concat(format(d.value))
+            .concat(format(d.value || 0))
         )
         .join('tspan')
         .attr('x', 3)
         .attr(
           'y',
-          (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`
+          (_, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`
         )
         .attr('fill-opacity', (d, i, nodes) =>
           i === nodes.length - 1 ? 0.7 : null
@@ -138,9 +138,12 @@ export const TreeMap: FC<TreeMapType> = ({
       group.call(position, root)
     }
 
-    function position(group, root) {
+    function position(
+      group: d3.Selection<SVGGElement, unknown, HTMLElement, TreemapItem>,
+      root: TreeMapNode
+    ): void {
       group
-        .selectAll('g')
+        .selectAll<d3.BaseType, TreeMapNode>('g')
         .attr('transform', (d) =>
           d === root ? `translate(0,-30)` : `translate(${x(d.x0)},${y(d.y0)})`
         )
@@ -150,13 +153,13 @@ export const TreeMap: FC<TreeMapType> = ({
     }
 
     // When zooming in, draw the new nodes on top, and fade them in.
-    function zoomin(d) {
+    function zoomin(d: TreeMapNode): void {
       const groupToRemove = group.attr('pointer-events', 'none')
       const groupToAdd = (group = svg.append('g').call(render, d))
 
       // depth starts at 0, so 3 is the level at which we have the Funktion which holds its Einzeltitel:
       if (d.depth === 3) {
-        onLastLevelReached(d.data.name as string)
+        onLastLevelReached(d.data.name || '')
       }
 
       x.domain([d.x0, d.x1])
@@ -177,12 +180,12 @@ export const TreeMap: FC<TreeMapType> = ({
     }
 
     // When zooming out, draw the old nodes on top, and fade them out.
-    function zoomout(d) {
+    function zoomout(d: TreeMapNode): void {
       const groupToRemove = group.attr('pointer-events', 'none')
       const groupToAdd = (group = svg.insert('g', '*').call(render, d.parent))
 
-      x.domain([d.parent.x0, d.parent.x1])
-      y.domain([d.parent.y0, d.parent.y1])
+      x.domain([d.parent?.x0 || 0, d.parent?.x1 || 0])
+      y.domain([d.parent?.y0 || 0, d.parent?.y1 || 0])
 
       svg
         .transition()
