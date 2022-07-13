@@ -23,6 +23,8 @@ export interface TreemapItem {
   children: TreemapItem[]
 }
 
+type TreeMapNode = d3.HierarchyRectangularNode<TreemapHierarchyType>
+
 const format = d3.format(',d')
 
 export const TreeMap: FC<TreeMapType> = ({
@@ -36,16 +38,22 @@ export const TreeMap: FC<TreeMapType> = ({
   const y = d3.scaleLinear().rangeRound([0, height])
 
   useEffect(() => {
-    const name = (d) =>
+    const name = (d: TreeMapNode): string =>
       d
         .ancestors()
         .reverse()
         .map((d) => d.data.name)
         .join('/')
 
-    function tile(node, x0, y0, x1, y1) {
+    function tile(
+      node: TreeMapNode,
+      x0: number,
+      y0: number,
+      x1: number,
+      y1: number
+    ): void {
       d3.treemapBinary(node, 0, 0, width, height)
-      for (const child of node.children) {
+      for (const child of node.children || []) {
         child.x0 = x0 + (child.x0 / width) * (x1 - x0)
         child.x1 = x0 + (child.x1 / width) * (x1 - x0)
         child.y0 = y0 + (child.y0 / height) * (y1 - y0)
@@ -53,26 +61,31 @@ export const TreeMap: FC<TreeMapType> = ({
       }
     }
 
-    const treemap = (data) =>
-      d3.treemap().tile(tile)(
+    const treemap = (
+      data: TreemapHierarchyType
+    ): d3.HierarchyRectangularNode<TreemapHierarchyType> =>
+      d3.treemap<TreemapHierarchyType>().tile(tile)(
         d3
-          .hierarchy(data)
-          .sum((d) => d.value)
-          .sort((a, b) => b.value - a.value)
+          .hierarchy<TreemapHierarchyType>(data)
+          .sum((d) => d.value || 0)
+          .sort((a, b) => (b.value || 0) - (a.value || 0))
       )
 
     const svg = d3.select('svg')
 
     let group = svg.append('g').call(render, treemap(hierarchy))
 
-    function render(group, root) {
+    function render(
+      group: d3.Selection<SVGGElement, unknown, HTMLElement, any>,
+      root: TreeMapNode
+    ): void {
       const node = group
         .selectAll('g')
-        .data(root.children.concat(root))
+        .data((root.children || []).concat(root))
         .join('g')
 
       node
-        .attr('id', (d) => d.data.id)
+        .attr('id', (d) => d.data.id || '')
         .filter((d) => (d === root ? d.parent : d.children))
         .attr('cursor', 'pointer')
         .on('click', (_event, d) => (d === root ? zoomout(root) : zoomin(d)))
