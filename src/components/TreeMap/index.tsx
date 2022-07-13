@@ -202,11 +202,9 @@ export const TreeMap: FC<TreeMapType> = ({
 
   useEffect(() => {
     if (!initialLevelId) return
-    const nodeToClick = document.getElementById(initialLevelId)
+    const nodeToClick = d3.select(`#${initialLevelId}`)
     if (nodeToClick) {
-      console.log(nodeToClick)
-      // TODO: the below doesn't work:
-      //nodeToClick.click()
+      nodeToClick.dispatch('click')
     }
   }, [initialLevelId])
   return (
