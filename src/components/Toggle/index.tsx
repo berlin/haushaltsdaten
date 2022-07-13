@@ -6,12 +6,14 @@ export interface ToggleSwitchPropType {
   defaultEnabled?: boolean
   optionA?: ReactNode
   optionB?: ReactNode
+  onChange?: (isOn: boolean) => void
 }
 
 export const ToggleSwitch: FC<ToggleSwitchPropType> = ({
   defaultEnabled = false,
   optionA,
   optionB,
+  onChange = () => undefined,
 }) => {
   const [enabled, setEnabled] = useState(defaultEnabled)
 
@@ -32,7 +34,10 @@ export const ToggleSwitch: FC<ToggleSwitchPropType> = ({
         )}
         <Switch
           checked={enabled}
-          onChange={setEnabled}
+          onChange={(isOn: boolean) => {
+            setEnabled(isOn)
+            onChange(isOn)
+          }}
           className={classNames(
             !optionB && (enabled ? 'bg-brand' : 'bg-gray-400'),
             optionB && 'bg-brand',

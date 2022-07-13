@@ -27,7 +27,7 @@ const App: FC<{
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <Header />
+      <Header {...parsedQuery} />
       <div className="min-h-screen px-8 pt-28 pb-12">
         <div className="container mx-auto">
           <Component {...pageProps} query={parsedQuery} />
