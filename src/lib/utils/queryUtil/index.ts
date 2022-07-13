@@ -1,13 +1,15 @@
 import { districts } from '@data/districts'
 
 export interface RawPageQueryType {
-  activeTopic: string | null
+  mainTopic: string | null
+  midTopic: string | null
+  deepTopic: string | null
   showExpenses: boolean | null
   district: string | null
 }
 
 export interface ParsedPageQueryType {
-  activeTopic: string
+  topicPath: string[]
   showExpenses: boolean
   district: keyof typeof districts
 }
@@ -29,11 +31,28 @@ const parseBoolean = (val: string | string[] | undefined): boolean | null =>
     ? Boolean(val === 'true')
     : null
 
+const parseTopicPath = (
+  rawQuery: Record<string, string | string[] | undefined>
+): string[] | null => {
+  const parsedMainTopic = parseString(rawQuery.mainTopic)
+  const parsedMidTopic = parseString(rawQuery.midTopic)
+  const parsedDeepTopic = parseString(rawQuery.deepTopic)
+
+  if (parsedDeepTopic && parsedMidTopic && parsedMainTopic)
+    return [parsedMainTopic, parsedMidTopic, parsedDeepTopic]
+  if (!parsedDeepTopic && parsedMidTopic && parsedMainTopic)
+    return [parsedMainTopic, parsedMidTopic]
+  if (!parsedDeepTopic && !parsedMidTopic && parsedMainTopic)
+    return [parsedMainTopic]
+
+  return null
+}
+
 export const mapRawQueryToState = (
   rawQuery: Record<string, string | string[] | undefined>
 ): Partial<ParsedPageQueryType> =>
   removeNull({
-    activeTopic: parseString(rawQuery.activeTopic),
+    topicPath: parseTopicPath(rawQuery),
     showExpenses: parseBoolean(rawQuery.showExpenses),
     district: parseString(rawQuery.district),
   })

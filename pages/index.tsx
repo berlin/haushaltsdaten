@@ -1,6 +1,8 @@
 import { Button } from '@components/Button'
 import { ListItem } from '@components/ListItem'
+import { ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 
 const list = [
@@ -47,27 +49,47 @@ const list = [
 ]
 
 // eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
-  props: {
-    title: 'Willkommen',
-    query,
-  },
-})
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const hierarchy = DUMMY_DATA;
+  return ({
+    props: {
+      title: 'Willkommen',
+      query,
+      hierarchy,
+    },
+  })
+}
 
-export const Home: FC = () => (
-  <>
-    <h1 className="font-bold text-3xl mb-6">Übersicht</h1>
-    <div className="w-full aspect-video bg-gray-300"></div>
-    <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
-    <ul className="flex flex-col gap-4">
-      {[...list, ...list, ...list, ...list].map((item, idx) => (
-        <ListItem key={`${item.id}-${idx}`} {...item} />
-      ))}
-    </ul>
-    <div className="flex justify-center mt-6">
-      <Button>Mehr Reihen anzeigen</Button>
-    </div>
-  </>
-)
+export const Home: FC<{
+  query: ParsedPageQueryType
+  hierarchy: TreeMapHierarchyType,
+}> = ({ query, hierarchy }) => {
+  const { push, pathname } = useRouter();
+  return (
+    <>
+      <h1 className="font-bold text-3xl mb-6">Übersicht</h1>
+      <TreeMap breadcrumbToDesiredLevel={query.topicPath} hierarchy={hierarchy} onChange={(newPath: string[]) => {
+        void push({
+          pathname,
+          query: {
+            ...query,
+            mainTopic: newPath[0],
+            midTopic: newPath[1],
+            deepTopic: newPath[2],
+          }
+        }, undefined, { shallow: true })
+      }}>
+      <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
+      <ul className="flex flex-col gap-4">
+        {[...list, ...list, ...list, ...list].map((item, idx) => (
+          <ListItem key={`${item.id}-${idx}`} {...item} />
+        ))}
+      </ul>
+      <div className="flex justify-center mt-6">
+        <Button>Mehr Reihen anzeigen</Button>
+      </div>
+    </TreeMap>
+  )
+}
 
 export default Home
