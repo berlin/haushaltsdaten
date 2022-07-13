@@ -22,7 +22,11 @@ export const Home: FC<HomePageProps> = ({ treemapHierarchy }) => {
   return (
     <TreeMap
       hierarchy={treemapHierarchy}
-      initialLevelId="allgemeine_dienste"
+      breadcrumbsToDesiredLevel={[
+        'allgemeine_dienste',
+        'politische_fuehrung',
+        'gehalt_abc',
+      ]}
       onLastLevelReached={(funktionsbezeichnung) => {
         console.log('Find all Einzeltitel for:')
         console.log(funktionsbezeichnung)

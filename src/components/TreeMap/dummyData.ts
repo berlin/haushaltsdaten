@@ -13,10 +13,11 @@ export const DUMMY_DATA: TreemapHierarchyType = {
       name: 'Allgemeine Dienste HAUPT',
       children: [
         {
+          id: 'politische_fuehrung',
           name: 'Politische Führung OBER',
           children: [
             {
-              id: 'isdsadasda',
+              id: 'gehalt_abc',
               name: 'Gehalt ABC FUNKTION',
               children: [
                 {
