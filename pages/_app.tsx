@@ -5,6 +5,7 @@ import { Head } from '@components/Head'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { Header } from '@components/Header'
+import { Footer } from '@components/Footer'
 
 interface PagePropType extends Record<string, unknown> {
   title?: string
@@ -27,7 +28,10 @@ const App: FC<{
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
       <Header />
-      <Component {...pageProps} query={parsedQuery} />
+      <div className="min-h-screen">
+        <Component {...pageProps} query={parsedQuery} />
+      </div>
+      <Footer />
     </StrictMode>
   )
 }
