@@ -8,8 +8,8 @@ const OdisLogo = '/images/logo-odis-berlin-black.svg'
 export const Footer: FC = () => {
   return (
     <footer id="main-footer">
-      <section className="bg-gray-50 border-t border-gray-200">
-        <div className="container max-w-8xl mx-auto py-8 px-4">
+      <section className="bg-gray-50 border-t border-gray-200 px-8">
+        <div className="container max-w-8xl mx-auto py-8">
           <div className="w-full flex flex-wrap gap-8 sm:gap-12 sm:flex-nowrap">
             <div className="block">
               <span className="w-full block text-xs text-gray-700">&nbsp;</span>
@@ -82,8 +82,8 @@ export const Footer: FC = () => {
           </div>
         </div>
       </section>
-      <section className="bg-gray-100 border-t border-gray-200">
-        <div className="container max-w-8xl mx-auto px-4 py-6 block sm:flex justify-between">
+      <section className="bg-gray-100 border-t border-gray-200 px-8">
+        <div className="container max-w-8xl mx-auto py-6 block sm:flex justify-between">
           <div className="flex items-center">
             <p className="text-sm text-gray-700">
               &copy; {new Date().getFullYear()} Technologiestiftung Berlin
