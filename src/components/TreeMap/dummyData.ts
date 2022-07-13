@@ -1,15 +1,41 @@
-export const DUMMY_DATA = {
-  name: 'bla',
+export interface TreemapHierarchyType {
+  id?: string
+  name: string
+  children?: TreemapHierarchyType[]
+  value?: number
+}
+
+export const DUMMY_DATA: TreemapHierarchyType = {
+  name: 'Übersicht',
   children: [
     {
-      name: 'blub',
+      id: 'allgemeine_dienste',
+      name: 'Allgemeine Dienste HAUPT',
       children: [
-        { name: 'sfsdfdsf', value: 123 },
-        { name: 'gfhghfh', value: 452 },
+        {
+          name: 'Politische Führung OBER',
+          children: [
+            {
+              id: 'isdsadasda',
+              name: 'Gehalt ABC FUNKTION',
+              children: [
+                {
+                  name: 'Gehalt ABC FUNKTION',
+                  value: 300,
+                },
+              ],
+            },
+            {
+              name: 'Gehalt XYZ FUNKTION',
+              value: 400,
+            },
+          ],
+        },
+        { name: 'gfhghfh OBER', value: 452 },
       ],
     },
     {
-      name: 'zututzutu',
+      name: 'Gesundheit HAUPT',
       children: [
         { name: 'asdafd', value: 459 },
         {
