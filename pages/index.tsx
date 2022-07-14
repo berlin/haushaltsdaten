@@ -6,6 +6,7 @@ import { ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
+import useDimensions from 'react-cool-dimensions'
 
 const list = [
   {
@@ -67,27 +68,34 @@ export const Home: FC<{
   hierarchy: TreemapHierarchyType
 }> = ({ query, hierarchy }) => {
   const { push, pathname } = useRouter()
+  const { observe, width, height } = useDimensions()
   return (
     <>
-      <TreeMap
-        breadcrumbsToDesiredLevel={query.topicPath}
-        hierarchy={hierarchy}
-        onChange={(newPath: string[]) => {
-          void push(
-            {
-              pathname,
-              query: {
-                ...query,
-                mainTopic: newPath[0],
-                midTopic: newPath[1],
-                deepTopic: newPath[2],
-              },
-            },
-            undefined,
-            { shallow: true }
-          )
-        }}
-      />
+      <div className="aspect-video overflow-hidden" ref={observe}>
+        {width && height && (
+          <TreeMap
+            width={width}
+            height={height}
+            breadcrumbsToDesiredLevel={query.topicPath}
+            hierarchy={hierarchy}
+            onChange={(newPath: string[]) => {
+              void push(
+                {
+                  pathname,
+                  query: {
+                    ...query,
+                    mainTopic: newPath[0],
+                    midTopic: newPath[1],
+                    deepTopic: newPath[2],
+                  },
+                },
+                undefined,
+                { shallow: true }
+              )
+            }}
+          />
+        )}
+      </div>
       <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
       <ul className="flex flex-col gap-4">
         {[...list, ...list, ...list, ...list].map((item, idx) => (
