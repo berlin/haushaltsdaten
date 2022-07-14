@@ -165,33 +165,29 @@ export const TreeMap: FC<TreeMapType> = ({
         )
         .attr('stroke', '#fff')
 
-      // node
-      //   .append('clipPath')
-      //   .attr('id', (d) => {
-      //     console.log(d)
+      node
+        .append('clipPath')
+        .attr('id', (d) => `treemap-clippath-${d.data.id || ''}`)
+        .append('use')
+        .attr('xlink:href', (d) => `treemap-clippath-${d.data.id || ''}`)
 
-      //     return d.data.name
-      //   })
-      //   .append('use')
-      //   .attr('xlink:href', '#')
-      // .attr("xlink:href", (d) => d.leafUid.href);
       setBreadcrumb(getFullBreadcrumb(root))
 
       node
         .append('text')
-        .attr('clip-path', (d) => (d as unknown as { clipUid: string }).clipUid)
+        .attr('clip-path', (d) => `treemap-clippath-${d.data.id || ''}`)
         .attr('font-weight', (d) => (d === root ? 'bold' : null))
         .selectAll('tspan')
         .data((d) =>
-          (d === root ? name(d) : d.data.name)
-            .split(/(?=[A-Z] [^A-Z])/g)
-            .concat(format(d.value || 0))
+          [d === root ? name(d) : d.data.name].concat(
+            `€ ${formatCurrency(d.value || 0)}`
+          )
         )
         .join('tspan')
-        .attr('x', 3)
+        .attr('x', 5)
         .attr(
           'y',
-          (_, i, nodes) => `${(i * nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`
+          (_, i, nodes) => `${(i * nodes.length - 1) * 0.3 + 1.5 + i * 0.9}em`
         )
         .attr('fill-opacity', (_, i, nodes) =>
           i === nodes.length - 1 ? 0.7 : null
@@ -303,6 +299,7 @@ export const TreeMap: FC<TreeMapType> = ({
                   <span className="font-normal text-gray-300">→</span>
                 )}
                 <span
+                  title={el.data.name}
                   className={classNames(
                     'text-ellipsis overflow-hidden whitespace-nowrap',
                     idx !== 0 ? 'font-normal' : 'font-bold',

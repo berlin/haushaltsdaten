@@ -51,7 +51,12 @@ export const createTreeStructure = (
     if (!isNaN(Number(value))) {
       return {
         ...baseInfo,
-        value: value,
+        children: [
+          {
+            ...baseInfo,
+            value: value,
+          },
+        ],
       }
     }
 
