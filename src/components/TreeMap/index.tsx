@@ -2,6 +2,7 @@ import { FC, Fragment, useCallback, useEffect, useState } from 'react'
 import * as d3 from 'd3'
 import { TreemapHierarchyType } from './dummyData'
 import classNames from 'classnames'
+import { formatCurrency } from '@lib/utils/numberUtil'
 
 export interface TreeMapType {
   width?: number
@@ -10,6 +11,7 @@ export interface TreeMapType {
   breadcrumbsToDesiredLevel?: string[]
   onLastLevelReached?: (funktionsbezeichnung: string) => void
   onChange?: (newPath: string[]) => void
+  onZoomout?: (newPath: string[]) => void
 }
 
 export interface TreemapItem {
@@ -67,6 +69,7 @@ export const TreeMap: FC<TreeMapType> = ({
   breadcrumbsToDesiredLevel = [],
   onLastLevelReached = () => undefined,
   onChange = () => undefined,
+  onZoomout = () => undefined,
 }) => {
   const [breadcrumb, setBreadcrumb] = useState<TreeMapNode[]>([])
   const [path, setPath] = useState<string[]>(breadcrumbsToDesiredLevel)
@@ -263,7 +266,7 @@ export const TreeMap: FC<TreeMapType> = ({
     setBreadcrumb(bc)
     const newPath = bc.map((el) => el.data.id).filter(Boolean) as string[]
     setPath(newPath)
-    onChange(newPath)
+    onZoomout(newPath)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -271,40 +274,48 @@ export const TreeMap: FC<TreeMapType> = ({
     <div>
       <h1
         id="expenditures-treemap-breadcrumb"
-        className="font-bold text-3xl mb-6 flex gap-4"
+        className="font-bold text-3xl mb-6 flex justify-between"
       >
-        {breadcrumb.map((el, idx) => {
-          return (
-            <Fragment key={el.data.id}>
-              {idx !== 0 && (
-                <span className="font-normal text-gray-300">→</span>
-              )}
-              <span
-                className={classNames(
-                  idx !== 0 ? 'font-normal' : 'font-bold',
-                  idx !== breadcrumb.length - 1
-                    ? 'hover:text-brand transition-colors cursor-pointer'
-                    : 'cursor-default'
+        <span className="inline-flex gap-4">
+          {breadcrumb.map((el, idx) => {
+            return (
+              <Fragment key={el.data.id}>
+                {idx !== 0 && (
+                  <span className="font-normal text-gray-300">→</span>
                 )}
-                {...(idx !== breadcrumb.length - 1
-                  ? {
-                      role: 'button',
-                      tabIndex: 0,
-                      onClick: () => {
-                        onBreadcrumbClick(el)
-                      },
-                      onKeyUp: (evt) => {
-                        if (evt.code !== 'enter') return
-                        onBreadcrumbClick(el)
-                      },
-                    }
-                  : {})}
-              >
-                {el.data.name}
-              </span>
-            </Fragment>
-          )
-        })}
+                <span
+                  className={classNames(
+                    idx !== 0 ? 'font-normal' : 'font-bold',
+                    idx !== breadcrumb.length - 1
+                      ? 'hover:text-brand transition-colors cursor-pointer'
+                      : 'cursor-default'
+                  )}
+                  {...(idx !== breadcrumb.length - 1
+                    ? {
+                        role: 'button',
+                        tabIndex: 0,
+                        onClick: () => {
+                          onBreadcrumbClick(el)
+                        },
+                        onKeyUp: (evt) => {
+                          if (evt.code !== 'enter') return
+                          onBreadcrumbClick(el)
+                        },
+                      }
+                    : {})}
+                >
+                  {el.data.name}
+                </span>
+              </Fragment>
+            )
+          })}
+        </span>
+        {breadcrumb[breadcrumb.length - 1] && (
+          <span className="font-mono font-normal inline-flex gap-3">
+            <span className="text-gray-300">€</span>
+            {formatCurrency(breadcrumb[breadcrumb.length - 1].value || 0)}
+          </span>
+        )}
       </h1>
       <svg
         id="expenditures-treemap"

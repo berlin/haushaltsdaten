@@ -2,7 +2,7 @@ import { Button } from '@components/Button'
 import { ListItem } from '@components/ListItem'
 import { TreeMap } from '@components/TreeMap'
 import { DUMMY_DATA, TreemapHierarchyType } from '@components/TreeMap/dummyData'
-import { ParsedPageQueryType } from '@lib/utils/queryUtil'
+import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
@@ -67,7 +67,8 @@ export const Home: FC<{
   query: ParsedPageQueryType
   hierarchy: TreemapHierarchyType
 }> = ({ query, hierarchy }) => {
-  const { push, pathname } = useRouter()
+  const { push, reload, pathname } = useRouter()
+  const { topicPath, ...queryRest } = query
   const { observe, width, height } = useDimensions()
   return (
     <>
@@ -76,14 +77,14 @@ export const Home: FC<{
           <TreeMap
             width={width}
             height={height}
-            breadcrumbsToDesiredLevel={query.topicPath}
+            breadcrumbsToDesiredLevel={topicPath}
             hierarchy={hierarchy}
             onChange={(newPath: string[]) => {
               void push(
                 {
                   pathname,
                   query: {
-                    ...query,
+                    ...queryRest,
                     mainTopic: newPath[0],
                     midTopic: newPath[1],
                     deepTopic: newPath[2],
@@ -92,6 +93,21 @@ export const Home: FC<{
                 undefined,
                 { shallow: true }
               )
+            }}
+            onZoomout={(newPath: string[]) => {
+              void push(
+                {
+                  pathname,
+                  query: {
+                    ...queryRest,
+                    mainTopic: newPath[0],
+                    midTopic: newPath[1],
+                    deepTopic: newPath[2],
+                  },
+                },
+                undefined,
+                { shallow: true }
+              ).then(reload)
             }}
           />
         )}
