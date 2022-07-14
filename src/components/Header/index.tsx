@@ -5,7 +5,7 @@ import { districts } from '@data/districts'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 
 export type HeaderPropType = Partial<ParsedPageQueryType>
 
@@ -22,11 +22,17 @@ export const Header: FC<HeaderPropType> = ({ district }) => {
     }))
   const foundDistrict = mappedDistricts.find(({ id }) => id === district)
 
-  const updateUrl = (newQuery: Partial<ParsedPageQueryType>): void => {
-    void push({ pathname, query: { ...mappedQuery, ...newQuery } }, undefined, {
-      shallow: true,
-    })
-  }
+  const updateUrl = useCallback(
+    (newQuery: Partial<ParsedPageQueryType>): void => {
+      void push(
+        { pathname, query: { ...mappedQuery, ...newQuery } },
+        undefined,
+        { shallow: true }
+      )
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
 
   return (
     <header

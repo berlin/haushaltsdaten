@@ -35,7 +35,8 @@ export const TreeMapWithData: FC<TreeMapWithDataPropType> = ({
         undefined,
         { shallow: true }
       ),
-    [pathname, push, queryRest]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [queryRest]
   )
   return (
     <TreeMap

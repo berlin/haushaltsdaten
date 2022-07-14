@@ -1,4 +1,4 @@
-import { FC, Fragment, useCallback, useEffect, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import * as d3 from 'd3'
 import { TreemapHierarchyType } from './dummyData'
 import classNames from 'classnames'
@@ -179,7 +179,7 @@ export const TreeMap: FC<TreeMapType> = ({
 
       node
         .append('text')
-        .attr('clip-path', (d) => d.clipUid)
+        .attr('clip-path', (d) => (d as unknown as { clipUid: string }).clipUid)
         .attr('font-weight', (d) => (d === root ? 'bold' : null))
         .selectAll('tspan')
         .data((d) =>
@@ -224,12 +224,18 @@ export const TreeMap: FC<TreeMapType> = ({
           groupToRemove
             .transition(t)
             .remove()
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             .call(position, d.parent, width, x, y)
         )
         .call((t) =>
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           groupToAdd
             .transition(t)
             .attrTween('opacity', () => d3.interpolate(0, 1))
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             .call(position, d, width, x, y)
         )
     }
@@ -246,13 +252,21 @@ export const TreeMap: FC<TreeMapType> = ({
         .transition()
         .duration(750)
         .call((t) =>
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           groupToRemove
             .transition(t)
             .remove()
             .attrTween('opacity', () => d3.interpolate(1, 0))
-            .call(position, d)
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            .call(position, d, width, x, y)
         )
-        .call((t) => groupToAdd.transition(t).call(position, d.parent))
+        .call((t) =>
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          groupToAdd.transition(t).call(position, d.parent, width, x, y)
+        )
     }
 
     path.forEach((crumb) => {
@@ -274,17 +288,23 @@ export const TreeMap: FC<TreeMapType> = ({
     <div>
       <h1
         id="expenditures-treemap-breadcrumb"
-        className="font-bold text-3xl mb-6 flex justify-between"
+        className="font-bold text-2xl mb-6 grid grid-cols-[1fr,auto] gap-8"
       >
-        <span className="inline-flex gap-4">
+        <span className="flex gap-4">
           {breadcrumb.map((el, idx) => {
             return (
-              <Fragment key={el.data.id}>
+              <span
+                key={el.data.id}
+                className={`grid gap-4 ${
+                  idx !== 0 ? 'grid-cols-[auto,1fr]' : ''
+                }`}
+              >
                 {idx !== 0 && (
                   <span className="font-normal text-gray-300">→</span>
                 )}
                 <span
                   className={classNames(
+                    'text-ellipsis overflow-hidden whitespace-nowrap',
                     idx !== 0 ? 'font-normal' : 'font-bold',
                     idx !== breadcrumb.length - 1
                       ? 'hover:text-brand transition-colors cursor-pointer'
@@ -297,16 +317,13 @@ export const TreeMap: FC<TreeMapType> = ({
                         onClick: () => {
                           onBreadcrumbClick(el)
                         },
-                        onKeyUp: (evt) => {
-                          if (evt.code !== 'enter') return
-                          onBreadcrumbClick(el)
-                        },
+                        onKeyUp: () => undefined,
                       }
                     : {})}
                 >
                   {el.data.name}
                 </span>
-              </Fragment>
+              </span>
             )
           })}
         </span>

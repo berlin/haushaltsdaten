@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 }
 
 export const Home: FC<{
-  query: ParsedPageQueryType
+  query: Partial<ParsedPageQueryType>
   hierarchy: TreemapHierarchyType
 }> = ({ query, hierarchy }) => {
   const { observe, width, height } = useDimensions()
