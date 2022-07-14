@@ -17,7 +17,10 @@ export const ListItem: FC<ListItemPropType> = ({
 }) => (
   <li className="w-full grid grid-cols-[3fr,2fr,auto] gap-6">
     <h4 className="whitespace-nowrap text-ellipsis overflow-hidden">{title}</h4>
-    <span className="inline-flex gap-2 items-center whitespace-nowrap">
+    <span
+      className="inline-flex gap-2 items-center overflow-hidden whitespace-nowrap text-ellipsis"
+      title={group}
+    >
       <span
         className={`w-3 h-3 rounded-full inline-block ${groupColorClass}`}
       />
