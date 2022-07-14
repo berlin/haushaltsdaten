@@ -1,9 +1,4 @@
-export interface TreemapHierarchyType {
-  id?: string
-  name: string
-  children?: TreemapHierarchyType[]
-  value?: number
-}
+import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 
 export const DUMMY_DATA: TreemapHierarchyType = {
   id: 'Übersicht',
@@ -22,6 +17,7 @@ export const DUMMY_DATA: TreemapHierarchyType = {
               name: 'Gehalt ABC FUNKTION',
               children: [
                 {
+                  id: 'gehalt_abc-deep',
                   name: 'Gehalt ABC FUNKTION',
                   value: 300,
                 },
@@ -32,6 +28,7 @@ export const DUMMY_DATA: TreemapHierarchyType = {
               name: 'Gehalt XYZ FUNKTION',
               children: [
                 {
+                  id: 'gehaltXyzFunktion-deep',
                   name: 'Gehalt XYZ FUNKTION',
                   value: 400,
                 },
@@ -49,7 +46,7 @@ export const DUMMY_DATA: TreemapHierarchyType = {
         {
           id: 'asdafd-parent',
           name: 'asdafd',
-          children: [{ name: 'asdafd', value: 459 }],
+          children: [{ id: 'deep1', name: 'asdafd', value: 459 }],
         },
         {
           id: 'gfhghfh',
@@ -60,6 +57,7 @@ export const DUMMY_DATA: TreemapHierarchyType = {
               name: 'jkdkfhksdfsd',
               children: [
                 {
+                  id: 'deep2',
                   name: 'jkdkfhksdfsd',
                   value: 453,
                 },
@@ -70,6 +68,7 @@ export const DUMMY_DATA: TreemapHierarchyType = {
               name: 'mnbmmbmb',
               children: [
                 {
+                  id: 'deep3',
                   name: 'mnbmmbmb',
                   value: 38,
                 },
@@ -80,6 +79,7 @@ export const DUMMY_DATA: TreemapHierarchyType = {
               name: 'wertrzrt',
               children: [
                 {
+                  id: 'deep4',
                   name: 'wertrzrt',
                   value: 100,
                 },
@@ -90,12 +90,12 @@ export const DUMMY_DATA: TreemapHierarchyType = {
         {
           id: 'bnmbnmb',
           name: 'bnmbnmb',
-          children: [{ name: 'bnmbnmb', value: 125 }],
+          children: [{ id: 'deep5', name: 'bnmbnmb', value: 125 }],
         },
         {
           id: 'jhkztj',
           name: 'jhkztj',
-          children: [{ name: 'jhkztj', value: 70 }],
+          children: [{ id: 'deep6', name: 'jhkztj', value: 70 }],
         },
       ],
     },
@@ -103,31 +103,35 @@ export const DUMMY_DATA: TreemapHierarchyType = {
       id: 'iououio',
       name: 'iououio',
       children: [
-        { id: 'asds', name: 'asds', children: [{ name: 'asds', value: 433 }] },
+        {
+          id: 'asds',
+          name: 'asds',
+          children: [{ id: 'deep7', name: 'asds', value: 433 }],
+        },
         {
           id: 'asdasda',
           name: 'asdasda',
-          children: [{ name: 'asdasda', value: 25 }],
+          children: [{ id: 'deep18', name: 'asdasda', value: 25 }],
         },
         {
           id: 'hgjhjkuh',
           name: 'hgjhjkuh',
-          children: [{ name: 'hgjhjkuh', value: 853 }],
+          children: [{ id: 'deep9', name: 'hgjhjkuh', value: 853 }],
         },
         {
           id: 'dfgdggd',
           name: 'dfgdggd',
-          children: [{ name: 'dfgdggd', value: 123 }],
+          children: [{ id: 'deep10', name: 'dfgdggd', value: 123 }],
         },
         {
           id: 'hgjhjkuh',
           name: 'hgjhjkuh',
-          children: [{ name: 'hgjhjkuh', value: 200 }],
+          children: [{ id: 'deep11', name: 'hgjhjkuh', value: 200 }],
         },
         {
           id: 'dfgdggd',
           name: 'dfgdggd',
-          children: [{ name: 'dfgdggd', value: 67 }],
+          children: [{ id: 'deep12', name: 'dfgdggd', value: 67 }],
         },
       ],
     },

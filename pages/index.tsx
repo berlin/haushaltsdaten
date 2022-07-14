@@ -3,10 +3,7 @@ import { Footer } from '@components/Footer'
 import { Header } from '@components/Header'
 import { ListItem } from '@components/ListItem'
 import snakeCase from 'just-snake-case'
-import {
-  getMainTopicData,
-  HaushaltsdatenRowType,
-} from '@lib/requests/getMainTopicData'
+import { getMainTopicData } from '@lib/requests/getMainTopicData'
 import {
   createBaseTree,
   createTreeStructure,

@@ -12,6 +12,6 @@ nextRouter.useRouter = jest.fn().mockReturnValue({
 
 describe('Home page', () => {
   it('renders without crashing', () => {
-    render(<Home query={{}} hierarchy={DUMMY_DATA} />)
+    render(<Home query={{}} hierarchy={DUMMY_DATA} data={[]} />)
   })
 })

@@ -1,8 +1,8 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import * as d3 from 'd3'
-import { TreemapHierarchyType } from './dummyData'
 import classNames from 'classnames'
 import { formatCurrency } from '@lib/utils/numberUtil'
+import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 
 export interface TreeMapType {
   width?: number

@@ -1,8 +1,8 @@
+import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { useRouter } from 'next/router'
 import { FC, useCallback } from 'react'
 import { TreeMap } from '.'
-import { TreemapHierarchyType } from './dummyData'
 
 interface TreeMapWithDataPropType {
   hierarchy: TreemapHierarchyType
