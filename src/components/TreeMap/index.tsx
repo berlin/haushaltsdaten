@@ -274,7 +274,7 @@ export const TreeMap: FC<TreeMapType> = ({
   const onBreadcrumbClick = useCallback((el: TreeMapNode) => {
     const bc = getFullBreadcrumb(el)
     setBreadcrumb(bc)
-    const newPath = bc.map((el) => el.data.id).filter(Boolean) as string[]
+    const newPath = bc.map((el) => el.data.id).filter(Boolean)
     setPath(newPath)
     onZoomout(newPath)
     // eslint-disable-next-line react-hooks/exhaustive-deps
