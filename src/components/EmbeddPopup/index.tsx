@@ -3,9 +3,28 @@ import { Paragraph } from '@components/Paragraph'
 import { RadioGroup } from '@components/RadioGroup'
 import { Popover, Transition } from '@headlessui/react'
 import classNames from 'classnames'
-import { FC, Fragment } from 'react'
+import { useRouter } from 'next/router'
+import { FC, Fragment, useState } from 'react'
+
+const options = [
+  {
+    name: 'viz',
+    title: 'Nur Visualisierung',
+    subtitle: 'Ohne Labels etc.',
+  },
+  {
+    name: 'all',
+    title: 'Ganze Seite',
+    subtitle: 'Mit kontextuellen Infos',
+  },
+]
 
 export const EmbeddPopup: FC = () => {
+  const { asPath } = useRouter()
+  const [shareFullPage, setShareFullPage] = useState(false)
+  const sharableURL = `${
+    typeof window !== 'undefined' ? window.location.origin : ''
+  }${shareFullPage ? asPath : asPath.replace('/', '/share')}`
   return (
     <Popover className="relative">
       {({ open }) => (
@@ -38,34 +57,28 @@ export const EmbeddPopup: FC = () => {
             leaveTo="opacity-0 translate-y-1"
           >
             <Popover.Panel className="absolute right-0 z-10 mt-3 w-80" static>
-              <div className="overflow-hidden rounded shadow-lg shadow-gray-100 ring-1 ring-gray-200">
+              <div className="overflow-hidden rounded shadow-lg shadow-gray-900/5 ring-1 ring-gray-200">
                 <div className="bg-white px-5 py-4">
                   <h3 className="text-lg font-bold">Ansicht einbetten</h3>
                   <Paragraph className="leading-tight text-gray-500">
                     Gibt dir einen Link, den du als iframe einbetten kannst
                   </Paragraph>
                   <RadioGroup
-                    options={[
-                      {
-                        name: 'viz',
-                        title: 'Nur Visualisierung',
-                        subtitle: 'Ohne Labels etc.',
-                      },
-                      {
-                        name: 'all',
-                        title: 'Ganze Seite',
-                        subtitle: 'Mit kontextuellen Infos',
-                      },
-                    ]}
+                    value={shareFullPage ? options[1] : options[0]}
+                    options={options}
+                    onChange={(option) => {
+                      const idxOfOption = options.indexOf(option)
+                      setShareFullPage(Boolean(idxOfOption))
+                    }}
                   />
                   <label htmlFor="url" className="text-sm block mb-1 mt-4">
-                    Kopieren Sie die folgende URL
+                    Kopiere die folgende URL
                   </label>
                   <input
                     name="url"
                     type="text"
                     readOnly
-                    value={`http://localhost:6007/?path=/story/ui-elements-header--default`}
+                    value={sharableURL}
                     className={classNames(
                       'w-full mb-4 font-mono text-sm',
                       'px-3 py-2 border border-gray-200 rounded outline-none',
