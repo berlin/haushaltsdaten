@@ -145,7 +145,7 @@ export const TreeMap: FC<TreeMapType> = ({
           const newPath = d
             .ancestors()
             .sort((a, b) => a.depth - b.depth)
-            .map((parent) => parent.data.name)
+            .map((parent) => parent.data.id || '')
           if (!newPath.every(Boolean)) {
             console.error('An invalid path was attempted to be clicked')
             return

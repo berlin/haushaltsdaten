@@ -133,3 +133,48 @@ export const DUMMY_DATA: TreemapHierarchyType = {
     },
   ],
 }
+
+const list = [
+  {
+    id: 'test',
+    title:
+      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
+    group: 'Allgemeine Dienste',
+    groupColorClass: 'bg-lightblue',
+    price: 1341512,
+  },
+  {
+    id: 'test1',
+    title:
+      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
+    group: 'Allgemeine Dienste',
+    groupColorClass: 'bg-lightblue',
+    price: 1341512,
+  },
+  {
+    id: 'test2',
+    title:
+      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
+    group: 'Allgemeine Dienste',
+    groupColorClass: 'bg-lightblue',
+    price: 1341512,
+  },
+  {
+    id: 'test3',
+    title:
+      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
+    group: 'Allgemeine Dienste',
+    groupColorClass: 'bg-lightblue',
+    price: 1341512,
+  },
+  {
+    id: 'test4',
+    title:
+      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
+    group: 'Allgemeine Dienste',
+    groupColorClass: 'bg-lightblue',
+    price: 1341512,
+  },
+]
+
+export const DUMMY_LIST = [...list, ...list, ...list]

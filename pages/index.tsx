@@ -1,55 +1,16 @@
 import { Button } from '@components/Button'
 import { ListItem } from '@components/ListItem'
 import { TreeMap } from '@components/TreeMap'
-import { DUMMY_DATA, TreemapHierarchyType } from '@components/TreeMap/dummyData'
+import {
+  DUMMY_DATA,
+  DUMMY_LIST,
+  TreemapHierarchyType,
+} from '@components/TreeMap/dummyData'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useCallback } from 'react'
 import useDimensions from 'react-cool-dimensions'
-
-const list = [
-  {
-    id: 'test',
-    title:
-      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
-    group: 'Allgemeine Dienste',
-    groupColorClass: 'bg-lightblue',
-    price: 1341512,
-  },
-  {
-    id: 'test1',
-    title:
-      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
-    group: 'Allgemeine Dienste',
-    groupColorClass: 'bg-lightblue',
-    price: 1341512,
-  },
-  {
-    id: 'test2',
-    title:
-      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
-    group: 'Allgemeine Dienste',
-    groupColorClass: 'bg-lightblue',
-    price: 1341512,
-  },
-  {
-    id: 'test3',
-    title:
-      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
-    group: 'Allgemeine Dienste',
-    groupColorClass: 'bg-lightblue',
-    price: 1341512,
-  },
-  {
-    id: 'test4',
-    title:
-      'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
-    group: 'Allgemeine Dienste',
-    groupColorClass: 'bg-lightblue',
-    price: 1341512,
-  },
-]
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -66,10 +27,31 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 export const Home: FC<{
   query: ParsedPageQueryType
   hierarchy: TreemapHierarchyType
-}> = ({ query, hierarchy }) => {
-  const { push, reload, pathname } = useRouter()
-  const { topicPath, ...queryRest } = query
+}> = ({ hierarchy }) => {
+  const { push, reload, query, pathname } = useRouter()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { mainTopic, midTopic, deepTopic, ...queryRest } =
+    mapRawQueryToState(query)
   const { observe, width, height } = useDimensions()
+
+  const onChangePath = useCallback(
+    (newPath: string[]) =>
+      push(
+        {
+          pathname,
+          query: {
+            ...queryRest,
+            mainTopic: newPath[0],
+            midTopic: newPath[1],
+            deepTopic: newPath[2],
+          },
+        },
+        undefined,
+        { shallow: true }
+      ),
+    [pathname, push, queryRest]
+  )
+
   return (
     <>
       <div className="aspect-video overflow-hidden" ref={observe}>
@@ -77,44 +59,20 @@ export const Home: FC<{
           <TreeMap
             width={width}
             height={height}
-            breadcrumbsToDesiredLevel={topicPath}
+            breadcrumbsToDesiredLevel={
+              [mainTopic, midTopic, deepTopic].filter(Boolean) as string[]
+            }
             hierarchy={hierarchy}
-            onChange={(newPath: string[]) => {
-              void push(
-                {
-                  pathname,
-                  query: {
-                    ...queryRest,
-                    mainTopic: newPath[0],
-                    midTopic: newPath[1],
-                    deepTopic: newPath[2],
-                  },
-                },
-                undefined,
-                { shallow: true }
-              )
-            }}
+            onChange={onChangePath}
             onZoomout={(newPath: string[]) => {
-              void push(
-                {
-                  pathname,
-                  query: {
-                    ...queryRest,
-                    mainTopic: newPath[0],
-                    midTopic: newPath[1],
-                    deepTopic: newPath[2],
-                  },
-                },
-                undefined,
-                { shallow: true }
-              ).then(reload)
+              void onChangePath(newPath).then(reload)
             }}
           />
         )}
       </div>
       <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
       <ul className="flex flex-col gap-4">
-        {[...list, ...list, ...list, ...list].map((item, idx) => (
+        {DUMMY_LIST.map((item, idx) => (
           <ListItem key={`${item.id}-${idx}`} {...item} />
         ))}
       </ul>

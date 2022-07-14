@@ -9,7 +9,9 @@ export interface RawPageQueryType {
 }
 
 export interface ParsedPageQueryType {
-  topicPath: string[]
+  mainTopic: string | null
+  midTopic: string | null
+  deepTopic: string | null
   showExpenses: boolean
   district: keyof typeof districts
 }
@@ -50,9 +52,13 @@ const parseTopicPath = (
 
 export const mapRawQueryToState = (
   rawQuery: Record<string, string | string[] | undefined>
-): Partial<ParsedPageQueryType> =>
-  removeNull({
-    topicPath: parseTopicPath(rawQuery),
+): Partial<ParsedPageQueryType> => {
+  const [mainTopic, midTopic, deepTopic] = parseTopicPath(rawQuery) || []
+  return removeNull({
+    mainTopic,
+    midTopic,
+    deepTopic,
     showExpenses: parseBoolean(rawQuery.showExpenses),
     district: parseString(rawQuery.district),
   })
+}
