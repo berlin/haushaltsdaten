@@ -1,3 +1,4 @@
+import { CopyTextField } from '@components/CopyTextField'
 import { ChevronDown } from '@components/Icons'
 import { Paragraph } from '@components/Paragraph'
 import { RadioGroup } from '@components/RadioGroup'
@@ -71,21 +72,13 @@ export const EmbeddPopup: FC = () => {
                       setShareFullPage(Boolean(idxOfOption))
                     }}
                   />
-                  <label htmlFor="url" className="text-sm block mb-1 mt-4">
-                    Kopiere die folgende URL
-                  </label>
-                  <input
+                  <CopyTextField
+                    contentToCopy={sharableURL}
                     name="url"
-                    type="text"
-                    readOnly
-                    value={sharableURL}
-                    className={classNames(
-                      'w-full mb-4 font-mono text-sm',
-                      'px-3 py-2 border border-gray-200 rounded outline-none',
-                      'focus-visible:border-brand focus-visible:ring-2 focus-visible:ring-brand',
-                      'focus-visible:ring-offset-2 focus-visible:ring-offset-white'
-                    )}
-                  />
+                    label="Kopiere die folgende URL"
+                  >
+                    {sharableURL}
+                  </CopyTextField>
                 </div>
               </div>
             </Popover.Panel>
