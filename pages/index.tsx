@@ -2,25 +2,42 @@ import { Button } from '@components/Button'
 import { Footer } from '@components/Footer'
 import { Header } from '@components/Header'
 import { ListItem } from '@components/ListItem'
+import { getMainTopicData } from '@lib/requests/getMainTopicData'
 import {
-  DUMMY_DATA,
-  DUMMY_LIST,
+  createBaseTree,
+  createTreeStructure,
   TreemapHierarchyType,
-} from '@components/TreeMap/dummyData'
+} from '@lib/utils/createTreemapStructure'
 import { TreeMapWithData } from '@components/TreeMap/withData'
 import { ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import useDimensions from 'react-cool-dimensions'
+import { DUMMY_LIST } from '@components/TreeMap/dummyData'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const hierarchy = DUMMY_DATA
+  const data = await getMainTopicData({
+    bereich: 'Hauptverwaltung',
+    titelart: 'Ausgabetitel',
+    hauptfunktion: 'Allgemeine Dienste',
+  })
+
+  if (!data) {
+    throw new Error('No data found for this request')
+  }
+
+  const hierarchyData = {
+    id: 'overview',
+    name: 'Übersicht',
+    children: createTreeStructure(createBaseTree(data)),
+  }
+
   return {
     props: {
       title: 'Willkommen',
       query,
-      hierarchy,
+      hierarchy: hierarchyData,
     },
   }
 }
