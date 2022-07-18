@@ -16,7 +16,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const data = await getMainTopicData({
     bereich: 'Hauptverwaltung',
     titelart: 'Ausgabetitel',
-    hauptfunktion: 'Allgemeine Dienste',
   })
 
   if (!data) {
