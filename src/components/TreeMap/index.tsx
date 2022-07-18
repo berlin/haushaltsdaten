@@ -3,6 +3,7 @@ import * as d3 from 'd3'
 import classNames from 'classnames'
 import { formatCurrency } from '@lib/utils/numberUtil'
 import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
+import { getColorByMainTopic } from './colors'
 
 export interface TreeMapType {
   width?: number
@@ -160,9 +161,16 @@ export const TreeMap: FC<TreeMapType> = ({
       // Reactangles (Fill & Stroke)
       node
         .append('rect')
-        .attr('fill', (d) =>
-          d === root ? '#fff' : d.children ? '#ccc' : '#ddd'
-        )
+        .attr('fill', (d) => {
+          const mainTopicsDomain =
+            hierarchy.children?.map((mainTopic) => mainTopic.name) || []
+
+          const mainTopic = d.parent
+            ? d.ancestors().find((ancestor) => ancestor.depth === 1)?.data
+                .name || ''
+            : d.data.name
+          return getColorByMainTopic(mainTopic, mainTopicsDomain)
+        })
         .attr('stroke', '#fff')
 
       node
