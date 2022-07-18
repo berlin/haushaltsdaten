@@ -12,6 +12,8 @@ import { ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import useDimensions from 'react-cool-dimensions'
+import { TreeMapControls } from '@components/TreeMapControls'
+import classNames from 'classnames'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -65,8 +67,18 @@ export const Home: FC<{
 
   return (
     <>
-      <div className="min-h-screen px-8 pt-28 pb-12">
-        <div className="container mx-auto">
+      <div className="min-h-screen px-8 pb-12">
+        <div
+          className={classNames(
+            'sticky top-0',
+            'py-4',
+            'bg-white',
+            'border-b border-gray-200'
+          )}
+        >
+          <TreeMapControls />
+        </div>
+        <div className="container mx-auto mt-6">
           <div className="w-full h-[80vh] overflow-hidden" ref={observe}>
             {width && height && (
               <TreeMapWithData
