@@ -1,6 +1,4 @@
 import { Button } from '@components/Button'
-import { Footer } from '@components/Footer'
-import { Header } from '@components/Header'
 import { ListItem } from '@components/ListItem'
 import snakeCase from 'just-snake-case'
 import { getMainTopicData } from '@lib/requests/getMainTopicData'
@@ -62,12 +60,11 @@ export const Home: FC<{
     group: string
     groupId: string
   }[]
-}> = ({ query, hierarchy, data }) => {
+}> = ({ hierarchy, data }) => {
   const { observe, width, height } = useDimensions()
 
   return (
     <>
-      <Header {...query} />
       <div className="min-h-screen px-8 pt-28 pb-12">
         <div className="container mx-auto">
           <div className="w-full h-[80vh] overflow-hidden" ref={observe}>
@@ -97,8 +94,6 @@ export const Home: FC<{
           </div>
         </div>
       </div>
-
-      <Footer />
     </>
   )
 }
