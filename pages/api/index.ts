@@ -14,7 +14,7 @@ const { POSTGRES_PORT } = process.env
 const POSTGRES_USER = process.env.POSTGRES_USER || 'postgres'
 const POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD || 'postgres'
 const POSTGRES_DATABASE = process.env.POSTGRES_DATABASE || 'postgres'
-const port = parseInt(POSTGRES_PORT ? POSTGRES_PORT : '5432', 10)
+const port = parseInt(POSTGRES_PORT ? POSTGRES_PORT : '54322', 10)
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
 const sql = postgres({
   user: POSTGRES_USER,
@@ -24,7 +24,7 @@ const sql = postgres({
   port: isNaN(port) ? 5432 : port,
 })
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/require-await
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Record<string, unknown>>
@@ -48,8 +48,7 @@ export default async function handler(
     // 	ausgaben: {},
     // };
     const result = await sql`
-		SELECT * from haushaltsdaten_2022`
-
+    SELECT * from haushaltsdaten_2022`
     const hf = groupBy(result, 'hauptfunktion')
     const hf_of = Object.keys(hf).map((key) => {
       return {
@@ -58,16 +57,16 @@ export default async function handler(
         name: hf[key][0].hauptfunktions_bezeichnung,
       }
     })
-
     const f_of_hf = Object.keys(hf_of).map((hf_key) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      const f = Object.keys(hf_of[hf_key].oberfunktion).map((of_key) => {
+      const f = Object.keys(hf_of[hf_key].children).map((of_key) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        const items = hf_of[hf_key].oberfunktion[of_key]
+        const items = hf_of[hf_key].children[of_key]
         const name = items[0].funktions_bezeichnung
         const funktions_groups = groupBy(items, 'funktion')
+        // console.log(name)
         return {
           oberfunktion: of_key,
           name: name,
@@ -78,15 +77,14 @@ export default async function handler(
       })
       return {
         hauptfunktion: hf_key,
-
         name: hf[hf_key][0].hauptfunktions_bezeichnung,
         children: f,
       }
     })
+    // console.log(f_of_hf)
 
     data.children.push(...f_of_hf)
-
-    console.log(JSON.stringify(data, null, 2))
+    // console.log(JSON.stringify(data, null, 2))
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error)
@@ -94,6 +92,6 @@ export default async function handler(
     }
   } finally {
     sql.end()
+    res.status(200).json(data)
   }
-  res.status(200).json(data)
 }
