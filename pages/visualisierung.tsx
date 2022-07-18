@@ -20,7 +20,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const data = await getMainTopicData({
     bereich: 'Hauptverwaltung',
     titelart: 'Ausgabetitel',
-    hauptfunktion: 'Allgemeine Dienste',
   })
 
   if (!data) {
@@ -70,6 +69,7 @@ export const Visualization: FC<{
       <div className="min-h-screen px-8 pb-12">
         <div
           className={classNames(
+            'container mx-auto',
             'sticky top-0',
             'py-4',
             'bg-white',

@@ -16,7 +16,6 @@ export const getMainTopicData = async ({
 }: {
   bereich?: string
   titelart: 'Einnahmetitel' | 'Ausgabetitel'
-  hauptfunktion: string
 }): Promise<HaushaltsdatenRowType[] | undefined> => {
   if (bereich) {
     const { data, error } = await supabase
