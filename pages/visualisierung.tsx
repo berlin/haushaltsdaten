@@ -70,6 +70,7 @@ export const Visualization: FC<{
       <div className="min-h-screen px-8 pb-12">
         <div
           className={classNames(
+            'container mx-auto',
             'sticky top-0',
             'py-4',
             'bg-white',
