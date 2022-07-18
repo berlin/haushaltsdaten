@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { RadioGroup as HUIRadioGroup } from '@headlessui/react'
 import classNames from 'classnames'
 
@@ -10,14 +10,32 @@ interface RadioGroupPropTypeOption {
 
 export interface RadioGroupPropType {
   options: RadioGroupPropTypeOption[]
+  value: RadioGroupPropTypeOption
+  onChange?: (newOption: RadioGroupPropTypeOption) => void
 }
 
-export const RadioGroup: FC<RadioGroupPropType> = ({ options }) => {
-  const [selected, setSelected] = useState(options[0])
+export const RadioGroup: FC<RadioGroupPropType> = ({
+  options,
+  value = options[0],
+  onChange = () => undefined,
+}) => {
+  const [selected, setSelected] = useState(value)
+
+  useEffect(() => {
+    if (value === selected) return
+    setSelected(value)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
 
   return (
     <div className="mx-auto w-full max-w-md py-2">
-      <HUIRadioGroup value={selected} onChange={setSelected}>
+      <HUIRadioGroup
+        value={selected}
+        onChange={(newOption: RadioGroupPropTypeOption) => {
+          setSelected(newOption)
+          onChange(newOption)
+        }}
+      >
         <HUIRadioGroup.Label className="sr-only">Options</HUIRadioGroup.Label>
         {options.map((option) => (
           <HUIRadioGroup.Option

@@ -1,7 +1,3 @@
-import { Button } from '@components/Button'
-import { Footer } from '@components/Footer'
-import { Header } from '@components/Header'
-import { ListItem } from '@components/ListItem'
 import snakeCase from 'just-snake-case'
 import { getMainTopicData } from '@lib/requests/getMainTopicData'
 import {
@@ -62,43 +58,20 @@ export const Home: FC<{
     group: string
     groupId: string
   }[]
-}> = ({ query, hierarchy, data }) => {
+}> = ({ hierarchy }) => {
   const { observe, width, height } = useDimensions()
 
   return (
     <>
-      <Header {...query} />
-      <div className="min-h-screen px-8 pt-28 pb-12">
-        <div className="container mx-auto">
-          <div className="w-full h-[80vh] overflow-hidden" ref={observe}>
-            {width && height && (
-              <TreeMapWithData
-                hierarchy={hierarchy}
-                width={width}
-                height={height}
-              />
-            )}
-          </div>
-          <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
-          <ul className="flex flex-col gap-4">
-            {(data || []).map((item) => (
-              <ListItem
-                key={item.id}
-                title={item.title}
-                id={item.id}
-                group={item.group}
-                groupColorClass="bg-lightblue"
-                price={item.amount}
-              />
-            ))}
-          </ul>
-          <div className="flex justify-center mt-6">
-            <Button>Mehr Reihen anzeigen</Button>
-          </div>
-        </div>
+      <div className="w-screen h-screen overflow-hidden" ref={observe}>
+        {width && height && (
+          <TreeMapWithData
+            hierarchy={hierarchy}
+            width={width}
+            height={height}
+          />
+        )}
       </div>
-
-      <Footer />
     </>
   )
 }

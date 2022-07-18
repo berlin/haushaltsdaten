@@ -10,15 +10,26 @@ interface ListBoxOptionType {
 
 export interface ListBoxPropType {
   options: ListBoxOptionType[]
+  selected?: ListBoxOptionType
+  onChange?: (newId: ListBoxOptionType['id']) => void
 }
 
-export const ListBox: FC<ListBoxPropType> = ({ options }) => {
-  const [selectedOption, setSelectedOption] = useState<ListBoxOptionType>(
-    options[0]
-  )
+export const ListBox: FC<ListBoxPropType> = ({
+  options,
+  selected = options[0],
+  onChange = () => undefined,
+}) => {
+  const [selectedOption, setSelectedOption] =
+    useState<ListBoxOptionType>(selected)
 
   return (
-    <Listbox value={selectedOption} onChange={setSelectedOption}>
+    <Listbox
+      value={selectedOption}
+      onChange={(newOption) => {
+        setSelectedOption(newOption)
+        onChange(newOption.id)
+      }}
+    >
       <div className="relative mt-1">
         <Listbox.Button
           className={classNames(
