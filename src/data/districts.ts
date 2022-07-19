@@ -14,7 +14,23 @@ type DistrictKey =
   | '13'
   | '14'
 
-export const districts: Record<DistrictKey, string> = {
+export type DistrictLabel =
+  | 'Alle Bereiche'
+  | 'Hauptverwaltung'
+  | 'Mitte'
+  | 'Friedrichshain-Kreuzberg'
+  | 'Pankow'
+  | 'Charlottenburg-Wilmersdorf'
+  | 'Spandau'
+  | 'Steglitz-Zehlendorf'
+  | 'Tempelhof-Schöneberg'
+  | 'Neukölln'
+  | 'Treptow-Köpenick'
+  | 'Marzahn-Hellersdorf'
+  | 'Lichtenberg'
+  | 'Reinickendorf'
+
+export const districts: Record<DistrictKey, DistrictLabel> = {
   '01': 'Alle Bereiche',
   '02': 'Hauptverwaltung',
   '03': 'Mitte',
@@ -27,6 +43,6 @@ export const districts: Record<DistrictKey, string> = {
   '10': 'Neukölln',
   '11': 'Treptow-Köpenick',
   '12': 'Marzahn-Hellersdorf',
-  '13': 'Lichtenberg Hohenschönhausen',
+  '13': 'Lichtenberg',
   '14': 'Reinickendorf',
 }

@@ -1,3 +1,4 @@
+import { DistrictLabel } from '@data/districts'
 import { supabase } from '@lib/requests/createSupabaseClient'
 
 export interface HaushaltsdatenRowType {
@@ -10,13 +11,17 @@ export interface HaushaltsdatenRowType {
   betrag: string
 }
 
+export interface GetMainTopicDataParamsType {
+  bereich?: DistrictLabel
+  titelart: 'Einnahmetitel' | 'Ausgabetitel'
+}
+
 export const getMainTopicData = async ({
   bereich,
   titelart,
-}: {
-  bereich?: string
-  titelart: 'Einnahmetitel' | 'Ausgabetitel'
-}): Promise<HaushaltsdatenRowType[] | undefined> => {
+}: GetMainTopicDataParamsType): Promise<
+  HaushaltsdatenRowType[] | undefined
+> => {
   if (bereich) {
     const { data, error } = await supabase
       .from('haushaltsdaten_2022')
