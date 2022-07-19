@@ -1,11 +1,14 @@
 import { Button } from '@components/Button'
 import { ListItem } from '@components/ListItem'
 import snakeCase from 'just-snake-case'
-import { getMainTopicData } from '@lib/requests/getMainTopicData'
+import {
+  getMainTopicData,
+  GetMainTopicDataParamsType,
+  HaushaltsdatenRowType,
+} from '@lib/requests/getMainTopicData'
 import {
   createBaseTree,
   createTreeStructure,
-  TreemapHierarchyType,
 } from '@lib/utils/createTreemapStructure'
 import { TreeMapWithData } from '@components/TreeMap/withData'
 import { ParsedPageQueryType } from '@lib/utils/queryUtil'
@@ -14,29 +17,37 @@ import { FC } from 'react'
 import useDimensions from 'react-cool-dimensions'
 import { TreeMapControls } from '@components/TreeMapControls'
 import classNames from 'classnames'
+import { useData } from '@lib/hooks/useData'
+import { districts } from '@data/districts'
+
+const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
+const DEFAULT_TITELART: GetMainTopicDataParamsType['titelart'] = 'Ausgabetitel'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const queriedDistrictId =
+    query && query.district && !Array.isArray(query.district)
+      ? query.district
+      : null
+
   const data = await getMainTopicData({
-    bereich: 'Hauptverwaltung',
-    titelart: 'Ausgabetitel',
+    bereich:
+      !!queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
+        ? districts[queriedDistrictId as keyof typeof districts]
+        : undefined,
+    titelart: DEFAULT_TITELART,
   })
 
   if (!data) {
     throw new Error('No data found for this request')
   }
 
-  const hierarchyData = {
-    id: 'overview',
-    name: 'Übersicht',
-    children: createTreeStructure(createBaseTree(data)),
-  }
-
   return {
     props: {
       title: 'Visualisierung',
       query,
-      hierarchy: hierarchyData,
+      queriedDistrictId: queriedDistrictId,
+      rawData: data,
       data: data
         .map((item) => ({
           id: item.id,
@@ -53,7 +64,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
 export const Visualization: FC<{
   query: Partial<ParsedPageQueryType>
-  hierarchy: TreemapHierarchyType
+  queriedDistrictId: keyof typeof districts
+  rawData: HaushaltsdatenRowType[]
   data: {
     id: string
     title: string
@@ -61,8 +73,24 @@ export const Visualization: FC<{
     group: string
     groupId: string
   }[]
-}> = ({ hierarchy, data }) => {
+}> = ({ data, rawData, query, queriedDistrictId }) => {
   const { observe, width, height } = useDimensions()
+
+  const {
+    data: haushaltsData,
+    error,
+    isLoading,
+  } = useData({
+    type:
+      typeof query.showExpenses === 'undefined' || query.showExpenses
+        ? 'Ausgabetitel'
+        : 'Einnahmetitel',
+    district:
+      queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
+        ? districts[queriedDistrictId]
+        : undefined,
+    initialData: rawData,
+  })
 
   return (
     <>
@@ -76,13 +104,17 @@ export const Visualization: FC<{
             'border-b border-gray-200'
           )}
         >
-          <TreeMapControls />
+          <TreeMapControls district={query.district} />
         </div>
         <div className="container mx-auto mt-6">
           <div className="w-full h-[80vh] overflow-hidden" ref={observe}>
-            {width && height && (
+            {!isLoading && !error && haushaltsData && width && height && (
               <TreeMapWithData
-                hierarchy={hierarchy}
+                hierarchy={{
+                  id: 'overview',
+                  name: 'Übersicht',
+                  children: createTreeStructure(createBaseTree(haushaltsData)),
+                }}
                 width={width}
                 height={height}
               />
