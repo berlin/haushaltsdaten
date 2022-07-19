@@ -25,7 +25,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
 
   const updateUrl = useCallback(
     (newQuery: Partial<ParsedPageQueryType>): void => {
-      void push({ pathname, query: newQuery }, undefined, { shallow: true })
+      void push({ pathname, query: newQuery }, undefined, { shallow: false })
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
