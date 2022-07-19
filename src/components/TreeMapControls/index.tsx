@@ -25,11 +25,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
 
   const updateUrl = useCallback(
     (newQuery: Partial<ParsedPageQueryType>): void => {
-      void push(
-        { pathname, query: { ...mappedQuery, ...newQuery } },
-        undefined,
-        { shallow: true }
-      )
+      void push({ pathname, query: newQuery }, undefined, { shallow: true })
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -45,13 +41,14 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
           value={mappedQuery.showExpenses ?? true}
           optionA="Einnahmen"
           optionB="Ausgaben"
-          onChange={(isOn) => updateUrl({ showExpenses: isOn })}
+          onChange={(isOn) => updateUrl({ ...mappedQuery, showExpenses: isOn })}
         />
         <Separator />
         <ListBox
           selected={foundDistrict}
           onChange={(district) =>
             updateUrl({
+              ...mappedQuery,
               district: `${district}` as ParsedPageQueryType['district'],
             })
           }
