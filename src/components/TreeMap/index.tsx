@@ -277,7 +277,7 @@ export const TreeMap: FC<TreeMapType> = ({
       d3.select(`#${crumb}`).dispatch('click')
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [hierarchy])
 
   const onBreadcrumbClick = useCallback((el: TreeMapNode) => {
     const bc = getFullBreadcrumb(el)
