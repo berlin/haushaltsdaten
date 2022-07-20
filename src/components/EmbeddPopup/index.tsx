@@ -25,7 +25,8 @@ export const EmbeddPopup: FC = () => {
   const [shareFullPage, setShareFullPage] = useState(false)
   const sharableURL = `${
     typeof window !== 'undefined' ? window.location.origin : ''
-  }${shareFullPage ? asPath : asPath.replace('/', '/share')}`
+  }${shareFullPage ? asPath : asPath.replace('/visualisierung', '/share')}`
+
   return (
     <Popover className="relative">
       {({ open }) => (
