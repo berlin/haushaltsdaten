@@ -70,7 +70,7 @@ export const TreeMap: FC<TreeMapType> = ({
         .ancestors()
         .reverse()
         .map((d) => d.data.name)
-        .join('/')
+        .join(' → ')
 
     function tile(
       node: TreeMapNode,
