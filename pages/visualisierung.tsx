@@ -35,8 +35,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       ? 'Ausgabetitel'
       : 'Einnahmetitel'
 
-  console.log(queriedType)
-
   const data = await getMainTopicData({
     bereich:
       !!queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
