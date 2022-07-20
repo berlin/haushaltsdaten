@@ -125,17 +125,12 @@ export const TreeMap: FC<TreeMapType> = ({
       node
         .append('rect')
         .attr('fill', (d) => {
-          const mainTopicsDomain =
-            hierarchy.children?.map((mainTopic) => mainTopic.name) || []
-
           const mainTopic = d.parent
             ? d.ancestors().find((ancestor) => ancestor.depth === 1)?.data
                 .name || ''
             : d.data.name
 
-          return d === root
-            ? '#fff'
-            : getColorByMainTopic(mainTopic, mainTopicsDomain)
+          return d === root ? '#fff' : getColorByMainTopic(mainTopic)
         })
         .attr('stroke', '#fff')
 
