@@ -107,7 +107,7 @@ export const Visualization: FC<{
                 type={queriedType}
                 hierarchy={{
                   id: 'overview',
-                  name: 'Übersicht',
+                  name: 'Alle Bereiche',
                   children: createTreeStructure(createBaseTree(rawData)),
                 }}
                 width={width}
