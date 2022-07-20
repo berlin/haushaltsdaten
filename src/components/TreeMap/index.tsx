@@ -12,6 +12,7 @@ export interface TreeMapType {
   district: DistrictLabel
   type: GetMainTopicDataParamsType['titelart']
   hierarchy: TreemapHierarchyType
+  onChangeLevel?: (levelPath: string[]) => void
 }
 
 export interface TreemapItem {
@@ -60,6 +61,7 @@ export const TreeMap: FC<TreeMapType> = ({
   district,
   type,
   hierarchy,
+  onChangeLevel = () => undefined,
 }) => {
   const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().rangeRound([0, height])
@@ -117,6 +119,16 @@ export const TreeMap: FC<TreeMapType> = ({
         .attr('cursor', 'pointer')
         .on('click', (_, d) => {
           d === root ? zoomout(root) : zoomin(d)
+
+          const pathToLevel = d
+            .ancestors()
+            .map((node) => node.data.id)
+            .reverse()
+            // remove the overview node because it's not relevant
+            // for the breadcrumbs:
+            .filter((el) => el !== 'overview')
+
+          onChangeLevel(pathToLevel)
         })
 
       node.append('title').text((d) => `${name(d)}\n${format(d.value || 0)}`)

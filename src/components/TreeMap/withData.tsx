@@ -26,6 +26,7 @@ export const TreeMapWithData: FC<TreeMapWithDataPropType> = ({
       district={district}
       type={type}
       hierarchy={hierarchy}
+      onChangeLevel={(path) => console.log(path)}
     />
   )
 }
