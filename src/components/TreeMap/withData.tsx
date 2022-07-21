@@ -10,6 +10,7 @@ interface TreeMapWithDataPropType {
   hierarchy: TreemapHierarchyType
   width: number
   height: number
+  onChangeLevel?: (levelPath: string[]) => void
 }
 
 export const TreeMapWithData: FC<TreeMapWithDataPropType> = ({
@@ -18,6 +19,7 @@ export const TreeMapWithData: FC<TreeMapWithDataPropType> = ({
   hierarchy,
   width,
   height,
+  onChangeLevel = () => undefined,
 }) => {
   return (
     <TreeMap
@@ -26,7 +28,7 @@ export const TreeMapWithData: FC<TreeMapWithDataPropType> = ({
       district={district}
       type={type}
       hierarchy={hierarchy}
-      onChangeLevel={(path) => console.log(path)}
+      onChangeLevel={(path) => onChangeLevel(path)}
     />
   )
 }
