@@ -1,16 +1,15 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { FC } from 'react'
 import React from 'react'
 
 // eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
+export const getStaticProps: GetStaticProps = async () => ({
   props: {
     title: 'FAQ',
-    query,
   },
 })
 
-export const Faq: FC = () => (
+export const FaqPage: FC = () => (
   <div className="mt-8 px-8 pb-12">
     <h1 className="font-bold text-4xl mt-26 mb-6">Fragen und Antworten</h1>
     <h2 className="font-bold text-2xl mb-6 mt-12">Was zeigen die Diagramme?</h2>
@@ -80,4 +79,4 @@ export const Faq: FC = () => (
   </div>
 )
 
-export default Faq
+export default FaqPage
