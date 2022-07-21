@@ -48,7 +48,8 @@ export const EmbeddPopup: FC = () => {
                 <div className="bg-white px-5 py-4">
                   <h3 className="text-lg font-bold">Auswahl einbetten</h3>
                   <Paragraph className="leading-normal text-gray-500">
-                    Dieser Link kann zum Einbetten der Auswahl in ein{' '}
+                    Dieser Link kann zum Einbetten der aktuellen Visualisierung
+                    in ein{' '}
                     <code className="rounded-md bg-gray-100 px-1 py-0.5">
                       iframe
                     </code>{' '}

@@ -1,6 +1,7 @@
 import { DistrictLabel } from '@data/districts'
 import { GetMainTopicDataParamsType } from '@lib/requests/getMainTopicData'
 import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
+import { TopicType } from 'pages/visualisierung'
 import { FC } from 'react'
 import { TreeMap } from '.'
 
@@ -10,7 +11,7 @@ interface TreeMapWithDataPropType {
   hierarchy: TreemapHierarchyType
   width: number
   height: number
-  onChangeLevel?: (levelPath: string[]) => void
+  onChangeLevel?: (level: TopicType) => void
 }
 
 export const TreeMapWithData: FC<TreeMapWithDataPropType> = ({
@@ -28,7 +29,7 @@ export const TreeMapWithData: FC<TreeMapWithDataPropType> = ({
       district={district}
       type={type}
       hierarchy={hierarchy}
-      onChangeLevel={(path) => onChangeLevel(path)}
+      onChangeLevel={(level) => onChangeLevel(level)}
     />
   )
 }

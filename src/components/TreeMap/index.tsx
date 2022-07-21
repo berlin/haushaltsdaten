@@ -5,6 +5,8 @@ import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 import { getColorByMainTopic } from './colors'
 import { DistrictLabel } from '@data/districts'
 import { GetMainTopicDataParamsType } from '@lib/requests/getMainTopicData'
+import { TopicType } from 'pages/visualisierung'
+import { TopicDepth } from '@lib/utils/mapTreemapDepthToColumn'
 
 export interface TreeMapType {
   width?: number
@@ -12,7 +14,7 @@ export interface TreeMapType {
   district: DistrictLabel
   type: GetMainTopicDataParamsType['titelart']
   hierarchy: TreemapHierarchyType
-  onChangeLevel?: (levelPath: string[]) => void
+  onChangeLevel?: (level: TopicType) => void
 }
 
 export interface TreemapItem {
@@ -120,15 +122,13 @@ export const TreeMap: FC<TreeMapType> = ({
         .on('click', (_, d) => {
           d === root ? zoomout(root) : zoomin(d)
 
-          const pathToLevel = d
-            .ancestors()
-            .map((node) => node.data.id)
-            .reverse()
-            // remove the overview node because it's not relevant
-            // for the breadcrumbs:
-            .filter((el) => el !== 'overview')
+          const depth = d === root ? d.depth - 1 : d.depth
+          const label = d === root ? d.parent?.data.name : d.data.name
 
-          onChangeLevel(pathToLevel)
+          onChangeLevel({
+            topicDepth: depth as TopicDepth,
+            topicLabel: label,
+          })
         })
 
       node.append('title').text((d) => `${name(d)}\n${format(d.value || 0)}`)
