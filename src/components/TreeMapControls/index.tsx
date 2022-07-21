@@ -5,14 +5,19 @@ import { districts } from '@data/districts'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { FC, useCallback } from 'react'
+import { FC } from 'react'
 
-export type TreeMapControlsPropType = Partial<ParsedPageQueryType>
+export type TreeMapControlsPropType = Partial<ParsedPageQueryType> & {
+  onChange: (newQuery: Partial<ParsedPageQueryType>) => void
+}
 
 const Separator: FC = () => <span className="h-10 w-[1px] bg-gray-200" />
 
-export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
-  const { query, push, pathname } = useRouter()
+export const TreeMapControls: FC<TreeMapControlsPropType> = ({
+  district,
+  onChange,
+}) => {
+  const { query } = useRouter()
 
   const mappedQuery = mapRawQueryToState(query)
   const mappedDistricts = Object.keys(districts)
@@ -22,14 +27,6 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
       name: districts[key as keyof typeof districts] || ' ',
     }))
   const foundDistrict = mappedDistricts.find(({ id }) => id === district)
-
-  const updateUrl = useCallback(
-    (newQuery: Partial<ParsedPageQueryType>): void => {
-      void push({ pathname, query: newQuery }, undefined, { shallow: false })
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
 
   return (
     <nav
@@ -41,13 +38,13 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
           value={mappedQuery.showExpenses ?? true}
           optionA="Einnahmen"
           optionB="Ausgaben"
-          onChange={(isOn) => updateUrl({ ...mappedQuery, showExpenses: isOn })}
+          onChange={(isOn) => onChange({ ...mappedQuery, showExpenses: isOn })}
         />
         <Separator />
         <ListBox
           selected={foundDistrict}
           onChange={(district) =>
-            updateUrl({
+            onChange({
               ...mappedQuery,
               district: `${district}` as ParsedPageQueryType['district'],
             })

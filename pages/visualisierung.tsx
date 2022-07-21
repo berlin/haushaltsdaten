@@ -24,6 +24,7 @@ import {
   TopicDepth,
 } from '@lib/utils/mapTreemapDepthToColumn'
 import { getColorByMainTopic } from '@components/TreeMap/colors'
+import { useRouter } from 'next/router'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
@@ -88,6 +89,7 @@ export const Visualization: FC<{
   initialListData: HaushaltsdatenRowType[]
 }> = ({ queriedDistrictId, queriedType, hierarchyData, initialListData }) => {
   const { observe, width, height } = useDimensions()
+  const { push, pathname } = useRouter()
 
   const [topic, setTopic] = useState<TopicType>({})
 
@@ -120,7 +122,19 @@ export const Visualization: FC<{
             'border-b border-gray-200'
           )}
         >
-          <TreeMapControls district={queriedDistrictId} />
+          <TreeMapControls
+            district={queriedDistrictId}
+            onChange={(newQuery) => {
+              // When resetting type or district, we want to clear the topic
+              // as well, so that the list view displays items from every
+              // topic again:
+              setTopic({})
+
+              void push({ pathname, query: newQuery }, undefined, {
+                shallow: false,
+              })
+            }}
+          />
         </div>
         <div className="container mx-auto mt-6">
           <div className="w-full h-[80vh] overflow-hidden" ref={observe}>
