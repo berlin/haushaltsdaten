@@ -4,6 +4,7 @@ import snakeCase from 'just-snake-case'
 import {
   getMainTopicData,
   GetMainTopicDataParamsType,
+  HaushaltsdatenRowType,
 } from '@lib/requests/getMainTopicData'
 import {
   createBaseTree,
@@ -13,21 +14,18 @@ import {
 import { TreeMapWithData } from '@components/TreeMap/withData'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import useDimensions from 'react-cool-dimensions'
 import { TreeMapControls } from '@components/TreeMapControls'
 import classNames from 'classnames'
 import { districts } from '@data/districts'
+import { useListData } from '@lib/hooks/useListData'
+import {
+  mapTopicDepthToColumn,
+  TopicDepth,
+} from '@lib/utils/mapTreemapDepthToColumn'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
-
-interface ListDataType {
-  id: string
-  title: string
-  amount: number
-  group: string
-  groupId: string
-}
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -62,13 +60,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
 
   const initialListData = data
-    .map((item) => ({
-      id: item.id,
-      title: item.titel_bezeichnung,
-      amount: parseInt(item.betrag, 10),
-      group: item.hauptfunktions_bezeichnung,
-      groupId: snakeCase(item.hauptfunktions_bezeichnung),
-    }))
+    .sort((a, b) => parseInt(b.betrag, 10) - parseInt(a.betrag, 10))
     .slice(0, 100)
 
   return {
@@ -83,14 +75,38 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
 }
 
+export interface TopicType {
+  topicDepth?: TopicDepth
+  topicLabel?: string
+}
+
 export const Visualization: FC<{
   query: Partial<ParsedPageQueryType>
   queriedDistrictId: keyof typeof districts
   queriedType: GetMainTopicDataParamsType['titelart']
   hierarchyData: TreemapHierarchyType
-  initialListData: ListDataType[]
+  initialListData: HaushaltsdatenRowType[]
 }> = ({ queriedDistrictId, queriedType, hierarchyData, initialListData }) => {
   const { observe, width, height } = useDimensions()
+
+  const [topic, setTopic] = useState<TopicType>({})
+
+  const {
+    error,
+    isLoading,
+    data: listData,
+  } = useListData({
+    district:
+      queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
+        ? districts[queriedDistrictId]
+        : undefined,
+    type: queriedType,
+    topicColumn: topic?.topicDepth
+      ? mapTopicDepthToColumn(topic.topicDepth)
+      : undefined,
+    topicValue: topic.topicLabel || undefined,
+    initialData: initialListData,
+  })
 
   return (
     <>
@@ -115,24 +131,35 @@ export const Visualization: FC<{
                 type={queriedType}
                 width={width}
                 height={height}
-                onChangeLevel={() => undefined}
+                onChangeLevel={(level) => {
+                  setTopic(level)
+                }}
               />
             )}
           </div>
           <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
           <ul className="flex flex-col gap-4">
-            {(initialListData || [])
-              .sort((a, b) => b.amount - a.amount)
-              .map((item) => (
-                <ListItem
-                  key={item.id}
-                  title={item.title}
-                  id={item.id}
-                  group={item.group}
-                  groupColorClass="bg-lightblue"
-                  price={item.amount}
-                />
-              ))}
+            {!error &&
+              !isLoading &&
+              (listData || [])
+                .map((item) => ({
+                  id: item.id,
+                  title: item.titel_bezeichnung,
+                  amount: parseInt(item.betrag, 10),
+                  group: item.hauptfunktions_bezeichnung,
+                  groupId: snakeCase(item.hauptfunktions_bezeichnung),
+                }))
+                .sort((a, b) => b.amount - a.amount)
+                .map((item) => (
+                  <ListItem
+                    key={item.id}
+                    title={item.title}
+                    id={item.id}
+                    group={item.group}
+                    groupColorClass="bg-lightblue"
+                    price={item.amount}
+                  />
+                ))}
           </ul>
           <div className="flex justify-center mt-6">
             <Button>Mehr Reihen anzeigen</Button>
