@@ -69,7 +69,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       group: item.hauptfunktions_bezeichnung,
       groupId: snakeCase(item.hauptfunktions_bezeichnung),
     }))
-    .sort((a, b) => b.amount - a.amount)
     .slice(0, 100)
 
   return {
@@ -122,16 +121,18 @@ export const Visualization: FC<{
           </div>
           <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
           <ul className="flex flex-col gap-4">
-            {(initialListData || []).map((item) => (
-              <ListItem
-                key={item.id}
-                title={item.title}
-                id={item.id}
-                group={item.group}
-                groupColorClass="bg-lightblue"
-                price={item.amount}
-              />
-            ))}
+            {(initialListData || [])
+              .sort((a, b) => b.amount - a.amount)
+              .map((item) => (
+                <ListItem
+                  key={item.id}
+                  title={item.title}
+                  id={item.id}
+                  group={item.group}
+                  groupColorClass="bg-lightblue"
+                  price={item.amount}
+                />
+              ))}
           </ul>
           <div className="flex justify-center mt-6">
             <Button>Mehr Reihen anzeigen</Button>
