@@ -150,6 +150,7 @@ export const Visualization: FC<{
                   groupId: snakeCase(item.hauptfunktions_bezeichnung),
                 }))
                 .sort((a, b) => b.amount - a.amount)
+                .slice(0, 100)
                 .map((item) => (
                   <ListItem
                     key={item.id}
