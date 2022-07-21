@@ -24,6 +24,7 @@ import {
   mapTopicDepthToColumn,
   TopicDepth,
 } from '@lib/utils/mapTreemapDepthToColumn'
+import { getColorByMainTopic } from '@components/TreeMap/colors'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
@@ -148,6 +149,7 @@ export const Visualization: FC<{
                   amount: parseInt(item.betrag, 10),
                   group: item.hauptfunktions_bezeichnung,
                   groupId: snakeCase(item.hauptfunktions_bezeichnung),
+                  district: item.bereichs_bezeichnung,
                 }))
                 .sort((a, b) => b.amount - a.amount)
                 .slice(0, 100)
@@ -157,7 +159,8 @@ export const Visualization: FC<{
                     title={item.title}
                     id={item.id}
                     group={item.group}
-                    groupColorClass="bg-lightblue"
+                    groupColor={getColorByMainTopic(item.group)}
+                    district={item.district}
                     price={item.amount}
                   />
                 ))}
