@@ -22,5 +22,6 @@ Default.args = {
     'Ausbildungsentgelte (Praktikantinnen/Praktikanten, Volontärinnen/Volontäre)',
   group: 'Allgemeine Dienste',
   groupColor: '#ff00ff',
+  district: 'Friedrichshain-Kreuzberg',
   price: 1341512,
 }
