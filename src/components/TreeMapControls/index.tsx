@@ -1,4 +1,3 @@
-import { EmbeddPopup } from '@components/EmbeddPopup'
 import { ListBox } from '@components/ListBox'
 import { ToggleSwitch } from '@components/Toggle'
 import { districts } from '@data/districts'
@@ -29,35 +28,48 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
   const foundDistrict = mappedDistricts.find(({ id }) => id === district)
 
   return (
-    <nav
-      aria-label="Navigation der Visualisierung"
-      className={classNames('flex gap-6 justify-between items-center')}
-    >
-      <div className="flex gap-6">
-        <ToggleSwitch
-          value={mappedQuery.showExpenses ?? true}
-          optionA="Einnahmen"
-          optionB="Ausgaben"
-          onChange={(isOn) => onChange({ ...mappedQuery, showExpenses: isOn })}
-        />
-        <Separator />
-        <ListBox
-          selected={foundDistrict}
-          onChange={(district) =>
-            onChange({
-              ...mappedQuery,
-              district: `${district}` as ParsedPageQueryType['district'],
-            })
-          }
-          options={Object.keys(districts)
-            .sort()
-            .map((key) => ({
-              id: key,
-              name: districts[key as keyof typeof districts] || ' ',
-            }))}
-        />
-      </div>
-      <EmbeddPopup />
-    </nav>
+    <div className="w-full">
+      <nav
+        aria-label="Navigation der Visualisierung"
+        className={classNames(
+          'w-full',
+          'sm:flex gap-6 justify-between items-center'
+        )}
+      >
+        <div
+          className={classNames(
+            'w-full sm:w-auto',
+            'grid grid-cols-1 sm:grid-cols-[1fr,auto,1fr] gap-y-3 sm:gap-x-6'
+          )}
+        >
+          <ToggleSwitch
+            value={mappedQuery.showExpenses ?? true}
+            optionA="Einnahmen"
+            optionB="Ausgaben"
+            onChange={(isOn) =>
+              onChange({ ...mappedQuery, showExpenses: isOn })
+            }
+          />
+          <div className="hidden sm:inline-flex">
+            <Separator />
+          </div>
+          <ListBox
+            selected={foundDistrict}
+            onChange={(district) =>
+              onChange({
+                ...mappedQuery,
+                district: `${district}` as ParsedPageQueryType['district'],
+              })
+            }
+            options={Object.keys(districts)
+              .sort()
+              .map((key) => ({
+                id: key,
+                name: districts[key as keyof typeof districts] || ' ',
+              }))}
+          />
+        </div>
+      </nav>
+    </div>
   )
 }

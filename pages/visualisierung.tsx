@@ -25,6 +25,7 @@ import {
 } from '@lib/utils/mapTreemapDepthToColumn'
 import { getColorByMainTopic } from '@components/TreeMap/colors'
 import { useRouter } from 'next/router'
+import { EmbeddPopup } from '@components/EmbeddPopup'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
@@ -112,32 +113,48 @@ export const Visualization: FC<{
 
   return (
     <>
-      <div className="min-h-screen px-4 xl:px-8 pb-12">
+      <div className="min-h-screen pb-12">
         <div
           className={classNames(
-            'container mx-auto',
+            'w-full',
             'sticky top-0',
-            'py-4',
+            'px-4 py-5 sm:py-4',
             'bg-white',
-            'border-b border-gray-200'
+            'border-b border-gray-200 shadow-sm',
+            'z-10'
           )}
         >
-          <TreeMapControls
-            district={queriedDistrictId}
-            onChange={(newQuery) => {
-              // When resetting type or district, we want to clear the topic
-              // as well, so that the list view displays items from every
-              // topic again:
-              setTopic({})
+          <div
+            className={classNames(
+              'container mx-auto',
+              'flex justify-between items-center'
+            )}
+          >
+            <div className="w-full z-10">
+              <TreeMapControls
+                district={queriedDistrictId}
+                onChange={(newQuery) => {
+                  // When resetting type or district, we want to clear the topic
+                  // as well, so that the list view displays items from every
+                  // topic again:
+                  setTopic({})
 
-              void push({ pathname, query: newQuery }, undefined, {
-                shallow: false,
-              })
-            }}
-          />
+                  void push({ pathname, query: newQuery }, undefined, {
+                    shallow: false,
+                  })
+                }}
+              />
+            </div>
+            <div className="hidden sm:inline-flex">
+              <EmbeddPopup />
+            </div>
+          </div>
         </div>
-        <div className="container mx-auto mt-6">
-          <div className="w-full h-[80vh] overflow-hidden" ref={observe}>
+        <div className="px-4 mt-6">
+          <div
+            className="container mx-auto w-full h-[80vh] overflow-hidden"
+            ref={observe}
+          >
             {hierarchyData && width && height && (
               <TreeMapWithData
                 hierarchy={hierarchyData}
@@ -151,37 +168,42 @@ export const Visualization: FC<{
               />
             )}
           </div>
-          <h2 className="font-bold text-2xl mb-6 mt-12">
-            {queriedType === 'Ausgabetitel'
-              ? 'Höchste Ausgaben'
-              : 'Höchste Einnahmen'}
-          </h2>
-          <ul className="flex flex-col gap-4">
-            {!error &&
-              !isLoading &&
-              (listData || [])
-                .map((item) => ({
-                  id: item.id,
-                  title: item.titel_bezeichnung,
-                  amount: parseInt(item.betrag, 10),
-                  group: item.hauptfunktions_bezeichnung,
-                  groupId: snakeCase(item.hauptfunktions_bezeichnung),
-                  district: item.bereichs_bezeichnung,
-                }))
-                .sort((a, b) => b.amount - a.amount)
-                .slice(0, 100)
-                .map((item) => (
-                  <ListItem
-                    key={item.id}
-                    title={item.title}
-                    id={item.id}
-                    group={item.group}
-                    groupColor={getColorByMainTopic(item.group)}
-                    district={item.district}
-                    price={item.amount}
-                  />
-                ))}
-          </ul>
+          <div className="mt-4 flex justify-end sm:hidden">
+            <EmbeddPopup />
+          </div>
+          <div className="container mx-auto">
+            <h2 className="mb-6 mt-12 font-bold text-2xl">
+              {queriedType === 'Ausgabetitel'
+                ? 'Höchste Ausgaben'
+                : 'Höchste Einnahmen'}
+            </h2>
+            <ul className="flex flex-col gap-4">
+              {!error &&
+                !isLoading &&
+                (listData || [])
+                  .map((item) => ({
+                    id: item.id,
+                    title: item.titel_bezeichnung,
+                    amount: parseInt(item.betrag, 10),
+                    group: item.hauptfunktions_bezeichnung,
+                    groupId: snakeCase(item.hauptfunktions_bezeichnung),
+                    district: item.bereichs_bezeichnung,
+                  }))
+                  .sort((a, b) => b.amount - a.amount)
+                  .slice(0, 100)
+                  .map((item) => (
+                    <ListItem
+                      key={item.id}
+                      title={item.title}
+                      id={item.id}
+                      group={item.group}
+                      groupColor={getColorByMainTopic(item.group)}
+                      district={item.district}
+                      price={item.amount}
+                    />
+                  ))}
+            </ul>
+          </div>
         </div>
       </div>
     </>
