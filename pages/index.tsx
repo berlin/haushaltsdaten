@@ -1,13 +1,13 @@
 import { FadeInWrapper } from '@components/FadeInWrapper'
 import { GroupedBarChart } from '@components/GroupedBarChart'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { FC } from 'react'
 import TypeAnimation from 'react-type-animation'
 import { FUNCTION_GROUPS } from '@data/functionGroups'
 import { TOTAL_EXPENSES } from '@data/totalExpenses'
 
 // eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       title: 'Startseite',
