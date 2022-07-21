@@ -1,11 +1,11 @@
 import {
   getMainTopicData,
   GetMainTopicDataParamsType,
-  HaushaltsdatenRowType,
 } from '@lib/requests/getMainTopicData'
 import {
   createBaseTree,
   createTreeStructure,
+  TreemapHierarchyType,
 } from '@lib/utils/createTreemapStructure'
 import { TreeMapWithData } from '@components/TreeMap/withData'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
@@ -42,24 +42,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     throw new Error('No data found for this request')
   }
 
-  // const filteredData = data.filter((row) => {
-  //   if (TEST_PATH.length === 1) {
-  //     return snakeCase(row.hauptfunktions_bezeichnung) === TEST_PATH[0]
-  //   }
-  //   if (TEST_PATH.length === 2) {
-  //     return (
-  //       snakeCase(row.hauptfunktions_bezeichnung) === TEST_PATH[0] &&
-  //       snakeCase(row.oberfunktions_bezeichnung) === TEST_PATH[1]
-  //     )
-  //   }
-  //   if (TEST_PATH.length === 3) {
-  //     return (
-  //       snakeCase(row.hauptfunktions_bezeichnung) === TEST_PATH[0] &&
-  //       snakeCase(row.oberfunktions_bezeichnung) === TEST_PATH[1] &&
-  //       snakeCase(row.funktions_bezeichnung) === TEST_PATH[2]
-  //     )
-  //   }
-  // })
+  const hierarchyData = {
+    id: 'overview',
+    name: `Alle ${queriedType === 'Ausgabetitel' ? 'Ausgaben' : 'Einnahmen'}`,
+    children: createTreeStructure(createBaseTree(data)),
+  }
 
   return {
     props: {
@@ -67,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       query,
       queriedDistrictId: queriedDistrictId,
       queriedType: queriedType,
-      rawData: data,
+      hierarchyData: hierarchyData,
     },
   }
 }
@@ -76,22 +63,18 @@ export const SharePage: FC<{
   query: Partial<ParsedPageQueryType>
   queriedDistrictId: keyof typeof districts
   queriedType: GetMainTopicDataParamsType['titelart']
-  rawData: HaushaltsdatenRowType[]
-}> = ({ rawData, queriedDistrictId, queriedType }) => {
+  hierarchyData: TreemapHierarchyType
+}> = ({ hierarchyData, queriedDistrictId, queriedType }) => {
   const { observe, width, height } = useDimensions()
 
   return (
     <>
       <div className="w-full h-screen overflow-hidden" ref={observe}>
-        {rawData && width && height && (
+        {hierarchyData && width && height && (
           <TreeMapWithData
             district={districts[queriedDistrictId]}
             type={queriedType}
-            hierarchy={{
-              id: 'overview',
-              name: 'Alle Bereiche',
-              children: createTreeStructure(createBaseTree(rawData)),
-            }}
+            hierarchy={hierarchyData}
             width={width}
             height={height}
           />

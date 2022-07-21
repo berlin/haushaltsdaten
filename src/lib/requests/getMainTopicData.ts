@@ -6,7 +6,7 @@ export interface HaushaltsdatenRowType {
   hauptfunktions_bezeichnung: string
   oberfunktions_bezeichnung: string
   funktions_bezeichnung: string
-  einzelplan_bezeichnung: string
+  titel_bezeichnung: string
   bereichs_bezeichnung: string
   betrag: string
 }
@@ -26,7 +26,7 @@ export const getMainTopicData = async ({
     const { data, error } = await supabase
       .from('haushaltsdaten_2022')
       .select(
-        'id, betrag, bereichs_bezeichnung, einzelplan_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
+        'id, betrag, bereichs_bezeichnung, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
       .eq('jahr', '2022')
       .eq('titel_art', titelart)
@@ -39,7 +39,7 @@ export const getMainTopicData = async ({
     const { data, error } = await supabase
       .from('haushaltsdaten_2022')
       .select(
-        'id, betrag, bereichs_bezeichnung, einzelplan_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
+        'id, betrag, bereichs_bezeichnung, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
       .eq('jahr', '2022')
       .eq('titel_art', titelart)

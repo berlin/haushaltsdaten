@@ -1,4 +1,5 @@
 import { InternalLink } from '@components/InternalLink'
+import classNames from 'classnames'
 import snakeCase from 'just-snake-case'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
@@ -28,9 +29,10 @@ export const Nav: FC = () => {
           return (
             <li
               key={snakeCase(navItem.label)}
-              className={
+              className={classNames(
+                'transition-colors hover:text-brand',
                 pathname === navItem.path ? 'font-bold' : 'font-normal'
-              }
+              )}
             >
               <InternalLink href={navItem.path}>{navItem.label}</InternalLink>
             </li>

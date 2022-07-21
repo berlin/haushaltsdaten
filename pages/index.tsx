@@ -1,25 +1,21 @@
 import { FadeInWrapper } from '@components/FadeInWrapper'
 import { GroupedBarChart } from '@components/GroupedBarChart'
-import { ParsedPageQueryType } from '@lib/utils/queryUtil'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import { FC } from 'react'
 import TypeAnimation from 'react-type-animation'
 import { FUNCTION_GROUPS } from '@data/functionGroups'
 import { TOTAL_EXPENSES } from '@data/totalExpenses'
 
 // eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       title: 'Startseite',
-      query,
     },
   }
 }
 
-export const Home: FC<{
-  query: Partial<ParsedPageQueryType>
-}> = () => {
+export const HomePage: FC = () => {
   return (
     <div className="px-8">
       <h1 className="font-bold text-5xl mt-20 flex justify-center">
@@ -197,4 +193,4 @@ FAQ Seite*/}
   )
 }
 
-export default Home
+export default HomePage
