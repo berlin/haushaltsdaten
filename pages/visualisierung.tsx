@@ -1,4 +1,3 @@
-import { Button } from '@components/Button'
 import { ListItem } from '@components/ListItem'
 import snakeCase from 'just-snake-case'
 import {
@@ -138,7 +137,11 @@ export const Visualization: FC<{
               />
             )}
           </div>
-          <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
+          <h2 className="font-bold text-2xl mb-6 mt-12">
+            {queriedType === 'Ausgabetitel'
+              ? 'Höchste Ausgaben'
+              : 'Höchste Einnahmen'}
+          </h2>
           <ul className="flex flex-col gap-4">
             {!error &&
               !isLoading &&
@@ -165,9 +168,6 @@ export const Visualization: FC<{
                   />
                 ))}
           </ul>
-          <div className="flex justify-center mt-6">
-            <Button>Mehr Reihen anzeigen</Button>
-          </div>
         </div>
       </div>
     </>

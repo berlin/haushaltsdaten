@@ -17,7 +17,7 @@ export const ListItem: FC<ListItemPropType> = ({
   groupColor,
   district,
 }) => (
-  <li className="w-full grid grid-cols-[3fr,2fr,2fr,150px] gap-6">
+  <li className="pt-4 border-t border-gray-100 w-full grid grid-cols-[3fr,2fr,2fr,150px] gap-6">
     <h4
       className="whitespace-nowrap text-ellipsis overflow-hidden"
       title={title}
