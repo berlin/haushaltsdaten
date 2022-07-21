@@ -112,7 +112,7 @@ export const Visualization: FC<{
 
   return (
     <>
-      <div className="min-h-screen px-8 pb-12">
+      <div className="min-h-screen px-4 xl:px-8 pb-12">
         <div
           className={classNames(
             'container mx-auto',

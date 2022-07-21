@@ -6,7 +6,7 @@ export const Header: FC = () => {
   return (
     <header
       className={classNames(
-        'px-8 py-4',
+        'px-4 xl:px-8 py-3 xl:py-4',
         'w-screen inset-0 bottom-auto bg-gray-50',
         'border-b border-gray-100',
         'z-10'
