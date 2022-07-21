@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   const hierarchyData = {
     id: 'overview',
-    name: 'Alle Bereiche',
+    name: `Alle ${queriedType === 'Ausgabetitel' ? 'Ausgaben' : 'Einnahmen'}`,
     children: createTreeStructure(createBaseTree(data)),
   }
 
