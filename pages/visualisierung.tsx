@@ -4,11 +4,11 @@ import snakeCase from 'just-snake-case'
 import {
   getMainTopicData,
   GetMainTopicDataParamsType,
-  HaushaltsdatenRowType,
 } from '@lib/requests/getMainTopicData'
 import {
   createBaseTree,
   createTreeStructure,
+  TreemapHierarchyType,
 } from '@lib/utils/createTreemapStructure'
 import { TreeMapWithData } from '@components/TreeMap/withData'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
@@ -20,6 +20,14 @@ import classNames from 'classnames'
 import { districts } from '@data/districts'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
+
+interface ListDataType {
+  id: string
+  title: string
+  amount: number
+  group: string
+  groupId: string
+}
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
@@ -47,23 +55,31 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     throw new Error('No data found for this request')
   }
 
+  const hierarchyData = {
+    id: 'overview',
+    name: 'Alle Bereiche',
+    children: createTreeStructure(createBaseTree(data)),
+  }
+
+  const initialListData = data
+    .map((item) => ({
+      id: item.id,
+      title: item.titel_bezeichnung,
+      amount: parseInt(item.betrag, 10),
+      group: item.hauptfunktions_bezeichnung,
+      groupId: snakeCase(item.hauptfunktions_bezeichnung),
+    }))
+    .sort((a, b) => b.amount - a.amount)
+    .slice(0, 100)
+
   return {
     props: {
       title: 'Visualisierung',
       query,
       queriedDistrictId: queriedDistrictId,
       queriedType: queriedType,
-      rawData: data,
-      data: data
-        .map((item) => ({
-          id: item.id,
-          title: item.einzelplan_bezeichnung,
-          amount: parseInt(item.betrag, 10),
-          group: item.hauptfunktions_bezeichnung,
-          groupId: snakeCase(item.hauptfunktions_bezeichnung),
-        }))
-        .sort((a, b) => b.amount - a.amount)
-        .slice(0, 100),
+      hierarchyData: hierarchyData,
+      initialListData: initialListData,
     },
   }
 }
@@ -72,15 +88,9 @@ export const Visualization: FC<{
   query: Partial<ParsedPageQueryType>
   queriedDistrictId: keyof typeof districts
   queriedType: GetMainTopicDataParamsType['titelart']
-  rawData: HaushaltsdatenRowType[]
-  data: {
-    id: string
-    title: string
-    amount: number
-    group: string
-    groupId: string
-  }[]
-}> = ({ data, rawData, queriedDistrictId, queriedType }) => {
+  hierarchyData: TreemapHierarchyType
+  initialListData: ListDataType[]
+}> = ({ queriedDistrictId, queriedType, hierarchyData, initialListData }) => {
   const { observe, width, height } = useDimensions()
 
   return (
@@ -99,23 +109,20 @@ export const Visualization: FC<{
         </div>
         <div className="container mx-auto mt-6">
           <div className="w-full h-[80vh] overflow-hidden" ref={observe}>
-            {rawData && width && height && (
+            {hierarchyData && width && height && (
               <TreeMapWithData
+                hierarchy={hierarchyData}
                 district={districts[queriedDistrictId]}
                 type={queriedType}
-                hierarchy={{
-                  id: 'overview',
-                  name: 'Alle Bereiche',
-                  children: createTreeStructure(createBaseTree(rawData)),
-                }}
                 width={width}
                 height={height}
+                onChangeLevel={() => undefined}
               />
             )}
           </div>
           <h2 className="font-bold text-2xl mb-6 mt-12">Liste</h2>
           <ul className="flex flex-col gap-4">
-            {(data || []).map((item) => (
+            {(initialListData || []).map((item) => (
               <ListItem
                 key={item.id}
                 title={item.title}
