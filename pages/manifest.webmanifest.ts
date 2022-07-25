@@ -8,15 +8,15 @@ const getManifest = ({
   themeBackgroundColor = '#ffffff',
 }): string => `{
     "name": "${siteTitle}",
-    "short_name": "FreshMap",
+    "short_name": "BerlinerHaushaltsdaten",
     "icons": [
         {
-            "src": "/favicons/android-chrome-192x192.png",
+            "src": "/favicons/favicon-192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/favicons/android-chrome-512x512.png",
+            "src": "/favicons/favicon-512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
