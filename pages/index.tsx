@@ -18,11 +18,10 @@ export const getStaticProps: GetStaticProps = async () => {
 export const HomePage: FC = () => {
   return (
     <div className="px-8">
-      <h1 className="font-bold text-5xl mt-20 flex justify-center">
+      <h1 className="font-bold text-6xl mt-20 flex justify-center">
         Berliner Haushaltsdaten
       </h1>
-      <h1 className="font-bold text-3xl flex justify-center text-brand">
-        für den Doppelhaushalt 2022/23
+      <h1 className="font-bold text-4xl flex justify-center text-brand">Doppelhaushalt 2022/23
       </h1>
 
       <div className="flex justify-center mt-20 mb-16">
