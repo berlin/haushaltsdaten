@@ -6,7 +6,7 @@ import { getColorByMainTopic } from './colors'
 import { DistrictLabel } from '@data/districts'
 import { GetMainTopicDataParamsType } from '@lib/requests/getMainTopicData'
 import { TopicType } from 'pages/visualisierung'
-import { TopicDepth } from '@lib/utils/mapTreemapDepthToColumn'
+import { TopicDepth } from '@lib/utils/mapTopicDepthToColumn'
 
 export interface TreeMapType {
   width?: number

@@ -22,7 +22,7 @@ import { useListData } from '@lib/hooks/useListData'
 import {
   mapTopicDepthToColumn,
   TopicDepth,
-} from '@lib/utils/mapTreemapDepthToColumn'
+} from '@lib/utils/mapTopicDepthToColumn'
 import { getColorByMainTopic } from '@components/TreeMap/colors'
 import { useRouter } from 'next/router'
 import { EmbeddPopup } from '@components/EmbeddPopup'
