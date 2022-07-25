@@ -21,11 +21,12 @@ export const HomePage: FC = () => {
       <h1 className="font-bold text-6xl mt-20 flex justify-center">
         Berliner Haushaltsdaten
       </h1>
-      <h1 className="font-bold text-4xl flex justify-center text-brand">Doppelhaushalt 2022/23
+      <h1 className="font-bold text-4xl flex justify-center text-brand">
+        Doppelhaushalt 2022/23
       </h1>
 
-      <div className="flex justify-center mt-20 mb-16">
-        Gehälter für Polizist*innen,Lehrer*innen und Behördenmitarbeiter*innen,
+      <div className="w-3/5 m-auto italic text-center mt-20 mb-16">
+        Gehälter für Polizist*innen, Lehrer*innen und Behördenmitarbeiter*innen,
         aber auch der Betrieb öffentlicher Gebäude und die Beleuchtung des
         Straßenraums: Der Betrieb unserer Stadt erfordert eine hohe Summe an
         Ausgaben. Dazu kommen langfristige Investitionen in Einrichtungen und
