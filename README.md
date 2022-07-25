@@ -37,30 +37,60 @@ Where do they live and how to change them
 
 ## Getting started
 
-In order to work on this project, please follow these steps:
-
 ### Requirements
 
-- Node.js
-- Supabase
+#### Node.js
+
+This project is a Next.js app which requires you to have [Node.js](https://nodejs.org/en/) installed.
+
+#### Supabase
+
+As explained in the data section earlier, a Supabase instance is used for storing the data.
+
+If you simply want to continue working on this repository, you can use the already existing Supabase instance.
+
+If you are planning to re-deploy this project, you will need to obtain a Supabase instance yourself, either by using their cloud offering or by self-hosting Supabase.
 
 ### Installation
 
+Clone the repository to your local machine:
+
 ```bash
-# Clone the repo
 git clone git@github.com:berlin/haushaltsdaten.git
+```
 
-# Move into the repo
+Move into the repository folder:
+
+```bash
 cd haushaltsdaten
+```
 
-# Install the npm dependencies
+Make sure you use the Node.js version specified in `.nvmrc`. Find out which Node version you're currently on with:
+
+```bash
+node --version
+```
+
+If this version differs from the one specified in `.nvmrc`, please install the required version, either manually, or using a tool such as [nvm](https://github.com/nvm-sh/nvm), which allows switching to the correct version via:
+
+```bash
+nvm use
+```
+
+With the correct Node version, install the dependencies:
+
+```bash
 npm install
+```
 
-# Create your own .env file
-cp .env.example .env
+Because the data is stored in a Supabase database, you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
 
-# Edit the .env file with your own values
-vim .env # Use your favourite editor here
+In `.env` you must enter the connection details to the Supabase instance as suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access.
+
+You are now ready to start a local development server on http://localhost:3000 via:
+
+```bash
+npm run dev
 ```
 
 ## Deployment
