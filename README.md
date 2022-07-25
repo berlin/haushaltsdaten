@@ -42,13 +42,20 @@ Basic Next.js app
 
 ### Pages
 
+- `pages/index.tsx` is the homepage.
+- `pages/visualisierung.tsx` is the main route for the visualization. It renders the most important components for the visualization.
+- `pages/share.tsx` is almost identical to `pages/visualisierung.tsx`. It is used for sharing an SVG-only version of the currently rendered treemap.
+- `pages/faq.tsx` provides some questions and answers.
+
 ### Components
 
-The most important component is probably the treemap component which can be found in `src/components/TreeMap/index.tsx`. The component expects hierarchical data (`hierarchy` prop) to be passed to it (as specified in its type declaration).
+The most important component is probably the treemap component which can be found in `src/components/TreeMap/index.tsx`. The component expects hierarchical data (`hierarchy` prop) to be passed to it (as specified in its type declaration). It then utilizes [D3](https://d3js.org/) to render a treemap SVG which can be zoomed into and out.
+
+The treemap can be controlled with the filters defined in `src/components/TreeMapControls/index.tsx`.
 
 ### Texts
 
-Where do they live and how to change them
+The texts are currently hard-coded into the pages/components. In the future a more beginner-friendly structure could be applied (such as extracting all text content into a single content provider file).
 
 ## Getting started
 
