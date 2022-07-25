@@ -14,13 +14,6 @@ This website is a NextJS app configured with:
 
 ## Install and contribute
 
-### Requirements
-
-#### [Matomo](https://matomo.org/)
-We use the Google Analytics alternative [Matomo](https://matomo.org/), which is more respectful of the users' privacy, in order to track the page-visits on the page.
-
-You will need a [Matomo](https://matomo.org/) account if you wish to use page analytics as well and configure the environment variables `NEXT_PUBLIC_MATOMO_URL` and `NEXT_PUBLIC_MATOMO_SITE_ID` for this purpose.
-
 ### Installation
 
 ```bash
