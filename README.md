@@ -4,6 +4,13 @@
 
 This data visualization communicates Berlin's public expenditures. It describes in which fields data is spent, it compares the planed expenditures from the real ones and shows which departments are responsible for them.
 
+## The data
+
+- open data from daten.berlin.de (published bi-annually)
+- published as XLS, we covert to CSV and add to PostgreSQL database
+- more info in Supabase repo
+- alternatives to Supabase?
+
 ## Tech stack
 
 This website is a NextJS app configured with:
@@ -14,7 +21,28 @@ This website is a NextJS app configured with:
 - Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
 - Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
 
-## Install and contribute
+## Project structure
+
+Basic Next.js app
+
+### Pages
+
+### Components
+
+Most important ones
+
+### Texts
+
+Where do they live and how to change them
+
+## Getting started
+
+In order to work on this project, please follow these steps:
+
+### Requirements
+
+- Node.js
+- Supabase
 
 ### Installation
 
