@@ -2,14 +2,29 @@
 
 # _Berliner Haushaltsdaten - Dataviz_
 
-This data visualization communicates Berlin's public expenditures. It describes in which fields data is spent, it compares the planed expenditures from the real ones and shows which departments are responsible for them.
+TODO: add image
+
+This data visualization communicates Berlin's public expenditures. It describes in which fields data is spent (or earned) and which district or area is responsible for the expenditure.
+
+The means of visualization is a so-called [treemap](https://en.wikipedia.org/wiki/Treemapping) which allows comparing different expense areas and zooming into the hierarchies of expenses.
+
+The treemap visualization is embedabble by using the _Einbetten_ option.
+
+In addition, a list below the visualization renders the items which belong to the currently selected expense field (ordered by amount in €).
+
+A homepage and FAQ page provide contextual information.
+
+> **Attention: This is a prototype, not a finished software.**
 
 ## The data
 
-- open data from daten.berlin.de (published bi-annually)
-- published as XLS, we covert to CSV and add to PostgreSQL database
-- more info in Supabase repo
-- alternatives to Supabase?
+The data used is available as Open Data in Berlin's official [Open Data portal](https://daten.berlin.de/datensaetze). It is usually published bi-annually and includes the data for the next 2 years.
+
+The data comes as Excel files (`.xlsx`), which is converted to CSV and then loaded into a PostgreSQL database.
+
+We currently use a PostgreSQL database provided by [Supabase](https://supabase.com/). Find information for this setup in the [haushaltsdaten-supabase repo](https://github.com/berlin/haushaltsdaten-supabase).
+
+> **A note on our usage of Supabase**: We are using Supabase because it provides a convenient data access layer. There are certainly alternatives for accessing the data which could be explored in the future.
 
 ## Tech stack
 
