@@ -23,7 +23,7 @@ export const HomePage: FC = () => {
         Berliner Haushaltsdaten
       </h1>
       <h1 className="text-2xl md:text-4xl text-center flex justify-center ">
-        Doppelhaushalt 2022/23
+        2022
       </h1>
 
       <div className="md:w-3/5 md:text-xl m-auto italic text-center mt-12 md:mt-20 text-brand">
