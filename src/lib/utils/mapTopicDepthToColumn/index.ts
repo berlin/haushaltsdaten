@@ -6,7 +6,9 @@ import { TopicColumnName } from '@lib/requests/getRowsByTopic'
  */
 export type TopicDepth = 1 | 2 | 3
 
-export const mapTopicDepthToColumn = (depth: TopicDepth): TopicColumnName => {
+export const mapTopicDepthToColumn = (
+  depth: number
+): TopicColumnName | undefined => {
   switch (true) {
     case depth === 1:
       return 'hauptfunktions_bezeichnung'
@@ -15,6 +17,6 @@ export const mapTopicDepthToColumn = (depth: TopicDepth): TopicColumnName => {
     case depth === 3:
       return 'funktions_bezeichnung'
     default:
-      return 'hauptfunktions_bezeichnung'
+      return undefined
   }
 }

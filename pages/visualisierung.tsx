@@ -29,6 +29,13 @@ import { EmbeddPopup } from '@components/EmbeddPopup'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
+const isValidTopicDepth = (depthToCheck: number): boolean => {
+  const VALID_DEPTHS: TopicDepth[] = [1, 2, 3]
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return VALID_DEPTHS.includes(depthToCheck)
+}
+
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const parsedQuery = query ? mapRawQueryToState(query) : {}
@@ -104,10 +111,16 @@ export const Visualization: FC<{
         ? districts[queriedDistrictId]
         : undefined,
     type: queriedType,
-    topicColumn: topic?.topicDepth
-      ? mapTopicDepthToColumn(topic.topicDepth)
-      : undefined,
-    topicValue: topic.topicLabel || undefined,
+    topicColumn:
+      topic?.topicDepth && isValidTopicDepth(topic.topicDepth)
+        ? mapTopicDepthToColumn(topic.topicDepth)
+        : undefined,
+    topicValue:
+      topic.topicLabel &&
+      topic?.topicDepth &&
+      isValidTopicDepth(topic?.topicDepth)
+        ? topic.topicLabel
+        : undefined,
     initialData: initialListData,
   })
 
