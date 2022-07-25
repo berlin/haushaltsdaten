@@ -5,6 +5,7 @@ import { FC } from 'react'
 import TypeAnimation from 'react-type-animation'
 import { FUNCTION_GROUPS } from '@data/functionGroups'
 import { TOTAL_EXPENSES } from '@data/totalExpenses'
+import { InternalLink } from '@components/InternalLink'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticProps: GetStaticProps = async () => {
@@ -85,10 +86,9 @@ export const HomePage: FC = () => {
         <div className="font-bold text-brand mt-12 md:mt-20 text-xl">
           <ul>
             <li>
-              <a href="https://haushaltsdaten-staging.odis-berlin.de/faq">
-                {' '}
-                → Mehr erfahren: Fragen und Antworten zum Berliner Haushalt
-              </a>
+              <InternalLink href={'/faq'}>
+                {'→ Mehr erfahren: Fragen und Antworten zum Berliner Haushalt'}
+              </InternalLink>
             </li>
           </ul>
         </div>
@@ -188,10 +188,9 @@ export const HomePage: FC = () => {
         <div className="font-bold text-brand mt-12 md:mt-20 text-xl">
           <ul>
             <li>
-              <a href="https://haushaltsdaten-staging.odis-berlin.de">
-                {' '}
-                → Alle Daten in der Tree Map erkunden
-              </a>
+              <InternalLink href={'/visualisierung'}>
+                {'→ Alle Daten in der Tree Map erkunden'}
+              </InternalLink>
             </li>
           </ul>
         </div>
@@ -230,10 +229,9 @@ export const HomePage: FC = () => {
         <div className="font-bold text-brand mt-12 md:mt-20 text-xl">
           <ul>
             <li className="mb-6 md:mb-20">
-              <a href="https://haushaltsdaten-staging.odis-berlin.de/schwerpunkte">
-                {' '}
-                → Ausgewählte Schwerpunktthemen ansehen
-              </a>
+              <InternalLink href={'/schwerpunkte'}>
+                {'→ Ausgewählte Schwerpunktthemen ansehen'}
+              </InternalLink>
             </li>
           </ul>
         </div>
