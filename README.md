@@ -1,9 +1,11 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 # _Berliner Haushaltsdaten - Dataviz_
+
 This data visualization communicates Berlin's public expenditures. It describes in which fields data is spent, it compares the planed expenditures from the real ones and shows which departments are responsible for them.
 
 ## Tech stack
+
 This website is a NextJS app configured with:
 
 - [Typescript](https://www.typescriptlang.org/)
@@ -34,6 +36,7 @@ vim .env # Use your favourite editor here
 ```
 
 ## Deployment
+
 _Berliner Haushaltsdaten - Dataviz_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
 ## Contributors
