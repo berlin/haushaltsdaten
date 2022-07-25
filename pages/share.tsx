@@ -64,7 +64,7 @@ export const SharePage: FC<{
   queriedDistrictId: keyof typeof districts
   queriedType: GetMainTopicDataParamsType['titelart']
   hierarchyData: TreemapHierarchyType
-}> = ({ hierarchyData, queriedDistrictId, queriedType }) => {
+}> = ({ hierarchyData }) => {
   const { observe, width, height } = useDimensions()
 
   return (
@@ -72,8 +72,6 @@ export const SharePage: FC<{
       <div className="w-full h-screen overflow-hidden" ref={observe}>
         {hierarchyData && width && height && (
           <TreeMapWithData
-            district={districts[queriedDistrictId]}
-            type={queriedType}
             hierarchy={hierarchyData}
             width={width}
             height={height}

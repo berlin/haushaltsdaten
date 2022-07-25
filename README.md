@@ -2,7 +2,7 @@
 
 # _Berliner Haushaltsdaten - Dataviz_
 
-TODO: add image
+![Data visualization of Berlin's expenditures](/public/images/readme.png)
 
 This data visualization communicates Berlin's public expenditures. It describes in which fields data is spent (or earned) and which district or area is responsible for the expenditure.
 
@@ -44,7 +44,7 @@ Basic Next.js app
 
 ### Components
 
-Most important ones
+The most important component is probably the treemap component which can be found in `src/components/TreeMap/index.tsx`. The component expects hierarchical data (`hierarchy` prop) to be passed to it (as specified in its type declaration).
 
 ### Texts
 
