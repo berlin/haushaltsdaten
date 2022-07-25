@@ -93,3 +93,9 @@
 	border-radius: 1px;
 	color: #ffffff;
   }
+
+  .read-or-hide{
+	  font-weight: 500;
+	  color: #c41b31;
+	  cursor: pointer;
+  }
