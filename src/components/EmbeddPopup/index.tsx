@@ -1,31 +1,17 @@
 import { CopyTextField } from '@components/CopyTextField'
 import { ChevronDown } from '@components/Icons'
 import { Paragraph } from '@components/Paragraph'
-import { RadioGroup } from '@components/RadioGroup'
 import { Popover, Transition } from '@headlessui/react'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { FC, Fragment, useState } from 'react'
-
-const options = [
-  {
-    name: 'viz',
-    title: 'Nur Visualisierung',
-    subtitle: 'Ohne Labels etc.',
-  },
-  {
-    name: 'all',
-    title: 'Ganze Seite',
-    subtitle: 'Mit kontextuellen Infos',
-  },
-]
+import { FC, Fragment } from 'react'
 
 export const EmbeddPopup: FC = () => {
   const { asPath } = useRouter()
-  const [shareFullPage, setShareFullPage] = useState(false)
   const sharableURL = `${
     typeof window !== 'undefined' ? window.location.origin : ''
-  }${shareFullPage ? asPath : asPath.replace('/', '/share')}`
+  }${asPath.replace('/visualisierung', '/share')}`
+
   return (
     <Popover className="relative">
       {({ open }) => (
@@ -60,18 +46,15 @@ export const EmbeddPopup: FC = () => {
             <Popover.Panel className="absolute right-0 z-10 mt-3 w-80" static>
               <div className="overflow-hidden rounded shadow-lg shadow-gray-900/5 ring-1 ring-gray-200">
                 <div className="bg-white px-5 py-4">
-                  <h3 className="text-lg font-bold">Ansicht einbetten</h3>
-                  <Paragraph className="leading-tight text-gray-500">
-                    Gibt dir einen Link, den du als iframe einbetten kannst
+                  <h3 className="text-lg font-bold">Auswahl einbetten</h3>
+                  <Paragraph className="leading-normal text-gray-500">
+                    Dieser Link kann zum Einbetten der aktuellen Visualisierung
+                    in ein{' '}
+                    <code className="rounded-md bg-gray-100 px-1 py-0.5">
+                      iframe
+                    </code>{' '}
+                    benutzt werden.
                   </Paragraph>
-                  <RadioGroup
-                    value={shareFullPage ? options[1] : options[0]}
-                    options={options}
-                    onChange={(option) => {
-                      const idxOfOption = options.indexOf(option)
-                      setShareFullPage(Boolean(idxOfOption))
-                    }}
-                  />
                   <CopyTextField
                     contentToCopy={sharableURL}
                     name="url"

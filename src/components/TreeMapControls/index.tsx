@@ -1,18 +1,22 @@
-import { EmbeddPopup } from '@components/EmbeddPopup'
 import { ListBox } from '@components/ListBox'
 import { ToggleSwitch } from '@components/Toggle'
 import { districts } from '@data/districts'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { FC, useCallback } from 'react'
+import { FC } from 'react'
 
-export type TreeMapControlsPropType = Partial<ParsedPageQueryType>
+export type TreeMapControlsPropType = Partial<ParsedPageQueryType> & {
+  onChange: (newQuery: Partial<ParsedPageQueryType>) => void
+}
 
 const Separator: FC = () => <span className="h-10 w-[1px] bg-gray-200" />
 
-export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
-  const { query, push, pathname } = useRouter()
+export const TreeMapControls: FC<TreeMapControlsPropType> = ({
+  district,
+  onChange,
+}) => {
+  const { query } = useRouter()
 
   const mappedQuery = mapRawQueryToState(query)
   const mappedDistricts = Object.keys(districts)
@@ -23,47 +27,49 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({ district }) => {
     }))
   const foundDistrict = mappedDistricts.find(({ id }) => id === district)
 
-  const updateUrl = useCallback(
-    (newQuery: Partial<ParsedPageQueryType>): void => {
-      void push(
-        { pathname, query: { ...mappedQuery, ...newQuery } },
-        undefined,
-        { shallow: true }
-      )
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
-
   return (
-    <nav
-      aria-label="Navigation der Visualisierung"
-      className={classNames('flex gap-6 justify-between items-center')}
-    >
-      <div className="flex gap-6">
-        <ToggleSwitch
-          value={mappedQuery.showExpenses ?? true}
-          optionA="Einnahmen"
-          optionB="Ausgaben"
-          onChange={(isOn) => updateUrl({ showExpenses: isOn })}
-        />
-        <Separator />
-        <ListBox
-          selected={foundDistrict}
-          onChange={(district) =>
-            updateUrl({
-              district: `${district}` as ParsedPageQueryType['district'],
-            })
-          }
-          options={Object.keys(districts)
-            .sort()
-            .map((key) => ({
-              id: key,
-              name: districts[key as keyof typeof districts] || ' ',
-            }))}
-        />
-      </div>
-      <EmbeddPopup />
-    </nav>
+    <div className="w-full">
+      <nav
+        aria-label="Navigation der Visualisierung"
+        className={classNames(
+          'w-full',
+          'sm:flex gap-6 justify-between items-center'
+        )}
+      >
+        <div
+          className={classNames(
+            'w-full sm:w-auto',
+            'grid grid-cols-1 sm:grid-cols-[1fr,auto,1fr] gap-y-3 sm:gap-x-6'
+          )}
+        >
+          <ToggleSwitch
+            value={mappedQuery.showExpenses ?? true}
+            optionA="Einnahmen"
+            optionB="Ausgaben"
+            onChange={(isOn) =>
+              onChange({ ...mappedQuery, showExpenses: isOn })
+            }
+          />
+          <div className="hidden sm:inline-flex">
+            <Separator />
+          </div>
+          <ListBox
+            selected={foundDistrict}
+            onChange={(district) =>
+              onChange({
+                ...mappedQuery,
+                district: `${district}` as ParsedPageQueryType['district'],
+              })
+            }
+            options={Object.keys(districts)
+              .sort()
+              .map((key) => ({
+                id: key,
+                name: districts[key as keyof typeof districts] || ' ',
+              }))}
+          />
+        </div>
+      </nav>
+    </div>
   )
 }

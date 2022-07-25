@@ -1,18 +1,20 @@
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC, useEffect } from 'react'
 import * as d3 from 'd3'
-import classNames from 'classnames'
 import { formatCurrency } from '@lib/utils/numberUtil'
 import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 import { getColorByMainTopic } from './colors'
+import { DistrictLabel } from '@data/districts'
+import { GetMainTopicDataParamsType } from '@lib/requests/getMainTopicData'
+import { TopicType } from 'pages/visualisierung'
+import { TopicDepth } from '@lib/utils/mapTopicDepthToColumn'
 
 export interface TreeMapType {
   width?: number
   height?: number
+  district: DistrictLabel
+  type: GetMainTopicDataParamsType['titelart']
   hierarchy: TreemapHierarchyType
-  breadcrumbsToDesiredLevel?: string[]
-  onLastLevelReached?: (funktionsbezeichnung: string) => void
-  onChange?: (newPath: string[]) => void
-  onZoomout?: (newPath: string[]) => void
+  onChangeLevel?: (level: TopicType) => void
 }
 
 export interface TreemapItem {
@@ -32,6 +34,8 @@ type TreeMapNode = d3.HierarchyRectangularNode<TreemapHierarchyType>
 
 const format = d3.format(',d')
 
+const BREADCRUMBS_HEIGHT = 56
+
 function position(
   group: d3.Selection<SVGGElement, unknown, HTMLElement, TreemapItem>,
   root: TreeMapNode,
@@ -42,53 +46,27 @@ function position(
   group
     .selectAll<d3.BaseType, TreeMapNode>('g')
     .attr('transform', (d) =>
-      d === root ? `translate(0,0)` : `translate(${x(d.x0)},${y(d.y0)})`
+      d === root
+        ? `translate(0,-${BREADCRUMBS_HEIGHT})`
+        : `translate(${x(d.x0)},${y(d.y0)})`
     )
     .select('rect')
     .attr('width', (d) => (d === root ? width : x(d.x1) - x(d.x0)))
-    .attr('height', (d) => (d === root ? 30 : y(d.y1) - y(d.y0)))
-}
-
-function getFullBreadcrumb(rootEl: TreeMapNode): TreeMapNode[] {
-  let fullBreadcrumb: TreeMapNode[] = []
-  function getParent(el: TreeMapNode): TreeMapNode | undefined {
-    if (el.parent) {
-      fullBreadcrumb = [el, ...fullBreadcrumb]
-      return getParent(el.parent)
-    }
-    fullBreadcrumb = [el, ...fullBreadcrumb]
-    return undefined
-  }
-  getParent(rootEl)
-  return fullBreadcrumb.filter(({ data }) => data.id)
+    .attr('height', (d) =>
+      d === root ? BREADCRUMBS_HEIGHT : y(d.y1) - y(d.y0)
+    )
 }
 
 export const TreeMap: FC<TreeMapType> = ({
   width = 800,
   height = 800,
+  district,
+  type,
   hierarchy,
-  breadcrumbsToDesiredLevel = [],
-  onLastLevelReached = () => undefined,
-  onChange = () => undefined,
-  onZoomout = () => undefined,
+  onChangeLevel = () => undefined,
 }) => {
-  const [breadcrumb, setBreadcrumb] = useState<TreeMapNode[]>([])
-  const [path, setPath] = useState<string[]>(breadcrumbsToDesiredLevel)
   const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().rangeRound([0, height])
-
-  useEffect(() => {
-    if (breadcrumbsToDesiredLevel.join('-') === path.join('-')) return
-    setPath(breadcrumbsToDesiredLevel)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [breadcrumbsToDesiredLevel])
-
-  useEffect(() => {
-    if (!path) return
-    path.forEach((crumb) => {
-      d3.select(`#${crumb}`).dispatch('click')
-    })
-  }, [path])
 
   useEffect(() => {
     const name = (d: TreeMapNode): string =>
@@ -96,7 +74,7 @@ export const TreeMap: FC<TreeMapType> = ({
         .ancestors()
         .reverse()
         .map((d) => d.data.name)
-        .join('/')
+        .join(' → ')
 
     function tile(
       node: TreeMapNode,
@@ -134,26 +112,23 @@ export const TreeMap: FC<TreeMapType> = ({
     ): void {
       const node = group
         .selectAll<d3.BaseType, TreemapHierarchyType>('g')
-        .data(root.children || [])
+        .data((root.children || []).concat(root))
         .join('g')
 
       node
-        .attr('id', (d) => d.data.id || '')
+        .attr('id', (d) => `level-${d.depth}-${d.data.id || ''}`)
         .filter((d) => Boolean(d === root ? d.parent : d.children))
         .attr('cursor', 'pointer')
         .on('click', (_, d) => {
           d === root ? zoomout(root) : zoomin(d)
-          const newPath = d
-            .ancestors()
-            .sort((a, b) => a.depth - b.depth)
-            .map((parent) => parent.data.id || '')
-          if (!newPath.every(Boolean)) {
-            console.error('An invalid path was attempted to be clicked')
-            return
-          }
-          newPath.shift()
-          onChange(newPath)
-          setBreadcrumb(getFullBreadcrumb(d))
+
+          const depth = d === root ? d.depth - 1 : d.depth
+          const label = d === root ? d.parent?.data.name : d.data.name
+
+          onChangeLevel({
+            topicDepth: depth as TopicDepth,
+            topicLabel: label,
+          })
         })
 
       node.append('title').text((d) => `${name(d)}\n${format(d.value || 0)}`)
@@ -162,14 +137,12 @@ export const TreeMap: FC<TreeMapType> = ({
       node
         .append('rect')
         .attr('fill', (d) => {
-          const mainTopicsDomain =
-            hierarchy.children?.map((mainTopic) => mainTopic.name) || []
-
           const mainTopic = d.parent
             ? d.ancestors().find((ancestor) => ancestor.depth === 1)?.data
                 .name || ''
             : d.data.name
-          return getColorByMainTopic(mainTopic, mainTopicsDomain)
+
+          return d === root ? '#fff' : getColorByMainTopic(mainTopic)
         })
         .attr('stroke', '#fff')
 
@@ -178,8 +151,6 @@ export const TreeMap: FC<TreeMapType> = ({
         .attr('id', (d) => `treemap-clippath-${d.data.id || ''}`)
         .append('use')
         .attr('xlink:href', (d) => `treemap-clippath-${d.data.id || ''}`)
-
-      setBreadcrumb(getFullBreadcrumb(root))
 
       node
         .append('text')
@@ -212,11 +183,6 @@ export const TreeMap: FC<TreeMapType> = ({
     function zoomin(d: TreeMapNode): void {
       const groupToRemove = group.attr('pointer-events', 'none')
       const groupToAdd = (group = svg.append('g').call(render, d))
-
-      // depth starts at 0, so 3 is the level at which we have the Funktion which holds its Einzeltitel:
-      if (d.depth === 3) {
-        onLastLevelReached(d.data.name || '')
-      }
 
       x.domain([d.x0, d.x1])
       y.domain([d.y0, d.y1])
@@ -273,78 +239,20 @@ export const TreeMap: FC<TreeMapType> = ({
         )
     }
 
-    path.forEach((crumb) => {
-      d3.select(`#${crumb}`).dispatch('click')
-    })
+    return function cleanup() {
+      d3.select('#expenditures-treemap').selectAll('g').remove()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const onBreadcrumbClick = useCallback((el: TreeMapNode) => {
-    const bc = getFullBreadcrumb(el)
-    setBreadcrumb(bc)
-    const newPath = bc.map((el) => el.data.id).filter(Boolean)
-    setPath(newPath)
-    onZoomout(newPath)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [district, type])
 
   return (
-    <div>
-      <h1
-        id="expenditures-treemap-breadcrumb"
-        className="font-bold text-2xl mb-6 grid grid-cols-[1fr,auto] gap-8"
-      >
-        <span className="flex gap-4">
-          {breadcrumb.map((el, idx) => {
-            return (
-              <span
-                key={el.data.id}
-                className={`grid gap-4 ${
-                  idx !== 0 ? 'grid-cols-[auto,1fr]' : ''
-                }`}
-              >
-                {idx !== 0 && (
-                  <span className="font-normal text-gray-300">→</span>
-                )}
-                <span
-                  title={el.data.name}
-                  className={classNames(
-                    'text-ellipsis overflow-hidden whitespace-nowrap',
-                    idx !== 0 ? 'font-normal' : 'font-bold',
-                    idx !== breadcrumb.length - 1
-                      ? 'hover:text-brand transition-colors cursor-pointer'
-                      : 'cursor-default'
-                  )}
-                  {...(idx !== breadcrumb.length - 1
-                    ? {
-                        role: 'button',
-                        tabIndex: 0,
-                        onClick: () => {
-                          onBreadcrumbClick(el)
-                        },
-                        onKeyUp: () => undefined,
-                      }
-                    : {})}
-                >
-                  {el.data.name}
-                </span>
-              </span>
-            )
-          })}
-        </span>
-        {breadcrumb[breadcrumb.length - 1] && (
-          <span className="font-mono font-normal inline-flex gap-3">
-            <span className="text-gray-300">€</span>
-            {formatCurrency(breadcrumb[breadcrumb.length - 1].value || 0)}
-          </span>
-        )}
-      </h1>
-      <svg
-        id="expenditures-treemap"
-        width={width}
-        height={height}
-        viewBox={`0, 0, ${width}, ${height}`}
-      ></svg>
-    </div>
+    <svg
+      id="expenditures-treemap"
+      width={width}
+      height={height + BREADCRUMBS_HEIGHT}
+      viewBox={`0, -${BREADCRUMBS_HEIGHT}, ${width}, ${
+        height + BREADCRUMBS_HEIGHT
+      }`}
+    ></svg>
   )
 }

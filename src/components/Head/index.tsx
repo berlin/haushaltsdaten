@@ -9,8 +9,7 @@ const siteUrl =
   'http://localhost:3000'
 
 const faviconPath = '/favicon.ico'
-const faviconPathPNG16 = '/favicons/favicon-16x16.png'
-const faviconPathPNG32 = '/favicons/favicon-32x32.png'
+const faviconSvgPath = '/favicons/favicon.svg'
 
 interface HeadPropType {
   currentPagePath: string
@@ -27,26 +26,21 @@ interface HeadPropType {
 }
 
 export const Head: FC<Partial<HeadPropType>> = ({
-  description = '',
+  description = 'Interaktive Visualisierung der Berliner Haushaltsdaten',
   siteTitle = 'Berliner Haushaltsdaten',
   pageTitle = 'Karte',
   fbAppId = '',
   keywords = [
     'Berlin',
-    'Trees',
-    'Climate',
-    'Thirty',
-    'Watering',
-    'Suction tenstion',
-    'AI',
-    'Artificial Intelligence',
-    'Birds on Mars',
-    'CityLAB',
+    'Haushalt',
+    'Haushaltsdaten',
+    'Visualisierung',
+    'Senatsverwaltung für Finanzen Berlin',
   ],
   themeColor = colors.brand,
   locales = ['de'],
   locale = 'de',
-  twitterUsername = 'TSBBerlin',
+  twitterUsername = 'citylabberlin',
   socialThumbnail = '',
 }) => {
   const { pathname } = useRouter()
@@ -101,8 +95,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
       <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png" />
 
       <link href={faviconPath} type="image/x-icon" rel="shortcut icon" />
-      <link href={faviconPathPNG16} type="image/png" rel="icon" />
-      <link href={faviconPathPNG32} type="image/png" rel="icon" />
+      <link href={faviconSvgPath} type="image/svg+xml" rel="icon" />
 
       <link rel="manifest" href="/manifest.webmanifest" />
 
