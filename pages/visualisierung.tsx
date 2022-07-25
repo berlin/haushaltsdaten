@@ -171,8 +171,6 @@ export const Visualization: FC<{
             {hierarchyData && width && height && (
               <TreeMapWithData
                 hierarchy={hierarchyData}
-                district={districts[queriedDistrictId]}
-                type={queriedType}
                 width={width}
                 height={height}
                 onChangeLevel={(level) => {
