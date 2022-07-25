@@ -16,7 +16,7 @@ const ReadMore = ({ children }) => {
     setIsReadMore(!isReadMore);
   };
   return (
-    <p className="text">
+    <p>
       {isReadMore ? text.slice(0, 250) : text}
       <span onClick={toggleReadMore} className="font-medium text-brand cursor-pointer">
         {isReadMore ? " ...mehr anzeigen" : " weniger anzeigen"}
