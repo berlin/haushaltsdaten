@@ -2,7 +2,7 @@ import React, { FC, useRef, useState } from 'react'
 import { supabase } from '@lib/requests/createSupabaseClient'
 import { GetStaticProps } from 'next'
 import classNames from 'classnames'
-import { HaushaltsdatenRowType } from '@lib/requests/getMainTopicData'
+import { HaushaltsdatenRowType } from '@lib/requests/getRowsByDistrictAndType'
 import { formatCurrency } from '@lib/utils/numberUtil'
 
 const MAX_RENDERED_RESULTS = 500
