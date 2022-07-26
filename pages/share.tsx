@@ -1,7 +1,7 @@
 import {
-  getMainTopicData,
-  GetMainTopicDataParamsType,
-} from '@lib/requests/getMainTopicData'
+  getRowsByDistrictAndType,
+  GetRowsByDistrictAndTypeParamsType,
+} from '@lib/requests/getRowsByDistrictAndType'
 import {
   createBaseTree,
   createTreeStructure,
@@ -30,12 +30,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       ? 'Ausgabetitel'
       : 'Einnahmetitel'
 
-  const data = await getMainTopicData({
-    bereich:
+  const data = await getRowsByDistrictAndType({
+    district:
       !!queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
         ? districts[queriedDistrictId as keyof typeof districts]
         : undefined,
-    titelart: queriedType,
+    expenseType: queriedType,
   })
 
   if (!data) {
@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 export const SharePage: FC<{
   query: Partial<ParsedPageQueryType>
   queriedDistrictId: keyof typeof districts
-  queriedType: GetMainTopicDataParamsType['titelart']
+  queriedType: GetRowsByDistrictAndTypeParamsType['expenseType']
   hierarchyData: TreemapHierarchyType
 }> = ({ hierarchyData }) => {
   const { observe, width, height } = useDimensions()
