@@ -12,12 +12,14 @@ export interface ListBoxPropType {
   options: ListBoxOptionType[]
   selected?: ListBoxOptionType
   onChange?: (newId: ListBoxOptionType['id']) => void
+  additionalClasses?: string
 }
 
 export const ListBox: FC<ListBoxPropType> = ({
   options,
   selected = options[0],
   onChange = () => undefined,
+  additionalClasses = '',
 }) => {
   const [selectedOption, setSelectedOption] =
     useState<ListBoxOptionType>(selected)
@@ -30,7 +32,7 @@ export const ListBox: FC<ListBoxPropType> = ({
         onChange(newOption.id)
       }}
     >
-      <div className="relative mt-1">
+      <div className={classNames('relative mt-1', additionalClasses)}>
         <Listbox.Button
           className={classNames(
             'group',
@@ -61,7 +63,7 @@ export const ListBox: FC<ListBoxPropType> = ({
         >
           <Listbox.Options
             className={classNames(
-              'absolute right-0 mt-1 max-h-60 w-full min-w-[300px] overflow-auto',
+              'absolute right-0 mt-1 max-h-60 w-full min-w-[250px] overflow-auto',
               'rounded bg-white py-1 text-base shadow-lg',
               'ring-1 ring-gray-200 focus:outline-none',
               'sm:text-sm'

@@ -9,6 +9,7 @@ import useSWR from 'swr'
 interface useListDataParamsType {
   district?: DistrictLabel
   type: GetRowsByDistrictAndTypeParamsType['expenseType']
+  year: number
   topicColumn?: TopicColumnName
   topicValue?: string
   initialData?: HaushaltsdatenRowType[]
@@ -23,12 +24,13 @@ interface useListDataReturnType {
 export const useListData = ({
   district,
   type,
+  year,
   topicColumn,
   topicValue,
   initialData,
 }: useListDataParamsType): useListDataReturnType => {
   const params = [
-    `${district || 'Alle Bereiche'} - ${type} - ${
+    `${year} - ${district || 'Alle Bereiche'} - ${type} - ${
       topicColumn || 'Alle Spalten'
     } - ${topicValue || 'Alle Werte'}`,
   ]
@@ -38,6 +40,7 @@ export const useListData = ({
       getRowsByTopic({
         district: district,
         expenseType: type,
+        year: year,
         topicColumn: topicColumn || undefined,
         topicValue: topicValue,
       }),

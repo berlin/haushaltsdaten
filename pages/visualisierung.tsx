@@ -26,6 +26,7 @@ import {
 import { getColorByMainTopic } from '@components/TreeMap/colors'
 import { useRouter } from 'next/router'
 import { EmbeddPopup } from '@components/EmbeddPopup'
+import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
@@ -50,12 +51,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       ? 'Ausgabetitel'
       : 'Einnahmetitel'
 
+  const queriedYear = parsedQuery.year
+
   const data = await getRowsByDistrictAndType({
     district:
       !!queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
         ? districts[queriedDistrictId as keyof typeof districts]
         : undefined,
     expenseType: queriedType,
+    year: queriedYear && isValidYear(queriedYear) ? queriedYear : DEFAULT_YEAR,
   })
 
   if (!data) {
@@ -76,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       title: 'Visualisierung',
       query,
+      queriedYear: queriedYear || 2022,
       queriedDistrictId: queriedDistrictId,
       queriedType: queriedType,
       hierarchyData: hierarchyData,
@@ -91,11 +96,18 @@ export interface TopicType {
 
 export const Visualization: FC<{
   query: Partial<ParsedPageQueryType>
+  queriedYear: number
   queriedDistrictId: keyof typeof districts
   queriedType: GetRowsByDistrictAndTypeParamsType['expenseType']
   hierarchyData: TreemapHierarchyType
   initialListData: HaushaltsdatenRowType[]
-}> = ({ queriedDistrictId, queriedType, hierarchyData, initialListData }) => {
+}> = ({
+  queriedYear,
+  queriedDistrictId,
+  queriedType,
+  hierarchyData,
+  initialListData,
+}) => {
   const { observe, width, height } = useDimensions()
   const { push, pathname } = useRouter()
 
@@ -111,6 +123,7 @@ export const Visualization: FC<{
         ? districts[queriedDistrictId]
         : undefined,
     type: queriedType,
+    year: queriedYear,
     topicColumn:
       topic?.topicDepth && isValidTopicDepth(topic.topicDepth)
         ? mapTopicDepthToColumn(topic.topicDepth)
@@ -158,7 +171,7 @@ export const Visualization: FC<{
                 }}
               />
             </div>
-            <div className="hidden sm:inline-flex">
+            <div className="hidden lg:inline-flex">
               <EmbeddPopup />
             </div>
           </div>
@@ -179,11 +192,11 @@ export const Visualization: FC<{
               />
             )}
           </div>
-          <div className="mt-4 flex justify-end sm:hidden">
+          <div className="container mx-auto mt-4 flex justify-end lg:hidden">
             <EmbeddPopup />
           </div>
           <div className="container mx-auto">
-            <h2 className="mb-6 mt-12 font-bold text-2xl">
+            <h2 className="mb-6 mt-12 px-4 font-bold text-2xl">
               {queriedType === 'Ausgabetitel'
                 ? 'Höchste Ausgaben'
                 : 'Höchste Einnahmen'}
