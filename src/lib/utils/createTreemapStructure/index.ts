@@ -1,4 +1,4 @@
-import { HaushaltsdatenRowType } from '@lib/requests/getMainTopicData'
+import { HaushaltsdatenRowType } from '@lib/requests/getRowsByDistrictAndType'
 import snakeCase from 'just-snake-case'
 
 type FunktionAccType = Record<string, number>

@@ -11,26 +11,29 @@ export interface HaushaltsdatenRowType {
   betrag: string
 }
 
-export interface GetMainTopicDataParamsType {
-  bereich?: DistrictLabel
-  titelart: 'Einnahmetitel' | 'Ausgabetitel'
+export interface GetRowsByDistrictAndTypeParamsType {
+  district?: DistrictLabel
+  expenseType: 'Einnahmetitel' | 'Ausgabetitel'
 }
 
-export const getMainTopicData = async ({
-  bereich,
-  titelart,
-}: GetMainTopicDataParamsType): Promise<
+/**
+ * Retrieves rows from the Haushaltdaten based on the provided `district` and `expenseType`. There is no further filtering as to which topic group the rows belong to.
+ */
+export const getRowsByDistrictAndType = async ({
+  district,
+  expenseType,
+}: GetRowsByDistrictAndTypeParamsType): Promise<
   HaushaltsdatenRowType[] | undefined
 > => {
-  if (bereich) {
+  if (district) {
     const { data, error } = await supabase
       .from('haushaltsdaten_2022')
       .select(
         'id, betrag, bereichs_bezeichnung, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
       .eq('jahr', '2022')
-      .eq('titel_art', titelart)
-      .eq('bereichs_bezeichnung', bereich)
+      .eq('titel_art', expenseType)
+      .eq('bereichs_bezeichnung', district)
 
     if (error) throw error
 
@@ -42,7 +45,7 @@ export const getMainTopicData = async ({
         'id, betrag, bereichs_bezeichnung, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
       .eq('jahr', '2022')
-      .eq('titel_art', titelart)
+      .eq('titel_art', expenseType)
 
     if (error) throw error
 
