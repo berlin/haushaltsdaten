@@ -2,39 +2,12 @@ import React, { FC, useRef, useState } from 'react'
 import { supabase } from '@lib/requests/createSupabaseClient'
 import { GetStaticProps } from 'next'
 import classNames from 'classnames'
+import { HaushaltsdatenRowType } from '@lib/requests/getMainTopicData'
+import { formatCurrency } from '@lib/utils/numberUtil'
 
-export interface TData {
-  [key: string]: unknown
-  id: string
-  typ: string
-  bezeichnung: string
-  bereich: string
-  bereichs_bezeichnung: string
-  einzelplan: string
-  einzelplan_bezeichnung: string
-  kapitel: string
-  kapitel_bezeichnung: string
-  hauptgruppe: string
-  hauptgruppen_bezeichnung: string
-  obergruppe: string
-  obergruppen_bezeichnung: string
-  gruppe: string
-  gruppen_bezeichnung: string
-  hauptfunktion: string
-  hauptfunktions_bezeichnung: string
-  oberfunktion: string
-  oberfunktions_bezeichnung: string
-  funktion: string
-  funktions_bezeichnung: string
-  titel_art: string
-  titel: string
-  titel_bezeichnung: string
-  jahr: string
-  betrag_typ: string
-  betrag: string
-}
+const MAX_RENDERED_RESULTS = 500
 
-const toTitleCase = (s: string) =>
+const toTitleCase = (s: string): string =>
   s.replace(/^_*(.)|_+(.)/g, (_s, c: string, d: string) =>
     c ? c.toUpperCase() : ' ' + d.toUpperCase()
   )
@@ -59,7 +32,7 @@ export const getStaticProps: GetStaticProps = async () => ({
 })
 
 export const Search: FC = () => {
-  const [results, setResults] = useState<TData[] | null>(null)
+  const [results, setResults] = useState<HaushaltsdatenRowType[] | null>(null)
   const [searchTerm, setSearchTerm] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -89,13 +62,32 @@ export const Search: FC = () => {
       setResults(null)
       setSearchTerm(value)
     } else {
-      setResults(data)
+      setSearchTerm(value)
+      const mappedData: HaushaltsdatenRowType[] = data.map(
+        (row: HaushaltsdatenRowType) => {
+          return {
+            titel_bezeichnung: row['titel_bezeichnung'],
+            titel_art: row['titel_art'],
+            betrag: `${formatCurrency(parseInt(row['betrag'], 10))} €`,
+            bereichs_bezeichnung: row['bereichs_bezeichnung'],
+            funktions_bezeichnung: row['funktions_bezeichnung'],
+            oberfunktions_bezeichnung: row['oberfunktions_bezeichnung'],
+            hauptfunktions_bezeichnung: row['hauptfunktions_bezeichnung'],
+            id: row['id'],
+          }
+        }
+      )
+      setResults(
+        mappedData.length > MAX_RENDERED_RESULTS
+          ? mappedData.slice(0, MAX_RENDERED_RESULTS)
+          : mappedData
+      )
     }
   }
 
   return (
     <>
-      <div className="container flex justify-center px-4 my-24">
+      <div className="w-full flex justify-center px-4 my-24">
         <div className="flex-col">
           <h1
             id="search-field-title"
@@ -133,16 +125,20 @@ export const Search: FC = () => {
 
       {!loading ? (
         <div className="flex flex-col">
-          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+          <div className="overflow-x-auto">
+            <div className="min-w-full py-2">
               <div className="overflow-x-auto" id="results">
                 {results ? (
                   <>
-                    <div className="container flex justify-center">
-                      <div className="">
+                    <div className="w-full flex justify-center mb-8">
+                      <div>
                         {searchTerm ? (
                           <p>
-                            Ergebnisse für den Begriff{' '}
+                            {results.length}
+                            {results.length === MAX_RENDERED_RESULTS &&
+                              '+'}{' '}
+                            Ergebnis
+                            {results.length !== 1 && 'se'} für den Begriff{' '}
                             <span className="font-bold">{searchTerm}</span>
                           </p>
                         ) : null}
@@ -151,9 +147,15 @@ export const Search: FC = () => {
                     <Table
                       head={
                         <tr>
-                          {Object.keys(results[0]).map((name) => {
+                          {Object.keys(results[0]).map((name, i) => {
                             return (
-                              <th key={name} scope="col" className="text-left">
+                              <th
+                                key={name}
+                                scope="col"
+                                className={`text-left py-3 px-4 border-b border-gray-500 ${
+                                  i === 2 ? 'text-right' : 'text-left'
+                                }`}
+                              >
                                 {name === 'id' ? '#' : toTitleCase(name)}
                               </th>
                             )
@@ -163,8 +165,20 @@ export const Search: FC = () => {
                       body={results.map((result) => {
                         return (
                           <tr key={result.id}>
-                            {Object.keys(result).map((k) => {
-                              return <td key={k}>{result[k] as string}</td>
+                            {Object.keys(result).map((k, i) => {
+                              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                              // @ts-ignore
+                              const item = result[k] as string
+                              return (
+                                <td
+                                  key={k}
+                                  className={`py-3 px-4 border-b border-gray-200 first-of-type:text-brand first-of-type:font-bold ${
+                                    i === 2 ? 'text-right' : 'text-left'
+                                  }`}
+                                >
+                                  {item}
+                                </td>
+                              )
                             })}
                           </tr>
                         )
@@ -172,7 +186,7 @@ export const Search: FC = () => {
                     />
                   </>
                 ) : (
-                  <div className="container flex justify-center">
+                  <div className="w-full flex justify-center mb-24">
                     <div className="">
                       {searchTerm ? (
                         <p>

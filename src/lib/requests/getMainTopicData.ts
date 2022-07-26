@@ -7,6 +7,7 @@ export interface HaushaltsdatenRowType {
   oberfunktions_bezeichnung: string
   funktions_bezeichnung: string
   titel_bezeichnung: string
+  titel_art?: 'Einnahmetitel' | 'Ausgabetitel'
   bereichs_bezeichnung: string
   betrag: string
 }
