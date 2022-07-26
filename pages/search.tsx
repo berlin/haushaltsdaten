@@ -97,7 +97,7 @@ export const Search: FC = () => {
       <div className="container flex justify-center mt-6 mb-6">
         <div className="flex-col">
           <h1 className="flex justify-center mt-20 text-5xl font-bold">
-            Voll Text Suche
+            Textsuche
           </h1>
           <form className="flex-form" ref={form}>
             <label htmlFor="search">Suche</label>
