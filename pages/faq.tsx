@@ -1,6 +1,10 @@
 import { GetStaticProps } from 'next'
 import React, { useState } from "react";
 import { FC } from 'react'
+import { GroupedBarChart } from '@components/GroupedBarChart'
+import { TOTAL_EXPENSES } from '@data/totalExpenses'
+import { InternalLink } from '@components/InternalLink'
+import { FadeInWrapper } from '@components/FadeInWrapper'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticProps: GetStaticProps = async () => ({
@@ -28,9 +32,100 @@ const ReadMore = ({ children }) => {
 export const FaqPage: FC = () => (
   <div className="px-8">
     <div className="md:w-4/5 m-auto mt-12 md:mt-20">
-    <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl">Fragen und Antworten</h1>
-      <div className="md:w-3/5 m-auto mt-12 md:mt-20">  
-        <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">Warum werden die Haushaltsdaten visualisiert?</h2>
+    <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl lg:ml-28">Wissenwertes zum Berliner Haushalt</h1>
+    <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
+          <div className="flex-col mt-6">
+            Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land Berlin muss alle voraussichtlichen Einnahmen und Ausgaben
+            eines Jahres in einem Plan ausweisen, dem „Öffentlichen Haushalt“.
+            Jährlich stellt der Senat, genauer die Senatsverwaltung für Finanzen,
+            einen Haushaltsplanentwurf mit den jeweiligen Einzelhaushalten der
+            Verwaltungen auf.
+            </div>
+            <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12">
+              Berliner Doppelhaushalt
+            </h2>
+            <div className="flex-col mt-6">
+              Haushaltsrechtlich möglich ist es auch Haushalte direkt für
+              zwei Jahre, jeweils nach Jahren getrennt, festzusetzen. In Berliner macht man von dieser Regelung gebrauch, solche &quot;Doppelhaushalte&quot; vorzulegen,
+              da dadurch der Verwaltungsaufwand reduziert wird.
+            </div>
+
+            <p className="text-2xl text-center mt-6 md:mt-16">
+              76,61 Milliarden Euro
+            </p>
+            <p className="text-gray-500 text-xs md:text-sm text-center">
+              {' '}
+              stehen Berlin im aktuellen Doppelhaushalt als Gesamtausgaben zur
+              Verfügung
+            </p>
+
+          <div className="mt-6 md:mt-16">
+            Im Ausgabehaushalt ist festgelegt, wie viel Geld in den einzelnen
+          Politikbereichen ausgegeben werden darf. Gleichzeitig wird damit das
+          Budget (Etat) für die Erfüllung der öffentlichen Aufgaben Berlins
+          jährlich festgeschrieben. Die zu erwartenden Einnahmen aus Steuern und
+          Gebühren werden also auf die Aufgaben des Landes verteilt. Mit den
+          Einnahmen steht ein eng begrenzter Rahmen an Mitteln zur Verfügung,
+          der zum großen Teil durch Verpflichtungen Berlins (beispielsweise im
+          Sozialbereich und der Bildung) bereits fest gebunden ist. Die weitere
+          Aufteilung auf die weiteren Aufgaben der Verwaltung (z.B. innere
+          Sicherheit, Wirtschaftsförderung, Kultur) erfolgt im politischen
+          Abstimmungsprozess des Abgeordnetenhauses.
+          </div>
+
+          <p className="mt-6 md:mt-16 text-sm flex justify-center">
+            Gesamtausgaben des Berliner Haushalts in Mrd. €
+         </p>
+          <div className="mt-2 flex justify-center">
+            <GroupedBarChart data={TOTAL_EXPENSES}/>
+          </div>
+          <div className="mt-6 md:mt-16">
+            Die Haushaltslage des Landes hat sich in den vergangenen Jahren stetig
+            verbessert, sodass Berlin seit dem Jahr 2012 zur Finanzierung seiner
+            laufenden Ausgaben keine zusätzlichen Kredite mehr aufnehmen musste.
+          </div>
+          </div>
+
+      <div className="lg:w-3/6 m-auto mt-6 md:mt-12 mb-16 md:mb-28 ">
+        <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
+          Schwerpunktthemen im aktuellen Haushalt
+        </h2>
+        <div className="mt-6">
+          Im aktuellen doppelhaushalt lassen sich einige Themen in einen besonderen Fokus setzten.
+          So ist Berlin beispielweise bis heute eines der wenigen Bundesländer in Deutschland,
+          das die Umsetzung von Gender Budgeting im Landeshaushalt explizit
+          formuliert hat.
+          <br></br>
+          Weiterhin relevant ist die in Berlin steigende Investitionsquote. Die aus dem laufenden Haushalt finanzierten Investitionen sollen auch weiter anwachsen.
+          <br></br>
+          Die Berliner Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der letzten und laufenden Legislaturperiode. Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für die wachsende Stadt neue Schulen errichtet werden.
+          <br></br><br></br>
+          Mehr zu diesen Themen ist auf der Webseite der Senatsverwaltung für Finanzen zu erfahren.
+        </div>
+      
+
+        <div className="mt-6">
+          <div className="flex-col">
+            <p className='text-brand'><a href="https://www.berlin.de/sen/finanzen/haushalt/gender-budgeting/artikel.11915.php">→ Gender-Budgeting</a></p>
+            {/* <p>Berlin ist eines der wenigen Bundesländer,
+          das die Umsetzung von Gender Budgeting im Landeshaushalt explizit
+          formuliert hat und inzwischen dabei ist, Gender Budgeting in die
+          normale Haushaltspolitik zu integrieren.</p> */}
+          </div>
+          <div className="flex-col">
+          <p className='text-brand'p><a href="https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2022/pressemitteilung.1181316.php">→ Entwicklung der Investitionsquote</a></p>
+            {/* <p>Die aus dem laufenden Haushalt finanzierten Investitionen sollen weiter anwachsen auf 2,930 Mrd. Euro im Jahr 2022 und 3,238 Mrd. Euro im Jahr 2023.</p> */}
+          </div>
+          <div className="flex-col">            
+          <p className='text-brand'><a href="https://www.berlin.de/sen/finanzen/haushalt/schulbauoffensive/artikel.613867.php">→ Schulbauoffensive</a></p>
+            {/* <p>Die Berliner Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der letzten und laufenden Legislaturperiode. Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für die wachsende Stadt neue Schulen errichtet werden.</p> */}
+          </div>
+        </div>
+
+        <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
+          Fragen und Antworten
+        </h2>
+        <h2 className=" text-xl mt-6 md:mt-12">Warum werden die Haushaltsdaten visualisiert?</h2>
         <div className="flex justify-center mt-6">
         <ReadMore>
           Die interaktiven Diagramme in ihrer Ausgangsform zeigen eine Übersicht der
@@ -41,7 +136,7 @@ export const FaqPage: FC = () => (
           </ReadMore>
         </div>
 
-        <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
+        <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
         <div className="flex justify-center mt-6 mb-6 md:mb-20">
         <ReadMore>
           Alle Visualisierungen basieren auf dem öffentlich zugänglichen Datensatz
@@ -51,6 +146,11 @@ export const FaqPage: FC = () => (
           Haushaltsdaten der vergangenen 10 Jahre einsehen.
           </ReadMore>
         </div>
+      
+
+
+
+      
     {/* 
         <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
           Was ist ein Doppel- und Nachtragshaushalt?

@@ -118,6 +118,27 @@ export const HomePage: FC = () => {
               </ul>
             </FadeInWrapper>
           </div>
+
+          <div className="flex-col mt-6 md:mt-16">
+            Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land Berlin muss alle voraussichtlichen Einnahmen und Ausgaben
+            eines Jahres in einem Plan ausweisen, dem „Öffentlichen Haushalt“.
+            Jährlich stellt der Senat, genauer die Senatsverwaltung für Finanzen,
+            einen Haushaltsplanentwurf mit den jeweiligen Einzelhaushalten der
+            Verwaltungen auf. Was das genau bedeutet, kann auf der Info-Seite nachgelesen werden.
+          </div>
+          <div className="flex justify-center mt-6 md:mt-12">
+            <FadeInWrapper>
+              <ul>
+              <span className="font-bold text-xl text-brand">
+                  <InternalLink href={'/faq'}>
+                    {'→ Zur Informationsseite'}
+                  </InternalLink>
+                </span>
+                <li><p className="pl-6">Mehr erfahren in den Fragen und Antworten zum Berliner Haushalt</p>
+                </li>
+              </ul>
+            </FadeInWrapper>
+          </div>
         </div>
 
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12">
@@ -181,24 +202,44 @@ export const HomePage: FC = () => {
               </ul>
             </FadeInWrapper>
           </div>
-        </div>
+          </div>
 
-      <div className="lg:w-3/6 m-auto mt-6 md:mt-12 mb-16 md:mb-28">
-        <h2 className="text-2xl md:text-3xl mt-12 md:mt-20">
+      <div className="lg:w-3/6 m-auto mt-6 md:mt-12 md:mt-12 mb-16 md:mb-28 ">
+        <h2 className="text-xl md:text-2xl mt-12 md:mt-20">
           Schwerpunktthemen im aktuellen Haushalt
         </h2>
         <div className="mt-6">
-          Berlin ist bis heute eines der wenigen Bundesländer in Deutschland,
+          Im aktuellen doppelhaushalt lassen sich einige Themen in einen besonderen Fokus setzten.
+          So ist Berlin beispielweise bis heute eines der wenigen Bundesländer in Deutschland,
+          das die Umsetzung von Gender Budgeting im Landeshaushalt explizit
+          formuliert hat.
+          <br></br>
+          Weiterhin relevant ist die in Berlin steigende Investitionsquote. Die aus dem laufenden Haushalt finanzierten Investitionen sollen auch weiter anwachsen.
+          <br></br>
+          Die Berliner Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der letzten und laufenden Legislaturperiode. Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für die wachsende Stadt neue Schulen errichtet werden.
+          <br></br><br></br>
+          Mehr zu diesen Themen ist auf der Webseite der Senatsverwaltung für Finanzen zu erfahren.
+        </div>
+      
+
+        <div className="mt-6">
+          <div className="flex-col">
+            <p className='text-brand'><a href="https://www.berlin.de/sen/finanzen/haushalt/gender-budgeting/artikel.11915.php">→ Gender-Budgeting</a></p>
+            {/* <p>Berlin ist eines der wenigen Bundesländer,
           das die Umsetzung von Gender Budgeting im Landeshaushalt explizit
           formuliert hat und inzwischen dabei ist, Gender Budgeting in die
-          normale Haushaltspolitik zu integrieren.
-          <br></br>
-          Auf der Ebene der Bezirksverwaltung werden mittlerweile 116
-          Bezirksprodukte unter Gender-Aspekten untersucht, wie beispielsweise
-          die Nutzung von Sportflächen, Musikschulunterricht,
-          Volkshochschulkurse.
+          normale Haushaltspolitik zu integrieren.</p> */}
+          </div>
+          <div className="flex-col">
+          <p className='text-brand'p><a href="https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2022/pressemitteilung.1181316.php">→ Entwicklung der Investitionsquote</a></p>
+            {/* <p>Die aus dem laufenden Haushalt finanzierten Investitionen sollen weiter anwachsen auf 2,930 Mrd. Euro im Jahr 2022 und 3,238 Mrd. Euro im Jahr 2023.</p> */}
+          </div>
+          <div className="flex-col">            
+          <p className='text-brand'><a href="https://www.berlin.de/sen/finanzen/haushalt/schulbauoffensive/artikel.613867.php">→ Schulbauoffensive</a></p>
+            {/* <p>Die Berliner Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der letzten und laufenden Legislaturperiode. Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für die wachsende Stadt neue Schulen errichtet werden.</p> */}
+          </div>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
    
