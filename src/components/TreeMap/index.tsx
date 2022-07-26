@@ -136,9 +136,9 @@ export const TreeMap: FC<TreeMapType> = ({
         .append('title')
         .text(
           (d) =>
-            `${d.data.name}\n${'€ '}${format(d.value || 0)}\n${
-              topicDescriptions[d.data.name] || ''
-            }`
+            `${'Funktion: ' + d.data.name}\n${'Betrag: € '}${format(
+              d.value || 0
+            )}\n\n${topicDescriptions[d.data.name] || ''}`
         )
 
       // Reactangles (Fill & Stroke)
