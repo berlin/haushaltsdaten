@@ -14,7 +14,7 @@ const NAV_ITEMS = [
     path: '/visualisierung',
   },
   {
-    label: 'FAQ',
+    label: 'Infos',
     path: '/faq',
   },
 ]
