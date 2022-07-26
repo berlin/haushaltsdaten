@@ -80,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       title: 'Visualisierung',
       query,
-      queriedYear: queriedYear || 2022,
+      queriedYear: queriedYear || DEFAULT_YEAR,
       queriedDistrictId: queriedDistrictId,
       queriedType: queriedType,
       hierarchyData: hierarchyData,
