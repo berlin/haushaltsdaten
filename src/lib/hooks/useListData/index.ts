@@ -1,14 +1,14 @@
 import { DistrictLabel } from '@data/districts'
 import {
-  GetMainTopicDataParamsType,
+  GetRowsByDistrictAndTypeParamsType,
   HaushaltsdatenRowType,
-} from '@lib/requests/getMainTopicData'
+} from '@lib/requests/getRowsByDistrictAndType'
 import { getRowsByTopic, TopicColumnName } from '@lib/requests/getRowsByTopic'
 import useSWR from 'swr'
 
 interface useListDataParamsType {
   district?: DistrictLabel
-  type: GetMainTopicDataParamsType['titelart']
+  type: GetRowsByDistrictAndTypeParamsType['expenseType']
   topicColumn?: TopicColumnName
   topicValue?: string
   initialData?: HaushaltsdatenRowType[]
@@ -36,8 +36,8 @@ export const useListData = ({
     params,
     () =>
       getRowsByTopic({
-        bereich: district,
-        titelart: type,
+        district: district,
+        expenseType: type,
         topicColumn: topicColumn || undefined,
         topicValue: topicValue,
       }),
