@@ -34,7 +34,7 @@ export const HomePage: FC = () => {
               2022/23
             </h1>
           </div>
-          <div className="flex-col italic lg:not-italic lg:w-1/2 mt-6 md:mt-12 lg:mt-24 lg:pr-28">
+          <div className="flex-col italic lg:w-1/2 mt-6 md:mt-12 lg:mt-24 lg:pr-28">
             Pro Jahr stehen der Berliner Politik und Verwaltung über 35 Milliarden
             Euro zur Umsetzung ihrer Ziele zur Verfügung. Da kann es schonmal
             schwer werden, den Überblick zu behalten, wofür der Senat und die
