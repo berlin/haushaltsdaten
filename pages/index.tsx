@@ -126,7 +126,7 @@ export const HomePage: FC = () => {
             einen Haushaltsplanentwurf mit den jeweiligen Einzelhaushalten der
             Verwaltungen auf. Was das genau bedeutet, kann auf der Info-Seite nachgelesen werden.
           </div>
-          <div className="flex justify-center mt-6 md:mt-12">
+          <div className="flex justify-center mt-6 md:mt-12 mb-16 md:mb-24">
             <FadeInWrapper>
               <ul>
               <span className="font-bold text-xl text-brand">
@@ -141,105 +141,9 @@ export const HomePage: FC = () => {
           </div>
         </div>
 
-        <div className="lg:w-3/6 m-auto mt-6 md:mt-12">
-          <h2 className="text-2xl md:text-3xl mt-12 md:mt-20">
-            Wissenwertes zum Berliner Haushalt
-          </h2>
-          <div className="flex-col mt-6">
-            Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land Berlin muss alle voraussichtlichen Einnahmen und Ausgaben
-            eines Jahres in einem Plan ausweisen, dem „Öffentlichen Haushalt“.
-            Jährlich stellt der Senat, genauer die Senatsverwaltung für Finanzen,
-            einen Haushaltsplanentwurf mit den jeweiligen Einzelhaushalten der
-            Verwaltungen auf. Haushaltsrechtlich möglich ist es auch Haushalte direkt für
-            zwei Jahre, jeweils nach Jahren getrennt, festzusetzen. In Berliner macht man von dieser Regelung gebrauch, solche &quot;Doppelhaushalte&quot; vorzulegen,
-            da dadurch der Verwaltungsaufwand reduziert wird.
-          </div>
-
-            <p className="text-2xl text-center mt-6 md:mt-16">
-              76,61 Milliarden Euro
-            </p>
-            <p className="text-gray-500 text-xs md:text-sm text-center">
-              {' '}
-              stehen Berlin im aktuellen Doppelhaushalt als Gesamtausgaben zur
-              Verfügung
-            </p>
-
-          <div className="mt-6 md:mt-16">
-            Im Ausgabehaushalt ist festgelegt, wie viel Geld in den einzelnen
-          Politikbereichen ausgegeben werden darf. Gleichzeitig wird damit das
-          Budget (Etat) für die Erfüllung der öffentlichen Aufgaben Berlins
-          jährlich festgeschrieben. Die zu erwartenden Einnahmen aus Steuern und
-          Gebühren werden also auf die Aufgaben des Landes verteilt. Mit den
-          Einnahmen steht ein eng begrenzter Rahmen an Mitteln zur Verfügung,
-          der zum großen Teil durch Verpflichtungen Berlins (beispielsweise im
-          Sozialbereich und der Bildung) bereits fest gebunden ist. Die weitere
-          Aufteilung auf die weiteren Aufgaben der Verwaltung (z.B. innere
-          Sicherheit, Wirtschaftsförderung, Kultur) erfolgt im politischen
-          Abstimmungsprozess des Abgeordnetenhauses.
-          </div>
-
-          <p className="mt-6 md:mt-16 text-sm flex justify-center">
-            Gesamtausgaben des Berliner Haushalts in Mrd. €
-         </p>
-          <div className="mt-2 flex justify-center">
-            <GroupedBarChart data={TOTAL_EXPENSES}/>
-          </div>
-          <div className="mt-6 md:mt-16">
-            Die Haushaltslage des Landes hat sich in den vergangenen Jahren stetig
-            verbessert, sodass Berlin seit dem Jahr 2012 zur Finanzierung seiner
-            laufenden Ausgaben keine zusätzlichen Kredite mehr aufnehmen musste.
-          </div>
-          <div className="flex justify-center mt-6 md:mt-12">
-            <FadeInWrapper>
-              <ul>
-              <span className="font-bold text-xl text-brand">
-                  <InternalLink href={'/faq'}>
-                    {'→ Zu weiteren Infos'}
-                  </InternalLink>
-                </span>
-                <li><p className="pl-6">Mehr erfahren in den Fragen und Antworten zum Berliner Haushalt</p>
-                </li>
-              </ul>
-            </FadeInWrapper>
-          </div>
-          </div>
-
-      <div className="lg:w-3/6 m-auto mt-6 md:mt-12 md:mt-12 mb-16 md:mb-28 ">
-        <h2 className="text-xl md:text-2xl mt-12 md:mt-20">
-          Schwerpunktthemen im aktuellen Haushalt
-        </h2>
-        <div className="mt-6">
-          Im aktuellen doppelhaushalt lassen sich einige Themen in einen besonderen Fokus setzten.
-          So ist Berlin beispielweise bis heute eines der wenigen Bundesländer in Deutschland,
-          das die Umsetzung von Gender Budgeting im Landeshaushalt explizit
-          formuliert hat.
-          <br></br>
-          Weiterhin relevant ist die in Berlin steigende Investitionsquote. Die aus dem laufenden Haushalt finanzierten Investitionen sollen auch weiter anwachsen.
-          <br></br>
-          Die Berliner Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der letzten und laufenden Legislaturperiode. Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für die wachsende Stadt neue Schulen errichtet werden.
-          <br></br><br></br>
-          Mehr zu diesen Themen ist auf der Webseite der Senatsverwaltung für Finanzen zu erfahren.
-        </div>
       
 
-        <div className="mt-6">
-          <div className="flex-col">
-            <p className='text-brand'><a href="https://www.berlin.de/sen/finanzen/haushalt/gender-budgeting/artikel.11915.php">→ Gender-Budgeting</a></p>
-            {/* <p>Berlin ist eines der wenigen Bundesländer,
-          das die Umsetzung von Gender Budgeting im Landeshaushalt explizit
-          formuliert hat und inzwischen dabei ist, Gender Budgeting in die
-          normale Haushaltspolitik zu integrieren.</p> */}
-          </div>
-          <div className="flex-col">
-          <p className='text-brand'p><a href="https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2022/pressemitteilung.1181316.php">→ Entwicklung der Investitionsquote</a></p>
-            {/* <p>Die aus dem laufenden Haushalt finanzierten Investitionen sollen weiter anwachsen auf 2,930 Mrd. Euro im Jahr 2022 und 3,238 Mrd. Euro im Jahr 2023.</p> */}
-          </div>
-          <div className="flex-col">            
-          <p className='text-brand'><a href="https://www.berlin.de/sen/finanzen/haushalt/schulbauoffensive/artikel.613867.php">→ Schulbauoffensive</a></p>
-            {/* <p>Die Berliner Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der letzten und laufenden Legislaturperiode. Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für die wachsende Stadt neue Schulen errichtet werden.</p> */}
-          </div>
-        </div>
-      </div> 
+      
     </div>
   </div>
    
