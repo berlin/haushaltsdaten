@@ -1,6 +1,7 @@
 import React, { FC, useRef, useState } from 'react'
 import { supabase } from '@lib/requests/createSupabaseClient'
 import { GetStaticProps } from 'next'
+import classNames from 'classnames'
 
 export interface TData {
   [key: string]: unknown
@@ -94,21 +95,33 @@ export const Search: FC = () => {
 
   return (
     <>
-      <div className="container flex justify-center mt-6 mb-6">
+      <div className="container flex justify-center px-4 my-24">
         <div className="flex-col">
-          <h1 className="flex justify-center mt-20 text-5xl font-bold">
+          <h1
+            id="search-field-title"
+            className="flex justify-center mb-6 text-5xl font-bold"
+          >
             Textsuche
           </h1>
-          <form className="flex-form" ref={form}>
-            <label htmlFor="search">Suche</label>
+          <form className="flex gap-2 flex-wrap justify-center" ref={form}>
             <input
+              aria-labelledby="search-field-title"
               type="text"
-              id="input"
+              id="full-text-search-field"
               name="search"
               placeholder="Suchebegriff"
+              className={classNames(
+                'sm:min-w-[300px] p-2',
+                'rounded-md',
+                'border border-gray-400 focus:border-brand focus:outline-none'
+              )}
             />
             <button
-              className="font-bold text-white bg-gray-500 hover:bg-gray-800"
+              className={classNames(
+                'py-2 px-4 rounded-md',
+                'font-bold text-white',
+                'bg-gray-900 hover:bg-gray-800 focus:bg-brand focus:outline-none'
+              )}
               id="submit"
               onClick={handleClick}
             >
