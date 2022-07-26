@@ -46,25 +46,27 @@ export const FaqPage: FC = () => (
       <ReadMore>
         Alle Visualisierungen basieren auf dem öffentlich zugänglichen Datensatz
         des Doppelhaushaltes 2022/2023, der von der Senatsverwaltung für Finanzen
-        bereitgestellt wird und auf dem Berliner Open Data Portal veröffentlicht
+        bereitgestellt wird und auf dem <a className="text-brand" href="https://daten.berlin.de">Berliner Open Data Portal</a> veröffentlicht
         ist. Darüber hinaus können Nutzer:innen auf dem Open Data Portal die
         Haushaltsdaten der vergangenen 10 Jahre einsehen.
         </ReadMore>
       </div>
   {/* 
-      <h2 className="font-bold text-2xl mb-6 mt-12">
+      <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
         Was ist ein Doppel- und Nachtragshaushalt?
       </h2>
       <div className="flex justify-center mt-6">
-        Anstelle einen neuen Haushalt jedes Jahr zu verabschieden, kann eine Stadt
-        oder eine Gemeinde einen Zweijahreshaushalt oder Doppelhaushalt
-        verabschieden. Häufig entlastet dies die Verwaltung und die Politik
-        dadurch, dass nicht jedes Jahr eine große Haushaltsdebatte stattfindet.
-        Über zwei Jahre können sich allerdings natürlich viele Dinge ändern, daher
-        kann das Parlament mit einem Nachtragshaushalt nachsteuern, und so
-        Umverteilungen oder Mehrausgaben beschließen. Dies war beispielsweise
-        während der Corona-Pandemie nötig, um Mehrausgaben für Pflegepersonal und
-        Unterstützung der Berliner Wirtschaft zu gewährleisten.
+        <ReadMore>
+          Anstelle einen neuen Haushalt jedes Jahr zu verabschieden, kann eine Stadt
+          oder eine Gemeinde einen Zweijahreshaushalt oder Doppelhaushalt
+          verabschieden. Häufig entlastet dies die Verwaltung und die Politik
+          dadurch, dass nicht jedes Jahr eine große Haushaltsdebatte stattfindet.
+          Über zwei Jahre können sich allerdings natürlich viele Dinge ändern, daher
+          kann das Parlament mit einem Nachtragshaushalt nachsteuern, und so
+          Umverteilungen oder Mehrausgaben beschließen. Dies war beispielsweise
+          während der Corona-Pandemie nötig, um Mehrausgaben für Pflegepersonal und
+          Unterstützung der Berliner Wirtschaft zu gewährleisten.
+        </ReadMore>
       </div>
       <h2 className="font-bold text-2xl mb-6 mt-12">
         Wie setzt sich der Berliner Haushalt zusammen?
