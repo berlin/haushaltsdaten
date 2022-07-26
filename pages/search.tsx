@@ -1,5 +1,6 @@
 import React, { FC, useRef, useState } from 'react'
 import { supabase } from '@lib/requests/createSupabaseClient'
+import { GetStaticProps } from 'next'
 
 export interface TData {
   [key: string]: unknown
@@ -48,6 +49,14 @@ const Table: FC<{ body: React.ReactNode; head: React.ReactNode }> = ({
     </table>
   )
 }
+
+// eslint-disable-next-line @typescript-eslint/require-await
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {
+    title: 'Textsuche',
+  },
+})
+
 export const Search: FC = () => {
   const [results, setResults] = useState<TData[] | null>(null)
   const [searchTerm, setSearchTerm] = useState<string | null>(null)
