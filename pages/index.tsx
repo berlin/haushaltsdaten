@@ -130,7 +130,7 @@ export const HomePage: FC = () => {
             <FadeInWrapper>
               <ul>
                 <span className="font-bold text-xl text-brand">
-                  <InternalLink href={'/suche'}>{'→ Zur Suche'}</InternalLink>
+                  <InternalLink href={'/search'}>{'→ Zur Suche'}</InternalLink>
                 </span>
                 <li>
                   <p className="pl-6">

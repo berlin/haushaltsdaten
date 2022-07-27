@@ -5,11 +5,21 @@ import classNames from 'classnames'
 import { HaushaltsdatenRowType } from '@lib/requests/getRowsByDistrictAndType'
 import { formatCurrency } from '@lib/utils/numberUtil'
 
+interface FilteredSearchResultsType extends HaushaltsdatenRowType {
+  jahr: string
+  titel: string
+  obergruppen_bezeichnung: string
+  hauptgruppen_bezeichnung: string
+  gruppen_bezeichnung: string
+  einzelplan_bezeichnung: string
+  kapitel_bezeichnung: string
+}
+
 const MAX_RENDERED_RESULTS = 500
 
 const toTitleCase = (s: string): string =>
   s.replace(/^_*(.)|_+(.)/g, (_s, c: string, d: string) =>
-    c ? c.toUpperCase() : ' ' + d.toUpperCase()
+    c ? c.toUpperCase() : '-' + d.toUpperCase()
   )
 
 const Table: FC<{ body: React.ReactNode; head: React.ReactNode }> = ({
@@ -32,7 +42,9 @@ export const getStaticProps: GetStaticProps = async () => ({
 })
 
 export const Search: FC = () => {
-  const [results, setResults] = useState<HaushaltsdatenRowType[] | null>(null)
+  const [results, setResults] = useState<FilteredSearchResultsType[] | null>(
+    null
+  )
   const [searchTerm, setSearchTerm] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -63,16 +75,23 @@ export const Search: FC = () => {
       setSearchTerm(value)
     } else {
       setSearchTerm(value)
-      const mappedData: HaushaltsdatenRowType[] = data.map(
-        (row: HaushaltsdatenRowType) => {
+      const mappedData: FilteredSearchResultsType[] = data.map(
+        (row: FilteredSearchResultsType) => {
           return {
             titel_bezeichnung: row['titel_bezeichnung'],
             titel_art: row['titel_art'],
+            jahr: row['jahr'],
             betrag: `${formatCurrency(parseInt(row['betrag'], 10))} €`,
             bereichs_bezeichnung: row['bereichs_bezeichnung'],
-            funktions_bezeichnung: row['funktions_bezeichnung'],
-            oberfunktions_bezeichnung: row['oberfunktions_bezeichnung'],
+            einzelplan_bezeichnung: row['einzelplan_bezeichnung'],
+            kapitel_bezeichnung: row['kapitel_bezeichnung'],
             hauptfunktions_bezeichnung: row['hauptfunktions_bezeichnung'],
+            oberfunktions_bezeichnung: row['oberfunktions_bezeichnung'],
+            funktions_bezeichnung: row['funktions_bezeichnung'],
+            hauptgruppen_bezeichnung: row['hauptgruppen_bezeichnung'],
+            obergruppen_bezeichnung: row['obergruppen_bezeichnung'],
+            gruppen_bezeichnung: row['gruppen_bezeichnung'],
+            titel: row['titel'],
             id: row['id'],
           }
         }
@@ -87,14 +106,35 @@ export const Search: FC = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center px-4 my-24">
-        <div className="flex-col">
+      <div className="px-8">
+        <div className="md:w-4/5 m-auto mt-12 md:mt-20">
           <h1
             id="search-field-title"
-            className="flex justify-center mb-6 text-5xl font-bold"
+            className="font-bold text-2xl md:text-3xl lg:text-4xl lg:ml-28"
           >
             Textsuche
           </h1>
+          <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
+            <div className="flex-col mt-6">
+              Mithilfe der Textsuche kann der gesamte Haushalt nach durchsucht
+              werden. Es kann sowohl nach Bereichen, Einzelplänen, Kapitel
+              (Zuständigkeiten), Funktionen und Gruppen (Art der Ausgaben und
+              Einnahmen), als auch stichwortartig nach den einzelnen
+              Ausgabetiteln gesucht werden. Auch Kombinationen und die Suche
+              nach ID&apos;s sind möglich.
+              <br></br>
+              <br></br>
+              Ein Beispiel für eine allgemeine Suche über Kapitel wäre
+              „Senatsverwaltung für Inneres, Digitalisierung und Sport“ mit über
+              500 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre
+              zum Beispiel „Sporthalle“ (46 Ergebnisse) oder „Kita Spandau“ (10
+              Ergebnisse).
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full flex justify-center px-4 my-24">
+        <div className="flex-col">
           <form className="flex gap-2 flex-wrap justify-center" ref={form}>
             <input
               aria-labelledby="search-field-title"
