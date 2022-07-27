@@ -6,6 +6,7 @@ import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { Header } from '@components/Header'
 import { Footer } from '@components/Footer'
+import { useRouter } from 'next/router'
 
 interface PagePropType extends Record<string, unknown> {
   title?: string
@@ -22,18 +23,15 @@ const App: FC<{
   pageProps: PagePropType
 }> = ({ Component, pageProps }) => {
   useMatomo()
+  const { pathname } = useRouter()
   const parsedQuery = pageProps.query ? mapRawQueryToState(pageProps.query) : {}
 
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <Header />
-      <div className="min-h-screen px-8 pt-28 pb-12">
-        <div className="container mx-auto">
-          <Component {...pageProps} query={parsedQuery} />
-        </div>
-      </div>
-      <Footer />
+      {pathname !== '/share' && <Header {...pageProps.query} />}
+      <Component {...pageProps} query={parsedQuery} />
+      {pathname !== '/share' && <Footer />}
     </StrictMode>
   )
 }

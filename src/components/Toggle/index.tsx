@@ -3,17 +3,19 @@ import { Switch } from '@headlessui/react'
 import classNames from 'classnames'
 
 export interface ToggleSwitchPropType {
-  defaultEnabled?: boolean
+  value?: boolean
   optionA?: ReactNode
   optionB?: ReactNode
+  onChange?: (isOn: boolean) => void
 }
 
 export const ToggleSwitch: FC<ToggleSwitchPropType> = ({
-  defaultEnabled = false,
+  value = false,
   optionA,
   optionB,
+  onChange = () => undefined,
 }) => {
-  const [enabled, setEnabled] = useState(defaultEnabled)
+  const [enabled, setEnabled] = useState(value)
 
   return (
     <Switch.Group>
@@ -32,7 +34,10 @@ export const ToggleSwitch: FC<ToggleSwitchPropType> = ({
         )}
         <Switch
           checked={enabled}
-          onChange={setEnabled}
+          onChange={(isOn: boolean) => {
+            setEnabled(isOn)
+            onChange(isOn)
+          }}
           className={classNames(
             !optionB && (enabled ? 'bg-brand' : 'bg-gray-400'),
             optionB && 'bg-brand',
