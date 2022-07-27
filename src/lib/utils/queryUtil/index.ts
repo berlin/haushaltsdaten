@@ -1,4 +1,5 @@
 import { districts } from '@data/districts'
+import { VALID_YEARS } from '../yearValidator'
 
 export interface RawPageQueryType {
   mainTopic: string | null
@@ -14,6 +15,23 @@ export interface ParsedPageQueryType {
   deepTopic: string | null
   showExpenses: boolean
   district: keyof typeof districts
+  year: number
+}
+
+const isNumber = (val: unknown): boolean =>
+  !Number.isNaN(val) && Number.isInteger(parseFloat(String(val)))
+
+const parseSingleNumber = (
+  val: string | string[] | undefined
+): number | null => {
+  if (!val) return null
+  if (typeof val === 'string') return parseFloat(val) || null
+  if (isNumber(val)) return Number(val)
+  return null
+}
+
+const parseYear = (year: number): number | undefined => {
+  return VALID_YEARS.includes(year) ? year : undefined
 }
 
 const parseString = (val: string | string[] | undefined): string | null =>
@@ -60,5 +78,8 @@ export const mapRawQueryToState = (
     deepTopic,
     showExpenses: parseBoolean(rawQuery.showExpenses),
     district: parseString(rawQuery.district),
+    year:
+      parseSingleNumber(rawQuery.year) ??
+      parseYear(parseSingleNumber(rawQuery.year) as number),
   })
 }

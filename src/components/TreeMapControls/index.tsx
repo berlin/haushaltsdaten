@@ -2,6 +2,7 @@ import { ListBox } from '@components/ListBox'
 import { ToggleSwitch } from '@components/Toggle'
 import { districts } from '@data/districts'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
+import { DEFAULT_YEAR, VALID_YEARS } from '@lib/utils/yearValidator'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
@@ -39,7 +40,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
         <div
           className={classNames(
             'w-full sm:w-auto',
-            'grid grid-cols-1 sm:grid-cols-[1fr,auto,1fr] gap-y-3 sm:gap-x-6'
+            'grid grid-cols-1 sm:grid-cols-[1fr,auto,1fr,auto,1fr] gap-y-3 sm:gap-x-6'
           )}
         >
           <ToggleSwitch
@@ -67,6 +68,26 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
                 id: key,
                 name: districts[key as keyof typeof districts] || ' ',
               }))}
+            additionalClasses="z-10"
+          />
+          <div className="hidden sm:inline-flex">
+            <Separator />
+          </div>
+          <ListBox
+            selected={{ id: DEFAULT_YEAR, name: DEFAULT_YEAR }}
+            onChange={(year) =>
+              onChange({
+                ...mappedQuery,
+                year: year as number,
+              })
+            }
+            options={VALID_YEARS.map((year) => {
+              return {
+                id: `${year}`,
+                name: `${year}`,
+              }
+            })}
+            additionalClasses="z-0"
           />
         </div>
       </nav>

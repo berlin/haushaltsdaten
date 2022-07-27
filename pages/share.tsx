@@ -13,6 +13,7 @@ import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import useDimensions from 'react-cool-dimensions'
 import { districts } from '@data/districts'
+import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
@@ -30,12 +31,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       ? 'Ausgabetitel'
       : 'Einnahmetitel'
 
+  const queriedYear = parsedQuery.year
+
   const data = await getRowsByDistrictAndType({
     district:
       !!queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
         ? districts[queriedDistrictId as keyof typeof districts]
         : undefined,
     expenseType: queriedType,
+    year: queriedYear && isValidYear(queriedYear) ? queriedYear : DEFAULT_YEAR,
   })
 
   if (!data) {

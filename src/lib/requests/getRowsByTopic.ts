@@ -10,6 +10,7 @@ export type TopicColumnName =
 export interface GetRowsByTopicParamsType {
   district?: DistrictLabel
   expenseType: 'Einnahmetitel' | 'Ausgabetitel'
+  year: number
   topicColumn?: TopicColumnName
   topicValue?: string
 }
@@ -20,16 +21,17 @@ export interface GetRowsByTopicParamsType {
 export const getRowsByTopic = async ({
   district,
   expenseType,
+  year,
   topicColumn,
   topicValue,
 }: GetRowsByTopicParamsType): Promise<HaushaltsdatenRowType[] | undefined> => {
   if (!!district && !!topicColumn && !!topicValue) {
     const { data, error } = await supabase
-      .from('haushaltsdaten_2022')
+      .from('haushaltsdaten_current')
       .select(
         'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
-      .eq('jahr', '2022')
+      .eq('jahr', year)
       .eq('titel_art', expenseType)
       .eq('bereichs_bezeichnung', district)
       .eq(topicColumn, topicValue)
@@ -39,11 +41,11 @@ export const getRowsByTopic = async ({
     return data as HaushaltsdatenRowType[]
   } else if (!!topicColumn && !!topicValue) {
     const { data, error } = await supabase
-      .from('haushaltsdaten_2022')
+      .from('haushaltsdaten_current')
       .select(
         'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
-      .eq('jahr', '2022')
+      .eq('jahr', year)
       .eq('titel_art', expenseType)
       .eq(topicColumn, topicValue)
 
@@ -52,11 +54,11 @@ export const getRowsByTopic = async ({
     return data as HaushaltsdatenRowType[]
   } else if (district && !topicColumn && !topicValue) {
     const { data, error } = await supabase
-      .from('haushaltsdaten_2022')
+      .from('haushaltsdaten_current')
       .select(
         'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
-      .eq('jahr', '2022')
+      .eq('jahr', year)
       .eq('titel_art', expenseType)
       .eq('bereichs_bezeichnung', district)
 
@@ -65,11 +67,11 @@ export const getRowsByTopic = async ({
     return data as HaushaltsdatenRowType[]
   } else {
     const { data, error } = await supabase
-      .from('haushaltsdaten_2022')
+      .from('haushaltsdaten_current')
       .select(
         'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
       )
-      .eq('jahr', '2022')
+      .eq('jahr', year)
       .eq('titel_art', expenseType)
 
     if (error) throw error
