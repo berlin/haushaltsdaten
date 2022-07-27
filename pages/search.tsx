@@ -141,7 +141,7 @@ export const Search: FC = () => {
               type="text"
               id="full-text-search-field"
               name="search"
-              placeholder="Suchebegriff"
+              placeholder="Suchbegriff"
               className={classNames(
                 'sm:min-w-[300px] p-2',
                 'rounded-md',
