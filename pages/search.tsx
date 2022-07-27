@@ -117,16 +117,15 @@ export const Search: FC = () => {
           <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
             <div className="flex-col mt-6">
               Mithilfe der Textsuche kann der gesamte Haushalt nach durchsucht
-              werden. Es kann sowohl nach Bereichen (Bezirke und
-              Hauptverwaltungen), nach Funktionsbezeichnungen, als auch
+              werden. Es kann sowohl nach Bereichen, Einzelplänen, Kapitel (Zuständigkeiten), Funktionen und Gruppen (Art der Ausgaben und Einnahmen), als auch
               stichwortartig nach den einzelnen Ausgabetiteln gesucht werden.
-              Auch Kombinationen sind möglich.
+              Auch Kombinationen und die Suche nach ID's sind möglich.
               <br></br>
               <br></br>
-              Ein Beispiel für eine allgemeine Suche über die Hauptfunktion wäre
-              „Verkehrs- und Nachrichtenwesen“ mit über 500 Ergebnissen. Eine
+              Ein Beispiel für eine allgemeine Suche über Kapitel wäre
+              „Senatsverwaltung für Inneres, Digitalisierung und Sport“ mit über 500 Ergebnissen. Eine
               detailliertere Suche nach Stichworten wäre zum Beispiel
-              „Flughafen“ (12 Ergebnisse) oder „Kita Spandau“ (10 Ergebnisse).
+              „Sporthalle“ (46 Ergebnisse) oder „Kita Spandau“ (10 Ergebnisse).
             </div>
           </div>
         </div>
