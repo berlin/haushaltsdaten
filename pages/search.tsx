@@ -87,14 +87,33 @@ export const Search: FC = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center px-4 my-24">
-        <div className="flex-col">
+      <div className="px-8">
+        <div className="md:w-4/5 m-auto mt-12 md:mt-20">
           <h1
             id="search-field-title"
-            className="flex justify-center mb-6 text-5xl font-bold"
+            className="font-bold text-2xl md:text-3xl lg:text-4xl lg:ml-28"
           >
             Textsuche
           </h1>
+          <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
+            <div className="flex-col mt-6">
+              Mithilfe der Textsuche kann der gesamte Haushalt nach durchsucht
+              werden. Es kann sowohl nach Bereichen (Bezirke und
+              Hauptverwaltungen), nach Funktionsbezeichnungen, als auch
+              stichwortartig nach den einzelnen Ausgabetiteln gesucht werden.
+              Auch Kombinationen sind möglich.
+              <br></br>
+              <br></br>
+              Ein Beispiel für eine allgemeine Suche über die Hauptfunktion wäre
+              „Verkehrs- und Nachrichtenwesen“ mit über 500 Ergebnissen. Eine
+              detailliertere Suche nach Stichworten wäre zum Beispiel
+              „Flughafen“ (12 Ergebnisse) oder „Kita Spandau“ (10 Ergebnisse).
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full flex justify-center px-4 my-24">
+        <div className="flex-col">
           <form className="flex gap-2 flex-wrap justify-center" ref={form}>
             <input
               aria-labelledby="search-field-title"
