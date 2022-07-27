@@ -18,7 +18,7 @@ const NAV_ITEMS = [
     path: '/search',
   },
   {
-    label: 'FAQ',
+    label: 'Infos',
     path: '/faq',
   },
 ]
