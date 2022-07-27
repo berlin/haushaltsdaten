@@ -13,7 +13,7 @@ describe('FiveHundred', () => {
     render(<FiveHundred />)
 
     const status = screen.getByText('500')
-    const message = screen.getByText('Interne Server Fehler')
+    const message = screen.getByText('Interner Server-Fehler')
 
     expect(status).toBeInTheDocument()
     expect(message).toBeInTheDocument()

@@ -1,14 +1,14 @@
 import { DistrictLabel } from '@data/districts'
 import {
-  getMainTopicData,
-  GetMainTopicDataParamsType,
+  getRowsByDistrictAndType,
+  GetRowsByDistrictAndTypeParamsType,
   HaushaltsdatenRowType,
-} from '@lib/requests/getMainTopicData'
+} from '@lib/requests/getRowsByDistrictAndType'
 import useSWR from 'swr'
 
 interface useDataParamsType {
   district?: DistrictLabel
-  type: GetMainTopicDataParamsType['titelart']
+  type: GetRowsByDistrictAndTypeParamsType['expenseType']
   initialData?: HaushaltsdatenRowType[]
 }
 
@@ -27,9 +27,9 @@ export const useData = ({
   const { data, error } = useSWR<HaushaltsdatenRowType[] | undefined, Error>(
     params,
     () =>
-      getMainTopicData({
-        bereich: district,
-        titelart: type,
+      getRowsByDistrictAndType({
+        district: district,
+        expenseType: type,
       }),
     { fallbackData: initialData }
   )

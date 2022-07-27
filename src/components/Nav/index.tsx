@@ -14,7 +14,11 @@ const NAV_ITEMS = [
     path: '/visualisierung',
   },
   {
-    label: 'FAQ',
+    label: 'Textsuche',
+    path: '/search',
+  },
+  {
+    label: 'Infos',
     path: '/faq',
   },
 ]

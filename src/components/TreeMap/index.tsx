@@ -3,8 +3,6 @@ import * as d3 from 'd3'
 import { formatCurrency } from '@lib/utils/numberUtil'
 import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 import { getColorByMainTopic } from './colors'
-import { DistrictLabel } from '@data/districts'
-import { GetMainTopicDataParamsType } from '@lib/requests/getMainTopicData'
 import { TopicType } from 'pages/visualisierung'
 import { TopicDepth } from '@lib/utils/mapTopicDepthToColumn'
 import { topicDescriptions } from '@data/descriptionData'
@@ -12,8 +10,6 @@ import { topicDescriptions } from '@data/descriptionData'
 export interface TreeMapType {
   width?: number
   height?: number
-  district: DistrictLabel
-  type: GetMainTopicDataParamsType['titelart']
   hierarchy: TreemapHierarchyType
   onChangeLevel?: (level: TopicType) => void
 }
@@ -61,8 +57,6 @@ function position(
 export const TreeMap: FC<TreeMapType> = ({
   width = 800,
   height = 800,
-  district,
-  type,
   hierarchy,
   onChangeLevel = () => undefined,
 }) => {
@@ -251,7 +245,7 @@ export const TreeMap: FC<TreeMapType> = ({
       d3.select('#expenditures-treemap').selectAll('g').remove()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [district, type])
+  }, [hierarchy])
 
   return (
     <svg
