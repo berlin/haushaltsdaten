@@ -5,6 +5,7 @@ import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 import { getColorByMainTopic } from './colors'
 import { TopicType } from 'pages/visualisierung'
 import { TopicDepth } from '@lib/utils/mapTopicDepthToColumn'
+import { topicDescriptions } from '@data/descriptionData'
 
 export interface TreeMapType {
   width?: number
@@ -125,7 +126,14 @@ export const TreeMap: FC<TreeMapType> = ({
           })
         })
 
-      node.append('title').text((d) => `${name(d)}\n${format(d.value || 0)}`)
+      node
+        .append('title')
+        .text(
+          (d) =>
+            `${'Funktion: ' + d.data.name}\n${'Betrag: € '}${format(
+              d.value || 0
+            )}\n\n${topicDescriptions[d.data.name] || ''}`
+        )
 
       // Reactangles (Fill & Stroke)
       node
