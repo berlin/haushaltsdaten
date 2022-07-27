@@ -19,7 +19,7 @@ const ReadMore: FC = ({ children }) => {
   }
   return (
     <p>
-      {isReadMore ? text.slice(0, 250) : text}
+      {isReadMore ? text.slice(0, 300) : text}
       <button
         onClick={toggleReadMore}
         className="font-medium text-brand cursor-pointer"
@@ -160,7 +160,7 @@ export const FaqPage: FC = () => (
             möglichst transparent dargestellt und für alle Berliner:innen
             zugänglich sein. Diese Webseite wurde ins Leben gerufen, um ein
             möglichst niedrigschwelliges Angebot zu schaffen, sich mit den
-            Haushaltsdaten auseinanderzusetzen.<br></br>
+            Haushaltsdaten auseinanderzusetzen.
             Die interaktiven Diagramme in ihrer Ausgangsform zeigen eine
             Übersicht der kompletten Ausgaben und Einnahmen der Berliner
             Verwaltung. Durch Eingaben der Nutzer:innen werden weitere
@@ -172,7 +172,7 @@ export const FaqPage: FC = () => (
 
         <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
         <div className="flex justify-center mt-6 mb-6 md:mb-20">
-          <ReadMore>
+          <p>
             Alle Visualisierungen basieren auf dem öffentlich zugänglichen
             Datensatz des Doppelhaushaltes 2022/2023, der von der
             Senatsverwaltung für Finanzen bereitgestellt wird und auf dem{' '}
@@ -188,7 +188,7 @@ export const FaqPage: FC = () => (
             </a>{' '}
             veröffentlicht seit rund 10 Jahren den Haushalt als Open Data, die
             auf dem Berliner Datenportal eingesehen werden können.
-          </ReadMore>
+          </p>
         </div>
 
         {/* 
