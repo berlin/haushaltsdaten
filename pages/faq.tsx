@@ -153,6 +153,14 @@ export const FaqPage: FC = () => (
         </h2>
         <div className="flex justify-center mt-6">
           <ReadMore>
+            Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
+            Data veröffentlicht, jedoch aufgrund seiner Länge und Komplexität
+            nicht für jede:r intuitiv verständlich. Da der Haushalt allerdings
+            von besonderer Relevanz für das Leben in Berlin ist, sollte er
+            möglichst transparent dargestellt und für alle Berliner:innen
+            zugänglich sein. Diese Webseite wurde ins Leben gerufen, um ein
+            möglichst niedrigschwelliges Angebot zu schaffen, sich mit den
+            Haushaltsdaten auseinanderzusetzen.<br></br>
             Die interaktiven Diagramme in ihrer Ausgangsform zeigen eine
             Übersicht der kompletten Ausgaben und Einnahmen der Berliner
             Verwaltung. Durch Eingaben der Nutzer:innen werden weitere
@@ -171,8 +179,15 @@ export const FaqPage: FC = () => (
             <a className="text-brand" href="https://daten.berlin.de">
               Berliner Open Data Portal
             </a>{' '}
-            veröffentlicht ist. Darüber hinaus können Nutzer:innen auf dem Open
-            Data Portal die Haushaltsdaten der vergangenen 10 Jahre einsehen.
+            veröffentlicht ist. Die{' '}
+            <a
+              className="text-brand"
+              href="https://www.berlin.de/sen/finanzen/"
+            >
+              Berliner Senatsverwaltung für Finanzen
+            </a>{' '}
+            veröffentlicht seit rund 10 Jahren den Haushalt als Open Data, die
+            auf dem Berliner Datenportal eingesehen werden können.
           </ReadMore>
         </div>
 
