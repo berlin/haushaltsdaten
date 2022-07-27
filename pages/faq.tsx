@@ -160,12 +160,11 @@ export const FaqPage: FC = () => (
             möglichst transparent dargestellt und für alle Berliner:innen
             zugänglich sein. Diese Webseite wurde ins Leben gerufen, um ein
             möglichst niedrigschwelliges Angebot zu schaffen, sich mit den
-            Haushaltsdaten auseinanderzusetzen.
-            Die interaktiven Diagramme in ihrer Ausgangsform zeigen eine
-            Übersicht der kompletten Ausgaben und Einnahmen der Berliner
-            Verwaltung. Durch Eingaben der Nutzer:innen werden weitere
-            Detailebenen angezeigt, wie Bezirk oder Funktionen. Die Diagramme
-            wurden erstellt, um die komplexen Haushaltsdaten
+            Haushaltsdaten auseinanderzusetzen. Die interaktiven Diagramme in
+            ihrer Ausgangsform zeigen eine Übersicht der kompletten Ausgaben und
+            Einnahmen der Berliner Verwaltung. Durch Eingaben der Nutzer:innen
+            werden weitere Detailebenen angezeigt, wie Bezirk oder Funktionen.
+            Die Diagramme wurden erstellt, um die komplexen Haushaltsdaten
             nutzer:innenfreundlich darzustellen.
           </ReadMore>
         </div>
