@@ -1,10 +1,10 @@
 import { ListItem } from '@components/ListItem'
 import snakeCase from 'just-snake-case'
 import {
-  getMainTopicData,
-  GetMainTopicDataParamsType,
+  getRowsByDistrictAndType,
+  GetRowsByDistrictAndTypeParamsType,
   HaushaltsdatenRowType,
-} from '@lib/requests/getMainTopicData'
+} from '@lib/requests/getRowsByDistrictAndType'
 import {
   createBaseTree,
   createTreeStructure,
@@ -50,12 +50,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       ? 'Ausgabetitel'
       : 'Einnahmetitel'
 
-  const data = await getMainTopicData({
-    bereich:
+  const data = await getRowsByDistrictAndType({
+    district:
       !!queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
         ? districts[queriedDistrictId as keyof typeof districts]
         : undefined,
-    titelart: queriedType,
+    expenseType: queriedType,
   })
 
   if (!data) {
@@ -92,7 +92,7 @@ export interface TopicType {
 export const Visualization: FC<{
   query: Partial<ParsedPageQueryType>
   queriedDistrictId: keyof typeof districts
-  queriedType: GetMainTopicDataParamsType['titelart']
+  queriedType: GetRowsByDistrictAndTypeParamsType['expenseType']
   hierarchyData: TreemapHierarchyType
   initialListData: HaushaltsdatenRowType[]
 }> = ({ queriedDistrictId, queriedType, hierarchyData, initialListData }) => {
@@ -171,8 +171,6 @@ export const Visualization: FC<{
             {hierarchyData && width && height && (
               <TreeMapWithData
                 hierarchy={hierarchyData}
-                district={districts[queriedDistrictId]}
-                type={queriedType}
                 width={width}
                 height={height}
                 onChangeLevel={(level) => {

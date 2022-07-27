@@ -14,6 +14,10 @@ const NAV_ITEMS = [
     path: '/visualisierung',
   },
   {
+    label: 'Textsuche',
+    path: '/search',
+  },
+  {
     label: 'Infos',
     path: '/faq',
   },
