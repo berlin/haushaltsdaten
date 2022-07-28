@@ -8,7 +8,11 @@ export const FadeInWrapper: FC = ({ children }) => {
   useEffect(() => {
     if (!wrapperRef.current) return
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => setVisible(entry.isIntersecting))
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setVisible(entry.isIntersecting)
+        }
+      })
     })
     observer.observe(wrapperRef.current)
   }, [])
