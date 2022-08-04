@@ -13,7 +13,7 @@ export const Footer: FC = () => {
     <footer id="main-footer">
       <section className="bg-gray-50 border-t border-gray-200 px-4 xl:px-8">
         <div className="container max-w-8xl mx-auto py-8">
-          <div className="w-full flex flex-wrap gap-8 sm:gap-12 sm:flex-nowrap">
+          <div className="w-full flex flex-wrap gap-8 md:gap-12 lg:flex-nowrap">
             <div className="block">
               <span className="w-full block text-xs text-gray-700">&nbsp;</span>
               <a
