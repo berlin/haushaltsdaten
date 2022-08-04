@@ -3,7 +3,10 @@ import { FC } from 'react'
 const TSBLogo = '/images/tsb-logo.svg'
 const CityLABLogo = '/images/citylab-logo.svg'
 const BerlinLogo = '/images/berlin-skzl-logo.svg'
-const OdisLogo = '/images/logo-odis-berlin-black.svg'
+const OdisLogo = '/images/logo-odis-berlin.svg'
+const SenWEBLogo = '/images/logo-berlin-senweb-de.svg'
+const IBBLogo = '/images/ibb-logo.svg'
+// const SenFINLogo = '/images/logo-odis-berlin-black.svg'
 
 export const Footer: FC = () => {
   return (
@@ -63,6 +66,24 @@ export const Footer: FC = () => {
             </div>
             <div className="block">
               <span className="w-full block text-xs text-gray-700">
+                In Zusammenarbeit mit:
+              </span>
+              <a
+                href="https://technologiestiftung-berlin.de/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
+                aria-label="Technologiestiftung Berlin"
+              >
+                <img
+                  src={TSBLogo}
+                  alt="Logo der Technologiestiftung Berlin"
+                  className="w-40"
+                />
+              </a>
+            </div>
+            <div className="block">
+              <span className="w-full block text-xs text-gray-700">
                 Gefördert durch:
               </span>
               <a
@@ -75,6 +96,36 @@ export const Footer: FC = () => {
                 <img
                   src={BerlinLogo}
                   alt="Logo: Der Regierende Bürgermeister von Berlin - Senatskanzlei"
+                  className="w-32"
+                />
+              </a>
+            </div>
+            <div className="block">
+              <a
+                href="https://www.berlin.de/rbmskzl/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
+                aria-label="Der Regierende Bürgermeister von Berlin - Senatskanzlei"
+              >
+                <img
+                  src={SenWEBLogo}
+                  alt="Logo: Der Regierende Bürgermeister von Berlin - Senatskanzlei"
+                  className="w-32"
+                />
+              </a>
+            </div>
+            <div className="block">
+              <a
+                href="https://www.ibb.de/de/startseite/startseite.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
+                aria-label="Investitionsbank Berlin"
+              >
+                <img
+                  src={IBBLogo}
+                  alt="Logo: Investitionsbank Berlin"
                   className="w-32"
                 />
               </a>
