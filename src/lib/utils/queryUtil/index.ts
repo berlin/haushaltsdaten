@@ -1,5 +1,6 @@
 import { districts } from '@data/districts'
 import { VALID_YEARS } from '../yearValidator'
+import { VALID_MODUS } from '../modusValidator'
 
 export interface RawPageQueryType {
   mainTopic: string | null
@@ -16,6 +17,7 @@ export interface ParsedPageQueryType {
   showExpenses: boolean
   district: keyof typeof districts
   year: number
+  modus: number
 }
 
 const isNumber = (val: unknown): boolean =>
@@ -32,6 +34,10 @@ const parseSingleNumber = (
 
 const parseYear = (year: number): number | undefined => {
   return VALID_YEARS.includes(year) ? year : undefined
+}
+
+const parseModus = (modus: number): number | undefined => {
+  return VALID_MODUS.includes(modus) ? modus : undefined
 }
 
 const parseString = (val: string | string[] | undefined): string | null =>
@@ -81,5 +87,8 @@ export const mapRawQueryToState = (
     year:
       parseSingleNumber(rawQuery.year) ??
       parseYear(parseSingleNumber(rawQuery.year) as number),
+    modus:
+      parseSingleNumber(rawQuery.modus) ??
+      parseModus(parseSingleNumber(rawQuery.modus) as number),
   })
 }

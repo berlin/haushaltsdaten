@@ -11,6 +11,7 @@ export interface GetRowsByTopicParamsType {
   district?: DistrictLabel
   expenseType: 'Einnahmetitel' | 'Ausgabetitel'
   year: number
+  modus: number
   topicColumn?: TopicColumnName
   topicValue?: string
 }
@@ -22,6 +23,7 @@ export const getRowsByTopic = async ({
   district,
   expenseType,
   year,
+  modus,
   topicColumn,
   topicValue,
 }: GetRowsByTopicParamsType): Promise<HaushaltsdatenRowType[] | undefined> => {

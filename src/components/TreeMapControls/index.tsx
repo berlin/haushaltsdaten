@@ -3,6 +3,7 @@ import { ToggleSwitch } from '@components/Toggle'
 import { districts } from '@data/districts'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { DEFAULT_YEAR, VALID_YEARS } from '@lib/utils/yearValidator'
+import { DEFAULT_MODUS, VALID_MODUS } from '@lib/utils/modusValidator'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
@@ -85,6 +86,25 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
               return {
                 id: `${year}`,
                 name: `${year}`,
+              }
+            })}
+            additionalClasses="z-0"
+          />
+          <div className="hidden sm:inline-flex">
+            <Separator />
+          </div>
+          <ListBox
+            selected={{ id: DEFAULT_MODUS, name: DEFAULT_MODUS }}
+            onChange={(modus) =>
+              onChange({
+                ...mappedQuery,
+                modus: modus as number,
+              })
+            }
+            options={VALID_MODUS.map((modus) => {
+              return {
+                id: `${modus}`,
+                name: `${modus}`,
               }
             })}
             additionalClasses="z-0"

@@ -16,6 +16,7 @@ export interface GetRowsByDistrictAndTypeParamsType {
   district?: DistrictLabel
   expenseType: 'Einnahmetitel' | 'Ausgabetitel'
   year: number
+  modus: number
 }
 
 /**
@@ -25,10 +26,11 @@ export const getRowsByDistrictAndType = async ({
   district,
   expenseType,
   year,
+  modus,
 }: GetRowsByDistrictAndTypeParamsType): Promise<
   HaushaltsdatenRowType[] | undefined
 > => {
-  if (district) {
+  if (district && modus==1) {
     const { data, error } = await supabase
       .from('haushaltsdaten_current')
       .select(
@@ -40,6 +42,28 @@ export const getRowsByDistrictAndType = async ({
 
     if (error) throw error
 
+    console.log(data)
+
+    return data as HaushaltsdatenRowType[]
+  }   else if (district && modus==2) {
+    const { data, error } = await supabase
+      .from('haushaltsdaten_current')
+      .select(
+        'id, betrag, bereichs_bezeichnung, titel_bezeichnung, bezeichnung, einzelplan_bezeichnung, kapitel_bezeichnung'
+      )
+      .eq('jahr', year)
+      .eq('titel_art', expenseType)
+      .eq('bereichs_bezeichnung', district)
+
+    if (error) throw error
+
+    data.map((el)=>{
+      el.hauptfunktions_bezeichnung = el.bereichs_bezeichnung
+      el.oberfunktions_bezeichnung = el.einzelplan_bezeichnung
+      el.funktions_bezeichnung = el.kapitel_bezeichnung
+      delete el.text
+      })
+    console.log(data)
     return data as HaushaltsdatenRowType[]
   } else {
     const { data, error } = await supabase
@@ -52,6 +76,7 @@ export const getRowsByDistrictAndType = async ({
 
     if (error) throw error
 
+    console.log(modus)
     return data as HaushaltsdatenRowType[]
   }
 }

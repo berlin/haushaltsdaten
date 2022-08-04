@@ -27,6 +27,7 @@ import { getColorByMainTopic } from '@components/TreeMap/colors'
 import { useRouter } from 'next/router'
 import { EmbeddPopup } from '@components/EmbeddPopup'
 import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
+import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
@@ -52,6 +53,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       : 'Einnahmetitel'
 
   const queriedYear = parsedQuery.year
+  const queriedModus = parsedQuery.modus
 
   const data = await getRowsByDistrictAndType({
     district:
@@ -60,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         : undefined,
     expenseType: queriedType,
     year: queriedYear && isValidYear(queriedYear) ? queriedYear : DEFAULT_YEAR,
+    modus: queriedModus && isValidModus(queriedModus) ? queriedModus : DEFAULT_MODUS,
   })
 
   if (!data) {
@@ -81,6 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       title: 'Visualisierung',
       query,
       queriedYear: queriedYear || DEFAULT_YEAR,
+      queriedModus: queriedModus || DEFAULT_MODUS,
       queriedDistrictId: queriedDistrictId,
       queriedType: queriedType,
       hierarchyData: hierarchyData,
@@ -97,12 +101,14 @@ export interface TopicType {
 export const Visualization: FC<{
   query: Partial<ParsedPageQueryType>
   queriedYear: number
+  queriedModus: number
   queriedDistrictId: keyof typeof districts
   queriedType: GetRowsByDistrictAndTypeParamsType['expenseType']
   hierarchyData: TreemapHierarchyType
   initialListData: HaushaltsdatenRowType[]
 }> = ({
   queriedYear,
+  queriedModus,
   queriedDistrictId,
   queriedType,
   hierarchyData,
@@ -124,6 +130,7 @@ export const Visualization: FC<{
         : undefined,
     type: queriedType,
     year: queriedYear,
+    modus: queriedModus,
     topicColumn:
       topic?.topicDepth && isValidTopicDepth(topic.topicDepth)
         ? mapTopicDepthToColumn(topic.topicDepth)
