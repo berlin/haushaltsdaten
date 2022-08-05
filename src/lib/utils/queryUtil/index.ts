@@ -82,7 +82,6 @@ export const mapRawQueryToState = (
     year:
       parseSingleNumber(rawQuery.year) ??
       parseYear(parseSingleNumber(rawQuery.year) as number),
-    modus:
-      parseString(rawQuery.modus),
+    modus: parseString(rawQuery.modus),
   })
 }

@@ -62,7 +62,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         : undefined,
     expenseType: queriedType,
     year: queriedYear && isValidYear(queriedYear) ? queriedYear : DEFAULT_YEAR,
-    modus: queriedModus && isValidModus(queriedModus) ? queriedModus : DEFAULT_MODUS,
+    modus:
+      queriedModus && isValidModus(queriedModus) ? queriedModus : DEFAULT_MODUS,
   })
 
   if (!data) {
