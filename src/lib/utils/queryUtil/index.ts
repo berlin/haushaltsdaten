@@ -1,6 +1,5 @@
 import { districts } from '@data/districts'
 import { VALID_YEARS } from '../yearValidator'
-import { VALID_MODUS } from '../modusValidator'
 
 export interface RawPageQueryType {
   mainTopic: string | null
