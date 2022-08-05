@@ -19,6 +19,29 @@ export interface GetRowsByDistrictAndTypeParamsType {
   modus: string
 }
 
+export interface MapColumsFunktionType {
+  id: string
+  hauptKey: string
+  oberKey: string
+  funktionKey: string
+  titel_bezeichnung: string
+  bereichs_bezeichnung: string
+  hauptfunktions_bezeichnung: string
+  oberfunktions_bezeichnung: string
+  funktions_bezeichnung: string
+}
+
+export interface MapColumsEinzelplanType {
+  id: string
+  hauptKey: string
+  oberKey: string
+  funktionKey: string
+  titel_bezeichnung: string
+  bereichs_bezeichnung: string
+  einzelplan_bezeichnung: string
+  kapitel_bezeichnung: string
+}
+
 /**
  * Retrieves rows from the Haushaltdaten based on the provided `district` and `expenseType`. There is no further filtering as to which topic group the rows belong to.
  */
@@ -42,7 +65,8 @@ export const getRowsByDistrictAndType = async ({
         .eq('bereichs_bezeichnung', district)
 
       if (error) throw error
-      data.map((el) => {
+
+      data.map((el: MapColumsFunktionType) => {
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
@@ -60,11 +84,13 @@ export const getRowsByDistrictAndType = async ({
         .eq('bereichs_bezeichnung', district)
 
       if (error) throw error
-      data.map((el) => {
+
+      data.map((el: MapColumsEinzelplanType) => {
         el.hauptKey = el.bereichs_bezeichnung
         el.oberKey = el.einzelplan_bezeichnung
         el.funktionKey = el.kapitel_bezeichnung
       })
+      console.log(data)
 
       return data as HaushaltsdatenRowType[]
     }
@@ -79,7 +105,7 @@ export const getRowsByDistrictAndType = async ({
         .eq('titel_art', expenseType)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsFunktionType) => {
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
@@ -96,7 +122,7 @@ export const getRowsByDistrictAndType = async ({
         .eq('titel_art', expenseType)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsEinzelplanType) => {
         el.hauptKey = el.bereichs_bezeichnung
         el.oberKey = el.einzelplan_bezeichnung
         el.funktionKey = el.kapitel_bezeichnung

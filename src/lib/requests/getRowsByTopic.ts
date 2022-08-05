@@ -1,6 +1,10 @@
 import { DistrictLabel } from '@data/districts'
 import { supabase } from '@lib/requests/createSupabaseClient'
-import { HaushaltsdatenRowType } from './getRowsByDistrictAndType'
+import {
+  HaushaltsdatenRowType,
+  MapColumsFunktionType,
+  MapColumsEinzelplanType,
+} from './getRowsByDistrictAndType'
 
 export type TopicColumnName =
   | 'hauptfunktions_bezeichnung'
@@ -43,7 +47,7 @@ export const getRowsByTopic = async ({
         .eq(topicColumn, topicValue)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsFunktionType) => {
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
@@ -62,7 +66,7 @@ export const getRowsByTopic = async ({
         .eq(topicColumn, topicValue)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsEinzelplanType) => {
         el.hauptKey = el.bereichs_bezeichnung
         el.oberKey = el.einzelplan_bezeichnung
         el.funktionKey = el.kapitel_bezeichnung
@@ -82,7 +86,7 @@ export const getRowsByTopic = async ({
         .eq(topicColumn, topicValue)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsFunktionType) => {
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
@@ -100,7 +104,7 @@ export const getRowsByTopic = async ({
         .eq(topicColumn, topicValue)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsEinzelplanType) => {
         el.hauptKey = el.bereichs_bezeichnung
         el.oberKey = el.einzelplan_bezeichnung
         el.funktionKey = el.kapitel_bezeichnung
@@ -120,7 +124,7 @@ export const getRowsByTopic = async ({
         .eq('bereichs_bezeichnung', district)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsFunktionType) => {
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
@@ -138,7 +142,7 @@ export const getRowsByTopic = async ({
         .eq('bereichs_bezeichnung', district)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsEinzelplanType) => {
         el.hauptKey = el.bereichs_bezeichnung
         el.oberKey = el.einzelplan_bezeichnung
         el.funktionKey = el.kapitel_bezeichnung
@@ -157,7 +161,7 @@ export const getRowsByTopic = async ({
         .eq('titel_art', expenseType)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsFunktionType) => {
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
@@ -174,7 +178,7 @@ export const getRowsByTopic = async ({
         .eq('titel_art', expenseType)
 
       if (error) throw error
-      data.map((el) => {
+      data.map((el: MapColumsEinzelplanType) => {
         el.hauptKey = el.bereichs_bezeichnung
         el.oberKey = el.einzelplan_bezeichnung
         el.funktionKey = el.kapitel_bezeichnung
