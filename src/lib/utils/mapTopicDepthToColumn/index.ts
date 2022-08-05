@@ -10,7 +10,6 @@ export const mapTopicDepthToColumn = (
   depth: number,
   modus: string
 ): TopicColumnName | undefined => {
-  console.log(modus)
   if (modus=='Funktionen') {
     switch (true) {
       case depth === 1:

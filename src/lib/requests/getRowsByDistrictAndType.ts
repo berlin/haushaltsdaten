@@ -46,9 +46,7 @@ export const getRowsByDistrictAndType = async ({
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
-        delete el.text
         })
-      console.log(data)
 
       return data as HaushaltsdatenRowType[]
       }
@@ -67,9 +65,7 @@ export const getRowsByDistrictAndType = async ({
       el.hauptKey = el.bereichs_bezeichnung
       el.oberKey = el.einzelplan_bezeichnung
       el.funktionKey = el.kapitel_bezeichnung
-      delete el.text
       })
-    console.log(data)
 
     return data as HaushaltsdatenRowType[]
     }
@@ -89,9 +85,7 @@ export const getRowsByDistrictAndType = async ({
         el.hauptKey = el.hauptfunktions_bezeichnung
         el.oberKey = el.oberfunktions_bezeichnung
         el.funktionKey = el.funktions_bezeichnung
-        delete el.text
         })
-      console.log(data)
 
       return data as HaushaltsdatenRowType[]
       }
@@ -110,9 +104,7 @@ export const getRowsByDistrictAndType = async ({
       el.hauptKey = el.bereichs_bezeichnung
       el.oberKey = el.einzelplan_bezeichnung
       el.funktionKey = el.kapitel_bezeichnung
-      delete el.text
       })
-    console.log(data)
 
     return data as HaushaltsdatenRowType[]
     }

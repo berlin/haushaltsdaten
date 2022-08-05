@@ -36,10 +36,6 @@ const parseYear = (year: number): number | undefined => {
   return VALID_YEARS.includes(year) ? year : undefined
 }
 
-const parseModus = (modus: string): string | undefined => {
-  return VALID_MODUS.includes(modus) ? modus : undefined
-}
-
 const parseString = (val: string | string[] | undefined): string | null =>
   (val && typeof val === 'string' && val.length > 0 && val) || null
 
