@@ -116,15 +116,15 @@ export const Search: FC = () => {
           </h1>
           <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
             <div className="flex-col mt-6">
-              Mithilfe der Textsuche kann der gesamte Haushalt nach durchsucht
-              werden. Es kann sowohl nach Bereichen, Einzelplänen, Kapitel
+              Mithilfe dieser Funktion kann der gesamte Haushalt durchsucht
+              werden. Es kann sowohl nach Bereichen, Einzelplänen, Kapiteln
               (Zuständigkeiten), Funktionen und Gruppen (Art der Ausgaben und
               Einnahmen), als auch stichwortartig nach den einzelnen
-              Ausgabetiteln gesucht werden. Auch Kombinationen und die Suche
-              nach ID&apos;s sind möglich.
+              Ausgabetiteln gesucht werden. Auch Kombinationen und Suchen nach
+              numerischen Bezeichnungen von Ausgabetiteln sind möglich.
               <br></br>
               <br></br>
-              Ein Beispiel für eine allgemeine Suche über Kapitel wäre
+              Ein Beispiel für eine allgemeine Suche nach Kapiteln wäre
               „Senatsverwaltung für Inneres, Digitalisierung und Sport“ mit über
               500 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre
               zum Beispiel „Sporthalle“ (46 Ergebnisse) oder „Kita Spandau“ (10

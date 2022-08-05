@@ -28,13 +28,13 @@ export const HomePage: FC = () => {
             <h1 className="text-2xl md:text-4xl md:text-right">2022/23</h1>
           </div>
           <div className="flex-col italic lg:w-1/2 mt-6 md:mt-12 lg:mt-24 lg:pr-28">
-            Pro Jahr stehen der Berliner Politik und Verwaltung über 35
-            Milliarden Euro zur Umsetzung ihrer Ziele zur Verfügung. Da kann es
-            schonmal schwer werden, den Überblick zu behalten, wofür der Senat
-            und die Bezirke wieviel ihrer Ressourcen aufwenden. Um der
-            Öffentlichkeit die Haushaltsdaten verständlich und transparent zu
-            präsentieren, bietet diese Webseite einen Überblick über die
-            Einnahmen und Ausgaben des Landes für den aktuellen Doppelhaushalt.
+            Pro Jahr stehen der Berliner Verwaltung über 35 Milliarden Euro zur
+            Umsetzung der gesetzlichen Vorgaben und ihrer Ziele zur Verfügung.
+            Aber wofür wenden Senat und Bezirke welchen Anteil ihrer Ressourcen
+            auf? Diese Webseite bietet einen Überblick über die geplanten
+            Ausgaben und Einnahmen des Landes für den aktuellen Doppelhaushalt
+            2022/23. Sie wurde gemeinsam initiiert und erarbeitet mit der Open
+            Data Informationsstelle – machen Sie mit an ihrer Weiterentwicklung!
           </div>
         </div>
 
@@ -63,20 +63,21 @@ export const HomePage: FC = () => {
             </h1>
           </div>
           <div className="m-auto mt-6 md:mt-8">
-            Gehälter für Polizist:innen, der Betrieb öffentlicher Gebäude, die
-            Förderungen von kulturellen Einrichtungen, die Beleuchtung des
-            Straßenraums: Das Leben und Zusammenleben in Berlin verursacht viele
-            laufende Kosten. Dazu kommen langfristige Investitionen in
-            Einrichtungen und Infrastruktur, wie öffentliche Schulen und die
-            Verbesserung von Parks. Ausgaben die durch die Stadtverwaltung
-            getragen werden müssen. Doch wofür werden wieviele Gelder
-            ausgegeben?
+            Das Leben und Zusammenleben in Berlin verursacht viele laufende
+            Kosten: Gehälter für Lehrerinnen und Lehrer, der Betrieb
+            öffentlicher Gebäude, die Förderung von kulturellen Einrichtungen,
+            die Beleuchtung des Straßenraums. Hinzu kommen langfristige
+            Investitionen in technische und soziale Infrastruktur wie die
+            Schulen, den öffentlichen Nahverkehr oder Parks und
+            Erholungsflächen. All diese Ausgaben trägt die Berliner Verwaltung.
+            Doch wofür wird wieviel Geld ausgegeben?
             <br></br>
             <br></br>
-            Die Ausgaben sind im sogenannten Berliner Haushalt festgelegt. Sie
-            lassen sich in 9 bundesweit vereinheitlichte Hauptfunktionsbereiche
-            untergliedern. Diese können als oberste Stufe einer Treemap
-            dargestellt werden:
+            Die Ausgaben legt das Berliner Abgeordnetenhaus im Haushaltsgesetz
+            fest. Sie lassen sich in neun bundesweit vereinheitlichte
+            Hauptfunktionsbereiche untergliedern. Diese können als oberste Stufe
+            einer sich nach unten immer weiter verzweigenden Struktur, einer so
+            genannten Tree Map, dargestellt werden:
           </div>
         </div>
 
@@ -114,15 +115,15 @@ export const HomePage: FC = () => {
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12">
           Im Berliner Haushaltsplan sind die Ausgaben und Einnahmen außerdem
           spezifischen Bereichen zugeordnet: Der Hauptverwaltung und den zwölf
-          Berliner Bezirken. Außerdem werden die Beträge für den einzelnen
-          Haushaltsjahren getrennt angegeben. Mittels der Visualisierung die
+          Berliner Bezirken. Dabei werden die Beträge für die einzelnen
+          Haushaltsjahre getrennt angegeben. Mittels der Visualisierung, die
           über den Link oben erreichbar ist, können die einzelnen Bereiche und
           Jahre erkundet werden.
           <br></br>
           <br></br>
           Die Hauptfunktionen lassen sich in weitere Funktionsbereiche
-          untergliedern. Die unterste detailierteste Angabe zu spezifischen
-          Ausgaben und Einnahmen sind die sogenannten Titelbezeichung. Sie
+          untergliedern. Die unterste detaillierte Angabe zu spezifischen
+          Ausgaben und Einnahmen sind die sogenannten Titelbezeichungen. Sie
           können über die Visualisierung angezeigt werden und erscheinen dann
           unter der Tree Map. Titel und Funktionen können aber auch gezielt über
           die Suchfunktion gefunden werden.
@@ -141,13 +142,14 @@ export const HomePage: FC = () => {
             </FadeInWrapper>
           </div>
           <div className="flex-col mt-6 md:mt-16">
-            Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land
+            Wie kommt der Haushalt zustande, und wie wird er umgesetzt? Das Land
             Berlin muss alle voraussichtlichen Einnahmen und Ausgaben eines
-            Jahres in einem Plan ausweisen, dem „Öffentlichen Haushalt“.
-            Jährlich stellt der Senat, genauer die Senatsverwaltung für
-            Finanzen, einen Haushaltsplanentwurf mit den jeweiligen
-            Einzelhaushalten der Verwaltungen auf. Was das genau bedeutet, kann
-            auf der Info-Seite nachgelesen werden.
+            Jahres in einem Haushaltsplan ausweisen. Für jedes Jahr stellt der
+            Senat einen Haushaltsplanentwurf mit den jeweiligen Einzelhaushalten
+            der Verwaltungen auf und legt ihn dem Abgeordnetenhaus vor. Die
+            Abgeordneten können daraufhin Änderungen vornehmen. Am Ende der
+            Beratungen beschließen sie das Haushaltsgesetz. Nähere Informationen
+            finden sich auf der Info-Seite.
           </div>
           <div className="flex justify-center mt-6 md:mt-12 mb-16 md:mb-24">
             <FadeInWrapper>

@@ -40,19 +40,17 @@ export const FaqPage: FC = () => (
         <div className="flex-col mt-6">
           Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land
           Berlin muss alle voraussichtlichen Einnahmen und Ausgaben eines Jahres
-          in einem Plan ausweisen, dem „Öffentlichen Haushalt“. Jährlich stellt
-          der Senat, genauer die Senatsverwaltung für Finanzen, einen
-          Haushaltsplanentwurf mit den jeweiligen Einzelhaushalten der
-          Verwaltungen auf.
+          in einem Plan ausweisen, dem „Öffentlichen Haushalt“. Für jedes Jahr
+          stellt der Senat einen Haushaltsplanentwurf mit den jeweiligen
+          Einzelhaushalten der Verwaltungen auf.
         </div>
         <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12">
           Berliner Doppelhaushalt
         </h2>
         <div className="flex-col mt-6">
-          Haushaltsrechtlich möglich ist es auch Haushalte direkt für zwei
-          Jahre, jeweils nach Jahren getrennt, festzusetzen. In Berliner macht
-          man von dieser Regelung gebrauch, solche &quot;Doppelhaushalte&quot;
-          vorzulegen, da dadurch der Verwaltungsaufwand reduziert wird.
+          Haushaltsrechtlich möglich ist es auch, Haushalte für zwei Jahre
+          aufzustellen, jeweils nach Jahren getrennt. In Berlin macht man von
+          dieser Möglichkeit seit 2002 Gebrauch.
         </div>
 
         <p className="text-2xl text-center mt-6 md:mt-16">
@@ -65,17 +63,18 @@ export const FaqPage: FC = () => (
         </p>
 
         <div className="mt-6 md:mt-16">
-          Im Ausgabehaushalt ist festgelegt, wie viel Geld in den einzelnen
+          Im Haushalt ist festgelegt, wie viel Geld in den einzelnen
           Politikbereichen ausgegeben werden darf. Gleichzeitig wird damit das
           Budget (Etat) für die Erfüllung der öffentlichen Aufgaben Berlins
-          jährlich festgeschrieben. Die zu erwartenden Einnahmen aus Steuern und
-          Gebühren werden also auf die Aufgaben des Landes verteilt. Mit den
-          Einnahmen steht ein eng begrenzter Rahmen an Mitteln zur Verfügung,
-          der zum großen Teil durch Verpflichtungen Berlins (beispielsweise im
-          Sozialbereich und der Bildung) bereits fest gebunden ist. Die weitere
-          Aufteilung auf die weiteren Aufgaben der Verwaltung (z.B. innere
-          Sicherheit, Wirtschaftsförderung, Kultur) erfolgt im politischen
-          Abstimmungsprozess des Abgeordnetenhauses.
+          jährlich festgeschrieben. Die zu erwartenden Einnahmen aus Steuern,
+          Gebühren und weiteren Einnahmen dienen also zur Finanzierung aller
+          Aufgaben des Landes. Mit den Einnahmen steht ein klar begrenzter
+          Rahmen an Mitteln zur Verfügung, der zum großen Teil durch
+          Verpflichtungen Berlins (beispielsweise im Sozialbereich und der
+          Bildung) bereits rechtlich gebunden ist. Die Finanzierung weiterer
+          Aufgaben der Verwaltung (z. B. innere Sicherheit,
+          Wirtschaftsförderung, Kultur) erfolgt nach Vorlage durch den Senat im
+          politischen Abstimmungsprozess mit dem Abgeordnetenhaus.
         </div>
 
         <p className="mt-6 md:mt-16 text-sm flex justify-center">
@@ -85,31 +84,34 @@ export const FaqPage: FC = () => (
           <GroupedBarChart data={TOTAL_EXPENSES} />
         </div>
         <div className="mt-6 md:mt-16">
-          Die Haushaltslage des Landes hat sich in den vergangenen Jahren stetig
+          Die Haushaltslage des Landes hat sich zwischen 2012 und 2020 stetig
           verbessert, sodass Berlin seit dem Jahr 2012 zur Finanzierung seiner
           laufenden Ausgaben keine zusätzlichen Kredite mehr aufnehmen musste.
         </div>
       </div>
 
       <div className="lg:w-3/6 m-auto mt-6 md:mt-12 mb-16 md:mb-28 ">
-        <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
+        <h2 className="font-bold text-xl md:text-2xl">
           Schwerpunktthemen im aktuellen Haushalt
         </h2>
         <div className="mt-6">
-          Im aktuellen doppelhaushalt lassen sich einige Themen in einen
-          besonderen Fokus setzten. So ist Berlin beispielweise bis heute eines
-          der wenigen Bundesländer in Deutschland, das die Umsetzung von Gender
-          Budgeting im Landeshaushalt explizit formuliert hat.
+          Mit dem aktuellen Doppelhaushalt 2022/23 erreicht das Land Berlin
+          einen Höchststand bei Einnahmen und Ausgaben. Besondere Aufmerksamkeit
+          liegt auf den Investitionen, die weiter anwachsen. Ziel ist eine
+          Investitionsquote von 8 Prozent. Die Berliner Schulbauoffensive (BSO)
+          ist das größte Investitionsvorhaben der letzten und laufenden
+          Legislaturperiode. Damit wird der Sanierungsstau an den Schulen weiter
+          abgebaut, und es werden neue Schulen für die wachsende Stadt
+          errichtet.
           <br></br>
-          Weiterhin relevant ist die in Berlin steigende Investitionsquote. Die
-          aus dem laufenden Haushalt finanzierten Investitionen sollen auch
-          weiter anwachsen.
+          Außerdem trifft das Land Vorsorge für diverse Risiken, darunter die
+          steigenden Energiepreise und höheren Baukosten.
           <br></br>
-          Die Berliner Schulbauoffensive (BSO) ist das größte
-          Investitionsvorhaben der letzten und laufenden Legislaturperiode.
-          Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für
-          die wachsende Stadt neue Schulen errichtet werden.
-          <br></br>
+          Weiterhin legt es bei Aufstellung und Umsetzung ein Augenmerk auf die
+          Geschlechtergerechtigkeit und integriert Gender Budgeting in seine
+          Haushaltspolitik. Das heißt, dass insbesondere die Ausgaben danach
+          ausgewertet werden, inwieweit sie den Geschlechtern zu gleichen Teilen
+          zugutekommen.
           <br></br>
           Mehr zu diesen Themen ist auf der Webseite der Senatsverwaltung für
           Finanzen zu erfahren.
@@ -145,7 +147,7 @@ export const FaqPage: FC = () => (
           </div>
         </div>
 
-        <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
+        <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12 md:mt-20">
           Fragen und Antworten
         </h2>
         <h2 className=" text-xl mt-6 md:mt-12">
@@ -155,17 +157,16 @@ export const FaqPage: FC = () => (
           <ReadMore>
             Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
             Data veröffentlicht, jedoch aufgrund seiner Länge und Komplexität
-            nicht für jede:r intuitiv verständlich. Da der Haushalt allerdings
-            von besonderer Relevanz für das Leben in Berlin ist, sollte er
-            möglichst transparent dargestellt und für alle Berliner:innen
-            zugänglich sein. Diese Webseite wurde ins Leben gerufen, um ein
-            möglichst niedrigschwelliges Angebot zu schaffen, sich mit den
-            Haushaltsdaten auseinanderzusetzen. Die interaktiven Diagramme in
-            ihrer Ausgangsform zeigen eine Übersicht der kompletten Ausgaben und
-            Einnahmen der Berliner Verwaltung. Durch Eingaben der Nutzer:innen
-            werden weitere Detailebenen angezeigt, wie Bezirk oder Funktionen.
-            Die Diagramme wurden erstellt, um die komplexen Haushaltsdaten
-            nutzer:innenfreundlich darzustellen.
+            nicht für jede und jeden intuitiv verständlich. Da der Haushalt
+            allerdings von besonderer Relevanz für das Leben in Berlin ist,
+            sollte er möglichst transparent dargestellt und für alle
+            Berlinerinnen und Berliner zugänglich sein. Diese Webseite wurde ins
+            Leben gerufen, um ein möglichst niedrigschwelliges Angebot zu
+            schaffen, sich mit den Haushaltsdaten auseinanderzusetzen. Die
+            interaktiven Diagramme in ihrer Ausgangsform zeigen eine Übersicht
+            der kompletten Ausgaben und Einnahmen der Berliner Verwaltung. Durch
+            Eingaben der Nutzenden werden weitere Detailebenen angezeigt, wie
+            Bezirk oder Funktionen.
           </ReadMore>
         </div>
 
@@ -173,20 +174,19 @@ export const FaqPage: FC = () => (
         <div className="flex justify-center mt-6 mb-6 md:mb-20">
           <p>
             Alle Visualisierungen basieren auf dem öffentlich zugänglichen
-            Datensatz des Doppelhaushaltes 2022/2023, der von der
-            Senatsverwaltung für Finanzen bereitgestellt wird und auf dem{' '}
-            <a className="text-brand" href="https://daten.berlin.de">
-              Berliner Open Data Portal
-            </a>{' '}
-            veröffentlicht ist. Die{' '}
+            Datensatz des Doppelhaushaltes 2022/2023. Dieser wird von der{' '}
             <a
               className="text-brand"
               href="https://www.berlin.de/sen/finanzen/"
             >
-              Berliner Senatsverwaltung für Finanzen
+              Senatsverwaltung für Finanzen
             </a>{' '}
-            veröffentlicht seit rund 10 Jahren den Haushalt als Open Data, die
-            auf dem Berliner Datenportal eingesehen werden können.
+            bereitgestellt und auf dem{' '}
+            <a className="text-brand" href="https://daten.berlin.de">
+              Berliner Open Data Portal
+            </a>{' '}
+            veröffentlicht ist. Dort finden sich auch historische Haushaltsdaten
+            er letzten 10 Jahre.
           </p>
         </div>
 
