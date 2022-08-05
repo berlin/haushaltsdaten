@@ -101,7 +101,7 @@ export interface TopicType {
 export const Visualization: FC<{
   query: Partial<ParsedPageQueryType>
   queriedYear: number
-  queriedModus: number
+  queriedModus: string
   queriedDistrictId: keyof typeof districts
   queriedType: GetRowsByDistrictAndTypeParamsType['expenseType']
   hierarchyData: TreemapHierarchyType
@@ -133,7 +133,7 @@ export const Visualization: FC<{
     modus: queriedModus,
     topicColumn:
       topic?.topicDepth && isValidTopicDepth(topic.topicDepth)
-        ? mapTopicDepthToColumn(topic.topicDepth)
+        ? mapTopicDepthToColumn(topic.topicDepth, queriedModus)
         : undefined,
     topicValue:
       topic.topicLabel &&
@@ -216,8 +216,8 @@ export const Visualization: FC<{
                     id: item.id,
                     title: item.titel_bezeichnung,
                     amount: parseInt(item.betrag, 10),
-                    group: item.hauptfunktions_bezeichnung,
-                    groupId: snakeCase(item.hauptfunktions_bezeichnung),
+                    group: item.hauptKey,
+                    groupId: snakeCase(item.hauptKey),
                     district: item.bereichs_bezeichnung,
                   }))
                   .sort((a, b) => b.amount - a.amount)

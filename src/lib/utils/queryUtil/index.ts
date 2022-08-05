@@ -17,7 +17,7 @@ export interface ParsedPageQueryType {
   showExpenses: boolean
   district: keyof typeof districts
   year: number
-  modus: number
+  modus: string
 }
 
 const isNumber = (val: unknown): boolean =>
@@ -36,7 +36,7 @@ const parseYear = (year: number): number | undefined => {
   return VALID_YEARS.includes(year) ? year : undefined
 }
 
-const parseModus = (modus: number): number | undefined => {
+const parseModus = (modus: string): string | undefined => {
   return VALID_MODUS.includes(modus) ? modus : undefined
 }
 
@@ -88,7 +88,6 @@ export const mapRawQueryToState = (
       parseSingleNumber(rawQuery.year) ??
       parseYear(parseSingleNumber(rawQuery.year) as number),
     modus:
-      parseSingleNumber(rawQuery.modus) ??
-      parseModus(parseSingleNumber(rawQuery.modus) as number),
+      parseString(rawQuery.modus),
   })
 }

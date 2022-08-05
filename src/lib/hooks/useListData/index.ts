@@ -10,7 +10,7 @@ interface useListDataParamsType {
   district?: DistrictLabel
   type: GetRowsByDistrictAndTypeParamsType['expenseType']
   year: number
-  modus: number
+  modus: string
   topicColumn?: TopicColumnName
   topicValue?: string
   initialData?: HaushaltsdatenRowType[]

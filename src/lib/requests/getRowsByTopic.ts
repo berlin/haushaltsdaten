@@ -6,12 +6,15 @@ export type TopicColumnName =
   | 'hauptfunktions_bezeichnung'
   | 'oberfunktions_bezeichnung'
   | 'funktions_bezeichnung'
+  | 'bereichs_bezeichnung'
+  | 'einzelplan_bezeichnung'
+  | 'kapitel_bezeichnung'
 
 export interface GetRowsByTopicParamsType {
   district?: DistrictLabel
   expenseType: 'Einnahmetitel' | 'Ausgabetitel'
   year: number
-  modus: number
+  modus: string
   topicColumn?: TopicColumnName
   topicValue?: string
 }
@@ -28,6 +31,7 @@ export const getRowsByTopic = async ({
   topicValue,
 }: GetRowsByTopicParamsType): Promise<HaushaltsdatenRowType[] | undefined> => {
   if (!!district && !!topicColumn && !!topicValue) {
+    if (modus=='Funktionen') {
     const { data, error } = await supabase
       .from('haushaltsdaten_current')
       .select(
@@ -39,45 +43,153 @@ export const getRowsByTopic = async ({
       .eq(topicColumn, topicValue)
 
     if (error) throw error
+    data.map((el)=>{
+      el.hauptKey = el.hauptfunktions_bezeichnung
+      el.oberKey = el.oberfunktions_bezeichnung
+      el.funktionKey = el.funktions_bezeichnung
+      delete el.text
+      })
 
-    return data as HaushaltsdatenRowType[]
+      return data as HaushaltsdatenRowType[]
+    } else {
+      const { data, error } = await supabase
+      .from('haushaltsdaten_current')
+      .select(
+        'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, einzelplan_bezeichnung, kapitel_bezeichnung'
+      )
+      .eq('jahr', year)
+      .eq('titel_art', expenseType)
+      .eq('bereichs_bezeichnung', district)
+      .eq(topicColumn, topicValue)
+
+    if (error) throw error
+    data.map((el)=>{
+      el.hauptKey = el.bereichs_bezeichnung
+      el.oberKey = el.einzelplan_bezeichnung
+      el.funktionKey = el.kapitel_bezeichnung
+      delete el.text
+      })
+
+      return data as HaushaltsdatenRowType[]
+    }
+    
   } else if (!!topicColumn && !!topicValue) {
-    const { data, error } = await supabase
-      .from('haushaltsdaten_current')
-      .select(
-        'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
-      )
-      .eq('jahr', year)
-      .eq('titel_art', expenseType)
-      .eq(topicColumn, topicValue)
-
-    if (error) throw error
-
-    return data as HaushaltsdatenRowType[]
+    if (modus=='Funktionen') {
+      const { data, error } = await supabase
+        .from('haushaltsdaten_current')
+        .select(
+          'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
+        )
+        .eq('jahr', year)
+        .eq('titel_art', expenseType)
+        .eq(topicColumn, topicValue)
+  
+      if (error) throw error
+      data.map((el)=>{
+        el.hauptKey = el.hauptfunktions_bezeichnung
+        el.oberKey = el.oberfunktions_bezeichnung
+        el.funktionKey = el.funktions_bezeichnung
+        delete el.text
+        })
+  
+        return data as HaushaltsdatenRowType[]
+      } else {
+        const { data, error } = await supabase
+        .from('haushaltsdaten_current')
+        .select(
+          'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, einzelplan_bezeichnung, kapitel_bezeichnung'
+        )
+        .eq('jahr', year)
+        .eq('titel_art', expenseType)
+        .eq(topicColumn, topicValue)
+  
+      if (error) throw error
+      data.map((el)=>{
+        el.hauptKey = el.bereichs_bezeichnung
+        el.oberKey = el.einzelplan_bezeichnung
+        el.funktionKey = el.kapitel_bezeichnung
+        delete el.text
+        })
+  
+        return data as HaushaltsdatenRowType[]
+      }
   } else if (district && !topicColumn && !topicValue) {
-    const { data, error } = await supabase
-      .from('haushaltsdaten_current')
-      .select(
-        'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
-      )
-      .eq('jahr', year)
-      .eq('titel_art', expenseType)
-      .eq('bereichs_bezeichnung', district)
-
-    if (error) throw error
-
-    return data as HaushaltsdatenRowType[]
+    if (modus=='Funktionen') {
+      const { data, error } = await supabase
+        .from('haushaltsdaten_current')
+        .select(
+          'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
+        )
+        .eq('jahr', year)
+        .eq('titel_art', expenseType)
+        .eq('bereichs_bezeichnung', district)
+  
+      if (error) throw error
+      data.map((el)=>{
+        el.hauptKey = el.hauptfunktions_bezeichnung
+        el.oberKey = el.oberfunktions_bezeichnung
+        el.funktionKey = el.funktions_bezeichnung
+        delete el.text
+        })
+  
+        return data as HaushaltsdatenRowType[]
+      } else {
+        const { data, error } = await supabase
+        .from('haushaltsdaten_current')
+        .select(
+          'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, einzelplan_bezeichnung, kapitel_bezeichnung'
+        )
+        .eq('jahr', year)
+        .eq('titel_art', expenseType)
+        .eq('bereichs_bezeichnung', district)
+  
+      if (error) throw error
+      data.map((el)=>{
+        el.hauptKey = el.bereichs_bezeichnung
+        el.oberKey = el.einzelplan_bezeichnung
+        el.funktionKey = el.kapitel_bezeichnung
+        delete el.text
+        })
+  
+        return data as HaushaltsdatenRowType[]
+      }
   } else {
-    const { data, error } = await supabase
-      .from('haushaltsdaten_current')
-      .select(
-        'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
-      )
-      .eq('jahr', year)
-      .eq('titel_art', expenseType)
-
-    if (error) throw error
-
-    return data as HaushaltsdatenRowType[]
-  }
+    if (modus=='Funktionen') {
+      const { data, error } = await supabase
+        .from('haushaltsdaten_current')
+        .select(
+          'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, hauptfunktions_bezeichnung, oberfunktions_bezeichnung, funktions_bezeichnung'
+        )
+        .eq('jahr', year)
+        .eq('titel_art', expenseType)
+  
+      if (error) throw error
+      data.map((el)=>{
+        el.hauptKey = el.hauptfunktions_bezeichnung
+        el.oberKey = el.oberfunktions_bezeichnung
+        el.funktionKey = el.funktions_bezeichnung
+        delete el.text
+        })
+  
+        return data as HaushaltsdatenRowType[]
+      } else {
+        const { data, error } = await supabase
+        .from('haushaltsdaten_current')
+        .select(
+          'id, betrag, bereichs_bezeichnung, titel_art, titel_bezeichnung, einzelplan_bezeichnung, kapitel_bezeichnung'
+        )
+        .eq('jahr', year)
+        .eq('titel_art', expenseType)
+  
+      if (error) throw error
+      data.map((el)=>{
+        el.hauptKey = el.bereichs_bezeichnung
+        el.oberKey = el.einzelplan_bezeichnung
+        el.funktionKey = el.kapitel_bezeichnung
+        delete el.text
+        })
+  
+        return data as HaushaltsdatenRowType[]
+      }
+    }
 }

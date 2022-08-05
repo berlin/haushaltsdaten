@@ -2,7 +2,7 @@
 export const FUNCTION_GROUPS = [
   {
     name: 'Bildungswesen, Wissenschaft, Forschung, kulturelle Angelegenheiten',
-    color: '#6CA18E',
+    color: '#fffff',
     height: '8',
     value: '28,3%',
   },

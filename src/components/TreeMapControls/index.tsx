@@ -41,7 +41,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
         <div
           className={classNames(
             'w-full sm:w-auto',
-            'grid grid-cols-1 sm:grid-cols-[1fr,auto,1fr,auto,1fr] gap-y-3 sm:gap-x-6'
+            'grid grid-cols-1 sm:grid-cols-[1fr,auto,1fr,auto,1fr,auto,1fr] gap-y-3 sm:gap-x-6'
           )}
         >
           <ToggleSwitch
@@ -98,7 +98,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
             onChange={(modus) =>
               onChange({
                 ...mappedQuery,
-                modus: modus as number,
+                modus: modus as string,
               })
             }
             options={VALID_MODUS.map((modus) => {

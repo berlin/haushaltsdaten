@@ -1,6 +1,6 @@
-export const VALID_MODUS = [1, 2]
+export const VALID_MODUS = ['Einzelpläne', 'Funktionen']
 
-export const DEFAULT_MODUS = 1
+export const DEFAULT_MODUS = 'Funktionen'
 
-export const isValidModus = (modusToCheck: number): boolean =>
+export const isValidModus = (modusToCheck: string): boolean =>
   VALID_MODUS.includes(modusToCheck)
