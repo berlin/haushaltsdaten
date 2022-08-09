@@ -6,6 +6,7 @@ const BerlinLogo = '/images/berlin-skzl-logo.svg'
 const OdisLogo = '/images/logo-odis-berlin.svg'
 const SenWEBLogo = '/images/logo-berlin-senweb-de.svg'
 const IBBLogo = '/images/ibb-logo.svg'
+const SenFINLogo = 'images/logo-berlin-senfin.svg'
 // const SenFINLogo = '/images/logo-odis-berlin-black.svg'
 
 export const Footer: FC = () => {
@@ -66,19 +67,19 @@ export const Footer: FC = () => {
             </div>
             <div className="block">
               <span className="w-full block text-xs text-gray-700">
-                In Zusammenarbeit mit:
+                Zusammen mit:
               </span>
               <a
-                href="https://technologiestiftung-berlin.de/"
+                href="https://www.berlin.de/sen/finanzen/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
-                aria-label="Technologiestiftung Berlin"
+                aria-label="Senatsverwaltung für Finanzen"
               >
                 <img
-                  src={TSBLogo}
-                  alt="Logo der Technologiestiftung Berlin"
-                  className="w-40"
+                  src={SenFINLogo}
+                  alt="Logo der Senatsverwaltung für Finanzen"
+                  className="w-32"
                 />
               </a>
             </div>
@@ -102,15 +103,15 @@ export const Footer: FC = () => {
             </div>
             <div className="block">
               <a
-                href="https://www.berlin.de/rbmskzl/"
+                href="https://www.berlin.de/sen/wirtschaft/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-8 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
-                aria-label="Der Regierende Bürgermeister von Berlin - Senatskanzlei"
+                aria-label="Senatsverwaltung für Wirtschaft, Energie und Betriebe"
               >
                 <img
                   src={SenWEBLogo}
-                  alt="Logo: Der Regierende Bürgermeister von Berlin - Senatskanzlei"
+                  alt="Logo: Senatsverwaltung für Wirtschaft, Energie und Betriebe"
                   className="w-32"
                 />
               </a>
