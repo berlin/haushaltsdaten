@@ -69,7 +69,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
                 id: key,
                 name: districts[key as keyof typeof districts] || ' ',
               }))}
-            additionalClasses="z-10"
+            additionalClasses="z-20"
           />
           <div className="hidden sm:inline-flex">
             <Separator />
@@ -88,7 +88,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
                 name: `${year}`,
               }
             })}
-            additionalClasses="z-0"
+            additionalClasses="z-10"
           />
           <div className="hidden sm:inline-flex">
             <Separator />

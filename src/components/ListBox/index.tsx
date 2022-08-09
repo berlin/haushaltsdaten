@@ -32,12 +32,12 @@ export const ListBox: FC<ListBoxPropType> = ({
         onChange(newOption.id)
       }}
     >
-      <div className={classNames('relative mt-1', additionalClasses)}>
+      <div className={classNames('relative sm:mt-1', additionalClasses)}>
         <Listbox.Button
           className={classNames(
             'group',
             'relative w-full cursor-default rounded transition-colors',
-            'bg-white py-2 pl-3 pr-10 text-left border border-gray-200',
+            'bg-white py-1 sm:py-2 pl-3 pr-10 text-left border border-gray-200',
             'hover:text-brand cursor-pointer hover:border-brand',
             'focus:outline-none focus-visible:border-brand',
             'focus-visible:ring-2 focus-visible:ring-brand',
