@@ -7,7 +7,6 @@ const OdisLogo = '/images/logo-odis-berlin.svg'
 const SenWEBLogo = '/images/logo-berlin-senweb-de.svg'
 const IBBLogo = '/images/ibb-logo.svg'
 const SenFINLogo = 'images/logo-berlin-senfin.svg'
-// const SenFINLogo = '/images/logo-odis-berlin-black.svg'
 
 export const Footer: FC = () => {
   return (
