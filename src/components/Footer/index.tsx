@@ -3,14 +3,17 @@ import { FC } from 'react'
 const TSBLogo = '/images/tsb-logo.svg'
 const CityLABLogo = '/images/citylab-logo.svg'
 const BerlinLogo = '/images/berlin-skzl-logo.svg'
-const OdisLogo = '/images/logo-odis-berlin-black.svg'
+const OdisLogo = '/images/logo-odis-berlin.svg'
+const SenWEBLogo = '/images/logo-berlin-senweb-de.svg'
+const IBBLogo = '/images/ibb-logo.svg'
+const SenFINLogo = 'images/logo-berlin-senfin.svg'
 
 export const Footer: FC = () => {
   return (
     <footer id="main-footer">
       <section className="bg-gray-50 border-t border-gray-200 px-4 xl:px-8">
         <div className="container max-w-8xl mx-auto py-8">
-          <div className="w-full flex flex-wrap gap-8 sm:gap-12 sm:flex-nowrap">
+          <div className="w-full flex flex-wrap gap-8 md:gap-12 lg:flex-nowrap">
             <div className="block">
               <span className="w-full block text-xs text-gray-700">&nbsp;</span>
               <a
@@ -63,6 +66,24 @@ export const Footer: FC = () => {
             </div>
             <div className="block">
               <span className="w-full block text-xs text-gray-700">
+                Zusammen mit:
+              </span>
+              <a
+                href="https://www.berlin.de/sen/finanzen/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
+                aria-label="Senatsverwaltung für Finanzen"
+              >
+                <img
+                  src={SenFINLogo}
+                  alt="Logo der Senatsverwaltung für Finanzen"
+                  className="w-32"
+                />
+              </a>
+            </div>
+            <div className="block">
+              <span className="w-full block text-xs text-gray-700">
                 Gefördert durch:
               </span>
               <a
@@ -75,6 +96,36 @@ export const Footer: FC = () => {
                 <img
                   src={BerlinLogo}
                   alt="Logo: Der Regierende Bürgermeister von Berlin - Senatskanzlei"
+                  className="w-32"
+                />
+              </a>
+            </div>
+            <div className="block">
+              <a
+                href="https://www.berlin.de/sen/wirtschaft/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
+                aria-label="Senatsverwaltung für Wirtschaft, Energie und Betriebe"
+              >
+                <img
+                  src={SenWEBLogo}
+                  alt="Logo: Senatsverwaltung für Wirtschaft, Energie und Betriebe"
+                  className="w-32"
+                />
+              </a>
+            </div>
+            <div className="block">
+              <a
+                href="https://www.ibb.de/de/startseite/startseite.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
+                aria-label="Investitionsbank Berlin"
+              >
+                <img
+                  src={IBBLogo}
+                  alt="Logo: Investitionsbank Berlin"
                   className="w-32"
                 />
               </a>
