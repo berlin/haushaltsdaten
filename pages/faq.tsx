@@ -169,6 +169,24 @@ export const FaqPage: FC = () => (
           </ReadMore>
         </div>
 
+        <h2 className=" text-xl mt-6 md:mt-12" id="Einzelplaene-und-Funktionen">
+          Was sind Einzelpläne und Funktionen?
+        </h2>
+        <div className="flex justify-center mt-6">
+          <ReadMore>
+            Anstelle einen neuen Haushalt jedes Jahr zu verabschieden, kann eine
+            Stadt oder eine Gemeinde einen Zweijahreshaushalt oder
+            Doppelhaushalt verabschieden. Häufig entlastet dies die Verwaltung
+            und die Politik dadurch, dass nicht jedes Jahr eine große
+            Haushaltsdebatte stattfindet. Über zwei Jahre können sich allerdings
+            natürlich viele Dinge ändern, daher kann das Parlament mit einem
+            Nachtragshaushalt nachsteuern, und so Umverteilungen oder
+            Mehrausgaben beschließen. Dies war beispielsweise während der
+            Corona-Pandemie nötig, um Mehrausgaben für Pflegepersonal und
+            Unterstützung der Berliner Wirtschaft zu gewährleisten.
+          </ReadMore>
+        </div>
+
         <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
         <div className="flex justify-center mt-6 mb-6 md:mb-20">
           <p>
