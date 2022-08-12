@@ -121,6 +121,14 @@ export const HomePage: FC = () => {
           Jahre erkundet werden.
           <br></br>
           <br></br>
+          Es gibt zwei Optionen, die Zuordnung nach Einnahmen und Ausgaben zu
+          sortieren: nach Einzelplänen oder Hauptfunktionen gefiltert.
+          <br></br>
+          Die Einzelpläne bieten eine Übersicht über die Einnahmen und Ausgaben
+          der Haupt- und Bezirksverwaltungen unterteilt nach Arten und
+          Aufgabenbereich, z.B. Senatsverwaltung für Inneres oder Bezirksamt
+          Mitte.
+          <br></br>
           Die Hauptfunktionen lassen sich in weitere Funktionsbereiche
           untergliedern. Die unterste detaillierte Angabe zu spezifischen
           Ausgaben und Einnahmen sind die sogenannten Titelbezeichungen. Sie
