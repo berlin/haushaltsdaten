@@ -1,10 +1,8 @@
 import { GetStaticProps } from 'next'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FC } from 'react'
 import { GroupedBarChart } from '@components/GroupedBarChart'
 import { TOTAL_EXPENSES } from '@data/totalExpenses'
-import { mapRawQueryToState } from '@lib/utils/queryUtil'
-import { useRouter } from 'next/router'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticProps: GetStaticProps = async () => ({
@@ -34,16 +32,6 @@ const ReadMore: FC = ({ children }) => {
 }
 
 export const FaqPage: FC = () => {
-  const { query } = useRouter()
-  const { hashId } = mapRawQueryToState(query)
-
-  useEffect(() => {
-    if (!hashId) return
-    const elToScrollTo = document.getElementById(hashId)
-    if (!elToScrollTo) return
-    elToScrollTo.scrollIntoView({ behavior: 'smooth' })
-  }, [hashId])
-
   return (
     <div className="px-8">
       <div className="md:w-4/5 m-auto mt-12 md:mt-20">
