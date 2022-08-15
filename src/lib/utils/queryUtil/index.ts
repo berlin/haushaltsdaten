@@ -2,6 +2,7 @@ import { districts } from '@data/districts'
 import { VALID_YEARS } from '../yearValidator'
 
 export interface RawPageQueryType {
+  hashId: string | null
   mainTopic: string | null
   midTopic: string | null
   deepTopic: string | null
@@ -10,6 +11,7 @@ export interface RawPageQueryType {
 }
 
 export interface ParsedPageQueryType {
+  hashId: string | null
   mainTopic: string | null
   midTopic: string | null
   deepTopic: string | null
@@ -74,6 +76,7 @@ export const mapRawQueryToState = (
 ): Partial<ParsedPageQueryType> => {
   const [mainTopic, midTopic, deepTopic] = parseTopicPath(rawQuery) || []
   return removeNull({
+    hashId: typeof rawQuery.hashId === 'string' ? rawQuery.hashId : undefined,
     mainTopic,
     midTopic,
     deepTopic,
