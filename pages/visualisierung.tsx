@@ -206,8 +206,8 @@ export const Visualization: FC<{
           <div className="container mx-auto">
             <h2 className="mb-6 mt-12 px-4 font-bold text-2xl">
               {queriedType === 'Ausgabetitel'
-                ? 'Höchste Ausgaben'
-                : 'Höchste Einnahmen'}
+                ? 'Höchste Ausgabetitel'
+                : 'Höchste Einnahmetitel'}
             </h2>
             <ul className="flex flex-col gap-4">
               {!error &&
