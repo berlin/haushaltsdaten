@@ -111,7 +111,10 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
               })}
               additionalClasses="w-full z-0"
             />
-            <InternalLink href={'/faq'} query={{ hashId: 'FAQ' }}>
+            <InternalLink
+              href={'/faq'}
+              query={{ hashId: 'Einzelplaene-und-Funktionen' }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="icon icon-tabler icon-tabler-info-circle"
