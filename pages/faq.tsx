@@ -148,7 +148,7 @@ export const FaqPage: FC = () => {
             </div>
           </div>
 
-          <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
+          <h2 id="FAQ" className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
             Fragen und Antworten
           </h2>
           <h2 className=" text-xl mt-6 md:mt-12">
@@ -172,12 +172,6 @@ export const FaqPage: FC = () => {
             </ReadMore>
           </div>
 
-          <h2
-            className=" text-xl mt-6 md:mt-12"
-            id="Einzelplaene-und-Funktionen"
-          >
-            Was sind Einzelpläne und Funktionen?
-          </h2>
           <div className="flex justify-center mt-6">
             <ReadMore>
               Anstelle einen neuen Haushalt jedes Jahr zu verabschieden, kann
