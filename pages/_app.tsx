@@ -7,6 +7,7 @@ import { useMatomo } from '@lib/hooks/useMatomo'
 import { Header } from '@components/Header'
 import { Footer } from '@components/Footer'
 import { useRouter } from 'next/router'
+import { useHashIdScroll } from '@lib/hooks/useHashIdScroll'
 
 interface PagePropType extends Record<string, unknown> {
   title?: string
@@ -25,6 +26,7 @@ const App: FC<{
   useMatomo()
   const { pathname } = useRouter()
   const parsedQuery = pageProps.query ? mapRawQueryToState(pageProps.query) : {}
+  useHashIdScroll()
 
   return (
     <StrictMode>

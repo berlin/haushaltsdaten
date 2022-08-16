@@ -26,7 +26,10 @@ export const getColorByMainTopic: (mainTopic: string) => string = (
     case mainTopic ===
       'Wohnungswesen, Städtebau, Raumordnung und kommunale Gemeinschaftsdienste':
       return colors.gray[300]
+    case mainTopic === 'Hauptverwaltung':
+      return colors.middlegreen
+
     default:
-      return colors.gray[200]
+      return colors.lightblue
   }
 }
