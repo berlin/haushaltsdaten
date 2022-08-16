@@ -171,7 +171,7 @@ export const FaqPage: FC = () => (
         </div>
 
         <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
-        <div className="flex justify-center mt-6 mb-6 md:mb-20">
+        <div className="flex justify-center mt-6">
           <p>
             Alle Visualisierungen basieren auf dem öffentlich zugänglichen
             Datensatz des Doppelhaushaltes 2022/2023. Dieser wird von der{' '}
@@ -186,8 +186,22 @@ export const FaqPage: FC = () => (
               Berliner Open Data Portal
             </a>{' '}
             veröffentlicht ist. Dort finden sich auch historische Haushaltsdaten
-            er letzten 10 Jahre.
+            der letzten 10 Jahre.
           </p>
+        </div>
+
+        <h2 className=" text-xl mt-6 md:mt-12">
+          Ist die Anwendung Open Source? Wie kann sie weiterentwickelt werden?
+        </h2>
+        <div className="flex justify-center mt-6">
+          <ReadMore>Text</ReadMore>
+        </div>
+
+        <h2 className=" text-xl mt-6 md:mt-12">
+          Ist die Anwendung auch auf andere Städte und Kommunen übertragbar?
+        </h2>
+        <div className="flex justify-center mt-6">
+          <ReadMore>Text</ReadMore>
         </div>
 
         {/* 
