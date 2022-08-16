@@ -34,7 +34,13 @@ export const HomePage: FC = () => {
             auf? Diese Webseite bietet einen Überblick über die geplanten
             Ausgaben und Einnahmen des Landes für den aktuellen Doppelhaushalt
             2022/23. Sie wurde gemeinsam initiiert und erarbeitet mit der Open
-            Data Informationsstelle – machen Sie mit an ihrer Weiterentwicklung!
+            Data Informationsstelle und dem CityLAB Berlin – und steht als{' '}
+            <span className="text-brand">
+              <InternalLink href={'/faq'} query={{ hashId: 'Open-Source' }}>
+                Open Source Projekt
+              </InternalLink>{' '}
+            </span>
+            zur Weiterentwicklung zur Verfügung!
           </div>
         </div>
 
@@ -114,27 +120,18 @@ export const HomePage: FC = () => {
 
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12">
           Im Berliner Haushaltsplan sind die Ausgaben und Einnahmen außerdem
-          spezifischen Bereichen zugeordnet: Der Hauptverwaltung und den zwölf
-          Berliner Bezirken. Dabei werden die Beträge für die einzelnen
+          spezifischen Bereichen von Hauptverwaltungen und Bezirken zugeordnet:
+          den Einzelplänen. Dabei werden die Beträge für die einzelnen
           Haushaltsjahre getrennt angegeben. Mittels der Visualisierung, die
-          über den Link oben erreichbar ist, können die einzelnen Bereiche und
-          Jahre erkundet werden.
+          über den Link oben erreichbar ist, können die einzelnen
+          Darstellungsformen und Jahre im Deatil erkundet werden.
           <br></br>
           <br></br>
-          Es gibt zwei Optionen, die Zuordnung nach Einnahmen und Ausgaben zu
-          sortieren: nach Einzelplänen oder Hauptfunktionen gefiltert.
-          <br></br>
-          Die Einzelpläne bieten eine Übersicht über die Einnahmen und Ausgaben
-          der Haupt- und Bezirksverwaltungen unterteilt nach Arten und
-          Aufgabenbereich, z.B. Senatsverwaltung für Inneres oder Bezirksamt
-          Mitte.
-          <br></br>
-          Die Hauptfunktionen lassen sich in weitere Funktionsbereiche
-          untergliedern. Die unterste detaillierte Angabe zu spezifischen
-          Ausgaben und Einnahmen sind die sogenannten Titelbezeichungen. Sie
-          können über die Visualisierung angezeigt werden und erscheinen dann
-          unter der Tree Map. Titel und Funktionen können aber auch gezielt über
-          die Suchfunktion gefunden werden.
+          Die detailliertesten Angabe zu spezifischen Beträgen im Haushaltsplan
+          sind die sogenannten Einnahme- und Ausgabetitel. Sie können über die
+          Visualisierung gefiltert werden und erscheinen dann unter der Tree
+          Map. Titel und Funktionen können aber auch gezielt über die
+          Suchfunktion gefunden werden.
           <div className="flex justify-center mt-6 md:mt-12">
             <FadeInWrapper>
               <ul>

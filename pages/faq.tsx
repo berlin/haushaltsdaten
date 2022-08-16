@@ -20,7 +20,7 @@ const ReadMore: FC = ({ children }) => {
 
   return (
     <p>
-      {isReadMore ? text.slice(0, 300) : text}
+      {isReadMore ? text.slice(0, 320) : text}
       <button
         onClick={toggleReadMore}
         className="font-medium text-brand cursor-pointer"
@@ -42,19 +42,16 @@ export const FaqPage: FC = () => {
           <div className="flex-col mt-6">
             Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land
             Berlin muss alle voraussichtlichen Einnahmen und Ausgaben eines
-            Jahres in einem Plan ausweisen, dem „Öffentlichen Haushalt“.
-            Jährlich stellt der Senat, genauer die Senatsverwaltung für
-            Finanzen, einen Haushaltsplanentwurf mit den jeweiligen
-            Einzelhaushalten der Verwaltungen auf.
-          </div>
-          <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12">
+            Jahres in einem Plan ausweisen, dem „Öffentlichen Haushalt“. Für
+            jedes Jahr stellt der Senat einen Haushaltsplanentwurf mit den
+            jeweiligen Einzelhaushalten der Verwaltungen auf.
+            <br></br>
+            {/* <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12">
             Berliner Doppelhaushalt
-          </h2>
-          <div className="flex-col mt-6">
-            Haushaltsrechtlich möglich ist es auch Haushalte direkt für zwei
-            Jahre, jeweils nach Jahren getrennt, festzusetzen. In Berliner macht
-            man von dieser Regelung gebrauch, solche &quot;Doppelhaushalte&quot;
-            vorzulegen, da dadurch der Verwaltungsaufwand reduziert wird.
+          </h2> */}
+            Haushaltsrechtlich möglich ist es auch, Haushalte für zwei Jahre
+            aufzustellen, jeweils nach Jahren getrennt. In Berlin macht man von
+            dieser Möglichkeit seit 2002 Gebrauch.
           </div>
 
           <p className="text-2xl text-center mt-6 md:mt-16">
@@ -67,17 +64,18 @@ export const FaqPage: FC = () => {
           </p>
 
           <div className="mt-6 md:mt-16">
-            Im Ausgabehaushalt ist festgelegt, wie viel Geld in den einzelnen
+            Im Haushalt ist festgelegt, wie viel Geld in den einzelnen
             Politikbereichen ausgegeben werden darf. Gleichzeitig wird damit das
             Budget (Etat) für die Erfüllung der öffentlichen Aufgaben Berlins
-            jährlich festgeschrieben. Die zu erwartenden Einnahmen aus Steuern
-            und Gebühren werden also auf die Aufgaben des Landes verteilt. Mit
-            den Einnahmen steht ein eng begrenzter Rahmen an Mitteln zur
-            Verfügung, der zum großen Teil durch Verpflichtungen Berlins
-            (beispielsweise im Sozialbereich und der Bildung) bereits fest
-            gebunden ist. Die weitere Aufteilung auf die weiteren Aufgaben der
-            Verwaltung (z.B. innere Sicherheit, Wirtschaftsförderung, Kultur)
-            erfolgt im politischen Abstimmungsprozess des Abgeordnetenhauses.
+            jährlich festgeschrieben. Die zu erwartenden Einnahmen aus Steuern,
+            Gebühren und weiteren Einnahmen dienen also zur Finanzierung aller
+            Aufgaben des Landes. Mit den Einnahmen steht ein klar begrenzter
+            Rahmen an Mitteln zur Verfügung, der zum großen Teil durch
+            Verpflichtungen Berlins (beispielsweise im Sozialbereich und der
+            Bildung) bereits rechtlich gebunden ist. Die Finanzierung weiterer
+            Aufgaben der Verwaltung (z. B. innere Sicherheit,
+            Wirtschaftsförderung, Kultur) erfolgt nach Vorlage durch den Senat
+            im politischen Abstimmungsprozess mit dem Abgeordnetenhaus.
           </div>
 
           <p className="mt-6 md:mt-16 text-sm flex justify-center">
@@ -87,32 +85,34 @@ export const FaqPage: FC = () => {
             <GroupedBarChart data={TOTAL_EXPENSES} />
           </div>
           <div className="mt-6 md:mt-16">
-            Die Haushaltslage des Landes hat sich in den vergangenen Jahren
-            stetig verbessert, sodass Berlin seit dem Jahr 2012 zur Finanzierung
-            seiner laufenden Ausgaben keine zusätzlichen Kredite mehr aufnehmen
-            musste.
+            Die Haushaltslage des Landes hat sich zwischen 2012 und 2020 stetig
+            verbessert, sodass Berlin seit dem Jahr 2012 zur Finanzierung seiner
+            laufenden Ausgaben keine zusätzlichen Kredite mehr aufnehmen musste.
           </div>
         </div>
 
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12 mb-16 md:mb-28 ">
-          <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
+          <h2 className="font-bold text-xl md:text-2xl">
             Schwerpunktthemen im aktuellen Haushalt
           </h2>
           <div className="mt-6">
-            Im aktuellen doppelhaushalt lassen sich einige Themen in einen
-            besonderen Fokus setzten. So ist Berlin beispielweise bis heute
-            eines der wenigen Bundesländer in Deutschland, das die Umsetzung von
-            Gender Budgeting im Landeshaushalt explizit formuliert hat.
+            Mit dem aktuellen Doppelhaushalt 2022/23 erreicht das Land Berlin
+            einen Höchststand bei Einnahmen und Ausgaben. Besondere
+            Aufmerksamkeit liegt auf den Investitionen, die weiter anwachsen.
+            Ziel ist eine Investitionsquote von 8 Prozent. Die Berliner
+            Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der
+            letzten und laufenden Legislaturperiode. Damit wird der
+            Sanierungsstau an den Schulen weiter abgebaut, und es werden neue
+            Schulen für die wachsende Stadt errichtet.
             <br></br>
-            Weiterhin relevant ist die in Berlin steigende Investitionsquote.
-            Die aus dem laufenden Haushalt finanzierten Investitionen sollen
-            auch weiter anwachsen.
+            Außerdem trifft das Land Vorsorge für diverse Risiken, darunter die
+            steigenden Energiepreise und höheren Baukosten.
             <br></br>
-            Die Berliner Schulbauoffensive (BSO) ist das größte
-            Investitionsvorhaben der letzten und laufenden Legislaturperiode.
-            Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für
-            die wachsende Stadt neue Schulen errichtet werden.
-            <br></br>
+            Weiterhin legt es bei Aufstellung und Umsetzung ein Augenmerk auf
+            die Geschlechtergerechtigkeit und integriert Gender Budgeting in
+            seine Haushaltspolitik. Das heißt, dass insbesondere die Ausgaben
+            danach ausgewertet werden, inwieweit sie den Geschlechtern zu
+            gleichen Teilen zugutekommen.
             <br></br>
             Mehr zu diesen Themen ist auf der Webseite der Senatsverwaltung für
             Finanzen zu erfahren.
@@ -148,108 +148,159 @@ export const FaqPage: FC = () => {
             </div>
           </div>
 
-          <h2 id="FAQ" className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
+          <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12 md:mt-20">
             Fragen und Antworten
           </h2>
-          <h2 className=" text-xl mt-6 md:mt-12">
+          <h2 className=" text-xl mt-6 md:mt-12" id="Warum-Haushaltsdaten">
             Warum werden die Haushaltsdaten visualisiert?
           </h2>
           <div className="flex justify-center mt-6">
             <ReadMore>
-              Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
+              {`Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
               Data veröffentlicht, jedoch aufgrund seiner Länge und Komplexität
-              nicht für jede:r intuitiv verständlich. Da der Haushalt allerdings
-              von besonderer Relevanz für das Leben in Berlin ist, sollte er
-              möglichst transparent dargestellt und für alle Berliner:innen
-              zugänglich sein. Diese Webseite wurde ins Leben gerufen, um ein
-              möglichst niedrigschwelliges Angebot zu schaffen, sich mit den
-              Haushaltsdaten auseinanderzusetzen. Die interaktiven Diagramme in
-              ihrer Ausgangsform zeigen eine Übersicht der kompletten Ausgaben
-              und Einnahmen der Berliner Verwaltung. Durch Eingaben der
-              Nutzer:innen werden weitere Detailebenen angezeigt, wie Bezirk
-              oder Funktionen. Die Diagramme wurden erstellt, um die komplexen
-              Haushaltsdaten nutzer:innenfreundlich darzustellen.
+              nicht für jede und jeden intuitiv verständlich. Da der Haushalt
+              allerdings von besonderer Relevanz für das Leben in Berlin ist,
+              sollte er möglichst transparent dargestellt und für alle
+              Berlinerinnen und Berliner zugänglich sein. Diese Webseite wurde
+              ins Leben gerufen, um ein möglichst niedrigschwelliges Angebot zu
+              schaffen, sich mit den Haushaltsdaten auseinanderzusetzen. Vorlage
+              für die Darstellung der Daten war das Projekt „Offener Haushalt“
+              der Open Knowledge Foundation. Dabei handelte es sich um eine
+              Website, die Haushaltsdaten für Städte und Kommunen für
+              Deutschland zentral und standardisiert einsehbar gemacht hat. Das
+              Land Berlin hat in den letzten Jahren auf „Offener Haushalt“
+              zurückgegriffen, um seine Haushaltsdaten zu visualisieren und auch
+              via Einbettung auf der eigenen Berlin.de-Webseite zu präsentieren.
+              Seit 2021 kann „Offener Haushalt“ jedoch nicht mehr aktiv
+              gepflegt werden. Grund dafür ist, dass in der aktuellen Förderlandschaft
+              ein dauerhafter Betrieb gemeinwohl-orientierter Plattformen
+              schwierig ist und Strategien für die Übernahme seitens der Verwaltung bedauerlicherweise
+              fehlen.`}
             </ReadMore>
           </div>
 
+          <h2 className=" text-xl mt-6 md:mt-12">
+            Was genau zeigt die Visualisierung?
+          </h2>
           <div className="flex justify-center mt-6">
             <ReadMore>
-              Anstelle einen neuen Haushalt jedes Jahr zu verabschieden, kann
-              eine Stadt oder eine Gemeinde einen Zweijahreshaushalt oder
-              Doppelhaushalt verabschieden. Häufig entlastet dies die Verwaltung
-              und die Politik dadurch, dass nicht jedes Jahr eine große
-              Haushaltsdebatte stattfindet. Über zwei Jahre können sich
-              allerdings natürlich viele Dinge ändern, daher kann das Parlament
-              mit einem Nachtragshaushalt nachsteuern, und so Umverteilungen
-              oder Mehrausgaben beschließen. Dies war beispielsweise während der
-              Corona-Pandemie nötig, um Mehrausgaben für Pflegepersonal und
-              Unterstützung der Berliner Wirtschaft zu gewährleisten.
+              Die interaktiven Kacheldiagramme (TreeMaps) in ihrer Ausgangsform
+              zeigen eine Übersicht der kompletten Ausgaben und Einnahmen des
+              aktuellen Doppelhaushalts der Berliner Verwaltung. Die Flächen der
+              Rechtecke sind dabei proportional zur Größe der darzustellenden
+              Beträge. Über den Schieberegeler lässt sich einstellen, ob
+              Einnahmen oder Ausgaben angezeigt werden sollen - das Diagramm
+              passt sich entsprechend an. Die gezeigten Beträge gelten jeweils
+              für ein einzelnes Haushaltsjahr. Über das Dropdown-Menü kann daher
+              zwischen den Jahren gewechselt werden. Ebenfalls im Menü
+              auswählbar ist, ob Daten für gesamt Berlin, für einen einzelnen
+              Bezirk oder nur die Hauptverwaltungen angezeigt werden sollen.
+              Über das dritte Dropdown-Menü wird ausgewählt, ob die Beträge nach
+              Einzelplänen oder nach Funktionen sortiert dargestellt werden
+              sollen. Durch Klick auf eine der Flächen in der Tree Map lässt
+              sich die nächst tiefere Detailstufe anzeigen, um einzelne Bereiche
+              näher zu erkunden. Die unterste detaillierte Angabe zu
+              spezifischen Ausgaben und Einnahmen sind die sogenannten Titel.
+              Die zu den aktuell im Diagramm ausgewählten Bereichen gehörenden
+              Titel, werden unter der Tree Map als Liste angezeigt. Wird im
+              Diagramm durch Klick eine tiefere Detailebene ausgewählt, wird die
+              Liste also dementsprechend gefiltert. Aus Gründen der Performance
+              werden immer nur die 100 Titel mit den größten Beträgen angezeigt.
+              Titel, Einzelpläne und Funktionen können auch gezielt über die
+              Suchfunktion gefunden werden.
+            </ReadMore>
+          </div>
+
+          <h2
+            className=" text-xl mt-6 md:mt-12"
+            id="Einzelplaene-und-Funktionen"
+          >
+            Was sind Funktionen und was sind Einzelpläne?
+          </h2>
+          <div className="flex justify-center mt-6">
+            <ReadMore>
+              Es gibt zwei verschiedene Optionen die Zuordnung der Einnahme- und
+              Ausgabetitel im Diagramm zu sortieren: nach Einzelplänen oder nach
+              Hauptfunktionen gegliedert. Die Einzelpläne bieten eine Übersicht
+              über die Einnahmen und Ausgaben der Haupt- und Bezirksverwaltungen
+              unterteilt nach Arten und Bereich, z.B. Senatsverwaltung für
+              Inneres oder Schul- und Sportamt des Bezirks Mitte. Die
+              Hauptfunktionen stellen dagegen die Aufgaben dar, die durch die
+              jeweiligen Einnahmen oder Ausgaben erfüllt werden. Sowohl
+              Einzelpläne als auch Funktionen, lassen sich durch Klick in die
+              Tree Map in detailiertere Unterbereiche weiter untergliedern. Die
+              unterste detaillierte Angabe zu spezifischen Ausgaben und
+              Einnahmen sind die sogenannten Titel. Die zu den jeweils im
+              Diagramm ausgewählten Einzelplänen und Funktionen, bzw. deren
+              Unterbereichen, gehörenden Titel werden unter der Tree Map als
+              Liste angezeigt.
             </ReadMore>
           </div>
 
           <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
-          <div className="flex justify-center mt-6 mb-6 md:mb-20">
+          <div className="flex justify-center mt-6">
             <p>
               Alle Visualisierungen basieren auf dem öffentlich zugänglichen
-              Datensatz des Doppelhaushaltes 2022/2023, der von der
-              Senatsverwaltung für Finanzen bereitgestellt wird und auf dem{' '}
-              <a className="text-brand" href="https://daten.berlin.de">
-                Berliner Open Data Portal
-              </a>{' '}
-              veröffentlicht ist. Die{' '}
+              Datensatz des Doppelhaushaltes 2022/2023. Dieser wird von der{' '}
               <a
                 className="text-brand"
                 href="https://www.berlin.de/sen/finanzen/"
               >
-                Berliner Senatsverwaltung für Finanzen
+                Senatsverwaltung für Finanzen
               </a>{' '}
-              veröffentlicht seit rund 10 Jahren den Haushalt als Open Data, die
-              auf dem Berliner Datenportal eingesehen werden können.
+              bereitgestellt und auf dem{' '}
+              <a className="text-brand" href="https://daten.berlin.de">
+                Berliner Open Data Portal
+              </a>{' '}
+              veröffentlicht. Dort finden sich auch historische Haushaltsdaten
+              der letzten 10 Jahre.
             </p>
           </div>
 
-          {/* 
-        <h2 className="font-bold text-xl md:text-2xl mt-12 md:mt-20">
-          Was ist ein Doppel- und Nachtragshaushalt?
-        </h2>
-        <div className="flex justify-center mt-6">
-          <ReadMore>
-            Anstelle einen neuen Haushalt jedes Jahr zu verabschieden, kann eine Stadt
-            oder eine Gemeinde einen Zweijahreshaushalt oder Doppelhaushalt
-            verabschieden. Häufig entlastet dies die Verwaltung und die Politik
-            dadurch, dass nicht jedes Jahr eine große Haushaltsdebatte stattfindet.
-            Über zwei Jahre können sich allerdings natürlich viele Dinge ändern, daher
-            kann das Parlament mit einem Nachtragshaushalt nachsteuern, und so
-            Umverteilungen oder Mehrausgaben beschließen. Dies war beispielsweise
-            während der Corona-Pandemie nötig, um Mehrausgaben für Pflegepersonal und
-            Unterstützung der Berliner Wirtschaft zu gewährleisten.
-          </ReadMore>
-        </div>
-        <h2 className="font-bold text-2xl mb-6 mt-12">
-          Wie setzt sich der Berliner Haushalt zusammen?
-        </h2>
-        <div className="flex justify-center mt-6">
-          Der Haushalt setzt sich aus Einnahmen und Ausgaben zusammen. Alle
-          Einnahmen und Ausgaben sind, wie in einem herkömmlichen Budget oder einer
-          Rechnung, einem Einzelposten zugewiesen, der den Verwendungszweck
-          bestimmt. Im Haushaltsplan sind alle Senatsverwaltungen, Bezirke, sowie
-          zentrale Verfassungsorgane, wie beispielsweise das Abgeordnetenhaus.
-        </div>
-        <h2 className="font-bold text-2xl mb-6 mt-12">
-          Wer entscheidet über die Ausgaben?
-        </h2>
-        <div className="flex justify-center mt-6">
-          Das Land Berlin muss alle voraussichtlichen Einnahmen und Ausgaben eines
-          Jahres in einem Plan ausweisen. Man spricht in diesem Zusammenhang vom
-          „Öffentlichen Haushalt“. Jährlich stellt der Senat, das heißt die
-          Senatsverwaltung für Finanzen, einen Haushaltsplanentwurf mit den
-          jeweiligen Einzelhaushalten der Verwaltungen auf. Die Aufteilung auf
-          weitere Aufgaben (zum Beispiel innere Sicherheit, Wirtschaftsförderung,
-          Kultur) erfolgt im politischen Abstimmungsprozess des Abgeordnetenhauses.
-          Als Teil dieses Abstimmungsprozesses wird der Gesetzesvorschlag in
-          diversen Fachausschüssen debattiert und gegebenfalls angepasst, bevor im
-          Plenum über den Haushalt entschieden wird.
-        </div> */}
+          <h2 className=" text-xl mt-6 md:mt-12" id="Open-Source">
+            Ist die Anwendung Open Source? Wie kann sie weiterentwickelt werden?
+          </h2>
+          <div className="mt-6">
+            Nicht nur die Haushaltsdaten sind offen als Open Data verfügbar -
+            auch der{' '}
+            <a
+              className="text-brand"
+              href="https://github.com/berlin/haushaltsdaten"
+            >
+              Quellcode
+            </a>{' '}
+            <ReadMore>
+              dieser Anwendung steht frei unter MIT Lizenz zur Verfügung. Die
+              Digital-Community in Berlin und darüber hinaus ist eingeladen,
+              kollaborativ an der Entwicklung und Verbesserung der Seite
+              mitzuwirken oder Komponenten davon für eigene Arbeiten und
+              Projekte zu verwenden. Über GitHub können Issues angelegt und
+              Code-Verbesserungen oder neue Features via Pull request
+              eingereicht werden.
+            </ReadMore>
+          </div>
+
+          <h2 className=" text-xl mt-6 md:mt-12">
+            Ist die Anwendung auch auf andere Länder und Kommunen übertragbar?
+          </h2>
+          <div className="flex justify-center mt-6">
+            <ReadMore>
+              {`Diese Anwendung bzw. der Quellcode kann von anderen Kommunen und
+              Ländern verwendet werden, um ihre eigenen Haushaltsdaten zu
+              präsentieren und transparent bereitzustellen. Voraussetzung ist,
+              dass die jeweiligen Haushaltsdaten in einem maschinenlesbaren
+              Format und geeigneter Struktur vorliegen. Das ist leider nicht in
+              allen Ländern und Kommunen selbstverständlich. Die Haushaltsdaten
+              müssen auf Bundes-, Landes- und Kommunalebene zwar per Gesetz
+              veröffentlicht werden, oft passiert dies jedoch in Form von
+              PDF-Berichten. Diese PDFs können zwar von Menschen gut gelesen
+              werden, für eine weitere Verarbeitung, wie für die Erstellung von
+              Diagrammen, sind sie aber nicht geeignet. Für die Berliner Daten
+              und diese Anwendung nutzen wir das von der Open Knowledge
+              Foundation im Projekt „Offener Haushalt“ entwickelte
+              Datenschema.`}
+            </ReadMore>
+          </div>
         </div>
       </div>
     </div>
