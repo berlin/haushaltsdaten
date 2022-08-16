@@ -85,14 +85,14 @@ export const Search: FC = () => {
             bereichs_bezeichnung: row['bereichs_bezeichnung'],
             einzelplan_bezeichnung: row['einzelplan_bezeichnung'],
             kapitel_bezeichnung: row['kapitel_bezeichnung'],
-            hauptfunktions_bezeichnung: row['hauptfunktions_bezeichnung'],
-            oberfunktions_bezeichnung: row['oberfunktions_bezeichnung'],
-            funktions_bezeichnung: row['funktions_bezeichnung'],
             hauptgruppen_bezeichnung: row['hauptgruppen_bezeichnung'],
             obergruppen_bezeichnung: row['obergruppen_bezeichnung'],
             gruppen_bezeichnung: row['gruppen_bezeichnung'],
             titel: row['titel'],
             id: row['id'],
+            hauptKey: row['hauptKey'],
+            oberKey: row['oberKey'],
+            funktionKey: row['funktionKey'],
           }
         }
       )

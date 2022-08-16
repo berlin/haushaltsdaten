@@ -16,9 +16,9 @@ export const createBaseTree = (
   rowsList: HaushaltsdatenRowType[]
 ): HauptAccType => {
   return rowsList.reduce((acc, current) => {
-    const hauptKey = current['hauptfunktions_bezeichnung']
-    const oberKey = current['oberfunktions_bezeichnung']
-    const funktionKey = current['funktions_bezeichnung']
+    const hauptKey = current['hauptKey']
+    const oberKey = current['oberKey']
+    const funktionKey = current['funktionKey']
 
     const hauptAcc = acc[hauptKey] || {}
     const oberAcc = hauptAcc[oberKey] || {}

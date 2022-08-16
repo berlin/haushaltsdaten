@@ -10,6 +10,7 @@ interface useListDataParamsType {
   district?: DistrictLabel
   type: GetRowsByDistrictAndTypeParamsType['expenseType']
   year: number
+  modus: string
   topicColumn?: TopicColumnName
   topicValue?: string
   initialData?: HaushaltsdatenRowType[]
@@ -25,6 +26,7 @@ export const useListData = ({
   district,
   type,
   year,
+  modus,
   topicColumn,
   topicValue,
   initialData,
@@ -41,6 +43,7 @@ export const useListData = ({
         district: district,
         expenseType: type,
         year: year,
+        modus: modus,
         topicColumn: topicColumn || undefined,
         topicValue: topicValue,
       }),
