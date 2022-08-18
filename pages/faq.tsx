@@ -232,20 +232,26 @@ export const FaqPage: FC = () => {
             anchorClass={'text-brand font-medium'}
             truncatedEndingComponent={'... '}
           >
-            Alle Visualisierungen basieren auf dem öffentlich zugänglichen
-            Datensatz des Doppelhaushaltes 2022/2023. Dieser wird von der{' '}
+            Alle Visualisierungen basieren auf dem unter offener Lizenz
+            verfügbarem Datensatz des Doppelhaushaltes 2022/2023. Dieser wird
+            von der Senatsverwaltung für Finanzen (
             <a
               className="text-brand"
               href="https://www.berlin.de/sen/finanzen/"
             >
-              Senatsverwaltung für Finanzen
-            </a>{' '}
-            bereitgestellt und auf dem{' '}
+              SenFIN
+            </a>
+            ) bereitgestellt und auf dem Berliner{' '}
             <a className="text-brand" href="https://daten.berlin.de">
-              Berliner Open Data Portal
+              Datenportal
             </a>{' '}
             veröffentlicht. Dort finden sich auch historische Haushaltsdaten der
-            letzten 10 Jahre.
+            letzten 10 Jahre. Mehr zum Thema offene Daten der Berliner
+            Verwaltung ist auf der Webseite der{' '}
+            <a className="text-brand" href="https://odis-berlin.de">
+              Open Data Informationsstelle
+            </a>{' '}
+            zu finden.
           </ShowMoreText>
           <h2 className=" text-xl mt-6 md:mt-12" id="Open-Source">
             Ist die Anwendung Open Source? Wie kann sie weiterentwickelt werden?
@@ -259,20 +265,19 @@ export const FaqPage: FC = () => {
             truncatedEndingComponent={'... '}
           >
             Nicht nur die Haushaltsdaten sind offen als Open Data verfügbar -
-            auch der{' '}
+            auch der Quellcode dieser Anwendung steht frei unter MIT Lizenz zur
+            Verfügung. Die Digital-Community in Berlin und darüber hinaus ist
+            eingeladen, kollaborativ an der Entwicklung und Verbesserung der
+            Seite mitzuwirken oder Komponenten davon für eigene Arbeiten und
+            Projekte zu verwenden. Über{' '}
             <a
               className="text-brand"
               href="https://github.com/berlin/haushaltsdaten"
             >
-              Quellcode
+              GitHub
             </a>{' '}
-            dieser Anwendung steht frei unter MIT Lizenz zur Verfügung. Die
-            Digital-Community in Berlin und darüber hinaus ist eingeladen,
-            kollaborativ an der Entwicklung und Verbesserung der Seite
-            mitzuwirken oder Komponenten davon für eigene Arbeiten und Projekte
-            zu verwenden. Über GitHub können Issues angelegt und
-            Code-Verbesserungen oder neue Features via Pull request eingereicht
-            werden.
+            können Issues angelegt und Code-Verbesserungen oder neue Features
+            via Pull Request eingereicht werden.
           </ShowMoreText>
           <h2 className="text-xl mt-6 md:mt-12">
             Ist die Anwendung auch auf andere Länder und Kommunen übertragbar?
