@@ -124,12 +124,13 @@ export const FaqPage: FC = () => {
             Warum werden die Haushaltsdaten visualisiert?
           </h2>
           <ShowMoreText
-            lines={4}
+            lines={3}
             more="mehr anzeigen"
             less="weniger anzeigen"
             className={'mt-6'}
             anchorClass={'text-brand font-medium'}
             truncatedEndingComponent={'... '}
+            width={0}
           >
             Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
             Data veröffentlicht, jedoch aufgrund seiner Länge und Komplexität
@@ -163,36 +164,40 @@ export const FaqPage: FC = () => {
             Was genau zeigt die Visualisierung?
           </h2>
           <ShowMoreText
-            lines={4}
+            lines={3}
             more="mehr anzeigen"
             less="weniger anzeigen"
             className={'mt-6'}
             anchorClass={'text-brand font-medium'}
             truncatedEndingComponent={'... '}
+            width={0}
           >
-            Die interaktiven Kacheldiagramme (Tree Maps) in ihrer Ausgangsform
-            zeigen eine Übersicht der kompletten Ausgaben und Einnahmen des
-            aktuellen Doppelhaushalts der Berliner Verwaltung. Die Flächen der
-            Rechtecke sind dabei proportional zur Größe der darzustellenden
-            Beträge. Über den Schieberegeler lässt sich einstellen, ob Einnahmen
-            oder Ausgaben angezeigt werden sollen - das Diagramm passt sich
-            entsprechend an. Die gezeigten Beträge gelten jeweils für ein
-            einzelnes Haushaltsjahr. Über das Dropdown-Menü kann daher zwischen
-            den Jahren gewechselt werden. Ebenfalls im Menü auswählbar ist, ob
-            Daten für Gesamt-Berlin, für einen einzelnen Bezirk oder nur die
-            Hauptverwaltungen angezeigt werden sollen. Über das dritte
-            Dropdown-Menü wird ausgewählt, ob die Beträge nach Einzelplänen oder
-            nach Funktionen sortiert dargestellt werden sollen. Durch Klick auf
-            eine der Flächen in der Tree Map lässt sich die nächst tiefere
-            Detailstufe anzeigen, um einzelne Bereiche näher zu erkunden. Die
-            unterste detaillierte Angabe zu spezifischen Ausgaben und Einnahmen
-            sind die sogenannten Titel. Die zu den aktuell im Diagramm
-            ausgewählten Bereichen gehörenden Titel, werden unter der Tree Map
-            als Liste angezeigt. Wird im Diagramm durch Klick eine tiefere
-            Detailebene ausgewählt, wird die Liste also dementsprechend
-            gefiltert. Aus Performancegründen werden immer nur die 100 Titel mit
-            den größten Beträgen angezeigt. Titel, Einzelpläne und Funktionen
-            können auch gezielt über die Suchfunktion gefunden werden.
+            <div>
+              Die interaktiven Kacheldiagramme Tree Maps in ihrer Ausgangsform
+              zeigen eine Übersicht der kompletten Ausgaben und Einnahmen des
+              aktuellen Doppelhaushalts der Berliner Verwaltung. Die Flächen der
+              Rechtecke sind dabei proportional zur Größe der darzustellenden
+              Beträge. Über den Schieberegeler lässt sich einstellen, ob
+              Einnahmen oder Ausgaben angezeigt werden sollen - das Diagramm
+              passt sich entsprechend an. Die gezeigten Beträge gelten jeweils
+              für ein einzelnes Haushaltsjahr. Über das Dropdown-Menü kann daher
+              zwischen den Jahren gewechselt werden. Ebenfalls im Menü
+              auswählbar ist, ob Daten für Gesamt-Berlin, für einen einzelnen
+              Bezirk oder nur die Hauptverwaltungen angezeigt werden sollen.
+              Über das dritte Dropdown-Menü wird ausgewählt, ob die Beträge nach
+              Einzelplänen oder nach Funktionen sortiert dargestellt werden
+              sollen. Durch Klick auf eine der Flächen in der Tree Map lässt
+              sich die nächst tiefere Detailstufe anzeigen, um einzelne Bereiche
+              näher zu erkunden. Die unterste detaillierte Angabe zu
+              spezifischen Ausgaben und Einnahmen sind die sogenannten Titel.
+              Die zu den aktuell im Diagramm ausgewählten Bereichen gehörenden
+              Titel, werden unter der Tree Map als Liste angezeigt. Wird im
+              Diagramm durch Klick eine tiefere Detailebene ausgewählt, wird die
+              Liste also dementsprechend gefiltert. Aus Performancegründen
+              werden immer nur die 100 Titel mit den größten Beträgen angezeigt.
+              Titel, Einzelpläne und Funktionen können auch gezielt über die
+              Suchfunktion gefunden werden.
+            </div>
           </ShowMoreText>
           <h2
             className=" text-xl mt-6 md:mt-12"
@@ -201,12 +206,13 @@ export const FaqPage: FC = () => {
             Was sind Funktionen und was sind Einzelpläne?
           </h2>
           <ShowMoreText
-            lines={4}
+            lines={3}
             more="mehr anzeigen"
             less="weniger anzeigen"
             className={'mt-6'}
             anchorClass={'text-brand font-medium'}
             truncatedEndingComponent={'... '}
+            width={0}
           >
             Es gibt zwei verschiedene Optionen die Zuordnung der Einnahme- und
             Ausgabetitel im Diagramm zu sortieren: nach Einzelplänen oder nach
@@ -225,12 +231,13 @@ export const FaqPage: FC = () => {
           </ShowMoreText>
           <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
           <ShowMoreText
-            lines={4}
+            lines={3}
             more="mehr anzeigen"
             less="weniger anzeigen"
             className={'mt-6'}
             anchorClass={'text-brand font-medium'}
             truncatedEndingComponent={'... '}
+            width={0}
           >
             Alle Visualisierungen basieren auf dem unter offener Lizenz
             verfügbarem Datensatz des Doppelhaushaltes 2022/2023. Dieser wird
@@ -257,12 +264,13 @@ export const FaqPage: FC = () => {
             Ist die Anwendung Open Source? Wie kann sie weiterentwickelt werden?
           </h2>
           <ShowMoreText
-            lines={4}
+            lines={3}
             more="mehr anzeigen"
             less="weniger anzeigen"
             className={'mt-6'}
             anchorClass={'text-brand font-medium'}
             truncatedEndingComponent={'... '}
+            width={0}
           >
             Nicht nur die Haushaltsdaten sind offen als Open Data verfügbar -
             auch der Quellcode dieser Anwendung steht frei unter MIT Lizenz zur
@@ -283,12 +291,13 @@ export const FaqPage: FC = () => {
             Ist die Anwendung auch auf andere Länder und Kommunen übertragbar?
           </h2>
           <ShowMoreText
-            lines={4}
+            lines={3}
             more="mehr anzeigen"
             less="weniger anzeigen"
             className={'mt-6'}
             anchorClass={'text-brand font-medium'}
             truncatedEndingComponent={'... '}
+            width={0}
           >
             Die Anwendung bzw. der Quellcode kann von anderen Kommunen und
             Ländern verwendet werden, um ihre eigenen Haushaltsdaten zu
