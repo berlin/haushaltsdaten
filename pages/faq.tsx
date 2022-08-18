@@ -166,14 +166,14 @@ export const FaqPage: FC = () => {
               schaffen, sich mit den Haushaltsdaten auseinanderzusetzen. Vorlage
               für die Darstellung der Daten war das Projekt „Offener Haushalt“
               der Open Knowledge Foundation. Dabei handelte es sich um eine
-              Website, die Haushaltsdaten für Städte und Kommunen für
+              Webseite, die Haushaltsdaten für Städte und Kommunen für
               Deutschland zentral und standardisiert einsehbar gemacht hat. Das
               Land Berlin hat in den letzten Jahren auf „Offener Haushalt“
               zurückgegriffen, um seine Haushaltsdaten zu visualisieren und auch
               via Einbettung auf der eigenen Berlin.de-Webseite zu präsentieren.
               Seit 2021 kann „Offener Haushalt“ jedoch nicht mehr aktiv
               gepflegt werden. Grund dafür ist, dass in der aktuellen Förderlandschaft
-              ein dauerhafter Betrieb gemeinwohl-orientierter Plattformen
+              ein dauerhafter Betrieb gemeinwohlorientierter Plattformen
               schwierig ist und Strategien für die Übernahme seitens der Verwaltung bedauerlicherweise
               fehlen.`}
             </ReadMore>
@@ -184,7 +184,7 @@ export const FaqPage: FC = () => {
           </h2>
           <div className="flex justify-center mt-6">
             <ReadMore>
-              Die interaktiven Kacheldiagramme (TreeMaps) in ihrer Ausgangsform
+              Die interaktiven Kacheldiagramme (Tree Maps) in ihrer Ausgangsform
               zeigen eine Übersicht der kompletten Ausgaben und Einnahmen des
               aktuellen Doppelhaushalts der Berliner Verwaltung. Die Flächen der
               Rechtecke sind dabei proportional zur Größe der darzustellenden
@@ -193,7 +193,7 @@ export const FaqPage: FC = () => {
               passt sich entsprechend an. Die gezeigten Beträge gelten jeweils
               für ein einzelnes Haushaltsjahr. Über das Dropdown-Menü kann daher
               zwischen den Jahren gewechselt werden. Ebenfalls im Menü
-              auswählbar ist, ob Daten für gesamt Berlin, für einen einzelnen
+              auswählbar ist, ob Daten für Gesamt-Berlin, für einen einzelnen
               Bezirk oder nur die Hauptverwaltungen angezeigt werden sollen.
               Über das dritte Dropdown-Menü wird ausgewählt, ob die Beträge nach
               Einzelplänen oder nach Funktionen sortiert dargestellt werden
@@ -204,7 +204,7 @@ export const FaqPage: FC = () => {
               Die zu den aktuell im Diagramm ausgewählten Bereichen gehörenden
               Titel, werden unter der Tree Map als Liste angezeigt. Wird im
               Diagramm durch Klick eine tiefere Detailebene ausgewählt, wird die
-              Liste also dementsprechend gefiltert. Aus Gründen der Performance
+              Liste also dementsprechend gefiltert. Aus Performancegründen
               werden immer nur die 100 Titel mit den größten Beträgen angezeigt.
               Titel, Einzelpläne und Funktionen können auch gezielt über die
               Suchfunktion gefunden werden.
@@ -227,8 +227,8 @@ export const FaqPage: FC = () => {
               Inneres oder Schul- und Sportamt des Bezirks Mitte. Die
               Hauptfunktionen stellen dagegen die Aufgaben dar, die durch die
               jeweiligen Einnahmen oder Ausgaben erfüllt werden. Sowohl
-              Einzelpläne als auch Funktionen, lassen sich durch Klick in die
-              Tree Map in detailiertere Unterbereiche weiter untergliedern. Die
+              Einzelpläne als auch Funktionen lassen sich durch Klick in die
+              Tree Map in detailliertere Unterbereiche weiter untergliedern. Die
               unterste detaillierte Angabe zu spezifischen Ausgaben und
               Einnahmen sind die sogenannten Titel. Die zu den jeweils im
               Diagramm ausgewählten Einzelplänen und Funktionen, bzw. deren
@@ -285,7 +285,7 @@ export const FaqPage: FC = () => {
           </h2>
           <div className="flex justify-center mt-6">
             <ReadMore>
-              {`Diese Anwendung bzw. der Quellcode kann von anderen Kommunen und
+              {`Die Anwendung bzw. der Quellcode kann von anderen Kommunen und
               Ländern verwendet werden, um ihre eigenen Haushaltsdaten zu
               präsentieren und transparent bereitzustellen. Voraussetzung ist,
               dass die jeweiligen Haushaltsdaten in einem maschinenlesbaren
