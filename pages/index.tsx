@@ -22,12 +22,12 @@ export const HomePage: FC = () => {
             <span className="flex justify-center mt-10 md:mt-20 ">
               {/* <Building className="fill-gray-400"/> */}
             </span>
-            <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold lg:text-right mb-3">
+            <h1 className="text-4xl md:text-6xl font-bold xl:text-right mb-3">
               Berliner <br></br>Haushaltsdaten
             </h1>
             <h1 className="text-2xl md:text-4xl md:text-right">2022/23</h1>
           </div>
-          <div className="flex-col italic lg:w-1/2 mt-6 md:mt-12 lg:mt-24 lg:pr-28">
+          <div className="flex-col italic xl:w-1/2 mt-6 md:mt-12 xl:mt-24 xl:pr-28">
             Pro Jahr stehen der Berliner Verwaltung über 35 Milliarden Euro zur
             Umsetzung der gesetzlichen Vorgaben und ihrer Ziele zur Verfügung.
             Aber wofür wenden Senat und Bezirke welchen Anteil ihrer Ressourcen
@@ -90,7 +90,7 @@ export const HomePage: FC = () => {
         <div className="md:flex justify-center m-auto mt-6 md:mt-12 ">
           <div className="flex-col mb-6 md:my-auto inline-block">
             <FadeInWrapper>
-              <div className="md:pr-12">
+              <div className="pr-12">
                 <ul>
                   <span className="font-bold text-xl text-brand">
                     <InternalLink href={'/visualisierung'}>
@@ -124,7 +124,7 @@ export const HomePage: FC = () => {
           den Einzelplänen. Dabei werden die Beträge für die einzelnen
           Haushaltsjahre getrennt angegeben. Mittels der Visualisierung, die
           über den Link oben erreichbar ist, können die einzelnen
-          Darstellungsformen und Jahre im Deatil erkundet werden.
+          Darstellungsformen und Jahre im Detail erkundet werden.
           <br></br>
           <br></br>
           Die detailliertesten Angabe zu spezifischen Beträgen im Haushaltsplan

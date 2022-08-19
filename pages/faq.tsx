@@ -19,15 +19,19 @@ const ReadMore: FC = ({ children }) => {
   }
 
   return (
-    <p>
-      {isReadMore ? text.slice(0, 320) : text}
+    <div className="mt-6">
+      <span
+        dangerouslySetInnerHTML={{
+          __html: isReadMore ? `${text.slice(0, 300)}` : text,
+        }}
+      ></span>
       <button
         onClick={toggleReadMore}
         className="font-medium text-brand cursor-pointer"
       >
         {isReadMore ? ' ...mehr anzeigen' : ' weniger anzeigen'}
       </button>
-    </p>
+    </div>
   )
 }
 
@@ -58,7 +62,6 @@ export const FaqPage: FC = () => {
             76,61 Milliarden Euro
           </p>
           <p className="text-gray-500 text-xs md:text-sm text-center">
-            {' '}
             stehen Berlin im aktuellen Doppelhaushalt als Gesamtausgaben zur
             Verfügung
           </p>
@@ -154,37 +157,38 @@ export const FaqPage: FC = () => {
           <h2 className=" text-xl mt-6 md:mt-12" id="Warum-Haushaltsdaten">
             Warum werden die Haushaltsdaten visualisiert?
           </h2>
-          <div className="flex justify-center mt-6">
-            <ReadMore>
-              {`Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
-              Data veröffentlicht, jedoch aufgrund seiner Länge und Komplexität
-              nicht für jede und jeden intuitiv verständlich. Da der Haushalt
-              allerdings von besonderer Relevanz für das Leben in Berlin ist,
-              sollte er möglichst transparent dargestellt und für alle
-              Berlinerinnen und Berliner zugänglich sein. Diese Webseite wurde
-              ins Leben gerufen, um ein möglichst niedrigschwelliges Angebot zu
-              schaffen, sich mit den Haushaltsdaten auseinanderzusetzen. Vorlage
-              für die Darstellung der Daten war das Projekt „Offener Haushalt“
-              der Open Knowledge Foundation. Dabei handelte es sich um eine
-              Website, die Haushaltsdaten für Städte und Kommunen für
-              Deutschland zentral und standardisiert einsehbar gemacht hat. Das
-              Land Berlin hat in den letzten Jahren auf „Offener Haushalt“
-              zurückgegriffen, um seine Haushaltsdaten zu visualisieren und auch
-              via Einbettung auf der eigenen Berlin.de-Webseite zu präsentieren.
-              Seit 2021 kann „Offener Haushalt“ jedoch nicht mehr aktiv
-              gepflegt werden. Grund dafür ist, dass in der aktuellen Förderlandschaft
-              ein dauerhafter Betrieb gemeinwohl-orientierter Plattformen
-              schwierig ist und Strategien für die Übernahme seitens der Verwaltung bedauerlicherweise
-              fehlen.`}
-            </ReadMore>
-          </div>
+          <ReadMore>
+            {`Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
+            Data veröffentlicht, jedoch aufgrund seiner Länge und Komplexität
+            nicht für jede und jeden intuitiv verständlich. Da der Haushalt
+            allerdings von besonderer Relevanz für das Leben in Berlin ist,
+            sollte er möglichst transparent dargestellt und für alle
+            Berlinerinnen und Berliner zugänglich sein. Diese Webseite wurde ins
+            Leben gerufen, um ein möglichst niedrigschwelliges Angebot zu
+            schaffen, sich mit den Haushaltsdaten auseinanderzusetzen.
+            <br><br>Vorlage für die Darstellung der Daten war das Projekt 
+            <a class="text-brand" href="https://offenerhaushalt.de">
+              "Offener Haushalt"
+            </a> 
+            der 
+            <a class="text-brand" href="https://okfn.de">
+              Open Knowledge Foundation</a>. Dabei handelte es sich um eine Webseite, die Haushaltsdaten für
+            Städte und Kommunen für Deutschland zentral und standardisiert
+            einsehbar gemacht hat. Das Land Berlin hat in den letzten Jahren auf
+            „Offener Haushalt“ zurückgegriffen, um seine Haushaltsdaten zu
+            visualisieren und auch via Einbettung auf der eigenen
+            Berlin.de-Webseite zu präsentieren. Seit 2021 kann „Offener
+            Haushalt“ jedoch nicht mehr aktiv gepflegt werden. Grund dafür ist,
+            dass in der aktuellen Förderlandschaft ein dauerhafter Betrieb
+            gemeinwohlorientierter Plattformen schwierig ist und Strategien für
+            die Übernahme seitens der Verwaltung bedauerlicherweise fehlen.`}
+          </ReadMore>
 
           <h2 className=" text-xl mt-6 md:mt-12">
             Was genau zeigt die Visualisierung?
           </h2>
-          <div className="flex justify-center mt-6">
-            <ReadMore>
-              Die interaktiven Kacheldiagramme (TreeMaps) in ihrer Ausgangsform
+          <ReadMore>
+            {`Die interaktiven Kacheldiagramme (Tree Maps) in ihrer Ausgangsform
               zeigen eine Übersicht der kompletten Ausgaben und Einnahmen des
               aktuellen Doppelhaushalts der Berliner Verwaltung. Die Flächen der
               Rechtecke sind dabei proportional zur Größe der darzustellenden
@@ -193,7 +197,7 @@ export const FaqPage: FC = () => {
               passt sich entsprechend an. Die gezeigten Beträge gelten jeweils
               für ein einzelnes Haushaltsjahr. Über das Dropdown-Menü kann daher
               zwischen den Jahren gewechselt werden. Ebenfalls im Menü
-              auswählbar ist, ob Daten für gesamt Berlin, für einen einzelnen
+              auswählbar ist, ob Daten für Gesamt-Berlin, für einen einzelnen
               Bezirk oder nur die Hauptverwaltungen angezeigt werden sollen.
               Über das dritte Dropdown-Menü wird ausgewählt, ob die Beträge nach
               Einzelplänen oder nach Funktionen sortiert dargestellt werden
@@ -204,12 +208,11 @@ export const FaqPage: FC = () => {
               Die zu den aktuell im Diagramm ausgewählten Bereichen gehörenden
               Titel, werden unter der Tree Map als Liste angezeigt. Wird im
               Diagramm durch Klick eine tiefere Detailebene ausgewählt, wird die
-              Liste also dementsprechend gefiltert. Aus Gründen der Performance
+              Liste also dementsprechend gefiltert. Aus Performancegründen
               werden immer nur die 100 Titel mit den größten Beträgen angezeigt.
               Titel, Einzelpläne und Funktionen können auch gezielt über die
-              Suchfunktion gefunden werden.
-            </ReadMore>
-          </div>
+              Suchfunktion gefunden werden.`}
+          </ReadMore>
 
           <h2
             className=" text-xl mt-6 md:mt-12"
@@ -217,90 +220,92 @@ export const FaqPage: FC = () => {
           >
             Was sind Funktionen und was sind Einzelpläne?
           </h2>
-          <div className="flex justify-center mt-6">
-            <ReadMore>
-              Es gibt zwei verschiedene Optionen die Zuordnung der Einnahme- und
-              Ausgabetitel im Diagramm zu sortieren: nach Einzelplänen oder nach
-              Hauptfunktionen gegliedert. Die Einzelpläne bieten eine Übersicht
-              über die Einnahmen und Ausgaben der Haupt- und Bezirksverwaltungen
-              unterteilt nach Arten und Bereich, z.B. Senatsverwaltung für
-              Inneres oder Schul- und Sportamt des Bezirks Mitte. Die
-              Hauptfunktionen stellen dagegen die Aufgaben dar, die durch die
-              jeweiligen Einnahmen oder Ausgaben erfüllt werden. Sowohl
-              Einzelpläne als auch Funktionen, lassen sich durch Klick in die
-              Tree Map in detailiertere Unterbereiche weiter untergliedern. Die
-              unterste detaillierte Angabe zu spezifischen Ausgaben und
-              Einnahmen sind die sogenannten Titel. Die zu den jeweils im
-              Diagramm ausgewählten Einzelplänen und Funktionen, bzw. deren
-              Unterbereichen, gehörenden Titel werden unter der Tree Map als
-              Liste angezeigt.
-            </ReadMore>
-          </div>
+          <ReadMore>
+            {`Es gibt zwei verschiedene Optionen die Zuordnung der Einnahme- und
+            Ausgabetitel im Diagramm zu sortieren: nach Einzelplänen oder nach
+            Hauptfunktionen gegliedert. Die Einzelpläne bieten eine Übersicht
+            über die Einnahmen und Ausgaben der Haupt- und Bezirksverwaltungen
+            unterteilt nach Arten und Bereich, z.B. Senatsverwaltung für Inneres
+            oder Schul- und Sportamt des Bezirks Mitte. Die Hauptfunktionen
+            stellen dagegen die Aufgaben dar, die durch die jeweiligen Einnahmen
+            oder Ausgaben erfüllt werden. Sowohl Einzelpläne als auch Funktionen
+            lassen sich durch Klick in die Tree Map in detailliertere
+            Unterbereiche weiter untergliedern. Die unterste detaillierte Angabe
+            zu spezifischen Ausgaben und Einnahmen sind die sogenannten Titel.
+            Die zu den jeweils im Diagramm ausgewählten Einzelplänen und
+            Funktionen, bzw. deren Unterbereichen, gehörenden Titel werden unter
+            der Tree Map als Liste angezeigt.`}
+          </ReadMore>
 
           <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
-          <div className="flex justify-center mt-6">
-            <p>
-              Alle Visualisierungen basieren auf dem öffentlich zugänglichen
-              Datensatz des Doppelhaushaltes 2022/2023. Dieser wird von der{' '}
-              <a
-                className="text-brand"
-                href="https://www.berlin.de/sen/finanzen/"
-              >
-                Senatsverwaltung für Finanzen
-              </a>{' '}
-              bereitgestellt und auf dem{' '}
-              <a className="text-brand" href="https://daten.berlin.de">
-                Berliner Open Data Portal
-              </a>{' '}
-              veröffentlicht. Dort finden sich auch historische Haushaltsdaten
-              der letzten 10 Jahre.
-            </p>
-          </div>
+          <ReadMore>
+            {`Alle dieser Anwendung zugrundeliegenden Daten stammen aus dem Datensatz
+             zum "Doppelhaushalt 2022/2023" und sind als Open Data unter offener Lizenz verfügbar.
+             Sie können frei weiterverwendet und weiterverarbeitet werden.
+            Der Datensatz wird
+            von der 
+            <a
+              class="text-brand"
+              href="https://www.berlin.de/sen/finanzen/"
+            >
+            Senatsverwaltung für Finanzen
+            </a>
+            bereitgestellt und auf dem Berliner 
+            <a class="text-brand" href="https://daten.berlin.de">
+              Datenportal
+            </a> 
+            veröffentlicht. Dort finden sich auch historische Haushaltsdaten der
+            letzten 10 Jahre. Mehr zum Thema offene Daten der Berliner
+            Verwaltung ist auf der Webseite der 
+            <a class="text-brand" href="https://odis-berlin.de">
+              Open Data Informationsstelle
+            </a> 
+            zu finden.`}
+          </ReadMore>
 
           <h2 className=" text-xl mt-6 md:mt-12" id="Open-Source">
             Ist die Anwendung Open Source? Wie kann sie weiterentwickelt werden?
           </h2>
-          <div className="mt-6">
-            Nicht nur die Haushaltsdaten sind offen als Open Data verfügbar -
-            auch der{' '}
+          <ReadMore>
+            {`Nicht nur die Haushaltsdaten sind offen als Open Data verfügbar -
+            auch der Quellcode dieser Anwendung steht frei unter MIT-Lizenz zur
+            Verfügung. Die Digital-Community in Berlin und darüber hinaus ist
+            eingeladen, kollaborativ an der Entwicklung und Verbesserung der
+            Seite mitzuwirken oder Komponenten davon für eigene Arbeiten und
+            Projekte zu verwenden. Über 
             <a
-              className="text-brand"
+              class="text-brand"
               href="https://github.com/berlin/haushaltsdaten"
             >
-              Quellcode
-            </a>{' '}
-            <ReadMore>
-              dieser Anwendung steht frei unter MIT Lizenz zur Verfügung. Die
-              Digital-Community in Berlin und darüber hinaus ist eingeladen,
-              kollaborativ an der Entwicklung und Verbesserung der Seite
-              mitzuwirken oder Komponenten davon für eigene Arbeiten und
-              Projekte zu verwenden. Über GitHub können Issues angelegt und
-              Code-Verbesserungen oder neue Features via Pull request
-              eingereicht werden.
-            </ReadMore>
-          </div>
+              GitHub
+            </a> 
+            können Issues angelegt und Code-Verbesserungen oder neue Features
+            via Pull Request eingereicht werden.`}
+          </ReadMore>
 
           <h2 className=" text-xl mt-6 md:mt-12">
             Ist die Anwendung auch auf andere Länder und Kommunen übertragbar?
           </h2>
-          <div className="flex justify-center mt-6">
-            <ReadMore>
-              {`Diese Anwendung bzw. der Quellcode kann von anderen Kommunen und
-              Ländern verwendet werden, um ihre eigenen Haushaltsdaten zu
-              präsentieren und transparent bereitzustellen. Voraussetzung ist,
-              dass die jeweiligen Haushaltsdaten in einem maschinenlesbaren
-              Format und geeigneter Struktur vorliegen. Das ist leider nicht in
-              allen Ländern und Kommunen selbstverständlich. Die Haushaltsdaten
-              müssen auf Bundes-, Landes- und Kommunalebene zwar per Gesetz
-              veröffentlicht werden, oft passiert dies jedoch in Form von
-              PDF-Berichten. Diese PDFs können zwar von Menschen gut gelesen
-              werden, für eine weitere Verarbeitung, wie für die Erstellung von
-              Diagrammen, sind sie aber nicht geeignet. Für die Berliner Daten
-              und diese Anwendung nutzen wir das von der Open Knowledge
-              Foundation im Projekt „Offener Haushalt“ entwickelte
-              Datenschema.`}
-            </ReadMore>
-          </div>
+          <ReadMore>
+            {`Die Anwendung bzw. der Quellcode kann von anderen Kommunen und
+            Ländern verwendet werden, um ihre eigenen Haushaltsdaten zu
+            präsentieren und transparent bereitzustellen. Voraussetzung ist,
+            dass die jeweiligen Haushaltsdaten in einem maschinenlesbaren Format
+            und geeigneter Struktur vorliegen. Das ist leider nicht in allen
+            Ländern und Kommunen selbstverständlich. Die Haushaltsdaten müssen
+            auf Bundes-, Landes- und Kommunalebene zwar per Gesetz
+            veröffentlicht werden, oft passiert dies jedoch in Form von
+            PDF-Berichten. Diese PDFs können zwar von Menschen gut gelesen
+            werden, für eine weitere Verarbeitung, wie für die Erstellung von
+            Diagrammen, sind sie aber nicht geeignet. Für die Berliner Daten und
+            diese Anwendung nutzen wir ein 
+            <a
+              class="text-brand"
+              href="https://offenerhaushalt.de/page/datenstandard.html"
+            >
+              Datenschema</a>, das von der Open Knowledge Foundation im Projekt „Offener
+            Haushalt“ entwickelt wurde.`}
+          </ReadMore>
         </div>
       </div>
     </div>
