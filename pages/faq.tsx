@@ -20,11 +20,11 @@ const ReadMore: FC = ({ children }) => {
 
   return (
     <div className="mt-6">
-      <p
+      <span
         dangerouslySetInnerHTML={{
-          __html: isReadMore ? `${text.slice(0, 300)}...` : text,
+          __html: isReadMore ? `${text.slice(0, 300)}` : text,
         }}
-      ></p>
+      ></span>
       <button
         onClick={toggleReadMore}
         className="font-medium text-brand cursor-pointer"
@@ -168,7 +168,7 @@ export const FaqPage: FC = () => {
             schaffen, sich mit den Haushaltsdaten auseinanderzusetzen.
             <br><br>Vorlage für die Darstellung der Daten war das Projekt 
             <a class="text-brand" href="https://offenerhaushalt.de">
-              Offener Haushalt
+              "Offener Haushalt"
             </a> 
             der 
             <a class="text-brand" href="https://okfn.de">
@@ -303,8 +303,7 @@ export const FaqPage: FC = () => {
               class="text-brand"
               href="https://offenerhaushalt.de/page/datenstandard.html"
             >
-              Datenschema
-            </a>, das von der Open Knowledge Foundation im Projekt „Offener
+              Datenschema</a>, das von der Open Knowledge Foundation im Projekt „Offener
             Haushalt“ entwickelt wurde.`}
           </ReadMore>
         </div>
