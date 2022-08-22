@@ -245,7 +245,7 @@ export const TreeMap: FC<TreeMapType> = ({
       d3.select('#expenditures-treemap').selectAll('g').remove()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hierarchy])
+  }, [hierarchy, width, height])
 
   return (
     <svg
