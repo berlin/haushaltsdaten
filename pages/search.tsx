@@ -8,6 +8,9 @@ import { formatCurrency } from '@lib/utils/numberUtil'
 interface FilteredSearchResultsType extends HaushaltsdatenRowType {
   jahr: string
   titel: string
+  oberfunktions_bezeichnung: string
+  hauptfunktions_bezeichnung: string
+  funktions_bezeichnung: string
   obergruppen_bezeichnung: string
   hauptgruppen_bezeichnung: string
   gruppen_bezeichnung: string
@@ -85,6 +88,9 @@ export const Search: FC = () => {
             bereichs_bezeichnung: row['bereichs_bezeichnung'],
             einzelplan_bezeichnung: row['einzelplan_bezeichnung'],
             kapitel_bezeichnung: row['kapitel_bezeichnung'],
+            hauptfunktions_bezeichnung: row['hauptfunktions_bezeichnung'],
+            oberfunktions_bezeichnung: row['oberfunktions_bezeichnung'],
+            funktions_bezeichnung: row['funktions_bezeichnung'],
             hauptgruppen_bezeichnung: row['hauptgruppen_bezeichnung'],
             obergruppen_bezeichnung: row['obergruppen_bezeichnung'],
             gruppen_bezeichnung: row['gruppen_bezeichnung'],
