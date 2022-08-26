@@ -90,9 +90,6 @@ export const Search: FC = () => {
             gruppen_bezeichnung: row['gruppen_bezeichnung'],
             titel: row['titel'],
             id: row['id'],
-            hauptKey: row['hauptKey'],
-            oberKey: row['oberKey'],
-            funktionKey: row['funktionKey'],
           }
         }
       )
@@ -117,11 +114,11 @@ export const Search: FC = () => {
           <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
             <div className="flex-col mt-6">
               Mithilfe dieser Funktion kann der gesamte Haushalt durchsucht
-              werden. Es kann sowohl nach Bereichen, Einzelplänen, Kapiteln
-              (Zuständigkeiten), Funktionen und Gruppen (Art der Ausgaben und
-              Einnahmen), als auch stichwortartig nach den einzelnen
-              Ausgabetiteln gesucht werden. Auch Kombinationen und Suchen nach
-              numerischen Bezeichnungen von Ausgabetiteln sind möglich.
+              werden. Es kann sowohl nach Bereichen, Kapiteln (Zuständigkeiten),
+              Funktionen und Gruppen (Art der Ausgaben und Einnahmen), als auch
+              stichwortartig nach den einzelnen Ausgabetiteln gesucht werden.
+              Auch Kombinationen und Suchen nach numerischen Bezeichnungen von
+              Ausgabetiteln sind möglich.
               <br></br>
               <br></br>
               Ein Beispiel für eine allgemeine Suche nach Kapiteln wäre
