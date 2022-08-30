@@ -1,4 +1,4 @@
-export const VALID_MODUS = ['Funktionen', 'Einzelpläne']
+export const VALID_MODUS = ['Funktionen', 'Bereiche']
 
 export const DEFAULT_MODUS = 'Funktionen'
 

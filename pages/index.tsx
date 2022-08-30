@@ -120,11 +120,11 @@ export const HomePage: FC = () => {
 
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12">
           Im Berliner Haushaltsplan sind die Ausgaben und Einnahmen außerdem
-          spezifischen Bereichen von Hauptverwaltungen und Bezirken zugeordnet:
-          den Einzelplänen. Dabei werden die Beträge für die einzelnen
-          Haushaltsjahre getrennt angegeben. Mittels der Visualisierung, die
-          über den Link oben erreichbar ist, können die einzelnen
-          Darstellungsformen und Jahre im Detail erkundet werden.
+          spezifischen Bereichen von Hauptverwaltungen und Bezirken zugeordnet.
+          Dabei werden die Beträge für die einzelnen Haushaltsjahre getrennt
+          angegeben. Mittels der Visualisierung, die über den Link oben
+          erreichbar ist, können die einzelnen Darstellungsformen und Jahre im
+          Detail erkundet werden.
           <br></br>
           <br></br>
           Die detailliertesten Angabe zu spezifischen Beträgen im Haushaltsplan

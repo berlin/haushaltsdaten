@@ -200,17 +200,17 @@ export const FaqPage: FC = () => {
               auswählbar ist, ob Daten für Gesamt-Berlin, für einen einzelnen
               Bezirk oder nur die Hauptverwaltungen angezeigt werden sollen.
               Über das dritte Dropdown-Menü wird ausgewählt, ob die Beträge nach
-              Einzelplänen oder nach Funktionen sortiert dargestellt werden
+              Bereichen oder nach Funktionen sortiert dargestellt werden
               sollen. Durch Klick auf eine der Flächen in der Tree Map lässt
-              sich die nächst tiefere Detailstufe anzeigen, um einzelne Bereiche
+              sich die nächst tiefere Detailstufe anzeigen, um einzelne Untergruppen
               näher zu erkunden. Die unterste detaillierte Angabe zu
               spezifischen Ausgaben und Einnahmen sind die sogenannten Titel.
-              Die zu den aktuell im Diagramm ausgewählten Bereichen gehörenden
+              Die zu der aktuell im Diagramm ausgewählten Gruppe gehörenden
               Titel, werden unter der Tree Map als Liste angezeigt. Wird im
               Diagramm durch Klick eine tiefere Detailebene ausgewählt, wird die
               Liste also dementsprechend gefiltert. Aus Performancegründen
               werden immer nur die 100 Titel mit den größten Beträgen angezeigt.
-              Titel, Einzelpläne und Funktionen können auch gezielt über die
+              Titel, Bereiche und Funktionen können auch gezielt über die
               Suchfunktion gefunden werden.`}
           </ReadMore>
 
@@ -218,22 +218,22 @@ export const FaqPage: FC = () => {
             className=" text-xl mt-6 md:mt-12"
             id="Einzelplaene-und-Funktionen"
           >
-            Was sind Funktionen und was sind Einzelpläne?
+            Was sind Bereiche und Funktionen?
           </h2>
           <ReadMore>
             {`Es gibt zwei verschiedene Optionen die Zuordnung der Einnahme- und
-            Ausgabetitel im Diagramm zu sortieren: nach Einzelplänen oder nach
-            Hauptfunktionen gegliedert. Die Einzelpläne bieten eine Übersicht
+            Ausgabetitel im Diagramm zu sortieren: nach Bereichen oder nach
+            Hauptfunktionen gegliedert. Die Bereiche bieten eine Übersicht
             über die Einnahmen und Ausgaben der Haupt- und Bezirksverwaltungen
-            unterteilt nach Arten und Bereich, z.B. Senatsverwaltung für Inneres
+            unterteilt nach Arten und zuständigem Bereich, z.B. Senatsverwaltung für Inneres
             oder Schul- und Sportamt des Bezirks Mitte. Die Hauptfunktionen
             stellen dagegen die Aufgaben dar, die durch die jeweiligen Einnahmen
-            oder Ausgaben erfüllt werden. Sowohl Einzelpläne als auch Funktionen
+            oder Ausgaben erfüllt werden. Sowohl Bereiche als auch Funktionen
             lassen sich durch Klick in die Tree Map in detailliertere
-            Unterbereiche weiter untergliedern. Die unterste detaillierte Angabe
+            Untergruppen weiter untergliedern. Die unterste detaillierte Angabe
             zu spezifischen Ausgaben und Einnahmen sind die sogenannten Titel.
-            Die zu den jeweils im Diagramm ausgewählten Einzelplänen und
-            Funktionen, bzw. deren Unterbereichen, gehörenden Titel werden unter
+            Die zu den jeweils im Diagramm ausgewählten Bereichen und
+            Funktionen, bzw. deren Untergruppen, gehörenden Titel werden unter
             der Tree Map als Liste angezeigt.`}
           </ReadMore>
 

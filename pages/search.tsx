@@ -2,12 +2,19 @@ import React, { FC, useRef, useState } from 'react'
 import { supabase } from '@lib/requests/createSupabaseClient'
 import { GetStaticProps } from 'next'
 import classNames from 'classnames'
-import { HaushaltsdatenRowType } from '@lib/requests/getRowsByDistrictAndType'
 import { formatCurrency } from '@lib/utils/numberUtil'
 
-interface FilteredSearchResultsType extends HaushaltsdatenRowType {
+export interface FilteredSearchResultsType {
+  id: string
+  titel_bezeichnung: string
+  titel_art?: 'Einnahmetitel' | 'Ausgabetitel'
+  bereichs_bezeichnung: string
+  betrag: string
   jahr: string
   titel: string
+  oberfunktions_bezeichnung: string
+  hauptfunktions_bezeichnung: string
+  funktions_bezeichnung: string
   obergruppen_bezeichnung: string
   hauptgruppen_bezeichnung: string
   gruppen_bezeichnung: string
@@ -85,14 +92,14 @@ export const Search: FC = () => {
             bereichs_bezeichnung: row['bereichs_bezeichnung'],
             einzelplan_bezeichnung: row['einzelplan_bezeichnung'],
             kapitel_bezeichnung: row['kapitel_bezeichnung'],
+            hauptfunktions_bezeichnung: row['hauptfunktions_bezeichnung'],
+            oberfunktions_bezeichnung: row['oberfunktions_bezeichnung'],
+            funktions_bezeichnung: row['funktions_bezeichnung'],
             hauptgruppen_bezeichnung: row['hauptgruppen_bezeichnung'],
             obergruppen_bezeichnung: row['obergruppen_bezeichnung'],
             gruppen_bezeichnung: row['gruppen_bezeichnung'],
             titel: row['titel'],
             id: row['id'],
-            hauptKey: row['hauptKey'],
-            oberKey: row['oberKey'],
-            funktionKey: row['funktionKey'],
           }
         }
       )
@@ -117,11 +124,11 @@ export const Search: FC = () => {
           <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
             <div className="flex-col mt-6">
               Mithilfe dieser Funktion kann der gesamte Haushalt durchsucht
-              werden. Es kann sowohl nach Bereichen, Einzelplänen, Kapiteln
-              (Zuständigkeiten), Funktionen und Gruppen (Art der Ausgaben und
-              Einnahmen), als auch stichwortartig nach den einzelnen
-              Ausgabetiteln gesucht werden. Auch Kombinationen und Suchen nach
-              numerischen Bezeichnungen von Ausgabetiteln sind möglich.
+              werden. Es kann sowohl nach Bereichen, Kapiteln (Zuständigkeiten),
+              Funktionen und Gruppen (Art der Ausgaben und Einnahmen), als auch
+              stichwortartig nach den einzelnen Ausgabetiteln gesucht werden.
+              Auch Kombinationen und Suchen nach numerischen Bezeichnungen von
+              Ausgabetiteln sind möglich.
               <br></br>
               <br></br>
               Ein Beispiel für eine allgemeine Suche nach Kapiteln wäre
