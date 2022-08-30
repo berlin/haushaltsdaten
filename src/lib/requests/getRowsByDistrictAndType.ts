@@ -3,9 +3,9 @@ import { supabase } from '@lib/requests/createSupabaseClient'
 
 export interface HaushaltsdatenRowType {
   id: string
-  hauptKey?: string
-  oberKey?: string
-  funktionKey?: string
+  hauptKey: string
+  oberKey: string
+  funktionKey: string
   titel_bezeichnung: string
   titel_art?: 'Einnahmetitel' | 'Ausgabetitel'
   bereichs_bezeichnung: string

@@ -2,10 +2,14 @@ import React, { FC, useRef, useState } from 'react'
 import { supabase } from '@lib/requests/createSupabaseClient'
 import { GetStaticProps } from 'next'
 import classNames from 'classnames'
-import { HaushaltsdatenRowType } from '@lib/requests/getRowsByDistrictAndType'
 import { formatCurrency } from '@lib/utils/numberUtil'
 
-interface FilteredSearchResultsType extends HaushaltsdatenRowType {
+export interface FilteredSearchResultsType {
+  id: string
+  titel_bezeichnung: string
+  titel_art?: 'Einnahmetitel' | 'Ausgabetitel'
+  bereichs_bezeichnung: string
+  betrag: string
   jahr: string
   titel: string
   oberfunktions_bezeichnung: string
