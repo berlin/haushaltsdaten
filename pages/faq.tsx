@@ -40,15 +40,15 @@ export const FaqPage: FC = () => {
     <div className="px-8">
       <div className="md:w-4/5 m-auto mt-12 md:mt-20">
         <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl lg:ml-28">
-          Wissenwertes zum Berliner Haushalt
+          Wissenswertes zum Berliner Haushalt
         </h1>
         <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
           <div className="flex-col mt-6">
             Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land
             Berlin muss alle voraussichtlichen Einnahmen und Ausgaben eines
-            Jahres in einem Plan ausweisen, dem „Öffentlichen Haushalt“. Für
-            jedes Jahr stellt der Senat einen Haushaltsplanentwurf mit den
-            jeweiligen Einzelhaushalten der Verwaltungen auf.
+            Jahres im sogenannten Haushaltsplan ausweisen. Für jedes Jahr stellt
+            der Senat einen Haushaltsplanentwurf mit den jeweiligen
+            Einzelhaushalten der Verwaltungen auf.
             <br></br>
             {/* <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12">
             Berliner Doppelhaushalt
