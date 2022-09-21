@@ -200,3 +200,8 @@ Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3
     </td>
   </tr>
 </table>
+
+## Special thanks
+
+This project is inspired by the website [offenerhaushalt.de](https://offenerhaushalt.de) of the [Open Knowledge Foundation](https://okfn.de). This was a website that made budget data for cities and municipalities for Germany viewable in a centralized and standardized way. In recent years, the state of Berlin has used *Offener Haushalt* to visualize its budget data and also present it via embedding on its own Berlin.de website. Since 2021, however, *Offener Haushalt* can no longer be actively maintained. The reason for this is that in the current funding situation, it is difficult to operate platforms that are oriented towards the common good on a permanent basis, and strategies for adoption on the part of the administration are unfortunately lacking.
+
