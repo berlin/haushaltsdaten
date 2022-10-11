@@ -260,7 +260,7 @@ export const Visualization: FC<{
                 disabled={visibleRows >= (listData || []).length}
               >
                 <span className="block">
-                  Weiter Ausgabetitel anzeigen
+                  Weitere Ausgabetitel anzeigen
                   <span className="font-normal text-xs block">
                     ({visibleRows}/{(listData || []).length})
                   </span>
