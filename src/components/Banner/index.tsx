@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-// import { Button } from '@components/Button'
+import { Button } from '@components/Button'
 import { Cross } from '@components/Icons'
 
 export const Banner: FC = () => {
@@ -9,20 +9,26 @@ export const Banner: FC = () => {
   }
 
   return showBanner ? (
-    <div className="bg-brand text-white flex px-4 xl:px-8 py-5 py-8">
-      <p>
-        <b>Liebe Developer, </b>
-        am 23.11.22 um 19 Uhr findet im CityLAB Berlin das nächste Developer
-        Meetup statt. Du bist herzlich willkommen, uns über die Schulter zu
-        schauen und selbst aktiv mitzumachen. Wir freuen uns auf euch!
-      </p>
-      {/* <Button href={'https://www.citylab-berlin.org'}>Tolle Seite!</Button> */}
+    <div className="bg-brand text-white sticky top-0">
       <button
         onClick={hideBanner}
-        className="font-medium text-brand cursor-pointer pr-4"
+        className="p-2 font-medium text-brand cursor-pointer absolute right-0"
       >
         <Cross color1={'white'} />
       </button>
+      <div className="px-4 xl:px-8 py-5 py-8 flex gap-4 items-end md:flex-wrap">
+        <p className="grow">
+          <b>Liebe Developer, </b>
+          am 23.11.22 um 19 Uhr findet im CityLAB Berlin das nächste Developer
+          Meetup statt.
+          <br />
+          Du bist herzlich willkommen, uns über die Schulter zu schauen und
+          selbst aktiv mitzumachen. Wir freuen uns auf euch!
+        </p>
+        <span className="shrink-0">
+          <Button href={'https://www.citylab-berlin.org'}>Mehr Erfahren</Button>
+        </span>
+      </div>
     </div>
   ) : null
 }
