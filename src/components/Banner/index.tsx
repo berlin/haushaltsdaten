@@ -4,14 +4,11 @@ import { Cross } from '@components/Icons'
 
 export const Banner: FC = () => {
   const [showBanner, setShowBanner] = useState(true)
-  const hideBanner = (): void => {
-    setShowBanner(false)
-  }
 
   return showBanner ? (
     <div className="bg-brand text-white sticky top-0">
       <button
-        onClick={hideBanner}
+        onClick={() => setShowBanner(false)}
         className="p-2 font-medium text-brand cursor-pointer absolute right-0"
       >
         <Cross color1={'white'} />
