@@ -13,7 +13,7 @@ import {
 import { TreeMapWithData } from '@components/TreeMap/withData'
 import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
 import { GetServerSideProps } from 'next'
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
 import useDimensions from 'react-cool-dimensions'
 import { TreeMapControls } from '@components/TreeMapControls'
 import classNames from 'classnames'
@@ -28,8 +28,10 @@ import { useRouter } from 'next/router'
 import { EmbeddPopup } from '@components/EmbeddPopup'
 import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
 import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
+import { Button } from '@components/Button'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
+const MAX_ROWS = 100
 
 const isValidTopicDepth = (depthToCheck: number): boolean => {
   const VALID_DEPTHS: TopicDepth[] = [1, 2, 3]
@@ -78,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
   const initialListData = data
     .sort((a, b) => parseInt(b.betrag, 10) - parseInt(a.betrag, 10))
-    .slice(0, 100)
+    .slice(0, MAX_ROWS)
 
   return {
     props: {
@@ -119,6 +121,16 @@ export const Visualization: FC<{
   const { push, pathname } = useRouter()
 
   const [topic, setTopic] = useState<TopicType>({})
+  const [visibleRows, setVisibleRows] = useState<number>(MAX_ROWS)
+  const loadMoreRows = (): void => {
+    const listDataLength = (listData || []).length
+    const rowsToAdd = 10
+    setVisibleRows(
+      visibleRows + rowsToAdd >= listDataLength
+        ? listDataLength
+        : visibleRows + rowsToAdd
+    )
+  }
 
   const {
     error,
@@ -144,6 +156,12 @@ export const Visualization: FC<{
         : undefined,
     initialData: initialListData,
   })
+
+  useEffect(() => {
+    const listDataLength = (listData || []).length
+    // show all rows if dataLength is less or equal MAX_ROWS - otherwise show MAX_ROWS
+    setVisibleRows(listDataLength <= MAX_ROWS ? listDataLength : MAX_ROWS)
+  }, [listData])
 
   return (
     <>
@@ -222,7 +240,7 @@ export const Visualization: FC<{
                     district: item.bereichs_bezeichnung,
                   }))
                   .sort((a, b) => b.amount - a.amount)
-                  .slice(0, 100)
+                  .slice(0, visibleRows)
                   .map((item) => (
                     <ListItem
                       key={item.id}
@@ -235,6 +253,20 @@ export const Visualization: FC<{
                     />
                   ))}
             </ul>
+
+            <div className="justify-center flex mt-8">
+              <Button
+                onClick={loadMoreRows}
+                disabled={visibleRows >= (listData || []).length}
+              >
+                <span className="block">
+                  Weitere Ausgabetitel anzeigen
+                  <span className="font-normal text-xs block">
+                    ({visibleRows}/{(listData || []).length})
+                  </span>
+                </span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
