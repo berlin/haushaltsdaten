@@ -13,7 +13,7 @@ export const Banner: FC = () => {
       >
         <Cross color1={'white'} />
       </button>
-      <div className="px-4 xl:px-8 py-5 py-8 flex gap-4 items-end md:flex-wrap">
+      <div className="px-4 xl:px-8 py-5 py-8 flex gap-4 items-end flex-wrap">
         <p className="grow">
           <b>Liebe Developer, </b>
           am 23.11.22 um 19 Uhr findet im CityLAB Berlin das nächste Developer
