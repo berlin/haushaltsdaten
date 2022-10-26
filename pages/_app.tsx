@@ -1,6 +1,7 @@
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { ParsedUrlQuery } from 'querystring'
 import { StrictMode, FC } from 'react'
+import { Banner } from '@components/Banner'
 import { Head } from '@components/Head'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
@@ -30,6 +31,7 @@ const App: FC<{
 
   return (
     <StrictMode>
+      <Banner />
       <Head pageTitle={pageProps.title || ''} />
       {pathname !== '/share' && <Header {...pageProps.query} />}
       <Component {...pageProps} query={parsedQuery} />

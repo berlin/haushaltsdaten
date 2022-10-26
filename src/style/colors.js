@@ -29,6 +29,7 @@ const colors = Object.assign(
       '900': '#111827',
     },
     brand: '#c41b31',
+    blue: '#324FA3',
   },
   palette
 )
