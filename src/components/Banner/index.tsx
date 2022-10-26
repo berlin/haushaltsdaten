@@ -23,7 +23,11 @@ export const Banner: FC = () => {
           selbst aktiv mitzumachen. Wir freuen uns auf euch!
         </p>
         <span className="shrink-0 self-center">
-          <Button href={'https://www.citylab-berlin.org'}>Mehr Erfahren</Button>
+          <Button
+            href={'https://citylab-berlin.org/de/events/developer-meetup-3/'}
+          >
+            Mehr Erfahren
+          </Button>
         </span>
       </div>
     </div>
