@@ -31,7 +31,7 @@ const App: FC<{
 
   return (
     <StrictMode>
-      <Banner />
+      {pathname !== '/share' && <Banner />}
       <Head pageTitle={pageProps.title || ''} />
       {pathname !== '/share' && <Header {...pageProps.query} />}
       <Component {...pageProps} query={parsedQuery} />
