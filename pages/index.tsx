@@ -23,7 +23,7 @@ export const HomePage: FC = () => {
               {/* <Building className="fill-gray-400"/> */}
             </span>
             <h1 className="text-4xl md:text-6xl font-bold xl:text-right mb-3">
-              Berliner <br></br>Haushaltsdaten
+              Berliner <br></br>Gelder
             </h1>
             <h1 className="text-2xl md:text-4xl md:text-right">2022/23</h1>
           </div>
