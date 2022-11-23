@@ -1,8 +1,9 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { supabase } from '@lib/requests/createSupabaseClient'
 import { GetStaticProps } from 'next'
 import classNames from 'classnames'
 import { formatCurrency } from '@lib/utils/numberUtil'
+import { Button } from '@components/Button'
 
 export interface FilteredSearchResultsType {
   id: string
@@ -22,7 +23,7 @@ export interface FilteredSearchResultsType {
   kapitel_bezeichnung: string
 }
 
-const MAX_RENDERED_RESULTS = 500
+const ITEMS_PER_PAGE = 100
 
 const toTitleCase = (s: string): string =>
   s.replace(/^_*(.)|_+(.)/g, (_s, c: string, d: string) =>
@@ -54,6 +55,11 @@ export const Search: FC = () => {
   )
   const [searchTerm, setSearchTerm] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [itemsShown, setItemsShown] = useState(ITEMS_PER_PAGE)
+
+  useEffect(() => {
+    setItemsShown(ITEMS_PER_PAGE)
+  }, [searchTerm])
 
   const form = useRef<HTMLFormElement>(null)
   const handleClick: (
@@ -103,11 +109,7 @@ export const Search: FC = () => {
           }
         }
       )
-      setResults(
-        mappedData.length > MAX_RENDERED_RESULTS
-          ? mappedData.slice(0, MAX_RENDERED_RESULTS)
-          : mappedData
-      )
+      setResults(mappedData)
     }
   }
 
@@ -173,18 +175,15 @@ export const Search: FC = () => {
       {!loading ? (
         <div className="flex flex-col">
           <div className="overflow-x-auto">
-            <div className="min-w-full py-2">
-              <div className="overflow-x-auto" id="results">
-                {results ? (
-                  <>
+            <div className="min-w-full pt-2 pb-16">
+              {results ? (
+                <>
+                  <div className="overflow-x-auto" id="results">
                     <div className="w-full flex justify-center mb-8">
                       <div>
                         {searchTerm ? (
                           <p>
-                            {results.length}
-                            {results.length === MAX_RENDERED_RESULTS &&
-                              '+'}{' '}
-                            Ergebnis
+                            {results.length} Ergebnis
                             {results.length !== 1 && 'se'} für den Begriff{' '}
                             <span className="font-bold">{searchTerm}</span>
                           </p>
@@ -209,7 +208,7 @@ export const Search: FC = () => {
                           })}
                         </tr>
                       }
-                      body={results.map((result) => {
+                      body={results.slice(0, itemsShown).map((result) => {
                         return (
                           <tr key={result.id}>
                             {Object.keys(result).map((k, i) => {
@@ -231,20 +230,40 @@ export const Search: FC = () => {
                         )
                       })}
                     />
-                  </>
-                ) : (
-                  <div className="w-full flex justify-center mb-24">
-                    <div className="">
-                      {searchTerm ? (
-                        <p>
-                          Keine Ergebnisse für den Begriff{' '}
-                          <span className="font-bold">{searchTerm}</span>
-                        </p>
-                      ) : null}
-                    </div>
                   </div>
-                )}
-              </div>
+                  {results.length > ITEMS_PER_PAGE && (
+                    <div className="justify-center flex mt-8">
+                      <Button
+                        onClick={() =>
+                          setItemsShown(itemsShown + ITEMS_PER_PAGE)
+                        }
+                        disabled={itemsShown >= results.length}
+                      >
+                        <span className="block">
+                          {itemsShown >= results.length
+                            ? 'Keine weitere Suchergebnisse'
+                            : 'Weitere Suchergebnisse anzeigen'}
+                          <span className="font-normal text-xs block">
+                            ({Math.min(itemsShown, results.length)}/
+                            {results.length})
+                          </span>
+                        </span>
+                      </Button>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="w-full flex justify-center mb-24">
+                  <div className="">
+                    {searchTerm ? (
+                      <p>
+                        Keine Ergebnisse für den Begriff{' '}
+                        <span className="font-bold">{searchTerm}</span>
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
