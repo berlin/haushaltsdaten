@@ -250,7 +250,7 @@ export const Search: FC = () => {
         </div>
       ) : (
         <>
-          <div className="container flex justify-center">
+          <div className="container flex justify-center pb-20 mx-auto">
             <div role="status">
               <svg
                 aria-hidden="true"
