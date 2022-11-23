@@ -103,11 +103,7 @@ export const Search: FC = () => {
           }
         }
       )
-      setResults(
-        mappedData.length > MAX_RENDERED_RESULTS
-          ? mappedData.slice(0, MAX_RENDERED_RESULTS)
-          : mappedData
-      )
+      setResults(mappedData)
     }
   }
 
@@ -181,10 +177,7 @@ export const Search: FC = () => {
                       <div>
                         {searchTerm ? (
                           <p>
-                            {results.length}
-                            {results.length === MAX_RENDERED_RESULTS &&
-                              '+'}{' '}
-                            Ergebnis
+                            {results.length} Ergebnis
                             {results.length !== 1 && 'se'} für den Begriff{' '}
                             <span className="font-bold">{searchTerm}</span>
                           </p>
@@ -209,27 +202,29 @@ export const Search: FC = () => {
                           })}
                         </tr>
                       }
-                      body={results.map((result) => {
-                        return (
-                          <tr key={result.id}>
-                            {Object.keys(result).map((k, i) => {
-                              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                              // @ts-ignore
-                              const item = result[k] as string
-                              return (
-                                <td
-                                  key={k}
-                                  className={`py-3 px-4 border-b border-gray-200 first-of-type:text-brand first-of-type:font-bold ${
-                                    i === 2 ? 'text-right' : 'text-left'
-                                  }`}
-                                >
-                                  {item}
-                                </td>
-                              )
-                            })}
-                          </tr>
-                        )
-                      })}
+                      body={results
+                        .slice(0, MAX_RENDERED_RESULTS)
+                        .map((result) => {
+                          return (
+                            <tr key={result.id}>
+                              {Object.keys(result).map((k, i) => {
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-ignore
+                                const item = result[k] as string
+                                return (
+                                  <td
+                                    key={k}
+                                    className={`py-3 px-4 border-b border-gray-200 first-of-type:text-brand first-of-type:font-bold ${
+                                      i === 2 ? 'text-right' : 'text-left'
+                                    }`}
+                                  >
+                                    {item}
+                                  </td>
+                                )
+                              })}
+                            </tr>
+                          )
+                        })}
                     />
                   </>
                 ) : (
