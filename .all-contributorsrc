@@ -1,6 +1,6 @@
 {
   "projectName": "haushaltsdaten",
-  "projectOwner": "technologiestiftung",
+  "projectOwner": "berlin",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -63,6 +63,16 @@
       "contributions": [
         "code",
         "doc"
+      ]
+    },
+    {
+      "login": "szaimen",
+      "name": "Simon L.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42591237?v=4",
+      "profile": "https://github.com/szaimen",
+      "contributions": [
+        "ideas",
+        "design"
       ]
     }
   ],
