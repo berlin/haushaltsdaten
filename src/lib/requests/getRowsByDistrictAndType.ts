@@ -63,6 +63,7 @@ export const getRowsByDistrictAndType = async ({
         .eq('jahr', year)
         .eq('titel_art', expenseType)
         .eq('bereichs_bezeichnung', district)
+        .order('id', { ascending: false })
 
       if (error) throw error
 
@@ -82,6 +83,7 @@ export const getRowsByDistrictAndType = async ({
         .eq('jahr', year)
         .eq('titel_art', expenseType)
         .eq('bereichs_bezeichnung', district)
+        .order('id', { ascending: false })
 
       if (error) throw error
 
@@ -103,6 +105,7 @@ export const getRowsByDistrictAndType = async ({
         )
         .eq('jahr', year)
         .eq('titel_art', expenseType)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsFunktionType) => {
@@ -120,6 +123,7 @@ export const getRowsByDistrictAndType = async ({
         )
         .eq('jahr', year)
         .eq('titel_art', expenseType)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsEinzelplanType) => {
