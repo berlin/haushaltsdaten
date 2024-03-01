@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { InternalLink } from '@components/InternalLink'
+import { isValidYear } from '@lib/utils/yearValidator'
 
 export type TreeMapControlsPropType = Partial<ParsedPageQueryType> & {
   onChange: (newQuery: Partial<ParsedPageQueryType>) => void
@@ -20,7 +21,14 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
   onChange,
 }) => {
   const { query } = useRouter()
-
+  let { year } = query
+  if (year === undefined) {
+    year = `${DEFAULT_YEAR}`
+  } else if (Array.isArray(year)) {
+    year = `${DEFAULT_YEAR}`
+  } else if (!isNaN(parseInt(year)) && !isValidYear(parseInt(year))) {
+    year = `${DEFAULT_YEAR}`
+  }
   const mappedQuery = mapRawQueryToState(query)
   const mappedDistricts = Object.keys(districts)
     .sort()
@@ -76,7 +84,10 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
             <Separator />
           </div>
           <ListBox
-            selected={{ id: DEFAULT_YEAR, name: DEFAULT_YEAR }}
+            selected={{
+              id: (year as string | number) ?? DEFAULT_YEAR,
+              name: (year as string | number) ?? DEFAULT_YEAR,
+            }}
             onChange={(year) =>
               onChange({
                 ...mappedQuery,
@@ -94,7 +105,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
           <div className="hidden sm:inline-flex">
             <Separator />
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <ListBox
               selected={{ id: DEFAULT_MODUS, name: DEFAULT_MODUS }}
               onChange={(modus) =>
