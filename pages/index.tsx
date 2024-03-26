@@ -25,15 +25,15 @@ export const HomePage: FC = () => {
             <h1 className="text-4xl md:text-6xl font-bold xl:text-right mb-3">
               Berliner <br></br>Haushaltsdaten
             </h1>
-            <h1 className="text-2xl md:text-4xl md:text-right">2022/23</h1>
+            <h1 className="text-2xl md:text-4xl md:text-right">2024/25</h1>
           </div>
           <div className="flex-col italic xl:w-1/2 mt-6 md:mt-12 xl:mt-24 xl:pr-28">
-            Pro Jahr stehen der Berliner Verwaltung über 35 Milliarden Euro zur
+            Pro Jahr stehen der Berliner Verwaltung rund 39 Milliarden Euro zur
             Umsetzung der gesetzlichen Vorgaben und ihrer Ziele zur Verfügung.
             Aber wofür wenden Senat und Bezirke welchen Anteil ihrer Ressourcen
             auf? Diese Webseite bietet einen Überblick über die geplanten
             Ausgaben und Einnahmen des Landes für den aktuellen Doppelhaushalt
-            2022/23. Sie wurde gemeinsam initiiert und erarbeitet mit der Open
+            2024/25. Sie wurde gemeinsam initiiert und erarbeitet mit der Open
             Data Informationsstelle und dem CityLAB Berlin – und steht als{' '}
             <span className="text-brand">
               <InternalLink href={'/faq'} query={{ hashId: 'Open-Source' }}>
@@ -127,7 +127,7 @@ export const HomePage: FC = () => {
           Detail erkundet werden.
           <br></br>
           <br></br>
-          Die detailliertesten Angabe zu spezifischen Beträgen im Haushaltsplan
+          Die detailliertesten Angaben zu spezifischen Beträgen im Haushaltsplan
           sind die sogenannten Einnahme- und Ausgabetitel. Sie können über die
           Visualisierung gefiltert werden und erscheinen dann unter der Tree
           Map. Titel und Funktionen können aber auch gezielt über die
