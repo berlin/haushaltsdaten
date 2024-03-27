@@ -13,4 +13,6 @@ export const TOTAL_EXPENSES: IGroupedData[] = [
   { label: '2021', values: [32.27] },
   { label: '2022', values: [38.71] },
   { label: '2023', values: [37.9] },
+  { label: '2024', values: [39.28] },
+  { label: '2025', values: [40.5] },
 ]
