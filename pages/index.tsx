@@ -113,7 +113,7 @@ export const HomePage: FC = () => {
               title="Beispiel-Visualisierung der Haushaltsdaten"
               width="400rem"
               height="400"
-              src="https://haushaltsdaten-staging.odis-berlin.de/share"
+              src="https://haushaltsdaten.odis-berlin.de/share"
             ></iframe>
           </div>
         </div>
