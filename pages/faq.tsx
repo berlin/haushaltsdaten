@@ -59,7 +59,7 @@ export const FaqPage: FC = () => {
           </div>
 
           <p className="text-2xl text-center mt-6 md:mt-16">
-            76,61 Milliarden Euro
+            79,8 Milliarden Euro
           </p>
           <p className="text-gray-500 text-xs md:text-sm text-center">
             stehen Berlin im aktuellen Doppelhaushalt als Gesamtausgaben zur
@@ -87,11 +87,6 @@ export const FaqPage: FC = () => {
           <div className="mt-2 flex justify-center">
             <GroupedBarChart data={TOTAL_EXPENSES} />
           </div>
-          <div className="mt-6 md:mt-16">
-            Die Haushaltslage des Landes hat sich zwischen 2012 und 2020 stetig
-            verbessert, sodass Berlin seit dem Jahr 2012 zur Finanzierung seiner
-            laufenden Ausgaben keine zusätzlichen Kredite mehr aufnehmen musste.
-          </div>
         </div>
 
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12 mb-16 md:mb-28 ">
@@ -99,23 +94,24 @@ export const FaqPage: FC = () => {
             Schwerpunktthemen im aktuellen Haushalt
           </h2>
           <div className="mt-6">
-            Mit dem aktuellen Doppelhaushalt 2022/23 erreicht das Land Berlin
+            Mit dem aktuellen Doppelhaushalt 2024/25 erreicht das Land Berlin
             einen Höchststand bei Einnahmen und Ausgaben. Besondere
-            Aufmerksamkeit liegt auf den Investitionen, die weiter anwachsen.
-            Ziel ist eine Investitionsquote von 8 Prozent. Die Berliner
+            Aufmerksamkeit liegt weiterhin auf den Investitionen. Die Berliner
             Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der
             letzten und laufenden Legislaturperiode. Damit wird der
             Sanierungsstau an den Schulen weiter abgebaut, und es werden neue
-            Schulen für die wachsende Stadt errichtet.
+            Schulen errichtet.
             <br></br>
-            Außerdem trifft das Land Vorsorge für diverse Risiken, darunter die
-            steigenden Energiepreise und höheren Baukosten.
+            Auch die Digitalisierung der Verwaltung soll weiter vorangetrieben
+            werden und ein besonderes Augenmerk liegt auf der inneren
+            Sicherheit. Gleichzeitig bleibt die Konsolidierung des
+            Landeshaushalts im Fokus
             <br></br>
-            Weiterhin legt es bei Aufstellung und Umsetzung ein Augenmerk auf
-            die Geschlechtergerechtigkeit und integriert Gender Budgeting in
-            seine Haushaltspolitik. Das heißt, dass insbesondere die Ausgaben
-            danach ausgewertet werden, inwieweit sie den Geschlechtern zu
-            gleichen Teilen zugutekommen.
+            Das Land Berlin legt zudem bei Aufstellung und Umsetzung des
+            Haushaltsplans ein Augenmerk auf die Geschlechtergerechtigkeit und
+            integriert Gender Budgeting in seine Haushaltspolitik. Das heißt,
+            dass insbesondere die Ausgaben danach ausgewertet werden, inwieweit
+            sie den Geschlechtern zu gleichen Teilen zugutekommen.
             <br></br>
             Mehr zu diesen Themen ist auf der Webseite der Senatsverwaltung für
             Finanzen zu erfahren.
@@ -124,7 +120,7 @@ export const FaqPage: FC = () => {
           <div className="mt-6">
             <div className="flex-col">
               <p className="text-brand">
-                <a href="https://www.berlin.de/sen/finanzen/haushalt/gender-budgeting/artikel.11915.php">
+                <a href="https://www.berlin.de/sen/finanzen/haushalt/gender-budgeting/artikel.1339812.php">
                   → Gender-Budgeting
                 </a>
               </p>
@@ -135,19 +131,11 @@ export const FaqPage: FC = () => {
             </div>
             <div className="flex-col">
               <p className="text-brand">
-                <a href="https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2022/pressemitteilung.1181316.php">
-                  → Entwicklung der Investitionsquote
+                <a href="https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2023/pressemitteilung.1344266.php">
+                  → Mehr Mittel für Digitalisierung und innere Sicherheit
                 </a>
               </p>
-              {/* <p>Die aus dem laufenden Haushalt finanzierten Investitionen sollen weiter anwachsen auf 2,930 Mrd. Euro im Jahr 2022 und 3,238 Mrd. Euro im Jahr 2023.</p> */}
-            </div>
-            <div className="flex-col">
-              <p className="text-brand">
-                <a href="https://www.berlin.de/sen/finanzen/haushalt/schulbauoffensive/artikel.613867.php">
-                  → Schulbauoffensive
-                </a>
-              </p>
-              {/* <p>Die Berliner Schulbauoffensive (BSO) ist das größte Investitionsvorhaben der letzten und laufenden Legislaturperiode. Damit soll der Sanierungsstau an den Schulen weiter abgebaut und für die wachsende Stadt neue Schulen errichtet werden.</p> */}
+              {/* <p></p> */}
             </div>
           </div>
 
@@ -190,11 +178,12 @@ export const FaqPage: FC = () => {
           <ReadMore>
             {`Die interaktiven Kacheldiagramme (Tree Maps) in ihrer Ausgangsform
               zeigen eine Übersicht der kompletten Ausgaben und Einnahmen des
-              aktuellen Doppelhaushalts der Berliner Verwaltung. Die Flächen der
-              Rechtecke sind dabei proportional zur Größe der darzustellenden
-              Beträge. Über den Schieberegeler lässt sich einstellen, ob
-              Einnahmen oder Ausgaben angezeigt werden sollen - das Diagramm
-              passt sich entsprechend an. Die gezeigten Beträge gelten jeweils
+              aktuellen Doppelhaushalts der Berliner Verwaltung, sowie des 
+              Doppelhaushalts 2022/2023. Die Flächen der Rechtecke sind dabei 
+              proportional zur Größe der darzustellenden Beträge. Über den 
+              Schieberegeler lässt sich einstellen, ob Einnahmen oder 
+              Ausgaben angezeigt werden sollen - das Diagramm passt sich 
+              entsprechend an. Die gezeigten Beträge gelten jeweils
               für ein einzelnes Haushaltsjahr. Über das Dropdown-Menü kann daher
               zwischen den Jahren gewechselt werden. Ebenfalls im Menü
               auswählbar ist, ob Daten für Gesamt-Berlin, für einen einzelnen
@@ -240,7 +229,7 @@ export const FaqPage: FC = () => {
           <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
           <ReadMore>
             {`Alle dieser Anwendung zugrundeliegenden Daten stammen aus dem Datensatz
-             zum "Doppelhaushalt 2022/2023" und sind als Open Data unter offener Lizenz verfügbar.
+             zum "Doppelhaushalt 2024/2025" und sind als Open Data unter offener Lizenz verfügbar.
              Sie können frei weiterverwendet und weiterverarbeitet werden.
             Der Datensatz wird
             von der 
@@ -287,7 +276,7 @@ export const FaqPage: FC = () => {
             Ist die Anwendung auch auf andere Länder und Kommunen übertragbar?
           </h2>
           <ReadMore>
-            {`Die Anwendung bzw. der Quellcode kann von anderen Kommunen und
+            {`Die Anwendung bzw. der Quellcode können von anderen Kommunen und
             Ländern verwendet werden, um ihre eigenen Haushaltsdaten zu
             präsentieren und transparent bereitzustellen. Voraussetzung ist,
             dass die jeweiligen Haushaltsdaten in einem maschinenlesbaren Format

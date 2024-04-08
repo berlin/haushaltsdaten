@@ -45,6 +45,7 @@ export const getRowsByTopic = async ({
         .eq('titel_art', expenseType)
         .eq('bereichs_bezeichnung', district)
         .eq(topicColumn, topicValue)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsFunktionType) => {
@@ -64,6 +65,7 @@ export const getRowsByTopic = async ({
         .eq('titel_art', expenseType)
         .eq('bereichs_bezeichnung', district)
         .eq(topicColumn, topicValue)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsEinzelplanType) => {
@@ -84,6 +86,7 @@ export const getRowsByTopic = async ({
         .eq('jahr', year)
         .eq('titel_art', expenseType)
         .eq(topicColumn, topicValue)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsFunktionType) => {
@@ -102,6 +105,7 @@ export const getRowsByTopic = async ({
         .eq('jahr', year)
         .eq('titel_art', expenseType)
         .eq(topicColumn, topicValue)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsEinzelplanType) => {
@@ -122,6 +126,7 @@ export const getRowsByTopic = async ({
         .eq('jahr', year)
         .eq('titel_art', expenseType)
         .eq('bereichs_bezeichnung', district)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsFunktionType) => {
@@ -159,6 +164,7 @@ export const getRowsByTopic = async ({
         )
         .eq('jahr', year)
         .eq('titel_art', expenseType)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsFunktionType) => {
@@ -176,6 +182,7 @@ export const getRowsByTopic = async ({
         )
         .eq('jahr', year)
         .eq('titel_art', expenseType)
+        .order('id', { ascending: false })
 
       if (error) throw error
       data.map((el: MapColumsEinzelplanType) => {

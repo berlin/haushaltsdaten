@@ -125,18 +125,19 @@ export const Search: FC = () => {
           </h1>
           <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
             <div className="flex-col mt-6">
-              Mithilfe dieser Funktion kann der gesamte Haushalt durchsucht
-              werden. Es kann sowohl nach Bereichen, Kapiteln (Zuständigkeiten),
-              Funktionen und Gruppen (Art der Ausgaben und Einnahmen), als auch
-              stichwortartig nach den einzelnen Ausgabetiteln gesucht werden.
-              Auch Kombinationen und Suchen nach numerischen Bezeichnungen von
-              Ausgabetiteln sind möglich.
+              Mithilfe dieser Funktion können die gesamten Haushalte der Jahre
+              2022 bis 2025 durchsucht werden. Es kann sowohl nach Bereichen,
+              Kapiteln (Zuständigkeiten), Funktionen und Gruppen (Art der
+              Ausgaben und Einnahmen), als auch stichwortartig nach den
+              einzelnen Ausgabetiteln gesucht werden. Auch Kombinationen und
+              Suchen nach numerischen Bezeichnungen von Ausgabetiteln sind
+              möglich.
               <br></br>
               <br></br>
               Ein Beispiel für eine allgemeine Suche nach Kapiteln wäre
               „Senatsverwaltung für Inneres, Digitalisierung und Sport“ mit über
               500 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre
-              zum Beispiel „Sporthalle“ (46 Ergebnisse) oder „Kita Spandau“ (10
+              zum Beispiel „Sporthalle“ (91 Ergebnisse) oder „Kita Spandau“ (20
               Ergebnisse).
             </div>
           </div>

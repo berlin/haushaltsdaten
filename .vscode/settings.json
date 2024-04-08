@@ -1,28 +1,42 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#5cd1b4",
+    "activityBar.activeBackground": "#77604e",
     "activityBar.activeBorder": "#61666d",
-    "activityBar.background": "#29313b",
-    "activityBar.foreground": "#192e38",
-    "activityBar.inactiveForeground": "#61666d",
-    "activityBarBadge.background": "#5cd1b4",
-    "activityBarBadge.foreground": "#FFFFFF",
-    "statusBar.background": "#29313b",
-    "statusBar.foreground": "#d8dfe9",
-    "statusBarItem.hoverBackground": "#5cd1b4",
-    "titleBar.activeBackground": "#29313b",
-    "titleBar.activeForeground": "#d8dfe9",
-    "titleBar.inactiveBackground": "#1c222b",
-    "titleBar.inactiveForeground": "#61666d"
+    "activityBar.background": "#77604e",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#263a2f",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#58473a",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#77604e",
+    "titleBar.activeBackground": "#58473a",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#58473a99",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "commandCenter.border": "#e7e7e799",
+    "editorGroup.border": "#77604e",
+    "panel.border": "#77604e",
+    "sash.hoverBorder": "#77604e",
+    "sideBar.border": "#77604e",
+    "statusBar.border": "#58473a",
+    "statusBar.debuggingBackground": "#3a4b58",
+    "statusBar.debuggingBorder": "#3a4b58",
+    "statusBar.debuggingForeground": "#e7e7e7",
+    "statusBarItem.remoteBackground": "#58473a",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "tab.activeBorder": "#77604e",
+    "titleBar.border": "#58473a"
   },
   "workbench.colorTheme": "GitHub Dark",
   "workbench.preferredDarkColorTheme": "GitHub Dark",
 
   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-  "editor.formatOnPaste": false, // required 
+  "editor.formatOnPaste": false, // required
   "editor.formatOnType": false, // required
-  "editor.formatOnSave": true, // optional 
+  "editor.formatOnSave": true, // optional
   "editor.formatOnSaveMode": "file", // required to format on save
-  "files.autoSave": "onFocusChange" // optional but recommended
-  
+  "files.autoSave": "onFocusChange",
+  "peacock.color": "#58473a" // optional but recommended
+
 }
