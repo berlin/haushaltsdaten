@@ -91,20 +91,16 @@ export const FaqPage: FC = () => {
 
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12 mb-16 md:mb-28 ">
           <h2 className="font-bold text-xl md:text-2xl">
-            Schwerpunktthemen im aktuellen Haushalt
+            Schwerpunktthemen der Haushalte
           </h2>
           <div className="mt-6">
-            Mit dem aktuellen Doppelhaushalt 2026/27 erreicht das Land Berlin
-            erneut einen Höchststand bei Einnahmen und Ausgaben. Besondere
-            Aufmerksamkeit liegt weiterhin auf den Investitionen. Die Berliner
-            Schulbauoffensive (BSO) bleibt eines der größten
-            Investitionsvorhaben. Damit wird der Sanierungsstau an den Schulen
-            weiter abgebaut, und es werden neue Schulen errichtet.
-            <br></br>
-            Auch die Digitalisierung der Verwaltung soll weiter vorangetrieben
-            werden und ein besonderes Augenmerk liegt auf der inneren
-            Sicherheit. Gleichzeitig bleibt die Konsolidierung des
-            Landeshaushalts im Fokus.
+            Berlin wächst - und mit seinen Aufgaben steigen auch die Ausgaben.
+            Besondere Aufmerksamkeit liegt daher weiterhin auf den
+            Investitionen. Über die Jahre hinweg ergeben sich diverse
+            thematische Schwerpunkte, wie beispielsweise die Berliner
+            Schulbauoffensive (BSO), die den Sanierungsstau an den Schulen
+            abbaut und neue Schulen errichtet, die Digitalisierung der
+            Verwaltung oder innere Sicherheit.
             <br></br>
             Das Land Berlin legt zudem bei Aufstellung und Umsetzung des
             Haushaltsplans ein Augenmerk auf die Geschlechtergerechtigkeit und
@@ -112,30 +108,20 @@ export const FaqPage: FC = () => {
             dass insbesondere die Ausgaben danach ausgewertet werden, inwieweit
             sie den Geschlechtern zu gleichen Teilen zugutekommen.
             <br></br>
-            Mehr zu diesen Themen ist auf der Webseite der Senatsverwaltung für
-            Finanzen zu erfahren.
+            Mehr zu aktuellen, sowie historischen Schwerpunkten und weiteren
+            Themen ist auf der Webseite der Senatsverwaltung für Finanzen zu
+            erfahren.
           </div>
+          <br></br>
 
-          <div className="mt-6">
-            <div className="flex-col">
-              <p className="text-brand">
-                <a href="https://www.berlin.de/sen/finanzen/haushalt/gender-budgeting/artikel.1339812.php">
-                  → Gender-Budgeting
-                </a>
-              </p>
-              {/* <p>Berlin ist eines der wenigen Bundesländer,
-          das die Umsetzung von Gender Budgeting im Landeshaushalt explizit
-          formuliert hat und inzwischen dabei ist, Gender Budgeting in die
-          normale Haushaltspolitik zu integrieren.</p> */}
-            </div>
-            <div className="flex-col">
-              <p className="text-brand">
-                <a href="https://www.berlin.de/rbmskzl/aktuelles/pressemitteilungen/2023/pressemitteilung.1344266.php">
-                  → Mehr Mittel für Digitalisierung und innere Sicherheit
-                </a>
-              </p>
-              {/* <p></p> */}
-            </div>
+          <div className="flex-col">
+            <p className="text-brand">
+              <a href="https://www.berlin.de/sen/finanzen/haushalt/">
+                → Mehr Informationen der Senatsverwaltung für Finanzen über den
+                Haushalt
+              </a>
+            </p>
+            {/* <p></p> */}
           </div>
 
           <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12 md:mt-20">
