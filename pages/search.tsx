@@ -1,29 +1,28 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { supabase } from '@lib/requests/createSupabaseClient'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import classNames from 'classnames'
+import MiniSearch from 'minisearch'
 import { formatCurrency } from '@lib/utils/numberUtil'
 import { Button } from '@components/Button'
-
-export interface FilteredSearchResultsType {
-  id: string
-  titel_bezeichnung: string
-  titel_art?: 'Einnahmetitel' | 'Ausgabetitel'
-  bereichs_bezeichnung: string
-  betrag: string
-  jahr: string
-  titel: string
-  oberfunktions_bezeichnung: string
-  hauptfunktions_bezeichnung: string
-  funktions_bezeichnung: string
-  obergruppen_bezeichnung: string
-  hauptgruppen_bezeichnung: string
-  gruppen_bezeichnung: string
-  einzelplan_bezeichnung: string
-  kapitel_bezeichnung: string
-}
+import { FilteredSearchResultsType } from '@lib/types/haushaltsdaten'
 
 const ITEMS_PER_PAGE = 100
+
+const SEARCH_INDEXED_FIELDS = [
+  'titel_bezeichnung',
+  'bereichs_bezeichnung',
+  'einzelplan_bezeichnung',
+  'kapitel_bezeichnung',
+  'hauptfunktions_bezeichnung',
+  'oberfunktions_bezeichnung',
+  'funktions_bezeichnung',
+]
+
+interface ColumnarSearchData {
+  cols: string[]
+  rows: (string | number)[][]
+}
 
 const toTitleCase = (s: string): string =>
   s.replace(/^_*(.)|_+(.)/g, (_s, c: string, d: string) =>
@@ -49,7 +48,74 @@ export const getStaticProps: GetStaticProps = async () => ({
   },
 })
 
+// Lazy-loaded search state
+let cachedMiniSearch: MiniSearch | null = null
+let cachedDocMap: Map<number, FilteredSearchResultsType> | null = null
+let loadPromise: Promise<void> | null = null
+
+async function loadSearchData(basePath: string): Promise<{
+  miniSearch: MiniSearch
+  docMap: Map<number, FilteredSearchResultsType>
+}> {
+  if (cachedMiniSearch && cachedDocMap) {
+    return { miniSearch: cachedMiniSearch, docMap: cachedDocMap }
+  }
+
+  if (!loadPromise) {
+    loadPromise = (async () => {
+      const versionRes = await fetch(`${basePath}/data/version.json`)
+      const { hash } = (await versionRes.json()) as { hash: string }
+
+      const [indexRes, docsRes] = await Promise.all([
+        fetch(`${basePath}/data/${hash}/search-index.json`),
+        fetch(`${basePath}/data/${hash}/search-documents.json`),
+      ])
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const indexData = await indexRes.json()
+      const docsData = (await docsRes.json()) as ColumnarSearchData
+
+      cachedMiniSearch = MiniSearch.loadJSON(JSON.stringify(indexData), {
+        fields: SEARCH_INDEXED_FIELDS,
+        idField: 'id',
+        tokenize: (text: string) =>
+          text
+            .toLowerCase()
+            .split(/[\s\-/,;:.()]+/)
+            .filter((t: string) => t.length > 0),
+        searchOptions: {
+          tokenize: (text: string) =>
+            text
+              .toLowerCase()
+              .split(/[\s\-/,;:.()]+/)
+              .filter((t: string) => t.length > 0),
+        },
+      })
+
+      // Parse columnar documents into a Map for O(1) lookups
+      const { cols, rows } = docsData
+      const idIdx = cols.indexOf('id')
+      cachedDocMap = new Map<number, FilteredSearchResultsType>()
+      for (const row of rows) {
+        const obj = {} as Record<string, string | number>
+        cols.forEach((col, i) => {
+          obj[col] = row[i]
+        })
+        cachedDocMap.set(
+          Number(row[idIdx]),
+          obj as unknown as FilteredSearchResultsType
+        )
+      }
+    })()
+  }
+
+  await loadPromise
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return { miniSearch: cachedMiniSearch!, docMap: cachedDocMap! }
+}
+
 export const Search: FC = () => {
+  const { basePath } = useRouter()
   const [results, setResults] = useState<FilteredSearchResultsType[] | null>(
     null
   )
@@ -71,45 +137,52 @@ export const Search: FC = () => {
     }
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/no-unsafe-member-access
     const value = form.current['search'].value! as string
+    if (!value || value.trim().length === 0) return
     setLoading(true)
-    fetchData(value).catch(console.error)
+    performSearch(value).catch(console.error)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     form.current['search'].value = ''
   }
-  const fetchData: (value: string) => Promise<void> = async (value) => {
-    const { data, error } = await supabase.rpc('ftc', { search: value })
-    setLoading(false)
-    if (error) {
-      console.error(error)
-      throw new Error(error.message)
-    }
-    if (!data || data.length === 0) {
-      setResults(null)
+
+  const performSearch: (value: string) => Promise<void> = async (value) => {
+    try {
+      const { miniSearch, docMap } = await loadSearchData(basePath)
+
+      const searchResults = miniSearch.search(value, { prefix: true })
+
+      setLoading(false)
       setSearchTerm(value)
-    } else {
-      setSearchTerm(value)
-      const mappedData: FilteredSearchResultsType[] = data.map(
-        (row: FilteredSearchResultsType) => {
-          return {
-            titel_bezeichnung: row['titel_bezeichnung'],
+
+      if (!searchResults || searchResults.length === 0) {
+        setResults(null)
+      } else {
+        const mappedData: FilteredSearchResultsType[] = searchResults
+          .map((result) => docMap.get(Number(result.id)))
+          .filter((doc): doc is FilteredSearchResultsType => doc !== undefined)
+          .map((row) => ({
+            titel_bezeichnung: String(row['titel_bezeichnung']),
             titel_art: row['titel_art'],
-            jahr: row['jahr'],
-            betrag: `${formatCurrency(parseInt(row['betrag'], 10))} €`,
-            bereichs_bezeichnung: row['bereichs_bezeichnung'],
-            einzelplan_bezeichnung: row['einzelplan_bezeichnung'],
-            kapitel_bezeichnung: row['kapitel_bezeichnung'],
-            hauptfunktions_bezeichnung: row['hauptfunktions_bezeichnung'],
-            oberfunktions_bezeichnung: row['oberfunktions_bezeichnung'],
-            funktions_bezeichnung: row['funktions_bezeichnung'],
-            hauptgruppen_bezeichnung: row['hauptgruppen_bezeichnung'],
-            obergruppen_bezeichnung: row['obergruppen_bezeichnung'],
-            gruppen_bezeichnung: row['gruppen_bezeichnung'],
-            titel: row['titel'],
-            id: row['id'],
-          }
-        }
-      )
-      setResults(mappedData)
+            jahr: String(row['jahr']),
+            betrag: `${formatCurrency(Number(row['betrag']))} €`,
+            bereichs_bezeichnung: String(row['bereichs_bezeichnung']),
+            einzelplan_bezeichnung: String(row['einzelplan_bezeichnung']),
+            kapitel_bezeichnung: String(row['kapitel_bezeichnung']),
+            hauptfunktions_bezeichnung: String(
+              row['hauptfunktions_bezeichnung']
+            ),
+            oberfunktions_bezeichnung: String(row['oberfunktions_bezeichnung']),
+            funktions_bezeichnung: String(row['funktions_bezeichnung']),
+            hauptgruppen_bezeichnung: String(row['hauptgruppen_bezeichnung']),
+            obergruppen_bezeichnung: String(row['obergruppen_bezeichnung']),
+            gruppen_bezeichnung: String(row['gruppen_bezeichnung']),
+            titel: String(row['titel']),
+            id: String(row['id']),
+          }))
+        setResults(mappedData)
+      }
+    } catch (err) {
+      setLoading(false)
+      console.error(err)
     }
   }
 
@@ -126,7 +199,7 @@ export const Search: FC = () => {
           <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
             <div className="flex-col mt-6">
               Mithilfe dieser Funktion können die gesamten Haushalte der Jahre
-              2022 bis 2025 durchsucht werden. Es kann sowohl nach Bereichen,
+              2026 bis 2027 durchsucht werden. Es kann sowohl nach Bereichen,
               Kapiteln (Zuständigkeiten), Funktionen und Gruppen (Art der
               Ausgaben und Einnahmen), als auch stichwortartig nach den
               einzelnen Ausgabetiteln gesucht werden. Auch Kombinationen und
@@ -135,10 +208,9 @@ export const Search: FC = () => {
               <br></br>
               <br></br>
               Ein Beispiel für eine allgemeine Suche nach Kapiteln wäre
-              „Senatsverwaltung für Inneres, Digitalisierung und Sport“ mit über
-              500 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre
-              zum Beispiel „Sporthalle“ (91 Ergebnisse) oder „Kita Spandau“ (20
-              Ergebnisse).
+              {
+                '„Senatsverwaltung für Inneres und Sport" mit über 46.000 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre zum Beispiel „Sporthalle" (46 Ergebnisse) oder „Kita Spandau" (3230 Ergebnisse).'
+              }
             </div>
           </div>
         </div>

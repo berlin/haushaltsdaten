@@ -20,11 +20,13 @@ A homepage and FAQ page provide contextual information.
 
 The data used is available as Open Data in Berlin's official [Open Data portal](https://daten.berlin.de/datensaetze). It is usually published bi-annually and includes the data for the next 2 years.
 
-The data comes as Excel files (`.xlsx`), which is converted to CSV and then loaded into a PostgreSQL database.
+The data comes as Excel files (`.xlsx`), which is converted to CSV and then imported into a local SQLite database using the provided import script:
 
-We currently use a PostgreSQL database provided by [Supabase](https://supabase.com/). Find information for this setup in the [haushaltsdaten-supabase repo](https://github.com/berlin/haushaltsdaten-supabase).
+```bash
+npm run db:import doppelhaushalt_2026_2027.csv
+```
 
-> **A note on our usage of Supabase**: We are using Supabase because it provides a convenient data access layer. There are certainly alternatives for accessing the data which could be explored in the future.
+This generates `data/haushaltsdaten.db` which the application reads at runtime.
 
 ## Tech stack
 
@@ -65,14 +67,6 @@ The texts are currently hard-coded into the pages/components. In the future a mo
 
 This project is a Next.js app which requires you to have [Node.js](https://nodejs.org/en/) installed.
 
-#### Supabase
-
-As explained in the data section earlier, a Supabase instance is used for storing the data.
-
-If you simply want to continue working on this repository, you can use the already existing Supabase instance.
-
-If you are planning to re-deploy this project, you will need to obtain a Supabase instance yourself, either by using their cloud offering or by self-hosting Supabase.
-
 ### Installation
 
 Clone the repository to your local machine:
@@ -105,9 +99,11 @@ With the correct Node version, install the dependencies:
 npm install
 ```
 
-Because the data is stored in a Supabase database, you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
+Import the budget data into a local SQLite database:
 
-In `.env` you must enter the connection details to the Supabase instance as suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access.
+```bash
+npm run db:import doppelhaushalt_2026_2027.csv
+```
 
 You are now ready to start a local development server on http://localhost:3000 via:
 

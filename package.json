@@ -5,8 +5,8 @@
   "scripts": {
     "cm": "cz",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "build": "next build && next export",
+    "db:export": "node scripts/export-json.js",
     "test": "jest --maxWorkers=50% --coverage --collectCoverageFrom='./(src|pages)/**/*.ts(x)?' --collectCoverageFrom='!./(src|pages)/**/*.stories.ts(x)?'",
     "test:watch": "npm run test -- --watch",
     "test:ci": "jest --runInBand",
@@ -15,7 +15,9 @@
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "prepare": "husky install",
     "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook -s ./public"
+    "build-storybook": "build-storybook -s ./public",
+    "db:import": "node scripts/import-csv.js",
+    "db:export": "node scripts/export-json.js"
   },
   "config": {
     "commitizen": {
@@ -26,11 +28,11 @@
     "@headlessui/react": "1.6.6",
     "@mdx-js/loader": "2.1.2",
     "@next/mdx": "12.2.0",
-    "@supabase/supabase-js": "1.35.4",
     "classnames": "2.3.1",
     "d3": "7.6.1",
     "just-snake-case": "3.0.1",
     "maplibre-gl": "2.1.9",
+    "minisearch": "7.2.0",
     "react": "17.0.2",
     "react-cool-dimensions": "2.0.7",
     "react-dom": "17.0.2",
@@ -48,6 +50,8 @@
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "14.4.3",
+    "better-sqlite3": "^12.6.2",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/d3": "7.4.0",
     "@types/jest": "27.5.2",
     "@types/node": "20.10.6",

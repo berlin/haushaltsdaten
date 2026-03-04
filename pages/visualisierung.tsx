@@ -1,19 +1,15 @@
 import { ListItem } from '@components/ListItem'
 import snakeCase from 'just-snake-case'
-import {
-  getRowsByDistrictAndType,
-  GetRowsByDistrictAndTypeParamsType,
-  HaushaltsdatenRowType,
-} from '@lib/requests/getRowsByDistrictAndType'
+import { GetRowsByDistrictAndTypeParamsType } from '@lib/types/haushaltsdaten'
 import {
   createBaseTree,
   createTreeStructure,
   TreemapHierarchyType,
 } from '@lib/utils/createTreemapStructure'
 import { TreeMapWithData } from '@components/TreeMap/withData'
-import { mapRawQueryToState, ParsedPageQueryType } from '@lib/utils/queryUtil'
-import { GetServerSideProps } from 'next'
-import { FC, useState, useEffect } from 'react'
+import { mapRawQueryToState } from '@lib/utils/queryUtil'
+import { GetStaticProps } from 'next'
+import { FC, useState, useEffect, useMemo } from 'react'
 import useDimensions from 'react-cool-dimensions'
 import { TreeMapControls } from '@components/TreeMapControls'
 import classNames from 'classnames'
@@ -29,6 +25,7 @@ import { EmbeddPopup } from '@components/EmbeddPopup'
 import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
 import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
 import { Button } from '@components/Button'
+import { useHaushaltsdaten } from '@lib/hooks/useHaushaltsdaten'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 const MAX_ROWS = 100
@@ -41,7 +38,21 @@ const isValidTopicDepth = (depthToCheck: number): boolean => {
 }
 
 // eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {
+    title: 'Visualisierung',
+  },
+})
+
+export interface TopicType {
+  topicDepth?: TopicDepth
+  topicLabel?: string
+}
+
+export const Visualization: FC = () => {
+  const { observe, width, height } = useDimensions()
+  const { push, pathname, query } = useRouter()
+
   const parsedQuery = query ? mapRawQueryToState(query) : {}
 
   const queriedDistrictId =
@@ -49,76 +60,41 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       ? parsedQuery.district
       : null
 
-  const queriedType =
+  const queriedType: GetRowsByDistrictAndTypeParamsType['expenseType'] =
     typeof parsedQuery.showExpenses === 'undefined' || parsedQuery.showExpenses
       ? 'Ausgabetitel'
       : 'Einnahmetitel'
 
-  const queriedYear = parsedQuery.year
-  const queriedModus = parsedQuery.modus
+  const queriedYear =
+    parsedQuery.year && isValidYear(parsedQuery.year)
+      ? parsedQuery.year
+      : DEFAULT_YEAR
 
-  const data = await getRowsByDistrictAndType({
-    district:
-      !!queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
-        ? districts[queriedDistrictId as keyof typeof districts]
-        : undefined,
+  const queriedModus =
+    parsedQuery.modus && isValidModus(parsedQuery.modus)
+      ? parsedQuery.modus
+      : DEFAULT_MODUS
+
+  const { data: haushaltsdaten, isLoading: dataLoading } = useHaushaltsdaten({
+    year: queriedYear,
     expenseType: queriedType,
-    year: queriedYear && isValidYear(queriedYear) ? queriedYear : DEFAULT_YEAR,
-    modus:
-      queriedModus && isValidModus(queriedModus) ? queriedModus : DEFAULT_MODUS,
+    districtKey:
+      queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
+        ? queriedDistrictId
+        : ALL_DISTRICTS_ID,
+    modus: queriedModus,
   })
 
-  if (!data) {
-    throw new Error('No data found for this request')
-  }
-
-  const hierarchyData = {
-    id: 'overview',
-    name: `Gesamt${queriedType === 'Ausgabetitel' ? 'ausgaben' : 'einnahmen'}`,
-    children: createTreeStructure(createBaseTree(data)),
-  }
-
-  const initialListData = data
-    .sort((a, b) => parseInt(b.betrag, 10) - parseInt(a.betrag, 10))
-    .slice(0, MAX_ROWS)
-
-  return {
-    props: {
-      title: 'Visualisierung',
-      query,
-      queriedYear: queriedYear || DEFAULT_YEAR,
-      queriedModus: queriedModus || DEFAULT_MODUS,
-      queriedDistrictId: queriedDistrictId,
-      queriedType: queriedType,
-      hierarchyData: hierarchyData,
-      initialListData: initialListData,
-    },
-  }
-}
-
-export interface TopicType {
-  topicDepth?: TopicDepth
-  topicLabel?: string
-}
-
-export const Visualization: FC<{
-  query: Partial<ParsedPageQueryType>
-  queriedYear: number
-  queriedModus: string
-  queriedDistrictId: keyof typeof districts
-  queriedType: GetRowsByDistrictAndTypeParamsType['expenseType']
-  hierarchyData: TreemapHierarchyType
-  initialListData: HaushaltsdatenRowType[]
-}> = ({
-  queriedYear,
-  queriedModus,
-  queriedDistrictId,
-  queriedType,
-  hierarchyData,
-  initialListData,
-}) => {
-  const { observe, width, height } = useDimensions()
-  const { push, pathname } = useRouter()
+  const hierarchyData: TreemapHierarchyType | null = useMemo(() => {
+    if (!haushaltsdaten) return null
+    return {
+      id: 'overview',
+      name: `Gesamt${
+        queriedType === 'Ausgabetitel' ? 'ausgaben' : 'einnahmen'
+      }`,
+      children: createTreeStructure(createBaseTree(haushaltsdaten)),
+    }
+  }, [haushaltsdaten, queriedType])
 
   const [topic, setTopic] = useState<TopicType>({})
   const [visibleRows, setVisibleRows] = useState<number>(MAX_ROWS)
@@ -132,29 +108,27 @@ export const Visualization: FC<{
     )
   }
 
+  const topicColumn =
+    topic?.topicDepth && isValidTopicDepth(topic.topicDepth)
+      ? mapTopicDepthToColumn(topic.topicDepth, queriedModus)
+      : undefined
+
+  const topicValue =
+    topic.topicLabel &&
+    topic?.topicDepth &&
+    isValidTopicDepth(topic?.topicDepth)
+      ? topic.topicLabel
+      : undefined
+
   const {
     error,
     isLoading,
     data: listData,
   } = useListData({
-    district:
-      queriedDistrictId && queriedDistrictId !== ALL_DISTRICTS_ID
-        ? districts[queriedDistrictId]
-        : undefined,
-    type: queriedType,
-    year: queriedYear,
+    data: haushaltsdaten,
     modus: queriedModus,
-    topicColumn:
-      topic?.topicDepth && isValidTopicDepth(topic.topicDepth)
-        ? mapTopicDepthToColumn(topic.topicDepth, queriedModus)
-        : undefined,
-    topicValue:
-      topic.topicLabel &&
-      topic?.topicDepth &&
-      isValidTopicDepth(topic?.topicDepth)
-        ? topic.topicLabel
-        : undefined,
-    initialData: initialListData,
+    topicColumn,
+    topicValue,
   })
 
   useEffect(() => {
@@ -162,6 +136,31 @@ export const Visualization: FC<{
     // show all rows if dataLength is less or equal MAX_ROWS - otherwise show MAX_ROWS
     setVisibleRows(listDataLength <= MAX_ROWS ? listDataLength : MAX_ROWS)
   }, [listData])
+
+  if (dataLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div role="status">
+          <svg
+            aria-hidden="true"
+            className="w-8 h-8 text-gray-200 animate-spin fill-gray-600"
+            viewBox="0 0 100 101"
+            fill="none"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -184,7 +183,7 @@ export const Visualization: FC<{
           >
             <div className="w-full z-10">
               <TreeMapControls
-                district={queriedDistrictId}
+                district={queriedDistrictId || undefined}
                 onChange={(newQuery) => {
                   // When resetting type or district, we want to clear the topic
                   // as well, so that the list view displays items from every

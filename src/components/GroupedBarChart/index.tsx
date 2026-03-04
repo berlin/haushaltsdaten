@@ -61,7 +61,7 @@ export const GroupedBarChart: FC<GroupedBarChartProps> = ({ data }) => {
   const axisLeftRef = useRef<SVGGElement>(null)
 
   const margin = { top: 10, right: 0, bottom: 20, left: 30 }
-  const width = 500 - margin.left - margin.right
+  const width = 600 - margin.left - margin.right
   const height = 300 - margin.top - margin.bottom
 
   const labels = data.map(({ label }) => label)
@@ -92,8 +92,10 @@ export const GroupedBarChart: FC<GroupedBarChartProps> = ({ data }) => {
   return (
     <>
       <svg
-        width={width + margin.left + margin.right}
-        height={height + margin.top + margin.bottom}
+        viewBox={`0 0 ${width + margin.left + margin.right} ${
+          height + margin.top + margin.bottom
+        }`}
+        className="w-full max-w-[600px]"
       >
         <g transform={`translate(${margin.left}, ${margin.top})`}>
           <g ref={axisBottomRef} transform={`translate(0, ${height})`} />

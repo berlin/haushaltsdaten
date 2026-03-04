@@ -1,58 +1,37 @@
-import { DistrictLabel } from '@data/districts'
+import { useMemo } from 'react'
 import {
-  GetRowsByDistrictAndTypeParamsType,
   HaushaltsdatenRowType,
-} from '@lib/requests/getRowsByDistrictAndType'
-import { getRowsByTopic, TopicColumnName } from '@lib/requests/getRowsByTopic'
-import useSWR from 'swr'
+  TopicColumnName,
+} from '@lib/types/haushaltsdaten'
+import { filterByTopic } from '@lib/data/loadData'
 
-interface useListDataParamsType {
-  district?: DistrictLabel
-  type: GetRowsByDistrictAndTypeParamsType['expenseType']
-  year: number
+interface UseListDataParamsType {
+  data: HaushaltsdatenRowType[] | null
   modus: string
   topicColumn?: TopicColumnName
   topicValue?: string
-  initialData?: HaushaltsdatenRowType[]
 }
 
-interface useListDataReturnType {
+interface UseListDataReturnType {
   isLoading: boolean
   data: HaushaltsdatenRowType[] | null
   error: Error | null
 }
 
 export const useListData = ({
-  district,
-  type,
-  year,
+  data,
   modus,
   topicColumn,
   topicValue,
-  initialData,
-}: useListDataParamsType): useListDataReturnType => {
-  const params = [
-    `${year} - ${district || 'Alle Bereiche'} - ${type} - ${
-      topicColumn || 'Alle Spalten'
-    } - ${topicValue || 'Alle Werte'}`,
-  ]
-  const { data, error } = useSWR<HaushaltsdatenRowType[] | undefined, Error>(
-    params,
-    () =>
-      getRowsByTopic({
-        district: district,
-        expenseType: type,
-        year: year,
-        modus: modus,
-        topicColumn: topicColumn || undefined,
-        topicValue: topicValue,
-      }),
-    { fallbackData: initialData }
-  )
+}: UseListDataParamsType): UseListDataReturnType => {
+  const filtered = useMemo(() => {
+    if (!data) return null
+    return filterByTopic(data, modus, topicColumn, topicValue)
+  }, [data, modus, topicColumn, topicValue])
 
   return {
-    isLoading: !data && !error,
-    data: data || null,
-    error: error || null,
+    isLoading: !data,
+    data: filtered,
+    error: null,
   }
 }

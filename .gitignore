@@ -41,3 +41,10 @@ yarn-error.log*
 
 # Storybook
 storybook-static
+
+# SQLite database temp files
+data/*.db-wal
+data/*.db-shm
+
+# Generated data files (uncomment to exclude from git)
+# public/data/

@@ -1,4 +1,4 @@
-import { TopicColumnName } from '@lib/requests/getRowsByTopic'
+import { TopicColumnName } from '@lib/types/haushaltsdaten'
 
 /**
  * The TopicDepth describes the depth of the current level within the treemap.

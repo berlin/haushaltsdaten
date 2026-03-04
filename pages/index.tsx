@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next'
 import { FC } from 'react'
 import TypeAnimation from 'react-type-animation'
 import { InternalLink } from '@components/InternalLink'
+import { useRouter } from 'next/router'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticProps: GetStaticProps = async () => {
@@ -14,6 +15,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export const HomePage: FC = () => {
+  const { basePath } = useRouter()
   return (
     <div className="px-8">
       <div className="md:w-4/5 m-auto mt-12 lg:mt-20">
@@ -25,16 +27,15 @@ export const HomePage: FC = () => {
             <h1 className="text-4xl md:text-6xl font-bold xl:text-right mb-3">
               Berliner <br></br>Haushaltsdaten
             </h1>
-            <h1 className="text-2xl md:text-4xl md:text-right">2024/25</h1>
+            <h1 className="text-2xl md:text-4xl md:text-right">2026/27</h1>
           </div>
           <div className="flex-col italic xl:w-1/2 mt-6 md:mt-12 xl:mt-24 xl:pr-28">
-            Pro Jahr stehen der Berliner Verwaltung rund 39 Milliarden Euro zur
+            Pro Jahr stehen der Berliner Verwaltung rund 46 Milliarden Euro zur
             Umsetzung der gesetzlichen Vorgaben und ihrer Ziele zur Verfügung.
             Aber wofür wenden Senat und Bezirke welchen Anteil ihrer Ressourcen
             auf? Diese Webseite bietet einen Überblick über die geplanten
             Ausgaben und Einnahmen des Landes für den aktuellen Doppelhaushalt
-            2024/25. Sie wurde gemeinsam initiiert und erarbeitet mit der Open
-            Data Informationsstelle und dem CityLAB Berlin – und steht als{' '}
+            2026/27. Die Anwendung steht als{' '}
             <span className="text-brand">
               <InternalLink href={'/faq'} query={{ hashId: 'Open-Source' }}>
                 Open Source Projekt
@@ -113,7 +114,7 @@ export const HomePage: FC = () => {
               title="Beispiel-Visualisierung der Haushaltsdaten"
               width="400rem"
               height="400"
-              src="https://haushaltsdaten.odis-berlin.de/share"
+              src={`${basePath}/share`}
             ></iframe>
           </div>
         </div>
