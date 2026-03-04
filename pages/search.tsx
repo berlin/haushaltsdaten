@@ -148,7 +148,10 @@ export const Search: FC = () => {
     try {
       const { miniSearch, docMap } = await loadSearchData(basePath)
 
-      const searchResults = miniSearch.search(value, { prefix: true })
+      const searchResults = miniSearch.search(value, {
+        prefix: true,
+        combineWith: 'AND',
+      })
 
       setLoading(false)
       setSearchTerm(value)
@@ -209,7 +212,7 @@ export const Search: FC = () => {
               <br></br>
               Ein Beispiel für eine allgemeine Suche nach Kapiteln wäre
               {
-                '„Senatsverwaltung für Inneres und Sport" mit über 46.000 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre zum Beispiel „Sporthalle" (46 Ergebnisse) oder „Kita Spandau" (3230 Ergebnisse).'
+                '„Senatsverwaltung für Inneres und Sport" mit über 380 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre zum Beispiel „Sporthalle" (46 Ergebnisse) oder „Kita Spandau" (10 Ergebnisse).'
               }
             </div>
           </div>
