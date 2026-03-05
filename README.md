@@ -152,6 +152,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center"><a href="https://github.com/flonix8"><img src="https://avatars.githubusercontent.com/u/19605089?v=4?s=64" width="64px;" alt="Florian Stanek"/><br /><sub><b>Florian Stanek</b></sub></a><br /><a href="#ideas-flonix8" title="Ideas, Planning, & Feedback">🤔</a> <a href="#design-flonix8" title="Design">🎨</a> <a href="https://github.com/berlin/haushaltsdaten/commits?author=flonix8" title="Code">💻</a></td>
       <td align="center"><a href="https://github.com/julizet"><img src="https://avatars.githubusercontent.com/u/52455010?v=4?s=64" width="64px;" alt="Julia Zet"/><br /><sub><b>Julia Zet</b></sub></a><br /><a href="#ideas-julizet" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/berlin/haushaltsdaten/commits?author=julizet" title="Code">💻</a> <a href="#design-julizet" title="Design">🎨</a></td>
     </tr>
+      <td align="center"><a href="https://github.com/tifa365"><img src="https://avatars.githubusercontent.com/u/66328500?v=4?s=64" width="64px;" alt="tifa365"/><br /><sub><b>tifa365</b></sub></a><br /><a href="https://github.com/berlin/haushaltsdaten/commits?author=tifa365" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
