@@ -43,7 +43,9 @@ const DISTRICTS = {
 }
 
 const YEARS = [2026, 2027]
-const TYPES = ['Ausgabetitel', 'Einnahmetitel']
+// const TYPES = ['Ausgabetitel', 'Einnahmetitel']
+const TYPES = ['Einnahmetitel', 'Ausgabetitel'];
+
 
 // Columns included in each data file (both modus modes work from these)
 const DATA_COLUMNS = [
