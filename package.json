@@ -27,7 +27,7 @@
   "dependencies": {
     "@headlessui/react": "1.6.6",
     "@mdx-js/loader": "2.1.2",
-    "@next/mdx": "12.2.0",
+    "@next/mdx": "16.2.2",
     "classnames": "2.3.1",
     "d3": "7.6.1",
     "just-snake-case": "3.0.1",
