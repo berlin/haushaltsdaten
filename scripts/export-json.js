@@ -66,6 +66,7 @@ const DATA_COLUMNS = [
 // but not indexed — they share vocabulary with the funktions fields
 // and add ~30% to the index without meaningful search benefit.
 const SEARCH_INDEXED_FIELDS = [
+  'titel',
   'titel_bezeichnung',
   'bereichs_bezeichnung',
   'einzelplan_bezeichnung',
