@@ -1,11 +1,6 @@
 import { FC } from 'react'
 
-const TSBLogo = '/images/tsb-logo.svg'
-const CityLABLogo = '/images/citylab-logo.svg'
 const BerlinLogo = '/images/berlin-skzl-logo.svg'
-const OdisLogo = '/images/logo-odis-berlin.svg'
-const SenWEBLogo = '/images/logo-berlin-senweb-de.svg'
-const IBBLogo = '/images/ibb-logo.svg'
 const SenFINLogo = 'images/logo-berlin-senfin.svg'
 
 export const Footer: FC = () => {
@@ -24,9 +19,9 @@ export const Footer: FC = () => {
                 aria-label="ODIS Berlin"
               >
                 <img
-                  src={OdisLogo}
                   alt="Logo von der ODIS Berlin"
                   className="w-44"
+                  src="https://logos.citylab-berlin.org/logo-odis-berlin-black.svg"
                 />
               </a>
             </div>
@@ -40,9 +35,9 @@ export const Footer: FC = () => {
                 aria-label="CityLAB Berlin"
               >
                 <img
-                  src={CityLABLogo}
                   alt="Logo des CityLAB Berlin"
                   className="w-44"
+                  src="https://logos.citylab-berlin.org/logo-citylab-berlin-outline.svg"
                 />
               </a>
             </div>
@@ -58,9 +53,9 @@ export const Footer: FC = () => {
                 aria-label="Technologiestiftung Berlin"
               >
                 <img
-                  src={TSBLogo}
                   alt="Logo der Technologiestiftung Berlin"
                   className="w-40"
+                  src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-de.svg"
                 />
               </a>
             </div>
@@ -96,36 +91,6 @@ export const Footer: FC = () => {
                 <img
                   src={BerlinLogo}
                   alt="Logo: Der Regierende Bürgermeister von Berlin - Senatskanzlei"
-                  className="w-32"
-                />
-              </a>
-            </div>
-            <div className="block">
-              <a
-                href="https://www.berlin.de/sen/wirtschaft/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
-                aria-label="Senatsverwaltung für Wirtschaft, Energie und Betriebe"
-              >
-                <img
-                  src={SenWEBLogo}
-                  alt="Logo: Senatsverwaltung für Wirtschaft, Energie und Betriebe"
-                  className="w-32"
-                />
-              </a>
-            </div>
-            <div className="block">
-              <a
-                href="https://www.ibb.de/de/startseite/startseite.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 block hover:opacity-50 transition-opacity focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
-                aria-label="Investitionsbank Berlin"
-              >
-                <img
-                  src={IBBLogo}
-                  alt="Logo: Investitionsbank Berlin"
                   className="w-32"
                 />
               </a>

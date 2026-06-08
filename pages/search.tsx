@@ -10,6 +10,7 @@ import { FilteredSearchResultsType } from '@lib/types/haushaltsdaten'
 const ITEMS_PER_PAGE = 100
 
 const SEARCH_INDEXED_FIELDS = [
+  'titel',
   'titel_bezeichnung',
   'bereichs_bezeichnung',
   'einzelplan_bezeichnung',

@@ -105,6 +105,12 @@ Import the budget data into a local SQLite database:
 npm run db:import doppelhaushalt_2026_2027.csv
 ```
 
+To rebuild the search index do:
+
+```bash
+npm run db:export
+```
+
 You are now ready to start a local development server on http://localhost:3000 via:
 
 ```bash
