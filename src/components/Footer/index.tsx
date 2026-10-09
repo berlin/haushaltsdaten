@@ -1,9 +1,12 @@
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const BerlinLogo = '/images/berlin-skzl-logo.svg'
 const SenFINLogo = 'images/logo-berlin-senfin.svg'
 
 export const Footer: FC = () => {
+  const { t } = useTranslation()
+
   return (
     <footer id="main-footer">
       <section className="bg-gray-50 border-t border-gray-200 px-4 xl:px-8">
@@ -43,7 +46,7 @@ export const Footer: FC = () => {
             </div>
             <div className="block">
               <span className="w-full block text-xs text-gray-700">
-                Ein Projekt der:
+                {t('footer.projectOf')}
               </span>
               <a
                 href="https://technologiestiftung-berlin.de/"
@@ -61,7 +64,7 @@ export const Footer: FC = () => {
             </div>
             <div className="block">
               <span className="w-full block text-xs text-gray-700">
-                Zusammen mit:
+                {t('footer.togetherWith')}
               </span>
               <a
                 href="https://www.berlin.de/sen/finanzen/"
@@ -79,7 +82,7 @@ export const Footer: FC = () => {
             </div>
             <div className="block">
               <span className="w-full block text-xs text-gray-700">
-                Gefördert durch:
+                {t('footer.fundedBy')}
               </span>
               <a
                 href="https://www.berlin.de/rbmskzl/"
@@ -113,7 +116,7 @@ export const Footer: FC = () => {
                 rel="noopener noreferrer"
                 className="text-sm hover:text-brand transition-colors text-gray-700 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
               >
-                Kontakt
+                {t('footer.contact')}
               </a>
             </li>
             <li>
@@ -123,7 +126,7 @@ export const Footer: FC = () => {
                 rel="noopener noreferrer"
                 className="text-sm hover:text-brand transition-colors text-gray-700 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
               >
-                Quellcode
+                {t('footer.sourceCode')}
               </a>
             </li>
             <li>
@@ -133,7 +136,7 @@ export const Footer: FC = () => {
                 rel="noopener noreferrer"
                 className="text-sm hover:text-brand transition-colors text-gray-700 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
               >
-                Impressum
+                {t('footer.imprint')}
               </a>
             </li>
             <li>
@@ -143,7 +146,7 @@ export const Footer: FC = () => {
                 rel="noopener noreferrer"
                 className="text-sm hover:text-brand transition-colors text-gray-700 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-[1px] outline-none"
               >
-                Datenschutzerklärung
+                {t('footer.privacy')}
               </a>
             </li>
           </ul>

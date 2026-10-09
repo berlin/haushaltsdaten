@@ -1,0 +1,33 @@
+# Translation Review Needed
+
+The following files contain machine-assisted translations that should be
+reviewed by native speakers before production use.
+
+## Files requiring review
+
+### Turkish (tr)
+- `src/i18n/locales/tr.json` — UI strings (150+ keys)
+- `src/i18n/data-translations/tr.json` — Budget category names (~90 keys)
+- `src/data/descriptionData.tr.ts` — Topic tooltip descriptions (~90 entries)
+
+### English (en)
+- `src/i18n/locales/en.json` — UI strings (150+ keys)
+- `src/i18n/data-translations/en.json` — Budget category names (~90 keys)
+- `src/data/descriptionData.en.ts` — Topic tooltip descriptions (~90 entries)
+
+## Notes for reviewers
+
+- Budget category names (hauptfunktions_bezeichnung, etc.) are official German
+  administrative terms. Translations should be accurate but accessible.
+- The FAQ content is conversational German. Translations should sound natural,
+  not literal.
+- Turkish translations are particularly challenging due to the specialized
+  budget/administrative vocabulary.
+- Key terms to verify:
+  - "Doppelhaushalt" → "biennial budget" (EN) / "iki yıllık bütçe" (TR)
+  - "Haushaltsplan" → "budget plan" (EN) / "bütçe planı" (TR)
+  - "Einzelplan" → "sectoral budget" (EN) / "sektörel bütçe" (TR)
+  - "Titel" → "budget item" (EN) / "bütçe kalemi" (TR)
+  - "Funktionen" vs "Bereiche" — these are the two sorting modes
+  - "Gesamtausgaben" / "Gesamteinnahmen" — root treemap labels
+  - "Höchste Ausgabetitel" / "Höchste Einnahmetitel" — list section headers

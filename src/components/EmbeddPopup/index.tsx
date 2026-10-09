@@ -5,9 +5,11 @@ import { Popover, Transition } from '@headlessui/react'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { FC, Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const EmbeddPopup: FC = () => {
   const { asPath } = useRouter()
+  const { t } = useTranslation()
   const sharableURL = `${
     typeof window !== 'undefined' ? window.location.origin : ''
   }${asPath.replace('/visualisierung', '/share')}`
@@ -27,7 +29,7 @@ export const EmbeddPopup: FC = () => {
               'focus-visible:ring-offset-2 focus-visible:ring-offset-white'
             )}
           >
-            <span>Einbetten</span>
+            <span>{t('embed.button')}</span>
             <ChevronDown
               className={`${open ? '' : 'text-opacity-70'}
                   ml-2 h-5 w-5 text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
@@ -46,19 +48,16 @@ export const EmbeddPopup: FC = () => {
             <Popover.Panel className="absolute right-0 z-10 mt-3 w-80" static>
               <div className="overflow-hidden rounded shadow-lg shadow-gray-900/5 ring-1 ring-gray-200">
                 <div className="bg-white px-5 py-4">
-                  <h3 className="text-lg font-bold">Auswahl einbetten</h3>
+                  <h3 className="text-lg font-bold">{t('embed.title')}</h3>
                   <Paragraph className="leading-normal text-gray-500">
-                    Dieser Link kann zum Einbetten der aktuellen Visualisierung
-                    in ein{' '}
-                    <code className="rounded-md bg-gray-100 px-1 py-0.5">
-                      iframe
-                    </code>{' '}
-                    benutzt werden.
+                    {t('embed.description', {
+                      interpolation: { prefix: '<1>', suffix: '</1>' },
+                    })}
                   </Paragraph>
                   <CopyTextField
                     contentToCopy={sharableURL}
                     name="url"
-                    label="Kopiere die folgende URL"
+                    label={t('embed.copyLabel')}
                   >
                     {sharableURL}
                   </CopyTextField>

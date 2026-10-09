@@ -1,11 +1,15 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 import { formatCurrency } from '@lib/utils/numberUtil'
 import { TreemapHierarchyType } from '@lib/utils/createTreemapStructure'
 import { getColorByMainTopic } from './colors'
 import { TopicType } from 'pages/visualisierung'
 import { TopicDepth } from '@lib/utils/mapTopicDepthToColumn'
-import { topicDescriptions } from '@data/descriptionData'
+import { translateData } from '@lib/utils/translateData'
+import i18n from 'src/i18n'
+import { topicDescriptions as deDescriptions } from '@data/descriptionData'
+import { topicDescriptions as enDescriptions } from '@data/descriptionData.en'
+import { topicDescriptions as trDescriptions } from '@data/descriptionData.tr'
 
 export interface TreeMapType {
   width?: number
@@ -54,6 +58,12 @@ function position(
     )
 }
 
+const getDescriptionForLang = (lang: string): Record<string, string> => {
+  if (lang === 'en') return enDescriptions as Record<string, string>
+  if (lang === 'tr') return trDescriptions as Record<string, string>
+  return deDescriptions as Record<string, string>
+}
+
 export const TreeMap: FC<TreeMapType> = ({
   width = 800,
   height = 800,
@@ -63,12 +73,17 @@ export const TreeMap: FC<TreeMapType> = ({
   const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().rangeRound([0, height])
 
+  const descriptionsRef = useRef<Record<string, string>>({})
+
   useEffect(() => {
+    const lang = i18n.language || 'de'
+    descriptionsRef.current = getDescriptionForLang(lang)
+
     const name = (d: TreeMapNode): string =>
       d
         .ancestors()
         .reverse()
-        .map((d) => d.data.name)
+        .map((d) => translateData(d.data.name))
         .join(' → ')
 
     function tile(
@@ -130,8 +145,10 @@ export const TreeMap: FC<TreeMapType> = ({
         .append('title')
         .text(
           (d) =>
-            `${d.data.name}\n${'Betrag: € '}${format(d.value || 0)}\n\n${
-              topicDescriptions[d.data.name] || ''
+            `${translateData(d.data.name)}\n${translateData(
+              'Betrag: € '
+            )}${format(d.value || 0)}\n\n${
+              descriptionsRef.current[d.data.originalName] || ''
             }`
         )
 
@@ -141,8 +158,8 @@ export const TreeMap: FC<TreeMapType> = ({
         .attr('fill', (d) => {
           const mainTopic = d.parent
             ? d.ancestors().find((ancestor) => ancestor.depth === 1)?.data
-                .name || ''
-            : d.data.name
+                .originalName || ''
+            : d.data.originalName
 
           return d === root ? '#fff' : getColorByMainTopic(mainTopic)
         })
@@ -152,15 +169,15 @@ export const TreeMap: FC<TreeMapType> = ({
         .append('clipPath')
         .attr('id', (d) => `treemap-clippath-${d.data.id || ''}`)
         .append('use')
-        .attr('xlink:href', (d) => `treemap-clippath-${d.data.id || ''}`)
+        .attr('xlink:href', (d) => `#treemap-clippath-${d.data.id || ''}`)
 
       node
         .append('text')
-        .attr('clip-path', (d) => `treemap-clippath-${d.data.id || ''}`)
+        .attr('clip-path', (d) => `#treemap-clippath-${d.data.id || ''}`)
         .attr('font-weight', (d) => (d === root ? 'bold' : null))
         .selectAll('tspan')
         .data((d) =>
-          [d === root ? name(d) : d.data.name].concat(
+          [d === root ? name(d) : translateData(d.data.name)].concat(
             `€ ${formatCurrency(d.value || 0)}`
           )
         )
@@ -232,7 +249,7 @@ export const TreeMap: FC<TreeMapType> = ({
             .attrTween('opacity', () => d3.interpolate(1, 0))
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            .call(position, d, width, x, y)
+            .call(position, d.parent, width, x, y)
         )
         .call((t) =>
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -245,7 +262,7 @@ export const TreeMap: FC<TreeMapType> = ({
       d3.select('#expenditures-treemap').selectAll('g').remove()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hierarchy, width, height])
+  }, [hierarchy, width, height, i18n.language])
 
   return (
     <svg

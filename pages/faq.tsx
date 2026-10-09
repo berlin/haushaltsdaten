@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { FC } from 'react'
 import { GroupedBarChart } from '@components/GroupedBarChart'
 import { TOTAL_EXPENSES } from '@data/totalExpenses'
+import { useTranslation } from 'react-i18next'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticProps: GetStaticProps = async () => ({
@@ -11,12 +12,13 @@ export const getStaticProps: GetStaticProps = async () => ({
   },
 })
 
-const ReadMore: FC = ({ children }) => {
-  const text = children as string
+const ReadMore: FC<{ children: string }> = ({ children }) => {
+  const text = children
   const [isReadMore, setIsReadMore] = useState(true)
   const toggleReadMore = (): void => {
     setIsReadMore(!isReadMore)
   }
+  const { t } = useTranslation()
 
   return (
     <div className="mt-6">
@@ -29,60 +31,74 @@ const ReadMore: FC = ({ children }) => {
         onClick={toggleReadMore}
         className="font-medium text-brand cursor-pointer"
       >
-        {isReadMore ? ' ...mehr anzeigen' : ' weniger anzeigen'}
+        {isReadMore ? t('faq.readMore') : t('faq.readLess')}
       </button>
     </div>
   )
 }
 
+const Q4Text: FC = () => {
+  const { t } = useTranslation()
+  const raw = t('faq.q4Text')
+  const html = raw
+    .replace(
+      /<1>(.*?)<\/1>/g,
+      '<a class="text-brand" href="https://www.berlin.de/sen/finanzen/">$1</a>'
+    )
+    .replace(
+      /<3>(.*?)<\/3>/g,
+      '<a class="text-brand" href="https://daten.berlin.de">$1</a>'
+    )
+    .replace(
+      /<5>(.*?)<\/5>/g,
+      '<a class="text-brand" href="https://odis-berlin.de">$1</a>'
+    )
+  return <ReadMore>{html}</ReadMore>
+}
+
+const Q5Text: FC = () => {
+  const { t } = useTranslation()
+  const raw = t('faq.q5Text')
+  const html = raw.replace(
+    /<1>(.*?)<\/1>/g,
+    '<a class="text-brand" href="https://github.com/berlin/haushaltsdaten">$1</a>'
+  )
+  return <ReadMore>{html}</ReadMore>
+}
+
+const Q6Text: FC = () => {
+  const { t } = useTranslation()
+  const raw = t('faq.q6Text')
+  const html = raw.replace(
+    /<1>(.*?)<\/1>/g,
+    '<a class="text-brand" href="https://offenerhaushalt.de/page/datenstandard.html">$1</a>'
+  )
+  return <ReadMore>{html}</ReadMore>
+}
+
 export const FaqPage: FC = () => {
+  const { t } = useTranslation()
+
   return (
     <div className="px-8">
       <div className="md:w-4/5 m-auto mt-12 md:mt-20">
         <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl lg:ml-28">
-          Wissenswertes zum Berliner Haushalt
+          {t('faq.title')}
         </h1>
         <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
-          <div className="flex-col mt-6">
-            Wie genau funktioniert das eigentlich mit dem Haushalt? Das Land
-            Berlin muss alle voraussichtlichen Einnahmen und Ausgaben eines
-            Jahres im sogenannten Haushaltsplan ausweisen. Für jedes Jahr stellt
-            der Senat einen Haushaltsplanentwurf mit den jeweiligen
-            Einzelhaushalten der Verwaltungen auf.
-            <br></br>
-            {/* <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12">
-            Berliner Doppelhaushalt
-          </h2> */}
-            Haushaltsrechtlich möglich ist es auch, Haushalte für zwei Jahre
-            aufzustellen, jeweils nach Jahren getrennt. In Berlin macht man von
-            dieser Möglichkeit seit 2002 Gebrauch.
-          </div>
+          <div className="flex-col mt-6">{t('faq.introText')}</div>
 
           <p className="text-2xl text-center mt-6 md:mt-16">
-            92,1 Milliarden Euro
+            {t('faq.totalAmount')}
           </p>
           <p className="text-gray-500 text-xs md:text-sm text-center">
-            stehen Berlin im aktuellen Doppelhaushalt als Gesamtausgaben zur
-            Verfügung
+            {t('faq.totalAmountDescription')}
           </p>
 
-          <div className="mt-6 md:mt-16">
-            Im Haushalt ist festgelegt, wie viel Geld in den einzelnen
-            Politikbereichen ausgegeben werden darf. Gleichzeitig wird damit das
-            Budget (Etat) für die Erfüllung der öffentlichen Aufgaben Berlins
-            jährlich festgeschrieben. Die zu erwartenden Einnahmen aus Steuern,
-            Gebühren und weiteren Einnahmen dienen also zur Finanzierung aller
-            Aufgaben des Landes. Mit den Einnahmen steht ein klar begrenzter
-            Rahmen an Mitteln zur Verfügung, der zum großen Teil durch
-            Verpflichtungen Berlins (beispielsweise im Sozialbereich und der
-            Bildung) bereits rechtlich gebunden ist. Die Finanzierung weiterer
-            Aufgaben der Verwaltung (z. B. innere Sicherheit,
-            Wirtschaftsförderung, Kultur) erfolgt nach Vorlage durch den Senat
-            im politischen Abstimmungsprozess mit dem Abgeordnetenhaus.
-          </div>
+          <div className="mt-6 md:mt-16">{t('faq.budgetText')}</div>
 
           <p className="mt-6 md:mt-16 text-sm flex justify-center">
-            Gesamtausgaben des Berliner Haushalts in Mrd. €
+            {t('faq.chartCaption')}
           </p>
           <div className="mt-2 flex justify-center">
             <GroupedBarChart data={TOTAL_EXPENSES} />
@@ -91,194 +107,48 @@ export const FaqPage: FC = () => {
 
         <div className="lg:w-3/6 m-auto mt-6 md:mt-12 mb-16 md:mb-28 ">
           <h2 className="font-bold text-xl md:text-2xl">
-            Schwerpunktthemen der Haushalte
+            {t('faq.focusTitle')}
           </h2>
-          <div className="mt-6">
-            Berlin wächst - und mit seinen Aufgaben steigen auch die Ausgaben.
-            Besondere Aufmerksamkeit liegt daher weiterhin auf den
-            Investitionen. Über die Jahre hinweg ergeben sich diverse
-            thematische Schwerpunkte, wie beispielsweise die Berliner
-            Schulbauoffensive (BSO), die den Sanierungsstau an den Schulen
-            abbaut und neue Schulen errichtet, die Digitalisierung der
-            Verwaltung oder innere Sicherheit.
-            <br></br>
-            Das Land Berlin legt zudem bei Aufstellung und Umsetzung des
-            Haushaltsplans ein Augenmerk auf die Geschlechtergerechtigkeit und
-            integriert Gender Budgeting in seine Haushaltspolitik. Das heißt,
-            dass insbesondere die Ausgaben danach ausgewertet werden, inwieweit
-            sie den Geschlechtern zu gleichen Teilen zugutekommen.
-            <br></br>
-            Mehr zu aktuellen, sowie historischen Schwerpunkten und weiteren
-            Themen ist auf der Webseite der Senatsverwaltung für Finanzen zu
-            erfahren.
-          </div>
+          <div className="mt-6">{t('faq.focusText')}</div>
           <br></br>
 
           <div className="flex-col">
             <p className="text-brand">
               <a href="https://www.berlin.de/sen/finanzen/haushalt/">
-                → Mehr Informationen der Senatsverwaltung für Finanzen über den
-                Haushalt
+                {t('faq.moreInfoLink')}
               </a>
             </p>
-            {/* <p></p> */}
           </div>
 
           <h2 className="font-bold text-xl md:text-2xl mt-6 md:mt-12 md:mt-20">
-            Fragen und Antworten
+            {t('faq.qaTitle')}
           </h2>
           <h2 className=" text-xl mt-6 md:mt-12" id="Warum-Haushaltsdaten">
-            Warum werden die Haushaltsdaten visualisiert?
+            {t('faq.q1Title')}
           </h2>
-          <ReadMore>
-            {`Der komplette Datensatz des Berliner Haushaltes ist zwar als Open
-            Data veröffentlicht, jedoch aufgrund seiner Länge und Komplexität
-            nicht für jede und jeden intuitiv verständlich. Da der Haushalt
-            allerdings von besonderer Relevanz für das Leben in Berlin ist,
-            sollte er möglichst transparent dargestellt und für alle
-            Berlinerinnen und Berliner zugänglich sein. Diese Webseite wurde ins
-            Leben gerufen, um ein möglichst niedrigschwelliges Angebot zu
-            schaffen, sich mit den Haushaltsdaten auseinanderzusetzen.
-            <br><br>Vorlage für die Darstellung der Daten war das Projekt 
-            <a class="text-brand" href="https://offenerhaushalt.de">
-              "Offener Haushalt"
-            </a> 
-            der 
-            <a class="text-brand" href="https://okfn.de">
-              Open Knowledge Foundation</a>. Dabei handelte es sich um eine Webseite, die Haushaltsdaten für
-            Städte und Kommunen für Deutschland zentral und standardisiert
-            einsehbar gemacht hat. Das Land Berlin hat in den letzten Jahren auf
-            „Offener Haushalt“ zurückgegriffen, um seine Haushaltsdaten zu
-            visualisieren und auch via Einbettung auf der eigenen
-            Berlin.de-Webseite zu präsentieren. Seit 2021 kann „Offener
-            Haushalt“ jedoch nicht mehr aktiv gepflegt werden. Grund dafür ist,
-            dass in der aktuellen Förderlandschaft ein dauerhafter Betrieb
-            gemeinwohlorientierter Plattformen schwierig ist und Strategien für
-            die Übernahme seitens der Verwaltung bedauerlicherweise fehlen.`}
-          </ReadMore>
+          <ReadMore>{t('faq.q1Text')}</ReadMore>
 
-          <h2 className=" text-xl mt-6 md:mt-12">
-            Was genau zeigt die Visualisierung?
-          </h2>
-          <ReadMore>
-            {`Die interaktiven Kacheldiagramme (Tree Maps) in ihrer Ausgangsform
-              zeigen eine Übersicht der kompletten Ausgaben und Einnahmen des
-              aktuellen Doppelhaushalts 2026/2027 der Berliner Verwaltung. Die Flächen der Rechtecke sind dabei 
-              proportional zur Größe der darzustellenden Beträge. Über den 
-              Schieberegeler lässt sich einstellen, ob Einnahmen oder 
-              Ausgaben angezeigt werden sollen - das Diagramm passt sich 
-              entsprechend an. Die gezeigten Beträge gelten jeweils
-              für ein einzelnes Haushaltsjahr. Über das Dropdown-Menü kann daher
-              zwischen den Jahren gewechselt werden. Ebenfalls im Menü
-              auswählbar ist, ob Daten für Gesamt-Berlin, für einen einzelnen
-              Bezirk oder nur die Hauptverwaltungen angezeigt werden sollen.
-              Über das dritte Dropdown-Menü wird ausgewählt, ob die Beträge nach
-              Bereichen oder nach Funktionen sortiert dargestellt werden
-              sollen. Durch Klick auf eine der Flächen in der Tree Map lässt
-              sich die nächst tiefere Detailstufe anzeigen, um einzelne Untergruppen
-              näher zu erkunden. Die unterste detaillierte Angabe zu
-              spezifischen Ausgaben und Einnahmen sind die sogenannten Titel.
-              Die zu der aktuell im Diagramm ausgewählten Gruppe gehörenden
-              Titel, werden unter der Tree Map als Liste angezeigt. Wird im
-              Diagramm durch Klick eine tiefere Detailebene ausgewählt, wird die
-              Liste also dementsprechend gefiltert. Aus Performancegründen
-              werden immer nur die 100 Titel mit den größten Beträgen angezeigt.
-              Titel, Bereiche und Funktionen können auch gezielt über die
-              Suchfunktion gefunden werden.`}
-          </ReadMore>
+          <h2 className=" text-xl mt-6 md:mt-12">{t('faq.q2Title')}</h2>
+          <ReadMore>{t('faq.q2Text')}</ReadMore>
 
           <h2
             className=" text-xl mt-6 md:mt-12"
             id="Einzelplaene-und-Funktionen"
           >
-            Was sind Bereiche und Funktionen?
+            {t('faq.q3Title')}
           </h2>
-          <ReadMore>
-            {`Es gibt zwei verschiedene Optionen die Zuordnung der Einnahme- und
-            Ausgabetitel im Diagramm zu sortieren: nach Bereichen oder nach
-            Hauptfunktionen gegliedert. Die Bereiche bieten eine Übersicht
-            über die Einnahmen und Ausgaben der Haupt- und Bezirksverwaltungen
-            unterteilt nach Arten und zuständigem Bereich, z.B. Senatsverwaltung für Inneres
-            oder Schul- und Sportamt des Bezirks Mitte. Die Hauptfunktionen
-            stellen dagegen die Aufgaben dar, die durch die jeweiligen Einnahmen
-            oder Ausgaben erfüllt werden. Sowohl Bereiche als auch Funktionen
-            lassen sich durch Klick in die Tree Map in detailliertere
-            Untergruppen weiter untergliedern. Die unterste detaillierte Angabe
-            zu spezifischen Ausgaben und Einnahmen sind die sogenannten Titel.
-            Die zu den jeweils im Diagramm ausgewählten Bereichen und
-            Funktionen, bzw. deren Untergruppen, gehörenden Titel werden unter
-            der Tree Map als Liste angezeigt.`}
-          </ReadMore>
+          <ReadMore>{t('faq.q3Text')}</ReadMore>
 
-          <h2 className=" text-xl mt-6 md:mt-12">Wo kommen die Daten her?</h2>
-          <ReadMore>
-            {`Alle dieser Anwendung zugrundeliegenden Daten stammen aus dem Datensatz
-             zum "Doppelhaushalt 2026/2027" und sind als Open Data unter offener Lizenz verfügbar.
-             Sie können frei weiterverwendet und weiterverarbeitet werden.
-            Der Datensatz wird
-            von der 
-            <a
-              class="text-brand"
-              href="https://www.berlin.de/sen/finanzen/"
-            >
-            Senatsverwaltung für Finanzen
-            </a>
-            bereitgestellt und auf dem Berliner 
-            <a class="text-brand" href="https://daten.berlin.de">
-              Datenportal
-            </a> 
-            veröffentlicht. Dort finden sich auch historische Haushaltsdaten der
-            letzten 10 Jahre. Mehr zum Thema offene Daten der Berliner
-            Verwaltung ist auf der Webseite der 
-            <a class="text-brand" href="https://odis-berlin.de">
-              Open Data Informationsstelle
-            </a> 
-            zu finden.`}
-          </ReadMore>
+          <h2 className=" text-xl mt-6 md:mt-12">{t('faq.q4Title')}</h2>
+          <Q4Text />
 
           <h2 className=" text-xl mt-6 md:mt-12" id="Open-Source">
-            Ist die Anwendung Open Source? Wie kann sie weiterentwickelt werden?
+            {t('faq.q5Title')}
           </h2>
-          <ReadMore>
-            {`Nicht nur die Haushaltsdaten sind offen als Open Data verfügbar -
-            auch der Quellcode dieser Anwendung steht frei unter MIT-Lizenz zur
-            Verfügung. Die Digital-Community in Berlin und darüber hinaus ist
-            eingeladen, kollaborativ an der Entwicklung und Verbesserung der
-            Seite mitzuwirken oder Komponenten davon für eigene Arbeiten und
-            Projekte zu verwenden. Über 
-            <a
-              class="text-brand"
-              href="https://github.com/berlin/haushaltsdaten"
-            >
-              GitHub
-            </a> 
-            können Issues angelegt und Code-Verbesserungen oder neue Features
-            via Pull Request eingereicht werden.`}
-          </ReadMore>
+          <Q5Text />
 
-          <h2 className=" text-xl mt-6 md:mt-12">
-            Ist die Anwendung auch auf andere Länder und Kommunen übertragbar?
-          </h2>
-          <ReadMore>
-            {`Die Anwendung bzw. der Quellcode können von anderen Kommunen und
-            Ländern verwendet werden, um ihre eigenen Haushaltsdaten zu
-            präsentieren und transparent bereitzustellen. Voraussetzung ist,
-            dass die jeweiligen Haushaltsdaten in einem maschinenlesbaren Format
-            und geeigneter Struktur vorliegen. Das ist leider nicht in allen
-            Ländern und Kommunen selbstverständlich. Die Haushaltsdaten müssen
-            auf Bundes-, Landes- und Kommunalebene zwar per Gesetz
-            veröffentlicht werden, oft passiert dies jedoch in Form von
-            PDF-Berichten. Diese PDFs können zwar von Menschen gut gelesen
-            werden, für eine weitere Verarbeitung, wie für die Erstellung von
-            Diagrammen, sind sie aber nicht geeignet. Für die Berliner Daten und
-            diese Anwendung nutzen wir ein 
-            <a
-              class="text-brand"
-              href="https://offenerhaushalt.de/page/datenstandard.html"
-            >
-              Datenschema</a>, das von der Open Knowledge Foundation im Projekt „Offener
-            Haushalt“ entwickelt wurde.`}
-          </ReadMore>
+          <h2 className=" text-xl mt-6 md:mt-12">{t('faq.q6Title')}</h2>
+          <Q6Text />
         </div>
       </div>
     </div>

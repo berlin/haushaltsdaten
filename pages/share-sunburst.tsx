@@ -4,11 +4,10 @@ import {
   createTreeStructure,
   TreemapHierarchyType,
 } from '@lib/utils/createTreemapStructure'
-import { TreeMapWithData } from '@components/TreeMap/withData'
+import { Sunburst } from '@components/Sunburst'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { GetStaticProps } from 'next'
 import { FC, useMemo } from 'react'
-import useDimensions from 'react-cool-dimensions'
 import { districts } from '@data/districts'
 import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
 import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
@@ -17,17 +16,16 @@ import { useRouter } from 'next/router'
 import { useTranslation } from 'react-i18next'
 import { translateData } from '@lib/utils/translateData'
 
-const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
+const ALL_DISTRICTS_ID: keyof typeof districts = '01'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticProps: GetStaticProps = async () => ({
   props: {
-    title: 'Visualisierung',
+    title: 'Sonnenstrahl',
   },
 })
 
-export const SharePage: FC = () => {
-  const { observe, width, height } = useDimensions()
+export const ShareSunburstPage: FC = () => {
   const { query } = useRouter()
   const { t } = useTranslation()
 
@@ -67,10 +65,10 @@ export const SharePage: FC = () => {
     if (!haushaltsdaten) return null
     const rootName =
       queriedType === 'Ausgabetitel'
-        ? translateData('Alle Ausgaben')
-        : translateData('Alle Einnahmen')
+        ? translateData('Gesamtausgaben')
+        : translateData('Gesamteinnahmen')
     const originalRootName =
-      queriedType === 'Ausgabetitel' ? 'Alle Ausgaben' : 'Alle Einnahmen'
+      queriedType === 'Ausgabetitel' ? 'Gesamtausgaben' : 'Gesamteinnahmen'
     return {
       id: 'overview',
       name: rootName,
@@ -106,17 +104,13 @@ export const SharePage: FC = () => {
 
   return (
     <>
-      <div className="w-full h-screen overflow-hidden" ref={observe}>
-        {hierarchyData && width && height && (
-          <TreeMapWithData
-            hierarchy={hierarchyData}
-            width={width}
-            height={height}
-          />
+      <div className="w-full h-screen flex items-center justify-center overflow-hidden">
+        {hierarchyData && (
+          <Sunburst hierarchy={hierarchyData} width={600} height={600} />
         )}
       </div>
     </>
   )
 }
 
-export default SharePage
+export default ShareSunburstPage

@@ -6,7 +6,7 @@ import {
   createTreeStructure,
   TreemapHierarchyType,
 } from '@lib/utils/createTreemapStructure'
-import { TreeMapWithData } from '@components/TreeMap/withData'
+import { Sunburst, TopicType } from '@components/Sunburst'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { GetStaticProps } from 'next'
 import { FC, useState, useEffect, useMemo } from 'react'
@@ -14,20 +14,20 @@ import useDimensions from 'react-cool-dimensions'
 import { TreeMapControls } from '@components/TreeMapControls'
 import classNames from 'classnames'
 import { districts } from '@data/districts'
+import { useRouter } from 'next/router'
+import { EmbeddPopup } from '@components/EmbeddPopup'
+import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
+import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
+import { useHaushaltsdaten } from '@lib/hooks/useHaushaltsdaten'
+import { useTranslation } from 'react-i18next'
+import { translateData } from '@lib/utils/translateData'
 import { useListData } from '@lib/hooks/useListData'
 import {
   mapTopicDepthToColumn,
   TopicDepth,
 } from '@lib/utils/mapTopicDepthToColumn'
 import { getColorByMainTopic } from '@components/TreeMap/colors'
-import { useRouter } from 'next/router'
-import { EmbeddPopup } from '@components/EmbeddPopup'
-import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
-import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
 import { Button } from '@components/Button'
-import { useHaushaltsdaten } from '@lib/hooks/useHaushaltsdaten'
-import { useTranslation } from 'react-i18next'
-import { translateData } from '@lib/utils/translateData'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 const MAX_ROWS = 100
@@ -42,16 +42,11 @@ const isValidTopicDepth = (depthToCheck: number): boolean => {
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getStaticProps: GetStaticProps = async () => ({
   props: {
-    title: 'Visualisierung',
+    title: 'Sonnenstrahl',
   },
 })
 
-export interface TopicType {
-  topicDepth?: TopicDepth
-  topicLabel?: string
-}
-
-export const Visualization: FC = () => {
+export const Sonnenstrahl: FC = () => {
   const { observe, width, height } = useDimensions()
   const { push, pathname, query } = useRouter()
   const { t } = useTranslation()
@@ -141,7 +136,6 @@ export const Visualization: FC = () => {
 
   useEffect(() => {
     const listDataLength = (listData || []).length
-    // show all rows if dataLength is less or equal MAX_ROWS - otherwise show MAX_ROWS
     setVisibleRows(listDataLength <= MAX_ROWS ? listDataLength : MAX_ROWS)
   }, [listData])
 
@@ -193,11 +187,7 @@ export const Visualization: FC = () => {
               <TreeMapControls
                 district={queriedDistrictId || undefined}
                 onChange={(newQuery) => {
-                  // When resetting type or district, we want to clear the topic
-                  // as well, so that the list view displays items from every
-                  // topic again:
                   setTopic({})
-
                   void push({ pathname, query: newQuery }, undefined, {
                     shallow: false,
                   })
@@ -211,14 +201,14 @@ export const Visualization: FC = () => {
         </div>
         <div className="px-4 mt-6">
           <div
-            className="container mx-auto w-full h-[80vh] overflow-hidden"
+            className="container mx-auto w-full h-[80vh] overflow-hidden flex justify-center"
             ref={observe}
           >
             {hierarchyData && width && height && (
-              <TreeMapWithData
+              <Sunburst
                 hierarchy={hierarchyData}
-                width={width}
-                height={height}
+                width={Math.min(width, height)}
+                height={Math.min(width, height)}
                 onChangeLevel={(level) => {
                   setTopic(level)
                 }}
@@ -283,4 +273,4 @@ export const Visualization: FC = () => {
   )
 }
 
-export default Visualization
+export default Sonnenstrahl

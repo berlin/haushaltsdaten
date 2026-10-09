@@ -1,8 +1,11 @@
 import { Nav } from '@components/Nav'
 import classNames from 'classnames'
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export const Header: FC = () => {
+  const { t } = useTranslation()
+
   return (
     <header
       className={classNames(
@@ -19,7 +22,7 @@ export const Header: FC = () => {
         )}
       >
         <h1 className={classNames('w-full md:w-auto', 'font-bold text-xl')}>
-          Berliner Haushaltsdaten
+          {t('header.siteTitle')}
         </h1>
         <Nav />
       </div>

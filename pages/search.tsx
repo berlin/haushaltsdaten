@@ -6,6 +6,8 @@ import MiniSearch from 'minisearch'
 import { formatCurrency } from '@lib/utils/numberUtil'
 import { Button } from '@components/Button'
 import { FilteredSearchResultsType } from '@lib/types/haushaltsdaten'
+import { useTranslation } from 'react-i18next'
+import { translateData } from '@lib/utils/translateData'
 
 const ITEMS_PER_PAGE = 100
 
@@ -117,6 +119,7 @@ async function loadSearchData(basePath: string): Promise<{
 
 export const Search: FC = () => {
   const { basePath } = useRouter()
+  const { t } = useTranslation()
   const [results, setResults] = useState<FilteredSearchResultsType[] | null>(
     null
   )
@@ -198,23 +201,14 @@ export const Search: FC = () => {
             id="search-field-title"
             className="font-bold text-2xl md:text-3xl lg:text-4xl lg:ml-28"
           >
-            Textsuche
+            {t('search.title')}
           </h1>
           <div className="lg:w-3/6 m-auto mt-6 md:mt-16">
             <div className="flex-col mt-6">
-              Mithilfe dieser Funktion können die gesamten Haushalte der Jahre
-              2026 bis 2027 durchsucht werden. Es kann sowohl nach Bereichen,
-              Kapiteln (Zuständigkeiten), Funktionen und Gruppen (Art der
-              Ausgaben und Einnahmen), als auch stichwortartig nach den
-              einzelnen Ausgabetiteln gesucht werden. Auch Kombinationen und
-              Suchen nach numerischen Bezeichnungen von Ausgabetiteln sind
-              möglich.
+              {t('search.description')}
               <br></br>
               <br></br>
-              Ein Beispiel für eine allgemeine Suche nach Kapiteln wäre
-              {
-                '„Senatsverwaltung für Inneres und Sport" mit über 380 Ergebnissen. Eine detailliertere Suche nach Stichworten wäre zum Beispiel „Sporthalle" (46 Ergebnisse) oder „Kita Spandau" (10 Ergebnisse).'
-              }
+              {t('search.searchExample')}
             </div>
           </div>
         </div>
@@ -227,7 +221,7 @@ export const Search: FC = () => {
               type="text"
               id="full-text-search-field"
               name="search"
-              placeholder="Suchbegriff"
+              placeholder={t('search.placeholder')}
               className={classNames(
                 'sm:min-w-[300px] p-2',
                 'rounded-md',
@@ -243,7 +237,7 @@ export const Search: FC = () => {
               id="submit"
               onClick={handleClick}
             >
-              Suchen
+              {t('search.button')}
             </button>
           </form>
         </div>
@@ -260,8 +254,9 @@ export const Search: FC = () => {
                       <div>
                         {searchTerm ? (
                           <p>
-                            {results.length} Ergebnis
-                            {results.length !== 1 && 'se'} für den Begriff{' '}
+                            {t('search.resultsCount', {
+                              count: results.length,
+                            })}{' '}
                             <span className="font-bold">{searchTerm}</span>
                           </p>
                         ) : null}
@@ -292,6 +287,8 @@ export const Search: FC = () => {
                               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                               // @ts-ignore
                               const item = result[k] as string
+                              const translatedItem =
+                                k === 'id' ? item : translateData(item)
                               return (
                                 <td
                                   key={k}
@@ -299,7 +296,7 @@ export const Search: FC = () => {
                                     i === 2 ? 'text-right' : 'text-left'
                                   }`}
                                 >
-                                  {item}
+                                  {translatedItem}
                                 </td>
                               )
                             })}
@@ -318,8 +315,8 @@ export const Search: FC = () => {
                       >
                         <span className="block">
                           {itemsShown >= results.length
-                            ? 'Keine weitere Suchergebnisse'
-                            : 'Weitere Suchergebnisse anzeigen'}
+                            ? t('search.noMoreResults')
+                            : t('search.showMore')}
                           <span className="font-normal text-xs block">
                             ({Math.min(itemsShown, results.length)}/
                             {results.length})
@@ -334,7 +331,7 @@ export const Search: FC = () => {
                   <div className="">
                     {searchTerm ? (
                       <p>
-                        Keine Ergebnisse für den Begriff{' '}
+                        {t('search.noResults')}{' '}
                         <span className="font-bold">{searchTerm}</span>
                       </p>
                     ) : null}
@@ -364,7 +361,7 @@ export const Search: FC = () => {
                   fill="currentFill"
                 ></path>
               </svg>
-              <span className="sr-only">Loading...</span>
+              <span className="sr-only">{t('search.loading')}</span>
             </div>
           </div>
         </>

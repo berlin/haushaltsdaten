@@ -48,3 +48,4 @@ data/*.db-shm
 
 # Generated data files (uncomment to exclude from git)
 # public/data/
+AGENTS.md
