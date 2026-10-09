@@ -1,5 +1,6 @@
 import * as d3 from 'd3'
 import { FC, MouseEvent, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export interface IGroupedData {
   label: string
@@ -59,6 +60,7 @@ export const GroupedBarChart: FC<GroupedBarChartProps> = ({ data }) => {
   const [tooltip, setTooltip] = useState<Tooltip | null>(null)
   const axisBottomRef = useRef<SVGGElement>(null)
   const axisLeftRef = useRef<SVGGElement>(null)
+  const { t } = useTranslation()
 
   const margin = { top: 10, right: 0, bottom: 20, left: 30 }
   const width = 600 - margin.left - margin.right
@@ -130,9 +132,12 @@ export const GroupedBarChart: FC<GroupedBarChartProps> = ({ data }) => {
       {tooltip !== null ? (
         <div className="tooltip" style={{ top: tooltip.y, left: tooltip.x }}>
           <span className="tooltip__title">
-            SOLL-Ausgaben in {labels[tooltip.index]}
+            {t('chart.plannedExpenses')}
+            {labels[tooltip.index]}
           </span>
-          <div>{data[tooltip.index].values[0]} Millarden €</div>
+          <div>
+            {data[tooltip.index].values[0]} {t('chart.billionEuros')}
+          </div>
         </div>
       ) : null}
     </>

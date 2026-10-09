@@ -1,0 +1,138 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "visualization": "Görselleştirme",
+    "search": "Arama",
+    "info": "Bilgi"
+  },
+  "header": {
+    "siteTitle": "Berlin Bütçe Verileri"
+  },
+  "footer": {
+    "projectOf": "Bir proje:",
+    "togetherWith": "Beraber:",
+    "fundedBy": "Destekleyen:",
+    "contact": "İletişim",
+    "sourceCode": "Kaynak Kodu",
+    "imprint": "Künye",
+    "privacy": "Gizlilik Politikası"
+  },
+  "home": {
+    "titleLine1": "Berlin",
+    "titleLine2": "Bütçe Verileri",
+    "year": "2026/27",
+    "intro": "Her yıl, Berlin idaresi yasal gereklilikleri yerine getirmek ve hedeflerini gerçekleştirmek için yaklaşık 46 milyar euroya sahiptir. Ancak Senato ve ilçeler kaynaklarının ne kadarını hangi alanlara harcamaktadır? Bu web sitesi, mevcut iki yıllık bütçe 2026/27 için devletin planlanan giderlerine ve gelirlerine genel bir bakış sunmaktadır. Uygulama, geliştirilmek üzere <1>açık kaynak projesi</1> olarak mevcuttur!",
+    "questionPrefix": "Berlin ne kadar harcıyor",
+    "typeAnimation": [
+      "polis için?",
+      "kamu müzeleri için?",
+      "konut inşaatı için?",
+      "sokak aydınlatması için?",
+      "temel gelir desteği için?"
+    ],
+    "body1": "Berlin'de yaşamak ve birlikte yaşamak birçok sürekli maliyet oluşturmaktadır: öğretmen maaşları, kamu binalarının işletilmesi, kültürel tesislerin desteklenmesi ve sokak aydınlatması. Buna ek olarak, okullar, toplu taşıma veya parklar ve rekreasyon alanları gibi teknik ve sosyal altyapılara yönelik uzun vadeli yatırımlar bulunmaktadır. Tüm bu giderleri Berlin idaresi karşılamaktadır. Peki para neye harcanmaktadır?",
+    "body2": "Harcamalar Berlin Eyalet Meclisi tarafından Bütçe Yasası'nda belirlenir. Dokuz ulusal düzeyde standartlaştırılmış ana fonksiyonel alana ayrılabilirler. Bunlar, aşağı doğru sürekli dallanan bir yapının en üst düzeyi olarak, bir tree map olarak adlandırılan bir şekilde temsil edilebilir.",
+    "toVisualization": "→ Görselleştirmeye",
+    "exploreAll": "Tüm giderleri ve gelirleri tree map'te keşfedin",
+    "iframeTitle": "Bütçe verilerinin örnek görselleştirmesi",
+    "districtInfo": "Berlin bütçe planında, giderler ve gelirler ayrıca ana idarelerin ve ilçelerin belirli alanlarına atanmaktadır. Tutarlar her bütçe yılı için ayrı ayrı belirtilmektedir. Yukarıdaki link üzerinden erişilebilen görselleştirme ile temsil biçimleri ve yıllar ayrıntılı olarak keşfedilebilir.",
+    "detailInfo": "Bütçe planındaki belirli tutarlara ilişkin en ayrıntılı bilgiler, sözde gelir ve gider kalemeleridir. Bunlar görselleştirme yoluyla filtrelenebilir ve ardından tree map'in altında görünür. Kalemeler ve işlevler ayrıca arama işlevi üzerinden de bulunabilir.",
+    "toSearch": "→ Aramaya",
+    "searchDescription": "Gelirler ve giderlerde anahtar kelimelerle arama",
+    "budgetInfo": "Bütçe nasıl oluşuyor ve nasıl uygulanıyor? Berlin Eyaleti, bir yılın tüm beklenen gelir ve giderlerini bütçe planında belirtmelidir. Her yıl Senato, idarelerin tek tek bütçelerini içeren bir bütçe taslağı hazırlar ve Eyalet Meclisi'ne sunar. Milletvekilleri bundan sonra değişiklik yapabilir. Görüşmelerin sonunda Bütçe Yasası'nı kabul ederler. Daha fazla bilgi bilgi sayfasında bulunabilir.",
+    "toInfo": "→ Bilgi Sayfasına",
+    "infoDescription": "Berlin bütçesi hakkında soru ve cevapları öğrenin"
+  },
+  "visualization": {
+    "pageTitle": "Görselleştirme",
+    "totalExpenses": "Toplam Giderler",
+    "totalIncome": "Toplam Gelirler",
+    "highestExpenses": "En Yüksek Gider Kalemleri",
+    "higherIncome": "En Yüksek Gelir Kalemleri",
+    "showMoreExpenses": "Daha fazla gider kalemi göster",
+    "showMoreIncome": "Daha fazla gelir kalemi göster",
+    "loading": "Yükleniyor..."
+  },
+  "share": {
+    "pageTitle": "Görselleştirme",
+    "allExpenses": "Tüm Giderler",
+    "allIncome": "Tüm Gelirler",
+    "loading": "Yükleniyor..."
+  },
+  "controls": {
+    "income": "Gelirler",
+    "expenses": "Giderler",
+    "functions": "İşlevler",
+    "areas": "Alanlar",
+    "navAriaLabel": "Görselleştirme navigasyonu"
+  },
+  "treemap": {
+    "amountLabel": "Tutar: € ",
+    "allAreas": "Tüm İlçeler"
+  },
+  "listItem": {
+    "currency": "€"
+  },
+  "search": {
+    "pageTitle": "Metin Araması",
+    "title": "Metin Araması",
+    "description": "Bu işlev, 2026 ila 2027 yıllarına ait tüm bütçeleri aramanızı sağlar. Hem alanlara, bölümlere (sorumluluklar), işlevlere ve gruplara (gider ve gelir türleri) göre hem de tek tek gider kalemlerine anahtar kelimelerle arama yapılabilir. Kombinasyonlar ve gider kalemlerinin sayısal tanımlarıyla aramalar da mümkündür.",
+    "searchExample": "Bölümler için genel bir arama örneği, 380'den fazla sonuçla \"İçişleri ve Spor Senatosu\" olacaktır. Anahtar kelimelerle daha ayrıntılı bir arama örneğin \"spor salonu\" (46 sonuç) veya \"Spandau kreş\" (10 sonuç) olabilir.",
+    "placeholder": "Arama terimi",
+    "button": "Ara",
+    "resultsCount_one": "terim için {{count}} sonuç",
+    "resultsCount_other": "terim için {{count}} sonuç",
+    "noMoreResults": "Başka arama sonucu yok",
+    "showMore": "Daha fazla arama sonucu göster",
+    "noResults": "terim için sonuç bulunamadı",
+    "loading": "Yükleniyor..."
+  },
+  "embed": {
+    "button": "Yerleştir",
+    "title": "Seçimi yerleştir",
+    "description": "Bu bağlantı, mevcut görselleştirmeyi bir <1>iframe</1>'e yerleştirmek için kullanılabilir.",
+    "copyLabel": "Aşağıdaki URL'yi kopyalayın",
+    "copied": "Panoya kopyalandı!"
+  },
+  "error": {
+    "notFound": "Bu sayfa bulunamadı",
+    "serverError": "Dahili Sunucu Hatası",
+    "backToHome": "Ana Sayfa"
+  },
+  "faq": {
+    "pageTitle": "Bilgi",
+    "readMore": " ...daha fazla göster",
+    "readLess": "daha az göster",
+    "title": "Berlin Bütçesi Hakkında",
+    "introText": "Bütçe tam olarak nasıl çalışıyor? Berlin Eyaleti, bir yılın tüm beklenen gelir ve giderlerini sözde bütçe planında belirtmelidir. Her yıl Senato, idarelerin tek tek bütçelerini içeren bir bütçe taslağı hazırlar. İki yıllık bütçe oluşturma da mümkündür, yıllar ayrı ayrı. Berlin 2002'den beri bu imkanı kullanmaktadır.",
+    "totalAmount": "92,1 milyar euro",
+    "totalAmountDescription": "mevcut iki yıllık bütçede Berlin'e toplam gider olarak mevcuttur",
+    "budgetText": "Bütçe, politika alanlarının her birinde ne kadar harcama yapılabileceğini belirler. Aynı zamanda, Berlin'in kamu görevlerinin yerine getirilmesi için bütçe (ödenek) yıllık olarak belirlenir. Vergiler, ücretler ve diğer gelirlerden beklenen gelirler, thus eyaletin tüm görevlerinin finansmanına hizmet eder. Gelirlerle, büyük ölçüde Berlin'in yükümlülükleri (örneğin sosyal alan ve eğitimde) tarafından zaten yasal olarak bağlanmış net bir fon çerçeve alanı mevcuttur. İdarenin diğer görevlerinin (ör. iç güvenlik, ekonomik gelişme, kültür) finansmanı, Senato tarafından Eyalet Meclisi ile politik istişare sürecinde yapılır.",
+    "chartCaption": "Berlin bütçesinin toplam giderleri milyar € cinsinden",
+    "focusTitle": "Bütçe Öncelik Alanları",
+    "focusText": "Berlin büyüyor - ve görevleri ile harcamaları da artıyor. Bu nedenle özel dikkat yatırımlara yönelmektedir. Yıllar içinde, okullardaki onarım birikimini ortadan kaldıran ve yeni okullar inşa eden Berlin Okul İnşaatı Girişimi (BSO), idarenin dijitalleştirilmesi veya iç güvenlik gibi çeşitli tematik öncelikler ortaya çıkmıştır. Berlin Eyaleti ayrıca bütçenin hazırlanması ve uygulanmasında toplumsal cinsiyet eşitliğine dikkat eder ve Cinsiyet Bütçeleme'yi mali politikasına entegre eder. Bu, harcamaların özellikle cinsiyetlere eşit derecede fayda sağlaması açısından değerlendirildiği anlamına gelir. Güncel ve tarihsel öncelikler ve diğer konular hakkında daha fazla bilgi Senato Finans Bakanlığı web sitesinde bulunabilir.",
+    "moreInfoLink": "→ Senato Finans Bakanlığı'ndan bütçe hakkında daha fazla bilgi",
+    "qaTitle": "Sorular ve Cevaplar",
+    "q1Title": "Bütçe verileri neden görselleştiriliyor?",
+    "q1Text": "Berlin bütçesinin eksiksiz veri seti Açık Veri olarak yayınlanmış olsa da, uzunluğu ve karmaşıklığı nedeniyle herkes için sezgisel olarak anlaşılır değildir. Bütçe Berlin'de yaşam için particular bir öneme sahip olduğundan, mümkün olduğunca şeffaf sunulmalı ve tüm Berlinliler için erişilebilir olmalıdır. Bu web sitesi, bütçe verileriyle ilgilenmek için düşük engelli bir fırsat yaratmak amacıyla hayata geçirilmiştir. Verilerin sunumu için şablon <1>\"Offener Haushalt\"</1> projesiydi <3>Open Knowledge Foundation</3>. Bu, Almanya'daki şehirler ve belediyeler için bütçe verilerini merkezi ve standart bir biçimde erişilebilir kılan bir web sitesiydi. Berlin Eyaleti son yıllarda bütçe verilerini görselleştirmek ve kendi Berlin.de web sitesinde yerleştirme yoluyla sunmak için \"Offener Haushalt\"ı kullandı. Ancak 2021'den beri \"Offener Haushalt\" artık aktif olarak bakım edilememektedir. Bunun nedeni, mevcut fon ortamında ortak yarar odaklı platformların kalıcı olarak işletilmesinin zor olması ve idare tarafından devralınması için stratejilerin maalesef bulunmamasıdır.",
+    "q2Title": "Görselleştirme tam olarak ne gösteriyor?",
+    "q2Text": "Etkileşimli kare diyagramları (tree map'ler) başlangıç biçimi olarak, Berlin idaresinin mevcut iki yıllık bütçesi 2026/2027'nin tam giderlerine ve gelirlerine genel bir bakış gösterir. Dikdörtgenlerin alanları, görüntülenecek tutarların büyüklüğüne orantılıdır. Kaydırıcı ile gelirlerin mi yoksa giderlerin mi görüntüleneceği ayarlanabilir - diyagram buna göre uyum sağlar. Gösterilen tutarlar her zaman tek bir bütçe yılına aittir. Bu nedenle açılır menü yıllar arasında geçiş yapılabilir. Menüde ayrıca Berlin geneli, tek bir ilçe veya sadece ana idareler için veri gösterilip gösterilmeyeceği de seçilebilir. Üçüncü açılır menü, tutarların alanlara göre mi yoksa işlevlere göre mi sıralı gösterileceğini seçer. Tree map'teki alanlardan birine tıklama, tek alt grupları daha ayrıntılı olarak keşfetmek için bir sonraki daha derin detay düzeyini görüntüler. Belirli gider ve gelirlere ilişkin en ayrıntılı bilgiler sözde kalemelerdir. Diyagramda seçili olan gruba ait kalemeler, tree map'in altında liste olarak görüntülenir. Diyagramda tıklama yoluyla daha derin bir detay düzeyi seçildiğinde, liste buna göre filtrelenir. Performans nedeniyle, her zaman yalnızca en büyük tutarlara sahip 100 kalem gösterilir. Kalemeler, alanlar ve işlevler ayrıca arama işlevi üzerinden de bulunabilir.",
+    "q3Title": "Alanlar ve işlevler nedir?",
+    "q3Text": "Diyagramda gelir ve gider kalemelerinin sıralanması için iki farklı seçenek vardır: alanlara göre veya ana işlevlere göre. Alanlar, ana idarelerin ve ilçe idarelerinin gelir ve giderlerine tür ve sorumlu alana göre bölünmüş bir genel bakış sunar, örneğin İçişleri Senatosu veya Mitte İlçesi Okul ve Spor Dairesi. Ana işlevler ise ilgili gelir veya gider tarafından yerine getirilen görevleri temsil eder. Hem alanlar hem de işlevler, tree map'te tıklama yoluyla daha ayrıntılı alt gruplara daha da bölünebilir. Belirli gider ve gelirlere ilişkin en ayrıntılı bilgiler sözde kalemelerdir. Diyagramda seçili olan alanlara ve işlevlere veya bunların alt gruplarına ait kalemeler, tree map'in altında liste olarak görüntülenir.",
+    "q4Title": "Veriler nereden geliyor?",
+    "q4Text": "Bu uygulamanın temelini oluşturan tüm veriler \"İki Yıllık Bütçe 2026/2027\" veri setinden gelmektedir ve açık lisans altında Açık Veri olarak mevcuttur. Serbestçe yeniden kullanılabilir ve işlenebilir. Veri seti <1>Senato Finans Bakanlığı</1> tarafından sağlanmakta ve Berlin'in <3>veri portalında</3> yayınlanmaktadır. Orada son 10 yıllık tarihsel bütçe verileri de bulunabilir. Berlin idaresindeki açık veriler hakkında daha fazla bilgi <5>Açık Veri Bilgi Ofisi</5> web sitesinde bulunabilir.",
+    "q5Title": "Uygulama açık kaynak mı? Nasıl geliştirilebilir?",
+    "q5Text": "Yalnızca bütçe verileri değil, bu uygulamanın kaynak kodu da MIT lisansı altında özgürce mevcuttur. Berlin'deki ve ötesindeki dijital topluluk, sitenin geliştirilmesine ve iyileştirilmesine işbirlikçi olarak katılmaya veya bileşenlerini kendi çalışmaları ve projeleri için kullanmaya davet edilmektedir. <1>GitHub</1> üzerinden sorunlar oluşturulabilir ve kod iyileştirmeleri veya yeni özellikler pull request yoluyla gönderilebilir.",
+    "q6Title": "Uygulama diğer eyaletlere ve belediyelere de aktarılabilir mi?",
+    "q6Text": "Uygulama veya kaynak kodu, kendi bütçe verilerini sunmak ve şeffaf bir şekilde sağlamak için diğer belediyeler ve eyaletler tarafından kullanılabilir. Ön koşul, ilgili bütçe verilerinin makine tarafından okunabilir bir biçimde ve uygun yapıda bulunmasıdır. Bu maalesef tüm eyaletler ve belediyeler için geçerli değildir. Bütçe verilerinin federal, eyalet ve belediye düzeyinde yasaya göre yayınlanması gerekir, ancak bu genellikle PDF raporları biçiminde gerçekleşir. Bu PDF'ler insanlar tarafından iyi okunabilir, ancak diyagramların oluşturulması gibi daha fazla işlenme için uygun değildir. Berlin verileri ve bu uygulama için, Open Knowledge Foundation'ın \"Offener Haushalt\" projesinde geliştirilen bir <1>veri şeması</1> kullanıyoruz."
+  },
+  "head": {
+    "defaultDescription": "Berlin bütçe verilerinin etkileşimli görselleştirmesi",
+    "defaultSiteTitle": "Berlin Bütçe Verileri",
+    "defaultPageTitle": "Harita"
+  },
+  "chart": {
+    "plannedExpenses": "PLANLANAN giderler ",
+    "billionEuros": "milyar €"
+  }
+}

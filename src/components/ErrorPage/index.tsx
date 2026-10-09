@@ -1,6 +1,7 @@
 import { InternalLink } from '@components/InternalLink'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface ErrorPagePropType {
   statusCode: number
@@ -9,6 +10,7 @@ interface ErrorPagePropType {
 
 export const ErrorPage: FC<ErrorPagePropType> = ({ statusCode, message }) => {
   const hasMobileSize = useHasMobileSize()
+  const { t } = useTranslation()
 
   return (
     <div
@@ -25,7 +27,7 @@ export const ErrorPage: FC<ErrorPagePropType> = ({ statusCode, message }) => {
         href="/"
         className="underline opacity-100 transition-opacity hover:opacity-60"
       >
-        Startseite
+        {t('error.backToHome')}
       </InternalLink>
     </div>
   )

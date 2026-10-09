@@ -1,0 +1,138 @@
+{
+  "nav": {
+    "home": "Home",
+    "visualization": "Visualization",
+    "search": "Search",
+    "info": "Info"
+  },
+  "header": {
+    "siteTitle": "Berlin Budget Data"
+  },
+  "footer": {
+    "projectOf": "A project by:",
+    "togetherWith": "Together with:",
+    "fundedBy": "Funded by:",
+    "contact": "Contact",
+    "sourceCode": "Source Code",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy"
+  },
+  "home": {
+    "titleLine1": "Berlin",
+    "titleLine2": "Budget Data",
+    "year": "2026/27",
+    "intro": "Each year, the Berlin administration has around 46 billion euros at its disposal to implement legal requirements and achieve its goals. But what proportion of their resources do the Senate and districts spend on what? This website provides an overview of the planned expenditure and revenue of the state for the current biennial budget 2026/27. The application is available as an <1>open source project</1> for further development!",
+    "questionPrefix": "How much money does Berlin spend on",
+    "typeAnimation": [
+      "the police?",
+      "public museums?",
+      "housing construction?",
+      "street lighting?",
+      "basic income support?"
+    ],
+    "body1": "Living and coexisting in Berlin incurs many ongoing costs: teachers' salaries, the operation of public buildings, the funding of cultural institutions, and street lighting. In addition, there are long-term investments in technical and social infrastructure such as schools, public transport, or parks and recreational areas. The Berlin administration bears all these expenses. But what is the money spent on?",
+    "body2": "The expenditure is determined by the Berlin House of Representatives in the Budget Act. It can be divided into nine nationally standardized main functional areas. These can be represented as the top level of a structure that branches out ever further downward, known as a tree map.",
+    "toVisualization": "→ To the Visualization",
+    "exploreAll": "Explore all expenses and income in the tree map",
+    "iframeTitle": "Example visualization of budget data",
+    "districtInfo": "In Berlin's budget plan, expenditure and revenue are also assigned to specific areas of main administrations and districts. The amounts for each budget year are stated separately. Using the visualization, which is accessible via the link above, the individual forms of representation and years can be explored in detail.",
+    "detailInfo": "The most detailed information on specific amounts in the budget plan is the so-called income and expense items. They can be filtered via the visualization and then appear below the tree map. Items and functions can also be found specifically via the search function.",
+    "toSearch": "→ To the Search",
+    "searchDescription": "Search for keywords in income and expenses",
+    "budgetInfo": "How is the budget created and how is it implemented? The State of Berlin must record all expected income and expenditure for a year in a budget plan. Each year, the Senate draws up a budget draft with the individual budgets of the administrations and submits it to the House of Representatives. The deputies can then make changes. At the end of the deliberations, they pass the Budget Act. Further information can be found on the info page.",
+    "toInfo": "→ To the Info Page",
+    "infoDescription": "Learn more in the questions and answers about Berlin's budget"
+  },
+  "visualization": {
+    "pageTitle": "Visualization",
+    "totalExpenses": "Total Expenses",
+    "totalIncome": "Total Income",
+    "highestExpenses": "Highest Expense Items",
+    "highestIncome": "Highest Income Items",
+    "showMoreExpenses": "Show more expense items",
+    "showMoreIncome": "Show more income items",
+    "loading": "Loading..."
+  },
+  "share": {
+    "pageTitle": "Visualization",
+    "allExpenses": "All Expenses",
+    "allIncome": "All Income",
+    "loading": "Loading..."
+  },
+  "controls": {
+    "income": "Income",
+    "expenses": "Expenses",
+    "functions": "Functions",
+    "areas": "Areas",
+    "navAriaLabel": "Visualization navigation"
+  },
+  "treemap": {
+    "amountLabel": "Amount: € ",
+    "allAreas": "All Districts"
+  },
+  "listItem": {
+    "currency": "€"
+  },
+  "search": {
+    "pageTitle": "Text Search",
+    "title": "Text Search",
+    "description": "This function allows you to search the entire budgets for the years 2026 to 2027. You can search by areas, chapters (responsibilities), functions and groups (types of expenditure and income), as well as by individual expense items using keywords. Combinations and searches for numerical designations of expense items are also possible.",
+    "searchExample": "An example of a general search for chapters would be \"Senate Department for the Interior and Sport\" with over 380 results. A more detailed keyword search would be, for example, \"sports hall\" (46 results) or \"daycare Spandau\" (10 results).",
+    "placeholder": "Search term",
+    "button": "Search",
+    "resultsCount_one": "{{count}} result for the term",
+    "resultsCount_other": "{{count}} results for the term",
+    "noMoreResults": "No more search results",
+    "showMore": "Show more search results",
+    "noResults": "No results for the term",
+    "loading": "Loading..."
+  },
+  "embed": {
+    "button": "Embed",
+    "title": "Embed selection",
+    "description": "This link can be used to embed the current visualization in an <1>iframe</1>.",
+    "copyLabel": "Copy the following URL",
+    "copied": "Copied to clipboard!"
+  },
+  "error": {
+    "notFound": "This page was not found",
+    "serverError": "Internal Server Error",
+    "backToHome": "Home"
+  },
+  "faq": {
+    "pageTitle": "Info",
+    "readMore": " ...show more",
+    "readLess": "show less",
+    "title": "About Berlin's Budget",
+    "introText": "How exactly does the budget work? The State of Berlin must record all expected income and expenditure for a year in the so-called budget plan. Each year, the Senate draws up a budget draft with the individual budgets of the administrations. It is also legally possible to draw up budgets for two years, separated by year. Berlin has been making use of this option since 2002.",
+    "totalAmount": "92.1 billion euros",
+    "totalAmountDescription": "are available to Berlin as total expenditure in the current biennial budget",
+    "budgetText": "The budget determines how much money may be spent in each policy area. At the same time, it annually fixes the budget (appropriations) for the fulfilment of Berlin's public tasks. The expected revenue from taxes, fees, and other income thus serves to finance all tasks of the state. With the revenue, there is a clearly limited framework of funds, most of which is already legally committed by Berlin's obligations (for example, in the social sector and education). The financing of further administrative tasks (e.g., internal security, economic development, culture) is carried out by the Senate in the political consultation process with the House of Representatives.",
+    "chartCaption": "Total expenditure of Berlin's budget in billion €",
+    "focusTitle": "Budget Focus Areas",
+    "focusText": "Berlin is growing - and so are its tasks and expenditure. Special attention therefore continues to be on investments. Over the years, various thematic priorities have emerged, such as the Berlin School Construction Offensive (BSO), which is eliminating the backlog of school renovations and building new schools, the digitalization of administration, or internal security. The State of Berlin also pays attention to gender equality in the preparation and implementation of the budget and integrates Gender Budgeting into its fiscal policy. This means that expenditure is evaluated in particular in terms of how equally it benefits all genders. More information on current and historical priorities and other topics can be found on the website of the Senate Department for Finance.",
+    "moreInfoLink": "→ More information from the Senate Department for Finance about the budget",
+    "qaTitle": "Questions and Answers",
+    "q1Title": "Why is the budget data visualized?",
+    "q1Text": "The complete dataset of Berlin's budget is published as Open Data, but due to its length and complexity, it is not intuitively understandable for everyone. Since the budget is of particular relevance for life in Berlin, it should be presented as transparently as possible and be accessible to all Berliners. This website was created to provide a low-barrier opportunity to engage with the budget data. The template for the data presentation was the project <1>\"Offener Haushalt\"</1> of the <3>Open Knowledge Foundation</3>. This was a website that made budget data for cities and municipalities in Germany centrally and standardistically accessible. The State of Berlin has used \"Offener Haushalt\" in recent years to visualize its budget data and present it via embedding on its own Berlin.de website. Since 2021, however, \"Offener Haushalt\" can no longer be actively maintained. The reason for this is that in the current funding landscape, it is difficult to operate platforms oriented towards the common good on a permanent basis, and strategies for adoption by the administration are unfortunately lacking.",
+    "q2Title": "What exactly does the visualization show?",
+    "q2Text": "The interactive tile diagrams (tree maps) in their initial form show an overview of the complete expenditure and income of the current biennial budget 2026/2027 of the Berlin administration. The areas of the rectangles are proportional to the size of the amounts to be displayed. The slider can be used to set whether income or expenditure should be displayed - the diagram adjusts accordingly. The amounts shown always apply to a single budget year. The dropdown menu can therefore be used to switch between years. Also selectable in the menu is whether data for all of Berlin, for a single district, or only the main administrations should be displayed. The third dropdown menu selects whether the amounts should be displayed sorted by areas or by functions. Clicking on one of the areas in the tree map displays the next deeper level of detail to explore individual subgroups in more detail. The most detailed information on specific expenditure and income are the so-called items. The items belonging to the group currently selected in the diagram are displayed as a list below the tree map. If a deeper detail level is selected in the diagram by clicking, the list is filtered accordingly. For performance reasons, only the 100 items with the largest amounts are always displayed. Items, areas, and functions can also be found specifically via the search function.",
+    "q3Title": "What are areas and functions?",
+    "q3Text": "There are two different options for sorting the assignment of income and expense items in the diagram: by areas or by main functions. The areas provide an overview of the income and expenditure of the main and district administrations, divided by type and responsible area, e.g. Senate Department for the Interior or School and Sports Office of the Mitte district. The main functions, on the other hand, represent the tasks that are fulfilled by the respective income or expenditure. Both areas and functions can be further subdivided into more detailed subgroups by clicking in the tree map. The most detailed information on specific expenditure and income are the so-called items. The items belonging to the areas and functions, or their subgroups, currently selected in the diagram are displayed as a list below the tree map.",
+    "q4Title": "Where do the data come from?",
+    "q4Text": "All data underlying this application come from the dataset on the \"Biennial Budget 2026/2027\" and are available as Open Data under an open license. They can be freely reused and further processed. The dataset is provided by the <1>Senate Department for Finance</1> and published on Berlin's <3>data portal</3>. Historical budget data from the last 10 years can also be found there. More information on open data from the Berlin administration can be found on the website of the <5>Open Data Information Office</5>.",
+    "q5Title": "Is the application open source? How can it be further developed?",
+    "q5Text": "Not only the budget data are available as open Open Data - the source code of this application is also freely available under the MIT license. The digital community in Berlin and beyond is invited to collaboratively contribute to the development and improvement of the site or to use its components for their own work and projects. Via <1>GitHub</1>, issues can be created and code improvements or new features can be submitted via pull request.",
+    "q6Title": "Is the application also transferable to other states and municipalities?",
+    "q6Text": "The application or source code can be used by other municipalities and states to present their own budget data and make them transparently available. The prerequisite is that the respective budget data are available in a machine-readable format and suitable structure. Unfortunately, this is not a matter of course in all states and municipalities. Budget data must be published at the federal, state, and municipal levels by law, but this often happens in the form of PDF reports. These PDFs can be read well by people, but they are not suitable for further processing, such as the creation of diagrams. For the Berlin data and this application, we use a <1>data schema</1> developed by the Open Knowledge Foundation in the project \"Offener Haushalt\"."
+  },
+  "head": {
+    "defaultDescription": "Interactive visualization of Berlin's budget data",
+    "defaultSiteTitle": "Berlin Budget Data",
+    "defaultPageTitle": "Map"
+  },
+  "chart": {
+    "plannedExpenses": "PLANNED expenditure in ",
+    "billionEuros": "billion €"
+  }
+}

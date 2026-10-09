@@ -1,6 +1,7 @@
 import { formatCurrency } from '@lib/utils/numberUtil'
 import { FC } from 'react'
 import { Building } from '@components/Icons'
+import { translateData } from '@lib/utils/translateData'
 
 export interface ListItemPropType {
   id: string
@@ -21,23 +22,27 @@ export const ListItem: FC<ListItemPropType> = ({
   <li className="pt-4 border-t border-gray-100 w-full grid grid-cols-[1fr] md:grid-cols-[3fr,2fr,2fr,150px] md:gap-x-6">
     <h4
       className="md:whitespace-nowrap md:text-ellipsis md:overflow-hidden font-bold md:font-normal"
-      title={title}
+      title={translateData(title)}
     >
-      {title}
+      {translateData(title)}
     </h4>
     <span
       className="inline-flex gap-2 items-center overflow-hidden whitespace-nowrap text-ellipsis"
-      title={group}
+      title={translateData(group)}
     >
       <span
         className={`w-4 h-4 rounded-full inline-block`}
         style={{ backgroundColor: groupColor }}
       />
-      <span className="text-ellipsis overflow-hidden w-full">{group}</span>
+      <span className="text-ellipsis overflow-hidden w-full">
+        {translateData(group)}
+      </span>
     </span>
     <span className="whitespace-nowrap text-ellipsis overflow-hidden inline-flex gap-1">
       <Building className="fill-gray-400 flex-shrink-0" />
-      <span className="text-ellipsis overflow-hidden">{district}</span>
+      <span className="text-ellipsis overflow-hidden">
+        {translateData(district)}
+      </span>
     </span>
     <span className="mt-4 md:mt-0 inline-flex float-right gap-2 justify-end font-mono font-semibold text-md md:text-sm">
       {formatCurrency(price)}

@@ -8,6 +8,7 @@ type HauptAccType = Record<string, OberAccType>
 export interface TreemapHierarchyType {
   id: string
   name: string
+  originalName: string
   children?: TreemapHierarchyType[]
   value?: number
 }
@@ -46,6 +47,7 @@ export const createTreeStructure = (
     const baseInfo = {
       id: snakeCase(key),
       name: key,
+      originalName: key,
     }
 
     if (!isNaN(Number(value))) {

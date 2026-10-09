@@ -1,34 +1,25 @@
 import { InternalLink } from '@components/InternalLink'
+import { LanguageSwitcher } from '@components/LanguageSwitcher'
 import classNames from 'classnames'
 import snakeCase from 'just-snake-case'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
-
-const NAV_ITEMS = [
-  {
-    label: 'Startseite',
-    path: '/',
-  },
-  {
-    label: 'Visualisierung',
-    path: '/visualisierung',
-  },
-  {
-    label: 'Textsuche',
-    path: '/search',
-  },
-  {
-    label: 'Infos',
-    path: '/faq',
-  },
-]
+import { useTranslation } from 'react-i18next'
 
 export const Nav: FC = () => {
   const { pathname } = useRouter()
+  const { t } = useTranslation()
+
+  const NAV_ITEMS = [
+    { label: t('nav.home'), path: '/' },
+    { label: t('nav.visualization'), path: '/visualisierung' },
+    { label: t('nav.search'), path: '/search' },
+    { label: t('nav.info'), path: '/faq' },
+  ]
 
   return (
     <nav>
-      <ul className="flex gap-6">
+      <ul className="flex gap-6 items-center">
         {NAV_ITEMS.map((navItem) => {
           return (
             <li
@@ -42,6 +33,9 @@ export const Nav: FC = () => {
             </li>
           )
         })}
+        <li>
+          <LanguageSwitcher />
+        </li>
       </ul>
     </nav>
   )

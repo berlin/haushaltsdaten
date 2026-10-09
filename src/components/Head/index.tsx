@@ -2,6 +2,7 @@ import { FC } from 'react'
 import NextHead from 'next/head'
 import colors from '../../style/colors'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
 
 const siteUrl =
   process.env.URL ||
@@ -26,39 +27,47 @@ interface HeadPropType {
 }
 
 export const Head: FC<Partial<HeadPropType>> = ({
-  description = 'Interaktive Visualisierung der Berliner Haushaltsdaten',
-  siteTitle = 'Berliner Haushaltsdaten',
-  pageTitle = 'Karte',
+  description,
+  siteTitle,
+  pageTitle,
   fbAppId = '',
-  keywords = [
-    'Berlin',
-    'Haushalt',
-    'Haushaltsdaten',
-    'Visualisierung',
-    'Senatsverwaltung für Finanzen Berlin',
-  ],
+  keywords,
   themeColor = colors.brand,
-  locales = ['de'],
-  locale = 'de',
+  locales = ['de', 'en', 'tr'],
+  locale,
   twitterUsername = 'citylabberlin',
   socialThumbnail = '',
 }) => {
+  const { t, i18n } = useTranslation()
   const { pathname } = useRouter()
-  const longTitle = [pageTitle, siteTitle].join(' – ')
+
+  const resolvedDescription = description || t('head.defaultDescription')
+  const resolvedSiteTitle = siteTitle || t('head.defaultSiteTitle')
+  const resolvedPageTitle = pageTitle || t('head.defaultPageTitle')
+  const resolvedKeywords: string[] =
+    keywords ||
+    (Array.isArray(t('head.keywords', { returnObjects: true }))
+      ? t('head.keywords', { returnObjects: true })
+      : [])
+  const resolvedLocale = locale || i18n.language || 'de'
+
+  const longTitle = [resolvedPageTitle, resolvedSiteTitle].join(' – ')
   const formatedSocialImage = `${siteUrl}/social-image.jpg`
 
   return (
     <NextHead>
       <title>{longTitle}</title>
 
-      {description && <meta name="description" content={description} />}
+      {resolvedDescription && (
+        <meta name="description" content={resolvedDescription} />
+      )}
 
       <meta property="og:type" content="article" />
 
       <meta name="theme-color" content={themeColor} />
 
-      {keywords.length > 0 && (
-        <meta name="keywords" content={keywords.join(', ')} />
+      {resolvedKeywords.length > 0 && (
+        <meta name="keywords" content={resolvedKeywords.join(', ')} />
       )}
 
       <meta
@@ -67,22 +76,22 @@ export const Head: FC<Partial<HeadPropType>> = ({
       />
 
       <meta itemProp="name" content={longTitle} />
-      <meta itemProp="description" content={description} />
+      <meta itemProp="description" content={resolvedDescription} />
 
       <meta name="twitter:card" content="summary_large_image" />
       {twitterUsername && (
         <meta name="twitter:site" content={`@${twitterUsername}`} />
       )}
-      <meta name="twitter:title" content={pageTitle} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:title" content={resolvedPageTitle} />
+      <meta name="twitter:description" content={resolvedDescription} />
 
-      <meta property="og:title" content={pageTitle} />
+      <meta property="og:title" content={resolvedPageTitle} />
       <meta property="og:type" content="website" />
-      <meta property="og:locale" content={locale} />
+      <meta property="og:locale" content={resolvedLocale} />
       <meta property="og:locale:alternate" content={`[${locales.join(',')}]`} />
       <meta property="og:url" content={`${siteUrl}${pathname}`} />
-      <meta property="og:description" content={description} />
-      <meta property="og:site_name" content={siteTitle} />
+      <meta property="og:description" content={resolvedDescription} />
+      <meta property="og:site_name" content={resolvedSiteTitle} />
       {fbAppId && <meta property="fb:app_id" content={fbAppId} />}
 
       <meta itemProp="image" content={formatedSocialImage} />

@@ -14,6 +14,8 @@ import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
 import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
 import { useHaushaltsdaten } from '@lib/hooks/useHaushaltsdaten'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'react-i18next'
+import { translateData } from '@lib/utils/translateData'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 
@@ -27,6 +29,7 @@ export const getStaticProps: GetStaticProps = async () => ({
 export const SharePage: FC = () => {
   const { observe, width, height } = useDimensions()
   const { query } = useRouter()
+  const { t } = useTranslation()
 
   const parsedQuery = query ? mapRawQueryToState(query) : {}
 
@@ -62,9 +65,16 @@ export const SharePage: FC = () => {
 
   const hierarchyData: TreemapHierarchyType | null = useMemo(() => {
     if (!haushaltsdaten) return null
+    const rootName =
+      queriedType === 'Ausgabetitel'
+        ? translateData('Alle Ausgaben')
+        : translateData('Alle Einnahmen')
+    const originalRootName =
+      queriedType === 'Ausgabetitel' ? 'Alle Ausgaben' : 'Alle Einnahmen'
     return {
       id: 'overview',
-      name: `Alle ${queriedType === 'Ausgabetitel' ? 'Ausgaben' : 'Einnahmen'}`,
+      name: rootName,
+      originalName: originalRootName,
       children: createTreeStructure(createBaseTree(haushaltsdaten)),
     }
   }, [haushaltsdaten, queriedType])
@@ -88,7 +98,7 @@ export const SharePage: FC = () => {
               fill="currentFill"
             />
           </svg>
-          <span className="sr-only">Loading...</span>
+          <span className="sr-only">{t('share.loading')}</span>
         </div>
       </div>
     )

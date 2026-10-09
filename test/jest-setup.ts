@@ -2,6 +2,24 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import '@testing-library/jest-dom'
 import fetchMock from 'jest-fetch-mock'
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+
+import deTranslation from '../src/i18n/locales/de.json'
+
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+i18n.use(initReactI18next).init({
+  resources: {
+    de: {
+      translation: deTranslation,
+    },
+  },
+  lng: 'de',
+  fallbackLng: 'de',
+  interpolation: {
+    escapeValue: false,
+  },
+})
 
 jest.mock('maplibre-gl/dist/maplibre-gl', () => ({
   GeolocateControl: jest.fn(),

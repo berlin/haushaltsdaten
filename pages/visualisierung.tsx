@@ -26,6 +26,8 @@ import { DEFAULT_YEAR, isValidYear } from '@lib/utils/yearValidator'
 import { DEFAULT_MODUS, isValidModus } from '@lib/utils/modusValidator'
 import { Button } from '@components/Button'
 import { useHaushaltsdaten } from '@lib/hooks/useHaushaltsdaten'
+import { useTranslation } from 'react-i18next'
+import { translateData } from '@lib/utils/translateData'
 
 const ALL_DISTRICTS_ID: keyof typeof districts = '01' // -> Alle Bereiche
 const MAX_ROWS = 100
@@ -52,6 +54,7 @@ export interface TopicType {
 export const Visualization: FC = () => {
   const { observe, width, height } = useDimensions()
   const { push, pathname, query } = useRouter()
+  const { t } = useTranslation()
 
   const parsedQuery = query ? mapRawQueryToState(query) : {}
 
@@ -87,11 +90,16 @@ export const Visualization: FC = () => {
 
   const hierarchyData: TreemapHierarchyType | null = useMemo(() => {
     if (!haushaltsdaten) return null
+    const rootName =
+      queriedType === 'Ausgabetitel'
+        ? translateData('Gesamtausgaben')
+        : translateData('Gesamteinnahmen')
+    const originalRootName =
+      queriedType === 'Ausgabetitel' ? 'Gesamtausgaben' : 'Gesamteinnahmen'
     return {
       id: 'overview',
-      name: `Gesamt${
-        queriedType === 'Ausgabetitel' ? 'ausgaben' : 'einnahmen'
-      }`,
+      name: rootName,
+      originalName: originalRootName,
       children: createTreeStructure(createBaseTree(haushaltsdaten)),
     }
   }, [haushaltsdaten, queriedType])
@@ -156,7 +164,7 @@ export const Visualization: FC = () => {
               fill="currentFill"
             />
           </svg>
-          <span className="sr-only">Loading...</span>
+          <span className="sr-only">{t('visualization.loading')}</span>
         </div>
       </div>
     )
@@ -223,8 +231,8 @@ export const Visualization: FC = () => {
           <div className="container mx-auto">
             <h2 className="mb-6 mt-12 px-4 font-bold text-2xl">
               {queriedType === 'Ausgabetitel'
-                ? 'Höchste Ausgabetitel'
-                : 'Höchste Einnahmetitel'}
+                ? t('visualization.highestExpenses')
+                : t('visualization.highestIncome')}
             </h2>
             <ul className="flex flex-col gap-4">
               {!error &&
@@ -259,7 +267,9 @@ export const Visualization: FC = () => {
                 disabled={visibleRows >= (listData || []).length}
               >
                 <span className="block">
-                  Weitere Ausgabetitel anzeigen
+                  {queriedType === 'Ausgabetitel'
+                    ? t('visualization.showMoreExpenses')
+                    : t('visualization.showMoreIncome')}
                   <span className="font-normal text-xs block">
                     ({visibleRows}/{(listData || []).length})
                   </span>

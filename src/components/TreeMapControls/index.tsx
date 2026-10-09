@@ -9,6 +9,8 @@ import { useRouter } from 'next/router'
 import { FC } from 'react'
 import { InternalLink } from '@components/InternalLink'
 import { isValidYear } from '@lib/utils/yearValidator'
+import { useTranslation } from 'react-i18next'
+import { translateData } from '@lib/utils/translateData'
 
 export type TreeMapControlsPropType = Partial<ParsedPageQueryType> & {
   onChange: (newQuery: Partial<ParsedPageQueryType>) => void
@@ -21,6 +23,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
   onChange,
 }) => {
   const { query } = useRouter()
+  const { t } = useTranslation()
   let { year } = query
   if (year === undefined) {
     year = `${DEFAULT_YEAR}`
@@ -34,14 +37,14 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
     .sort()
     .map((key) => ({
       id: key,
-      name: districts[key as keyof typeof districts] || ' ',
+      name: translateData(districts[key as keyof typeof districts]) || ' ',
     }))
   const foundDistrict = mappedDistricts.find(({ id }) => id === district)
 
   return (
     <div className="w-full">
       <nav
-        aria-label="Navigation der Visualisierung"
+        aria-label={t('controls.navAriaLabel')}
         className={classNames(
           'w-full',
           'sm:flex gap-6 justify-between items-center'
@@ -55,8 +58,8 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
         >
           <ToggleSwitch
             value={mappedQuery.showExpenses ?? true}
-            optionA="Einnahmen"
-            optionB="Ausgaben"
+            optionA={t('controls.income')}
+            optionB={t('controls.expenses')}
             onChange={(isOn) =>
               onChange({ ...mappedQuery, showExpenses: isOn })
             }
@@ -76,7 +79,9 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
               .sort()
               .map((key) => ({
                 id: key,
-                name: districts[key as keyof typeof districts] || ' ',
+                name:
+                  translateData(districts[key as keyof typeof districts]) ||
+                  ' ',
               }))}
             additionalClasses="z-20"
           />
@@ -107,7 +112,10 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
           </div>
           <div className="flex items-center gap-2">
             <ListBox
-              selected={{ id: DEFAULT_MODUS, name: DEFAULT_MODUS }}
+              selected={{
+                id: DEFAULT_MODUS,
+                name: translateData(DEFAULT_MODUS),
+              }}
               onChange={(modus) =>
                 onChange({
                   ...mappedQuery,
@@ -117,7 +125,7 @@ export const TreeMapControls: FC<TreeMapControlsPropType> = ({
               options={VALID_MODUS.map((modus) => {
                 return {
                   id: `${modus}`,
-                  name: `${modus}`,
+                  name: translateData(modus),
                 }
               })}
               additionalClasses="w-full z-0"
